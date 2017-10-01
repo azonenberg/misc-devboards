@@ -20,7 +20,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 5 5
 Title "TRAGICLASER Ethernet PHY Prototype"
-Date "2017-09-28"
+Date "2017-09-30"
 Rev "0.1"
 Comp "Andrew Zonenberg"
 Comment1 ""
