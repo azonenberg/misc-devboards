@@ -128,7 +128,7 @@ L R R7
 U 1 1 59CB47F1
 P 9000 1550
 F 0 "R7" H 9070 1596 50  0000 L CNN
-F 1 "115" H 9070 1505 50  0000 L CNN
+F 1 "16" H 9070 1505 50  0000 L CNN
 F 2 "azonenberg_pcb:EIA_0402_RES_NOSILK" V 8930 1550 50  0001 C CNN
 F 3 "" H 9000 1550 50  0000 C CNN
 	1    9000 1550
@@ -143,7 +143,7 @@ L R R8
 U 1 1 59CB7CAC
 P 9000 3000
 F 0 "R8" H 9070 3046 50  0000 L CNN
-F 1 "115" H 9070 2955 50  0000 L CNN
+F 1 "16" H 9070 2955 50  0000 L CNN
 F 2 "azonenberg_pcb:EIA_0402_RES_NOSILK" V 8930 3000 50  0001 C CNN
 F 3 "" H 9000 3000 50  0000 C CNN
 	1    9000 3000
@@ -152,9 +152,9 @@ $EndComp
 Text Label 9400 3150 0    60   ~ 0
 TX_N_A
 Text Notes 4700 3050 0    60   ~ 0
-For 10baseT we need to drive 2.5V\ndifferential into a 100 ohm load.\nThis is 25 mA output current. We probably\nneed to parallel 2 drivers.\n\nWith a 3.3V supply we need 132 ohm total loading\nThis is 16 ohms each above and below the 100.\n\nTX_P_B high, TX_N_B low:\n* TX_P = 2.9V\n* TX_N = 0.4V\n* Vd = 2.5V\n\nTX_P_B low, TX_N_B high:\n* TX_P = 0.4V\n* TX_N = 2.9V\n* Vd = -2.5V
+For 10baseT we need to drive 2.5V\ndifferential into a 100 ohm load.\nThis is 25 mA output current. We probably\nneed to parallel 2 drivers.\n\nWith a 3.3V supply we need 132 ohm total loading\nThis is 16 ohms each above and below the 100.\n\nTX_P_A high, TX_N_A low:\n* TX_P = 2.9V\n* TX_N = 0.4V\n* Vd = 2.5V\n\nTX_P_A low, TX_N_A high:\n* TX_P = 0.4V\n* TX_N = 2.9V\n* Vd = -2.5V
 Text Notes 10200 3200 0    60   ~ 0
-For 100baseT we need to drive 1V\ndifferential into a 100 ohm load.\nThis is 10 mA output current.\n\nWith a 3.3V supply we need 330 ohm total loading\n100 of that is the differential terminator at the far end\n115 ohms above and below the 100\n\nTX_P_A high, TX_N_A low:\n* TX_P = 2.15V\n* TX_N = 1.15V\n* Vd = +1V\n\nTX_P_A low, TX_N_A high:\n* TX_P = 1.15V\n* TX_N = 2.15V\n* Vd = -1V\n\nTX_P_A and TX_N_A floating:\n* TX_P = 1.65V\n* TX_N = 1.65V\n* Vd = 0V
+For 100baseT we need to drive 1V\ndifferential into a 100 ohm load.\nThis is 10 mA output current.\n\nWith a 3.3V supply we need 330 ohm total loading\n100 of that is the differential terminator at the far end\n115 ohms above and below the 100\n\nTX_P_B high, TX_N_B low:\n* TX_P = 2.15V\n* TX_N = 1.15V\n* Vd = +1V\n\nTX_P_B low, TX_N_B high:\n* TX_P = 1.15V\n* TX_N = 2.15V\n* Vd = -1V\n\nTX_P_B and TX_N_B floating:\n* TX_P = 1.65V\n* TX_N = 1.65V\n* Vd = 0V
 Text Notes 9100 2250 0    60   ~ 0
 100
 Text Notes 13750 5300 0    60   ~ 0
@@ -166,7 +166,7 @@ L R R5
 U 1 1 59CC3ADE
 P 8500 1550
 F 0 "R5" H 8570 1596 50  0000 L CNN
-F 1 "16" H 8570 1505 50  0000 L CNN
+F 1 "115" H 8570 1505 50  0000 L CNN
 F 2 "azonenberg_pcb:EIA_0402_RES_NOSILK" V 8430 1550 50  0001 C CNN
 F 3 "" H 8500 1550 50  0000 C CNN
 	1    8500 1550
@@ -177,7 +177,7 @@ L R R6
 U 1 1 59CC3B97
 P 8500 3000
 F 0 "R6" H 8570 3046 50  0000 L CNN
-F 1 "16" H 8570 2955 50  0000 L CNN
+F 1 "115" H 8570 2955 50  0000 L CNN
 F 2 "azonenberg_pcb:EIA_0402_RES_NOSILK" V 8430 3000 50  0001 C CNN
 F 3 "" H 8500 3000 50  0000 C CNN
 	1    8500 3000
