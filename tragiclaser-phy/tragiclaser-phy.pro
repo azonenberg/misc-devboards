@@ -1,4 +1,4 @@
-update=Wed 27 Sep 2017 08:13:16 PM PDT
+update=Mon 23 Oct 2017 11:29:04 AM PDT
 version=1
 last_client=kicad
 [pcbnew]
@@ -43,3 +43,13 @@ LibName11=special-azonenberg
 LibName12=xilinx-azonenberg
 LibName13=device
 LibName14=conn
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=/tmp/
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceAjustPassiveValues=0
+LabSize=60
+ERC_TestSimilarLabels=1
