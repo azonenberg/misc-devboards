@@ -6,7 +6,7 @@
 
   (title_block
     (title "BaseT to BaseT1 Media Converter")
-    (date "2024-01-27")
+    (date "2024-01-28")
     (rev "0.1")
     (company "Antikernel Labs")
     (comment 1 "Andrew D. Zonenberg")
@@ -606,6 +606,10 @@
     (uuid fd4ffb0f-2e3c-49d5-afc2-916a84ff561a)
   )
 
+  (label "GND" (at 135.89 55.88 180)
+    (effects (font (size 1.27 1.27)) (justify right bottom))
+    (uuid 071d5aac-e239-4505-888c-fa1f8f11bc6c)
+  )
   (label "5V0" (at 135.89 48.26 180)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 072018d0-a719-468a-8f96-be07342d09fa)
