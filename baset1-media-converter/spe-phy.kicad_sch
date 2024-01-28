@@ -6,7 +6,7 @@
 
   (title_block
     (title "BaseT to BaseT1 Media Converter")
-    (date "2024-01-25")
+    (date "2024-01-27")
     (rev "0.1")
     (company "Antikernel Labs")
     (comment 1 "Andrew D. Zonenberg")
@@ -1619,12 +1619,12 @@
     (pin "2" (uuid 19dc9477-9e22-4928-ad4b-8c05e254a9b5))
   )
 
-  (symbol (lib_id "device:EMI_Filter_CommonMode") (at 148.59 68.58 0) (unit 1)
+  (symbol (lib_id "device:EMI_Filter_CommonMode") (at 148.59 68.58 0) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 300200a2-c631-45c7-8198-f1942b646368)
     (property "Reference" "FL1" (id 0) (at 148.209 59.9304 0))
     (property "Value" "DLW32MH101XT2L" (id 1) (at 148.209 62.4673 0))
-    (property "Footprint" "azonenberg_pcb:CMC_1210" (id 2) (at 148.59 67.564 90)
+    (property "Footprint" "azonenberg_pcb:CMC_1210" (id 2) (at 148.59 69.596 90)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 148.209 65.0042 0))
