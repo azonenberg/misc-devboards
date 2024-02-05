@@ -45,7 +45,7 @@
         "silk_text_upright": false,
         "zones": {
           "45_degree_only": false,
-          "min_clearance": 0.508
+          "min_clearance": 0.25
         }
       },
       "diff_pair_dimensions": [
@@ -465,6 +465,10 @@
     [
       "950df7aa-ebdf-4f9e-8d44-c722dc087237",
       "SMPM ports"
+    ],
+    [
+      "3641ccd2-61ab-4d09-9763-27e9a915982d",
+      "HP IOs"
     ]
   ],
   "text_variables": {}

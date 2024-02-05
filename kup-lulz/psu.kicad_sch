@@ -6,8 +6,10 @@
 
   (title_block
     (title "Kintex Ultrascale+ OshPark For The Lulz")
-    (date "2024-02-01")
+    (date "2024-02-05")
     (rev "0.1")
+    (company "Antikernel Labs")
+    (comment 1 "Andrew D. Zonenberg")
   )
 
   (lib_symbols
@@ -3616,6 +3618,10 @@
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 562ebd88-6a77-4c8e-8950-136913b630a5)
   )
+  (label "GND" (at 369.57 170.18 180)
+    (effects (font (size 1.27 1.27)) (justify right bottom))
+    (uuid 567df4e2-4da1-4e29-895d-953eaa13d013)
+  )
   (label "BOOT0" (at 195.58 401.32 180)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 59b3ff7d-4dad-4eb4-b898-748adcb6523a)
@@ -6469,7 +6475,7 @@
     (uuid e9b534f2-6ba1-43ee-836b-3efc3fee6e1e)
     (property "Reference" "U8" (id 0) (at 384.175 142.4772 0))
     (property "Value" "ADP1740ACPZ-1.8-R7" (id 1) (at 384.175 145.0141 0))
-    (property "Footprint" "" (id 2) (at 374.65 175.26 0)
+    (property "Footprint" "azonenberg_pcb:QFN_16_0.65MM_4x4MM" (id 2) (at 374.65 175.26 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (id 3) (at 374.65 175.26 0)
@@ -6502,7 +6508,7 @@
     (property "Value" "DNP" (id 1) (at 350.901 168.0722 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "" (id 2) (at 348.9452 170.18 0)
+    (property "Footprint" "azonenberg_pcb:EIA_0402_CAP_NOSILK" (id 2) (at 348.9452 170.18 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (id 3) (at 347.98 166.37 0)
