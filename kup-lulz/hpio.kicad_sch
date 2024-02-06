@@ -3270,11 +3270,17 @@
     (uuid e2eabe4c-bb34-4703-a1ff-f1ef768262d1)
   )
 
+  (text "Polarity invert for routing\nNobody cares, just a 180 deg phase shift"
+    (at 204.47 99.06 180)
+    (effects (font (size 1.27 1.27)) (justify right bottom))
+    (uuid 1e78f12f-6b46-410c-9467-5a3f499ed0ce)
+  )
+
   (label "REFCLK3_N" (at 144.78 111.76 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 168c6c82-752f-47ab-9476-a6d776b03a3b)
   )
-  (label "REFCLK3_N" (at 215.9 99.06 180)
+  (label "REFCLK3_N" (at 215.9 96.52 180)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 238d78bd-2c87-4bfd-bab5-b4f911729fe4)
   )
@@ -3282,7 +3288,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 50f8c790-76ca-4a6a-8e86-89f2c6322616)
   )
-  (label "REFCLK3_P" (at 215.9 96.52 180)
+  (label "REFCLK3_P" (at 215.9 99.06 180)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 6e3073d7-a04b-4246-8b65-08d0f285264a)
   )
