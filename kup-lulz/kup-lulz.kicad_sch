@@ -6,7 +6,7 @@
 
   (title_block
     (title "Kintex Ultrascale+ OshPark For The Lulz")
-    (date "2024-02-06")
+    (date "2024-02-08")
     (rev "0.1")
     (company "Antikernel Labs")
     (comment 1 "Andrew D. Zonenberg")
@@ -2089,9 +2089,6 @@
     )
     (path "/8853104e-72eb-4ea7-9d5b-06a6795b0525/b9577dc6-5b67-41a2-93bb-24a580ae17c0"
       (reference "J12") (unit 1) (value "SFP_CAGE") (footprint "azonenberg_pcb:CONN_SFP_CAGE_TE_2007194-1")
-    )
-    (path "/5b5ad460-eef3-4f52-bacc-392e4facc62f/bb7db2c1-81ed-4ed5-836a-68d1fc74c4f3"
-      (reference "J14") (unit 1) (value "PMOD_HOST") (footprint "azonenberg_pcb:CONN_HEADER_2.54MM_2x6_RA_PMOD_HOST")
     )
     (path "/a85f8a39-3bba-49df-9845-885441be9553/2c7c4d4f-c2d4-4d56-aa03-e7f27d7e76ea"
       (reference "J15") (unit 1) (value "CONN_QSFP_HOST") (footprint "azonenberg_pcb:CONN_ZQSFP+_TE_1551920-2")
