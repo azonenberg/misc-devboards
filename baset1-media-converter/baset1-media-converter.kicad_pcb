@@ -7676,11 +7676,11 @@
       (options (clearance outline) (anchor rect))
       (primitives
         (gr_poly (pts
-            (xy 0.077 -0.15)
-            (xy -0.275 -0.15)
-            (xy -0.275 0.15)
-            (xy 0.275 0.15)
             (xy 0.275 0.048)
+            (xy 0.275 0.15)
+            (xy -0.275 0.15)
+            (xy -0.275 -0.15)
+            (xy 0.077 -0.15)
           ) (width 0) (fill yes))
       ) (tstamp f6e5cc9f-ff78-48d9-ba71-9113ee38a203))
     (pad "2" smd rect locked (at -1.85 -1 90) (size 0.3 0.55) (layers "F.Cu" "F.Paste" "F.Mask")
@@ -7698,11 +7698,11 @@
       (options (clearance outline) (anchor rect))
       (primitives
         (gr_poly (pts
-            (xy -0.077 -0.15)
-            (xy 0.275 -0.15)
             (xy 0.275 0.15)
             (xy -0.275 0.15)
             (xy -0.275 0.048)
+            (xy -0.077 -0.15)
+            (xy 0.275 -0.15)
           ) (width 0) (fill yes))
       ) (tstamp 3303f888-fe36-4c42-80e6-5e4e703e4d68))
     (pad "8" smd custom locked (at -1.5 1.85 90) (size 0.2 0.2) (layers "F.Cu" "F.Paste" "F.Mask")
@@ -7710,11 +7710,11 @@
       (options (clearance outline) (anchor rect))
       (primitives
         (gr_poly (pts
-            (xy 0.077 -0.15)
-            (xy -0.275 -0.15)
-            (xy -0.275 0.15)
-            (xy 0.275 0.15)
             (xy 0.275 0.048)
+            (xy 0.275 0.15)
+            (xy -0.275 0.15)
+            (xy -0.275 -0.15)
+            (xy 0.077 -0.15)
           ) (width 0) (fill yes))
       ) (tstamp b23c9676-d67e-4a12-beb4-05745cc58037))
     (pad "9" smd rect locked (at -1 1.85 180) (size 0.3 0.55) (layers "F.Cu" "F.Paste" "F.Mask")
@@ -7732,11 +7732,11 @@
       (options (clearance outline) (anchor rect))
       (primitives
         (gr_poly (pts
-            (xy -0.077 -0.15)
-            (xy 0.275 -0.15)
             (xy 0.275 0.15)
             (xy -0.275 0.15)
             (xy -0.275 0.048)
+            (xy -0.077 -0.15)
+            (xy 0.275 -0.15)
           ) (width 0) (fill yes))
       ) (tstamp 6872d871-e1f3-4cfb-a729-2b33f708d201))
     (pad "15" smd custom locked (at 1.95 1.5 180) (size 0.2 0.2) (layers "F.Cu" "F.Paste" "F.Mask")
@@ -7744,11 +7744,11 @@
       (options (clearance outline) (anchor rect))
       (primitives
         (gr_poly (pts
-            (xy 0.077 -0.15)
-            (xy -0.275 -0.15)
-            (xy -0.275 0.15)
-            (xy 0.275 0.15)
             (xy 0.275 0.048)
+            (xy 0.275 0.15)
+            (xy -0.275 0.15)
+            (xy -0.275 -0.15)
+            (xy 0.077 -0.15)
           ) (width 0) (fill yes))
       ) (tstamp ef2830df-779e-445d-89aa-7c83815c84e7))
     (pad "16" smd rect locked (at 1.95 1 90) (size 0.3 0.55) (layers "F.Cu" "F.Paste" "F.Mask")
@@ -7766,11 +7766,11 @@
       (options (clearance outline) (anchor rect))
       (primitives
         (gr_poly (pts
-            (xy -0.077 -0.15)
-            (xy 0.275 -0.15)
             (xy 0.275 0.15)
             (xy -0.275 0.15)
             (xy -0.275 0.048)
+            (xy -0.077 -0.15)
+            (xy 0.275 -0.15)
           ) (width 0) (fill yes))
       ) (tstamp 8383d32e-4e1d-4b7a-82a3-d4666243750c))
     (pad "22" smd custom locked (at 1.5 -1.95 270) (size 0.2 0.2) (layers "F.Cu" "F.Paste" "F.Mask")
@@ -7778,11 +7778,11 @@
       (options (clearance outline) (anchor rect))
       (primitives
         (gr_poly (pts
-            (xy 0.077 -0.15)
-            (xy -0.275 -0.15)
-            (xy -0.275 0.15)
-            (xy 0.275 0.15)
             (xy 0.275 0.048)
+            (xy 0.275 0.15)
+            (xy -0.275 0.15)
+            (xy -0.275 -0.15)
+            (xy 0.077 -0.15)
           ) (width 0) (fill yes))
       ) (tstamp 74e02608-70d8-4078-a206-2cecfb953fa4))
     (pad "23" smd rect locked (at 1 -1.95 180) (size 0.3 0.55) (layers "F.Cu" "F.Paste" "F.Mask")
@@ -7800,11 +7800,11 @@
       (options (clearance outline) (anchor rect))
       (primitives
         (gr_poly (pts
-            (xy -0.077 -0.15)
-            (xy 0.275 -0.15)
             (xy 0.275 0.15)
             (xy -0.275 0.15)
             (xy -0.275 0.048)
+            (xy -0.077 -0.15)
+            (xy 0.275 -0.15)
           ) (width 0) (fill yes))
       ) (tstamp 24f92769-4cd7-4916-9e98-2b6a949a52e8))
     (model ":walter:smd_qfn/qfn-28.wrl"
@@ -11171,6 +11171,9 @@
   )
   (gr_text "D1V2" (at 122 76.75) (layer "F.SilkS") (tstamp fbcdcf84-365c-4656-b4b5-39fc754f719a)
     (effects (font (size 0.75 0.75) (thickness 0.1)))
+  )
+  (gr_text "FIXME-v0.2\nFTDI footprint is 0.5mm, real chip is 0.45" (at 80.5 32.5) (layer "Eco1.User") (tstamp e0e7c14d-a277-4420-a907-722087747162)
+    (effects (font (size 1.5 1.5) (thickness 0.1)) (justify left))
   )
 
   (segment (start 111.25 44.83) (end 115.08 41) (width 0.125) (layer "F.Cu") (net 1) (tstamp 28f7111b-b9a0-4c2a-9526-334360998cf3))
