@@ -1,0 +1,3 @@
+[submodule "stm32-cpp"]
+	path = stm32-cpp
+	url = ../stm32-cpp.git
