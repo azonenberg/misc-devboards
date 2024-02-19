@@ -43,6 +43,9 @@ public:
 	uint16_t Read(uint8_t phyaddr, uint8_t regaddr);
 	void Write(uint8_t phyaddr, uint8_t regaddr, uint16_t regval);
 
+	uint16_t ReadMMD(uint8_t phyaddr, uint16_t mmd, uint16_t regid);
+	void WriteMMD(uint8_t phyaddr, uint16_t mmd, uint16_t regid, uint16_t value);
+
 protected:
 
 	void SendAddress(uint8_t addr);

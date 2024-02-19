@@ -45,6 +45,7 @@ void InitLEDs();
 
 void InitSPEPHY();
 void InitBaseTPHY();
+void PrintSPEStatus();
 
 #define PHY_ADDR_SPE 0x00
 #define PHY_ADDR_BASET 0x00
@@ -73,6 +74,10 @@ int main()
 	GPIOPin spe_rst_n(&GPIOA, 8, GPIOPin::MODE_OUTPUT);
 	baset_rst_n = 0;
 	spe_rst_n = 0;
+
+	//Wait 5 sec during startup
+	//for(int i=0; i<5; i++)
+	//	g_logTimer->Sleep(10000);
 
 	//Turn on all switchable power rails to start
 	//The DP83TC814 (100mbit) doesn't need the 1.0V rail, but we won't know which PHY we have until we ask
@@ -119,13 +124,57 @@ int main()
 		status = g_speMDIO->Read(PHY_ADDR_SPE, 0x01);
 		up = (status & 0x4) == 0x4;
 		if(up && !spe_linkUp)
+		{
 			g_log("SPE link is up\n");
+			PrintSPEStatus();
+		}
 		if(!up && spe_linkUp)
+		{
 			g_log("SPE link is down\n");
+			PrintSPEStatus();
+		}
 		spe_linkUp = up;
 	}
 
 	return 0;
+}
+
+void PrintSPEStatus()
+{
+	LogIndenter li(g_log);
+
+	//Three register address ranges at MMD 1 (0x1000), 3 (0x3000), and 1f (0x0000)
+	//do not actually send high nibble to the PHY
+	auto physts = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x10);
+	g_log("PHYSTS = 0x%04x\n", physts);
+	{
+		LogIndenter li(g_log);
+		if(physts & 0x0400)
+			g_log("Channel OK\n");
+		else
+			g_log("Channel not OK\n");
+		if(physts & 0x0200)
+			g_log("Scrambler locked\n");
+		else
+			g_log("Scrambler unlocked\n");
+		if(physts & 0x0001)
+			g_log("Link up\n");
+		else
+			g_log("Link down\n");
+	}
+	auto physcr = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x11);
+	g_log("PHYSCR = 0x%04x\n", physcr);
+	auto recr = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x15);
+	g_log("RECR = 0x%04x\n", recr);
+	auto misr3 = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x18);
+	g_log("MISR3 = 0x%04x\n", misr3);
+	auto r133 = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x133);
+	g_log("R133 = 0x%04x\n", r133);
+	auto tdrtc1 = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x310);
+	g_log("TDR_TC1 = 0x%04x\n", tdrtc1);
+
+	//auto leds2 = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x451);
+	//g_log("LEDS_CFG_2 = 0x%04x\n", leds2);
 }
 
 void InitClocks()
@@ -279,11 +328,22 @@ void InitSPEPHY()
 		g_log("Turning off 1.0V power rail as it's not needed for this PHY\n");
 		*g_pwren1v0 = 0;
 		g_speedIsGig = false;
+
+		//Set LED0/LED1 to be active high
+		iface.WriteMMD(PHY_ADDR_SPE, 0x1f, 0x451, 0x9);
+
+		auto pmactrl2 = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1, 0x834);
+		bool master = pmactrl2 & 0x4000;
+		if(master)
+			g_log("PHY is strapped to master mode\n");
+		else
+			g_log("PHY is strapped to slave mode\n");
+
+		//Select test mode
+		//iface.WriteMMD(PHY_ADDR_SPE, 0x1, 0x836, 0x2000);	//test mode 1
 	}
 	else
 		g_log(Logger::WARNING, "Unknown TI PHY %02x stepping %d\n", stepping);
-
-	//TODO: do other init?
 }
 
 void InitBaseTPHY()

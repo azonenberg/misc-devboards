@@ -170,3 +170,19 @@ void BitbangedMDIOInterface::Write(uint8_t phyaddr, uint8_t regaddr, uint16_t re
 	ClockCycle();
 	ClockCycle();
 }
+
+uint16_t BitbangedMDIOInterface::ReadMMD(uint8_t phyaddr, uint16_t mmd, uint16_t regid)
+{
+	Write(phyaddr, 0x0d, mmd);
+	Write(phyaddr, 0x0e, regid);
+	Write(phyaddr, 0x0d, 0x4000 | mmd);	//data, no post inc
+	return Read(phyaddr, 0x0e);
+}
+
+void BitbangedMDIOInterface::WriteMMD(uint8_t phyaddr, uint16_t mmd, uint16_t regid, uint16_t value)
+{
+	Write(phyaddr, 0x0d, mmd);
+	Write(phyaddr, 0x0e, regid);
+	Write(phyaddr, 0x0d, 0x4000 | mmd);	//data, no post inc
+	Write(phyaddr, 0x0e, value);
+}
