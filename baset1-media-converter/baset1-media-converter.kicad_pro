@@ -395,10 +395,10 @@
   "pcbnew": {
     "last_paths": {
       "gencad": "",
-      "idf": "",
+      "idf": "../../../../../../../tmp/baset1-media-converter.emn",
       "netlist": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "../../../../../../../tmp/baset1-media-converter.step",
       "vrml": ""
     },
     "page_layout_descr_file": ""

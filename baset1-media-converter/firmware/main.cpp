@@ -89,17 +89,18 @@ int main()
 
 	//For now, ignore PHY interrupts
 
-	//Clear PHY reset 10ms after power good
+	//Clear PHY reset 65ms after power good
 	GPIOPin pgood_in(&GPIOA, 1, GPIOPin::MODE_INPUT);
 	while(!pgood_in)
 	{}
-	g_logTimer->Sleep(100);
+	g_logTimer->Sleep(650);
 	g_log("Power good, releasing PHY reset\n");
 	baset_rst_n = 1;
 	spe_rst_n = 1;
 
-	//Wait another 100us after releasing reset before programming
-	g_logTimer->Sleep(1);
+	//The DP83TC814 (100mbit) only needs 100us after reset before we can configure.
+	//But the DP83TG720S (gigabit) needs 1ms.
+	g_logTimer->Sleep(10);
 
 	//Initialize the PHYs.
 	//Do the SPE one first as the configuration of the baseT phy depends on which one we have loaded
@@ -143,38 +144,45 @@ void PrintSPEStatus()
 {
 	LogIndenter li(g_log);
 
-	//Three register address ranges at MMD 1 (0x1000), 3 (0x3000), and 1f (0x0000)
-	//do not actually send high nibble to the PHY
-	auto physts = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x10);
-	g_log("PHYSTS = 0x%04x\n", physts);
+	if(g_speedIsGig)
 	{
-		LogIndenter li(g_log);
-		if(physts & 0x0400)
-			g_log("Channel OK\n");
-		else
-			g_log("Channel not OK\n");
-		if(physts & 0x0200)
-			g_log("Scrambler locked\n");
-		else
-			g_log("Scrambler unlocked\n");
-		if(physts & 0x0001)
-			g_log("Link up\n");
-		else
-			g_log("Link down\n");
+		g_log("TODO print status\n");
 	}
-	auto physcr = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x11);
-	g_log("PHYSCR = 0x%04x\n", physcr);
-	auto recr = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x15);
-	g_log("RECR = 0x%04x\n", recr);
-	auto misr3 = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x18);
-	g_log("MISR3 = 0x%04x\n", misr3);
-	auto r133 = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x133);
-	g_log("R133 = 0x%04x\n", r133);
-	auto tdrtc1 = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x310);
-	g_log("TDR_TC1 = 0x%04x\n", tdrtc1);
+	else
+	{
+		//Three register address ranges at MMD 1 (0x1000), 3 (0x3000), and 1f (0x0000)
+		//do not actually send high nibble to the PHY
+		auto physts = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x10);
+		g_log("PHYSTS = 0x%04x\n", physts);
+		{
+			LogIndenter li(g_log);
+			if(physts & 0x0400)
+				g_log("Channel OK\n");
+			else
+				g_log("Channel not OK\n");
+			if(physts & 0x0200)
+				g_log("Scrambler locked\n");
+			else
+				g_log("Scrambler unlocked\n");
+			if(physts & 0x0001)
+				g_log("Link up\n");
+			else
+				g_log("Link down\n");
+		}
+		auto physcr = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x11);
+		g_log("PHYSCR = 0x%04x\n", physcr);
+		auto recr = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x15);
+		g_log("RECR = 0x%04x\n", recr);
+		auto misr3 = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x18);
+		g_log("MISR3 = 0x%04x\n", misr3);
+		auto r133 = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x133);
+		g_log("R133 = 0x%04x\n", r133);
+		auto tdrtc1 = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x310);
+		g_log("TDR_TC1 = 0x%04x\n", tdrtc1);
 
-	//auto leds2 = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x451);
-	//g_log("LEDS_CFG_2 = 0x%04x\n", leds2);
+		//auto leds2 = g_speMDIO->ReadMMD(PHY_ADDR_SPE, 0x1f, 0x451);
+		//g_log("LEDS_CFG_2 = 0x%04x\n", leds2);
+	}
 }
 
 void InitClocks()
@@ -342,8 +350,15 @@ void InitSPEPHY()
 		//Select test mode
 		//iface.WriteMMD(PHY_ADDR_SPE, 0x1, 0x836, 0x2000);	//test mode 1
 	}
+	else if(model == 0x28)
+	{
+		g_log("Detected DP83TG720S stepping %d (1000base-T1)\n", stepping);
+		g_speedIsGig = true;
+
+		//TODO configure
+	}
 	else
-		g_log(Logger::WARNING, "Unknown TI PHY %02x stepping %d\n", stepping);
+		g_log(Logger::WARNING, "Unknown TI PHY %02x stepping %d\n", model);
 }
 
 void InitBaseTPHY()
