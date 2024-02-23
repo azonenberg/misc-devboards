@@ -504,12 +504,6 @@
     (uuid fe880c2b-876f-48da-a203-d36ca620baac)
   )
 
-  (text "TODO: fan connector and hook up some HPIOs to expansion?"
-    (at 205.74 143.51 0)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid 3cd0c282-6f9a-48bf-addd-1ad615f4a66b)
-  )
-
   (label "REFCLK2_P" (at 133.35 267.97 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 02ea461f-97bf-459b-8edf-661e068618d4)
@@ -1661,6 +1655,9 @@
     (path "/141d8977-f4d9-41b5-a51c-3451b2afc8fb/5829ab17-acb1-4377-ac37-8f480009e53d"
       (reference "C13") (unit 1) (value "22 uF 25V") (footprint "azonenberg_pcb:EIA_1812_CAP_NOSILK")
     )
+    (path "/141d8977-f4d9-41b5-a51c-3451b2afc8fb/5f20e7ac-94f4-43d8-a294-f090c6c55771"
+      (reference "C14") (unit 1) (value "10 uF 25V") (footprint "azonenberg_pcb:EIA_1210_CAP_NOSILK")
+    )
     (path "/141d8977-f4d9-41b5-a51c-3451b2afc8fb/d552f331-d0fd-4ed7-bb88-35bddd28bfd2"
       (reference "C15") (unit 1) (value "22 uF 25V") (footprint "azonenberg_pcb:EIA_1812_CAP_NOSILK")
     )
@@ -2042,6 +2039,12 @@
     (path "/141d8977-f4d9-41b5-a51c-3451b2afc8fb/a2e21d80-9278-45fb-9288-2a057074fb8d"
       (reference "D2") (unit 1) (value "RED") (footprint "azonenberg_pcb:EIA_0603_LED")
     )
+    (path "/141d8977-f4d9-41b5-a51c-3451b2afc8fb/bdfa2acb-ad77-48cf-95ba-a072a90b7d3e"
+      (reference "D3") (unit 1) (value "SZESD7471N2T5G") (footprint "azonenberg_pcb:SOD882")
+    )
+    (path "/141d8977-f4d9-41b5-a51c-3451b2afc8fb/d212e6db-8ad4-47bc-8b1e-1f496a7396ed"
+      (reference "D4") (unit 1) (value "SZESD7471N2T5G") (footprint "azonenberg_pcb:SOD882")
+    )
     (path "/141d8977-f4d9-41b5-a51c-3451b2afc8fb/6f041a72-539b-4789-a99d-c8d166db74dd"
       (reference "F1") (unit 1) (value "2A") (footprint "azonenberg_pcb:EIA_0603_CAP_NOSILK")
     )
@@ -2089,6 +2092,9 @@
     )
     (path "/8853104e-72eb-4ea7-9d5b-06a6795b0525/b9577dc6-5b67-41a2-93bb-24a580ae17c0"
       (reference "J12") (unit 1) (value "SFP_CAGE") (footprint "azonenberg_pcb:CONN_SFP_CAGE_TE_2007194-1")
+    )
+    (path "/141d8977-f4d9-41b5-a51c-3451b2afc8fb/af6c5525-63a9-4866-b43b-d6746aaaed5b"
+      (reference "J13") (unit 1) (value "FAN_01") (footprint "azonenberg_pcb:CONN_MOLEX_KK_0470531000")
     )
     (path "/a85f8a39-3bba-49df-9845-885441be9553/2c7c4d4f-c2d4-4d56-aa03-e7f27d7e76ea"
       (reference "J15") (unit 1) (value "CONN_QSFP_HOST") (footprint "azonenberg_pcb:CONN_ZQSFP+_TE_1551920-2")
@@ -2287,6 +2293,9 @@
     )
     (path "/141d8977-f4d9-41b5-a51c-3451b2afc8fb/d9b1e9b4-fefe-4842-83df-6fc531f43973"
       (reference "R17") (unit 1) (value "4.7k") (footprint "azonenberg_pcb:EIA_0402_RES_NOSILK")
+    )
+    (path "/141d8977-f4d9-41b5-a51c-3451b2afc8fb/95845f29-396e-472c-8056-7f13b28d2c28"
+      (reference "R18") (unit 1) (value "10K") (footprint "azonenberg_pcb:EIA_0402_RES_NOSILK")
     )
     (path "/141d8977-f4d9-41b5-a51c-3451b2afc8fb/0a4c9555-36a9-44e8-9915-3957b04a095d"
       (reference "R19") (unit 1) (value "20k") (footprint "azonenberg_pcb:EIA_0402_RES_NOSILK")
