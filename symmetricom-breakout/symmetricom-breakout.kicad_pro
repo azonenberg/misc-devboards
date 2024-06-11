@@ -63,7 +63,26 @@
           "width": 0.2
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "copper_edge_clearance|109850000|36500000|e33512fd-09f5-4f37-a2b4-d367c17fc7e0|6f70ec0d-a315-43e3-bddf-ac4d87f0a7cb",
+        "copper_edge_clearance|109850000|36500000|e33512fd-09f5-4f37-a2b4-d367c17fc7e0|df605781-5bd9-4393-84ab-feb32ca665d2",
+        "copper_edge_clearance|112635000|36500000|e33512fd-09f5-4f37-a2b4-d367c17fc7e0|a05aa937-1c88-40e2-8597-10a90e4f76de",
+        "copper_edge_clearance|115500000|36500000|e33512fd-09f5-4f37-a2b4-d367c17fc7e0|0a189c50-ee46-436b-93ac-73d8f8811f0d",
+        "copper_edge_clearance|115500000|36500000|e33512fd-09f5-4f37-a2b4-d367c17fc7e0|d740e7d8-e971-4d1d-9da0-87c3f679f9f4",
+        "copper_edge_clearance|128850000|36500000|e33512fd-09f5-4f37-a2b4-d367c17fc7e0|508e7fda-d6a0-424d-b70a-6e09bb626945",
+        "copper_edge_clearance|128850000|36500000|e33512fd-09f5-4f37-a2b4-d367c17fc7e0|a0fe5af8-d051-4ec0-a56a-5629ce5ebeb1",
+        "copper_edge_clearance|131635000|36500000|e33512fd-09f5-4f37-a2b4-d367c17fc7e0|832f56ee-ec5f-420d-8be6-c854cf5c20ea",
+        "copper_edge_clearance|134500000|36500000|e33512fd-09f5-4f37-a2b4-d367c17fc7e0|37b92540-6918-4af6-a5fc-fc417c918613",
+        "copper_edge_clearance|134500000|36500000|e33512fd-09f5-4f37-a2b4-d367c17fc7e0|9dd4bad0-989e-42aa-b5f0-f390443ac5fe",
+        "copper_edge_clearance|146850000|36500000|e33512fd-09f5-4f37-a2b4-d367c17fc7e0|132ca292-60c5-4b2a-96ce-74c90a568c37",
+        "copper_edge_clearance|146850000|36500000|e33512fd-09f5-4f37-a2b4-d367c17fc7e0|16f90b65-654e-4b43-8d9a-d8d603282c7d",
+        "copper_edge_clearance|149635000|36500000|e33512fd-09f5-4f37-a2b4-d367c17fc7e0|fb44c069-651f-4c50-81ae-0d2df42f8034",
+        "copper_edge_clearance|152500000|36500000|e33512fd-09f5-4f37-a2b4-d367c17fc7e0|14648dab-eaee-46de-bf7f-156287db122f",
+        "copper_edge_clearance|152500000|36500000|e33512fd-09f5-4f37-a2b4-d367c17fc7e0|3e398bb2-ffb0-41f2-a00f-403f36c78dda",
+        "silk_edge_clearance|87925000|36500001|e33512fd-09f5-4f37-a2b4-d367c17fc7e0|909346f9-b353-44e0-9ebe-7de9f4d96783",
+        "silk_edge_clearance|87925000|36500001|e33512fd-09f5-4f37-a2b4-d367c17fc7e0|c16b347e-3e2a-4749-a3ac-3def0ee13df8",
+        "silk_edge_clearance|96925000|36500001|e33512fd-09f5-4f37-a2b4-d367c17fc7e0|e0eee1e0-76b7-4b45-b2dc-685ecf8a67ae"
+      ],
       "meta": {
         "version": 2
       },
@@ -490,7 +509,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "output/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "",
