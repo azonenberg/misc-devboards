@@ -4,6 +4,12 @@
 	(generator_version "8.0")
 	(uuid "ef096c95-0fac-4f6e-b03f-91cd2b644955")
 	(paper "A3")
+	(title_block
+		(title "FPGA - STM32 Interface Test")
+		(date "2024-06-12")
+		(rev "0.1")
+		(company "Antikernel Labs")
+	)
 	(lib_symbols
 		(symbol "conn:CONN_COAXIAL"
 			(pin_names
@@ -6704,40 +6710,36 @@
 		(uuid "ff32a9d3-520b-4ce3-96fd-5e5ee3bbba13")
 	)
 	(no_connect
-		(at 354.33 59.69)
-		(uuid "07d02c82-6428-4c99-a496-ea8f8b93396a")
-	)
-	(no_connect
 		(at 354.33 82.55)
 		(uuid "1742635b-42bd-4473-9d67-887ccb194d85")
 	)
 	(no_connect
-		(at 354.33 64.77)
-		(uuid "2903acc2-594c-46ff-9ad6-7aa6d6244690")
+		(at 354.33 115.57)
+		(uuid "1d23d2d5-03e9-4e28-b922-13689d177265")
 	)
 	(no_connect
-		(at 354.33 90.17)
-		(uuid "322a5057-4b48-44ae-9468-cbaeccd6c37a")
+		(at 354.33 69.85)
+		(uuid "31283357-6c7e-4bcf-84c6-437a26cdb53f")
 	)
 	(no_connect
-		(at 354.33 54.61)
-		(uuid "4b8a088c-4770-4e05-bef2-95bfe6481d77")
+		(at 354.33 110.49)
+		(uuid "3adf8b89-e014-44fa-a7b6-8fd84daf6978")
+	)
+	(no_connect
+		(at 354.33 80.01)
+		(uuid "44f9c9d1-f492-4736-a195-bf771a98b2ce")
+	)
+	(no_connect
+		(at 354.33 113.03)
+		(uuid "50cdc4d9-cb17-4a81-8921-517ca6a5e191")
 	)
 	(no_connect
 		(at 354.33 130.81)
 		(uuid "66ec9ccc-c308-4db1-a469-0e145ffd8353")
 	)
 	(no_connect
-		(at 354.33 57.15)
-		(uuid "6cade39c-a278-4faa-bdbd-c4290d653c7b")
-	)
-	(no_connect
 		(at 354.33 95.25)
 		(uuid "6f4b1408-207f-4c25-9410-359db413398c")
-	)
-	(no_connect
-		(at 354.33 87.63)
-		(uuid "82932a57-bf0b-41f8-a865-f525995055cb")
 	)
 	(no_connect
 		(at 354.33 138.43)
@@ -6760,12 +6762,20 @@
 		(uuid "99f4263c-c1c3-4716-98fb-b2bbd638e75c")
 	)
 	(no_connect
-		(at 354.33 49.53)
-		(uuid "a8f87546-1961-4acd-9c9f-dbc899776bd8")
+		(at 354.33 118.11)
+		(uuid "a2fdac1f-f202-4cb9-a1b5-a3802b036523")
+	)
+	(no_connect
+		(at 354.33 120.65)
+		(uuid "ac788868-ad97-4675-9584-6d2c7a7680f7")
 	)
 	(no_connect
 		(at 354.33 125.73)
 		(uuid "b2c408f4-6a34-4f16-a6e4-0431fbda230a")
+	)
+	(no_connect
+		(at 354.33 77.47)
+		(uuid "bd5e5a5f-1d31-4256-b735-f514bceeddb0")
 	)
 	(no_connect
 		(at 157.48 104.14)
@@ -6778,10 +6788,6 @@
 	(no_connect
 		(at 354.33 133.35)
 		(uuid "ea6aeaf3-4deb-43e6-9db0-f6b28257446b")
-	)
-	(no_connect
-		(at 354.33 52.07)
-		(uuid "eba863a6-4c6c-4f28-8b13-dc8cfcc7018e")
 	)
 	(no_connect
 		(at 354.33 85.09)
@@ -8671,7 +8677,7 @@
 		(uuid "3c93f169-4a13-49d1-a73f-aa09d2e7ca77")
 	)
 	(label "RGMII_TX_CLK"
-		(at 354.33 69.85 180)
+		(at 354.33 59.69 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8858,7 +8864,7 @@
 		(uuid "4fc422fa-7760-4dd3-97b6-cc9e2e9007a0")
 	)
 	(label "RGMII_TXD1"
-		(at 354.33 77.47 180)
+		(at 354.33 52.07 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8990,7 +8996,7 @@
 		(uuid "58c52b80-1e89-4889-92ea-208c4ef63a18")
 	)
 	(label "RGMII_TX_EN"
-		(at 354.33 120.65 180)
+		(at 354.33 87.63 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9199,7 +9205,7 @@
 		(uuid "80793100-2867-491d-8efe-57f06f17b743")
 	)
 	(label "RGMII_TXD0"
-		(at 354.33 80.01 180)
+		(at 354.33 54.61 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9221,7 +9227,7 @@
 		(uuid "8195ca43-c8af-4519-86c7-361a0d6b6b79")
 	)
 	(label "ETH_RXD2"
-		(at 354.33 115.57 180)
+		(at 354.33 90.17 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9243,7 +9249,7 @@
 		(uuid "8e45f698-a8c6-4b4a-89c3-c1b45777d62f")
 	)
 	(label "RGMII_TXD2"
-		(at 354.33 74.93 180)
+		(at 354.33 49.53 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9507,7 +9513,7 @@
 		(uuid "b89868db-5874-4e98-a779-ca2243e7453f")
 	)
 	(label "RGMII_TXD3"
-		(at 354.33 72.39 180)
+		(at 354.33 57.15 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9529,7 +9535,7 @@
 		(uuid "c381211c-031d-4d03-badc-dd8dd75bd67e")
 	)
 	(label "ETH_RXD0"
-		(at 354.33 110.49 180)
+		(at 354.33 64.77 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9672,7 +9678,7 @@
 		(uuid "df8fc524-36fa-4b59-aeb5-9268e274c022")
 	)
 	(label "ETH_RXD3"
-		(at 354.33 118.11 180)
+		(at 354.33 74.93 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9727,7 +9733,7 @@
 		(uuid "e784ef3c-e61d-4580-acc1-6a78455517b9")
 	)
 	(label "ETH_RXD1"
-		(at 354.33 113.03 180)
+		(at 354.33 72.39 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13092,7 +13098,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_196_15x15_FULLARRAY_1MM_FTGB196"
 			(at 359.41 160.02 0)
 			(effects
 				(font
@@ -15763,7 +15769,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:CONN_HEADER_2.54MM_2x6_RA_PMOD_HOST"
 			(at 359.41 209.55 0)
 			(effects
 				(font

@@ -4,6 +4,12 @@
 	(generator_version "8.0")
 	(uuid "1f6ac185-91c8-4a2f-8aba-8ae65e73a6a0")
 	(paper "A3")
+	(title_block
+		(title "FPGA - STM32 Interface Test")
+		(date "2024-06-12")
+		(rev "0.1")
+		(company "Antikernel Labs")
+	)
 	(lib_symbols
 		(symbol "conn:CONN_COAXIAL"
 			(pin_names
@@ -13266,7 +13272,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_201_10x10_DEPOP_0.65MM_OSHPARK"
 			(at 71.12 156.21 0)
 			(effects
 				(font
@@ -14777,7 +14783,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_1210_CAP_NOSILK"
 			(at 195.2752 104.14 0)
 			(effects
 				(font
@@ -14917,7 +14923,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_1210_CAP_NOSILK"
 			(at 167.3352 133.35 0)
 			(effects
 				(font
@@ -15680,7 +15686,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_1210_CAP_NOSILK"
 			(at 181.3052 104.14 0)
 			(effects
 				(font
@@ -16658,7 +16664,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_201_10x10_DEPOP_0.65MM_OSHPARK"
 			(at 71.12 88.9 0)
 			(effects
 				(font
@@ -17957,7 +17963,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_196_15x15_FULLARRAY_1MM_FTGB196"
 			(at 332.74 158.75 0)
 			(effects
 				(font
@@ -19029,7 +19035,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_1210_CAP_NOSILK"
 			(at 167.3352 104.14 0)
 			(effects
 				(font
@@ -19239,7 +19245,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_1210_CAP_NOSILK"
 			(at 167.3352 148.59 0)
 			(effects
 				(font

@@ -4,7 +4,125 @@
 	(generator_version "8.0")
 	(uuid "322b6b01-83d4-4d60-bdbe-159095739d52")
 	(paper "A2")
+	(title_block
+		(title "FPGA - STM32 Interface Test")
+		(date "2024-06-12")
+		(rev "0.1")
+		(company "Antikernel Labs")
+	)
 	(lib_symbols
+		(symbol "conn:CONN_01X01"
+			(pin_names
+				(offset 1.016) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "CONN_01X01"
+				(at 2.54 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Connector, single row, 01x01, pin header"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Pin_Header_Straight_1X* Pin_Header_Angled_1X* Socket_Strip_Straight_1X* Socket_Strip_Angled_1X*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "CONN_01X01_0_1"
+				(rectangle
+					(start -1.27 0.127)
+					(end 0.254 -0.127)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 1.27)
+					(end 1.27 -1.27)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "CONN_01X01_1_1"
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "P1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "conn:CONN_01X03"
 			(pin_names
 				(offset 1.016) hide)
@@ -12406,6 +12524,17 @@
 		)
 		(uuid "28f65f45-2602-4edb-a2c4-3357aba8da72")
 	)
+	(label "GND"
+		(at 189.23 278.13 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2a4ca76b-ea89-4f05-9f6e-9ede4e752b22")
+	)
 	(label "TRACECLK"
 		(at 40.64 95.25 180)
 		(fields_autoplaced yes)
@@ -12880,7 +13009,7 @@
 		(uuid "69d623e9-7ac3-4213-a675-7a543c823025")
 	)
 	(label "RMII_TX_EN"
-		(at 339.09 105.41 180)
+		(at 339.09 36.83 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13012,7 +13141,7 @@
 		(uuid "7c401c00-35c3-47fe-83e2-404c5cff2860")
 	)
 	(label "FPGA_QSPI_SCK"
-		(at 339.09 100.33 180)
+		(at 339.09 105.41 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13243,7 +13372,7 @@
 		(uuid "9d03ba9a-b748-4840-a642-08bed1315e03")
 	)
 	(label "FMC_CLK"
-		(at 339.09 36.83 180)
+		(at 339.09 100.33 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14034,6 +14163,17 @@
 		)
 		(uuid "fb970423-dd97-4f9c-8c43-488eaa6a85a1")
 	)
+	(label "GND"
+		(at 189.23 285.75 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "fbc266c1-ea43-41e6-b708-d85b769b5b95")
+	)
 	(label "RMII_REF_CLK"
 		(at 40.64 35.56 180)
 		(fields_autoplaced yes)
@@ -14629,7 +14769,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0603_LED"
 			(at 349.25 207.01 0)
 			(effects
 				(font
@@ -14763,7 +14903,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 339.09 260.858 90)
 			(effects
 				(font
@@ -14897,7 +15037,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0603_LED"
 			(at 349.25 187.96 0)
 			(effects
 				(font
@@ -14964,7 +15104,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0603_LED"
 			(at 349.25 198.12 0)
 			(effects
 				(font
@@ -15165,7 +15305,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 339.09 189.738 90)
 			(effects
 				(font
@@ -15234,7 +15374,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_201_10x10_DEPOP_0.65MM_OSHPARK"
 			(at 138.43 74.93 0)
 			(effects
 				(font
@@ -15972,7 +16112,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 339.09 199.898 90)
 			(effects
 				(font
@@ -16041,7 +16181,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_201_10x10_DEPOP_0.65MM_OSHPARK"
 			(at 138.43 129.54 0)
 			(effects
 				(font
@@ -16781,7 +16921,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_201_10x10_DEPOP_0.65MM_OSHPARK"
 			(at 190.5 129.54 0)
 			(effects
 				(font
@@ -17690,7 +17830,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 339.09 231.648 90)
 			(effects
 				(font
@@ -17758,7 +17898,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:CONN_HEADER_1.27MM_2x10_SMT_SAMTEC_FTSH-110-01-L-DV-K"
 			(at 46.99 337.566 0)
 			(effects
 				(font
@@ -18146,7 +18286,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_201_10x10_DEPOP_0.65MM_OSHPARK"
 			(at 44.45 129.54 0)
 			(effects
 				(font
@@ -18860,6 +19000,73 @@
 		)
 	)
 	(symbol
+		(lib_id "conn:CONN_01X01")
+		(at 194.31 285.75 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "908e9188-4f62-474b-a745-633cfe755e3a")
+		(property "Reference" "TP16"
+			(at 196.215 284.5378 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TESTCLIP"
+			(at 196.215 286.9621 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:TESTPOINT_SMT_KEYSTONE_5016"
+			(at 194.31 285.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 194.31 285.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector, single row, 01x01, pin header"
+			(at 194.31 285.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "49ff0655-f378-47be-8fc0-587f6ab60962")
+		)
+		(instances
+			(project "fpga-stm32-ifaces"
+				(path "/b35a72f3-8995-417e-af27-dca34b6125a3/89442227-c436-4e13-9216-152fa3ab5112"
+					(reference "TP16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "device:R")
 		(at 226.06 236.22 90)
 		(unit 1)
@@ -19061,6 +19268,73 @@
 		)
 	)
 	(symbol
+		(lib_id "conn:CONN_01X01")
+		(at 194.31 278.13 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9b79d00f-bea8-4bbb-b81b-a4f21be50b68")
+		(property "Reference" "TP15"
+			(at 196.215 276.9178 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TESTCLIP"
+			(at 196.215 279.3421 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:TESTPOINT_SMT_KEYSTONE_5016"
+			(at 194.31 278.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 194.31 278.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector, single row, 01x01, pin header"
+			(at 194.31 278.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0eeb9e21-6a87-4796-9d6c-95fe700ac715")
+		)
+		(instances
+			(project "fpga-stm32-ifaces"
+				(path "/b35a72f3-8995-417e-af27-dca34b6125a3/89442227-c436-4e13-9216-152fa3ab5112"
+					(reference "TP15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "device:R")
 		(at 184.15 220.98 0)
 		(unit 1)
@@ -19155,7 +19429,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0603_LED"
 			(at 349.25 217.17 0)
 			(effects
 				(font
@@ -19291,7 +19565,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_201_10x10_DEPOP_0.65MM_OSHPARK"
 			(at 95.25 129.54 0)
 			(effects
 				(font
@@ -20096,7 +20370,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 339.09 218.948 90)
 			(effects
 				(font
@@ -20163,7 +20437,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0603_LED"
 			(at 349.25 259.08 0)
 			(effects
 				(font
@@ -20230,7 +20504,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0603_LED"
 			(at 349.25 248.92 0)
 			(effects
 				(font
@@ -20368,7 +20642,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_201_10x10_DEPOP_0.65MM_OSHPARK"
 			(at 190.5 74.93 0)
 			(effects
 				(font
@@ -21106,7 +21380,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0603_LED"
 			(at 349.25 240.03 0)
 			(effects
 				(font
@@ -21173,7 +21447,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 339.09 250.698 90)
 			(effects
 				(font
@@ -21465,7 +21739,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0603_LED"
 			(at 349.25 229.87 0)
 			(effects
 				(font
@@ -21535,7 +21809,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:CONN_HEADER_2.54MM_2x6_RA_PMOD_HOST"
 			(at 412.75 195.58 0)
 			(effects
 				(font
@@ -22194,7 +22468,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_196_15x15_FULLARRAY_1MM_FTGB196"
 			(at 344.17 162.56 0)
 			(effects
 				(font
@@ -22910,7 +23184,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 339.09 208.788 90)
 			(effects
 				(font
@@ -22979,7 +23253,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_201_10x10_DEPOP_0.65MM_OSHPARK"
 			(at 95.25 74.93 0)
 			(effects
 				(font
@@ -23787,7 +24061,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 339.09 241.808 90)
 			(effects
 				(font
@@ -23856,7 +24130,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_201_10x10_DEPOP_0.65MM_OSHPARK"
 			(at 44.45 74.93 0)
 			(effects
 				(font

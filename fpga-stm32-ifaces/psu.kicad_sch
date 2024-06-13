@@ -4,6 +4,12 @@
 	(generator_version "8.0")
 	(uuid "86ff5f36-e2a1-4db8-b955-e9f4e76b4a90")
 	(paper "A3")
+	(title_block
+		(title "FPGA - STM32 Interface Test")
+		(date "2024-06-12")
+		(rev "0.1")
+		(company "Antikernel Labs")
+	)
 	(lib_symbols
 		(symbol "conn:CONN_01X03"
 			(pin_names
@@ -3763,12 +3769,16 @@
 		(uuid "27734dad-9c81-4560-908d-5cdb3b28baad")
 	)
 	(no_connect
-		(at 271.78 223.52)
-		(uuid "3617465b-7f41-4d86-a2ef-a53cc2744d1c")
+		(at 271.78 213.36)
+		(uuid "3d28d489-7593-4875-ad9e-ce14b0c50218")
 	)
 	(no_connect
 		(at 130.81 245.11)
 		(uuid "92a4b781-863d-4278-bd79-c0ed385116a0")
+	)
+	(no_connect
+		(at 271.78 220.98)
+		(uuid "997e99a9-d277-4543-9433-1da558f8a1e0")
 	)
 	(no_connect
 		(at 39.37 100.33)
@@ -3787,28 +3797,24 @@
 		(uuid "b433ee8a-c5d5-4636-b71f-a9baa478ffa2")
 	)
 	(no_connect
-		(at 311.15 236.22)
+		(at 316.23 236.22)
 		(uuid "caeeb597-0323-4742-94ae-4b2436553435")
 	)
 	(no_connect
-		(at 311.15 222.25)
-		(uuid "cb2d4513-adcd-461c-ab4d-8fd3982cbd3a")
-	)
-	(no_connect
-		(at 311.15 224.79)
-		(uuid "cc1c8573-e0a1-49d9-82ad-7ec78b6209db")
-	)
-	(no_connect
-		(at 311.15 238.76)
+		(at 316.23 238.76)
 		(uuid "d09d0dd1-1646-4496-a4d9-9c1052d519d0")
 	)
 	(no_connect
-		(at 311.15 233.68)
+		(at 316.23 233.68)
 		(uuid "d905d12d-9e64-414c-b59c-a7fa005f378c")
 	)
 	(no_connect
 		(at 271.78 226.06)
 		(uuid "da1f5831-381c-45d8-b1c0-9543cee0165d")
+	)
+	(no_connect
+		(at 271.78 223.52)
+		(uuid "e3d173b4-2a64-4056-9ab3-730f0236be13")
 	)
 	(no_connect
 		(at 39.37 124.46)
@@ -4912,6 +4918,17 @@
 		(uuid "09c6eafc-41cb-4823-a70c-3105b75a009f")
 	)
 	(label "GND"
+		(at 52.07 189.23 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0ac4595f-618f-43a5-925d-97d6d3a84470")
+	)
+	(label "GND"
 		(at 26.67 257.81 180)
 		(fields_autoplaced yes)
 		(effects
@@ -4945,7 +4962,7 @@
 		(uuid "14fad931-62ff-4249-8af5-825d629c038f")
 	)
 	(label "SUPER_SYSOK_LED"
-		(at 271.78 205.74 180)
+		(at 316.23 224.79 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5066,6 +5083,17 @@
 		(uuid "27a6acd4-a850-4bc9-88ea-fae5c34c8659")
 	)
 	(label "GND"
+		(at 52.07 215.9 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "28c92f0c-2fce-45f0-b862-f9b9ec2c8107")
+	)
+	(label "GND"
 		(at 199.39 120.65 180)
 		(fields_autoplaced yes)
 		(effects
@@ -5077,7 +5105,7 @@
 		(uuid "2972c8f3-2a34-49ab-a203-a94881b8d342")
 	)
 	(label "SUPER_FAULT_LED"
-		(at 271.78 213.36 180)
+		(at 316.23 222.25 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5088,7 +5116,7 @@
 		(uuid "2c4db874-f64d-478b-9337-881d17c9371a")
 	)
 	(label "12V0_EN"
-		(at 212.09 228.6 180)
+		(at 212.09 231.14 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5219,6 +5247,17 @@
 		)
 		(uuid "4331064f-8f0f-4f8c-9aee-8dc77d7df302")
 	)
+	(label "1V2_EN"
+		(at 44.45 207.01 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "48119038-c840-4986-af3d-89f1e824b1e6")
+	)
 	(label "SUPER_I2C_SCL"
 		(at 41.91 60.96 0)
 		(fields_autoplaced yes)
@@ -5231,7 +5270,7 @@
 		(uuid "485e935d-eedc-4749-9c45-51c73df1bd64")
 	)
 	(label "1V2_EN"
-		(at 212.09 231.14 180)
+		(at 212.09 228.6 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5275,7 +5314,7 @@
 		(uuid "53b60dca-de35-4e9c-a586-a0436ec298ec")
 	)
 	(label "SUPER_PWRGOOD_LED"
-		(at 271.78 203.2 180)
+		(at 212.09 200.66 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5637,6 +5676,17 @@
 		)
 		(uuid "a704f30f-f2aa-42d5-b1bc-525fa08aa562")
 	)
+	(label "1V8_EN"
+		(at 44.45 198.12 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a8e3fb79-c3e2-406a-a255-ff4a390534d1")
+	)
 	(label "GND"
 		(at 237.49 257.81 0)
 		(fields_autoplaced yes)
@@ -5658,6 +5708,17 @@
 			(justify right bottom)
 		)
 		(uuid "ad4519ee-1633-4ca4-92fc-8c54cd25f18d")
+	)
+	(label "1V0_EN"
+		(at 44.45 215.9 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ade702b1-6aa5-4e46-bd0a-4c739d4f572f")
 	)
 	(label "1V0_EN"
 		(at 39.37 168.91 180)
@@ -5692,6 +5753,17 @@
 		)
 		(uuid "b4483404-0eff-45d8-bac1-462a77bdf94d")
 	)
+	(label "GND"
+		(at 52.07 207.01 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b4c21706-7e3b-4d46-9f4d-6dfdff523922")
+	)
 	(label "SUPER_PWRGOOD_LED"
 		(at 217.17 257.81 180)
 		(fields_autoplaced yes)
@@ -5724,6 +5796,17 @@
 			(justify right bottom)
 		)
 		(uuid "c307ca8e-12d0-4ca9-a06d-5c5a1160376c")
+	)
+	(label "GND"
+		(at 52.07 198.12 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c3b3c035-71b7-4f9e-ba9c-1b316187345c")
 	)
 	(label "GND"
 		(at 87.63 163.83 0)
@@ -5934,6 +6017,17 @@
 		)
 		(uuid "fb6f6c6d-cc43-479a-9268-93a8b1cbb420")
 	)
+	(label "3V3_EN"
+		(at 44.45 189.23 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "fca9b56e-6f70-44bc-b21c-9d86a454a112")
+	)
 	(label "1V2_PGOOD"
 		(at 271.78 233.68 180)
 		(fields_autoplaced yes)
@@ -6019,7 +6113,7 @@
 	)
 	(hierarchical_label "FPGA_DONE"
 		(shape input)
-		(at 271.78 220.98 180)
+		(at 271.78 205.74 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6079,7 +6173,7 @@
 	)
 	(hierarchical_label "FPGA_RST_N"
 		(shape output)
-		(at 212.09 200.66 180)
+		(at 271.78 203.2 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6153,7 +6247,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_1210_CAP_NOSILK"
 			(at 27.6352 116.84 0)
 			(effects
 				(font
@@ -6197,7 +6291,7 @@
 	)
 	(symbol
 		(lib_id "st-azonenberg:STM32L431-QFN48")
-		(at 314.96 240.03 0)
+		(at 320.04 240.03 0)
 		(unit 3)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6205,7 +6299,7 @@
 		(dnp no)
 		(uuid "0682dee9-aee0-4612-8b45-0a8dbabf6a89")
 		(property "Reference" "U11"
-			(at 314.96 241.808 0)
+			(at 320.04 241.808 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6214,7 +6308,7 @@
 			)
 		)
 		(property "Value" "STM32L431-QFN48"
-			(at 314.96 244.2323 0)
+			(at 320.04 244.2323 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6222,8 +6316,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
-			(at 314.96 217.17 0)
+		(property "Footprint" "azonenberg_pcb:QFN_48_0.5MM_7x7MM"
+			(at 320.04 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6232,7 +6326,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 314.96 217.17 0)
+			(at 320.04 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6241,7 +6335,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 314.96 217.17 0)
+			(at 320.04 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6444,7 +6538,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 68.58 122.428 90)
 			(effects
 				(font
@@ -6625,7 +6719,7 @@
 	)
 	(symbol
 		(lib_id "st-azonenberg:STM32L431-QFN48")
-		(at 314.96 226.06 0)
+		(at 320.04 226.06 0)
 		(unit 5)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6633,7 +6727,7 @@
 		(dnp no)
 		(uuid "1d8f6c79-a80d-460c-8609-1c387f525439")
 		(property "Reference" "U11"
-			(at 314.706 227.584 0)
+			(at 319.786 227.584 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6642,7 +6736,7 @@
 			)
 		)
 		(property "Value" "STM32L431-QFN48"
-			(at 314.706 230.0083 0)
+			(at 319.786 230.0083 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6650,8 +6744,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
-			(at 314.96 203.2 0)
+		(property "Footprint" "azonenberg_pcb:QFN_48_0.5MM_7x7MM"
+			(at 320.04 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6660,7 +6754,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 314.96 203.2 0)
+			(at 320.04 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6669,7 +6763,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 314.96 203.2 0)
+			(at 320.04 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6874,7 +6968,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_1210_CAP_NOSILK"
 			(at 88.5952 92.71 0)
 			(effects
 				(font
@@ -6943,7 +7037,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:CONN_U.FL_TE_1909763-1"
 			(at 203.2 125.73 0)
 			(effects
 				(font
@@ -7013,7 +7107,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 60.452 137.16 90)
 			(effects
 				(font
@@ -7083,7 +7177,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 60.452 113.03 90)
 			(effects
 				(font
@@ -7152,7 +7246,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:QFN_48_0.5MM_7x7MM"
 			(at 215.9 217.17 0)
 			(effects
 				(font
@@ -7443,7 +7537,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:MODULE_CYNTEC_MUN12AD03-SE"
 			(at 41.91 173.99 0)
 			(effects
 				(font
@@ -7534,7 +7628,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0805_CAP_NOSILK"
 			(at 88.5952 116.84 0)
 			(effects
 				(font
@@ -7603,7 +7697,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:QFN_48_0.5MM_7x7MM"
 			(at 361.95 217.17 0)
 			(effects
 				(font
@@ -7827,7 +7921,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0805_CAP_NOSILK"
 			(at 88.5952 163.83 0)
 			(effects
 				(font
@@ -7897,12 +7991,13 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:XILINX_JTAG_PTH_MOLEX_0878311420"
 			(at 130.81 245.11 0)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -8071,7 +8166,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0805_CAP_NOSILK"
 			(at 88.5952 140.97 0)
 			(effects
 				(font
@@ -8209,7 +8304,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 68.58 98.298 90)
 			(effects
 				(font
@@ -8278,7 +8373,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:CONN_U.FL_TE_1909763-1"
 			(at 203.2 115.57 0)
 			(effects
 				(font
@@ -8348,7 +8443,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 60.452 88.9 90)
 			(effects
 				(font
@@ -8484,7 +8579,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0603_LED"
 			(at 231.14 267.97 0)
 			(effects
 				(font
@@ -8554,7 +8649,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:CONN_HEADER_2.54MM_1x3"
 			(at 97.79 57.15 0)
 			(effects
 				(font
@@ -8601,6 +8696,74 @@
 	)
 	(symbol
 		(lib_id "device:R")
+		(at 48.26 189.23 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "78f95e73-9ea3-46da-9e39-52010be8ae96")
+		(property "Reference" "R86"
+			(at 48.26 184.0695 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10K"
+			(at 48.26 186.4938 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
+			(at 48.26 191.008 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 48.26 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 48.26 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4b79b68a-4d00-4a0c-8b18-67b18d8ec085")
+		)
+		(pin "2"
+			(uuid "d600389d-9e27-45bb-a818-3644d90fcda9")
+		)
+		(instances
+			(project "fpga-stm32-ifaces"
+				(path "/b35a72f3-8995-417e-af27-dca34b6125a3/56d77747-7310-4d4e-941c-71a62990f99c"
+					(reference "R86")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "device:R")
 		(at 220.98 278.13 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -8625,7 +8788,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 220.98 279.908 90)
 			(effects
 				(font
@@ -8695,7 +8858,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0805_CAP_NOSILK"
 			(at 75.8952 140.97 0)
 			(effects
 				(font
@@ -8764,7 +8927,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:CONN_U.FL_TE_1909763-1"
 			(at 203.2 105.41 0)
 			(effects
 				(font
@@ -8832,7 +8995,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:CONN_MOLEX_PICOBLADE_5POS_0532610571"
 			(at 38.1 66.04 0)
 			(effects
 				(font
@@ -9132,7 +9295,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 60.452 160.02 90)
 			(effects
 				(font
@@ -9245,6 +9408,74 @@
 		)
 	)
 	(symbol
+		(lib_id "device:R")
+		(at 48.26 215.9 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "aa0c2e57-3fe3-4ea3-800a-05a77c864f22")
+		(property "Reference" "R89"
+			(at 48.26 210.7395 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10K"
+			(at 48.26 213.1638 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
+			(at 48.26 217.678 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 48.26 215.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 48.26 215.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5d0d31c5-ee2f-4692-abec-98ca37deda89")
+		)
+		(pin "2"
+			(uuid "d9cecb3f-5392-496b-a8bb-cc56d3d5465d")
+		)
+		(instances
+			(project "fpga-stm32-ifaces"
+				(path "/b35a72f3-8995-417e-af27-dca34b6125a3/56d77747-7310-4d4e-941c-71a62990f99c"
+					(reference "R89")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "device:C")
 		(at 30.48 266.7 90)
 		(unit 1)
@@ -9339,7 +9570,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:CONN_U.FL_TE_1909763-1"
 			(at 203.2 95.25 0)
 			(effects
 				(font
@@ -9406,7 +9637,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:MODULE_CYNTEC_MUN12AD03-SE"
 			(at 41.91 151.13 0)
 			(effects
 				(font
@@ -9494,7 +9725,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 261.62 210.058 90)
 			(effects
 				(font
@@ -9564,7 +9795,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_1210_CAP_NOSILK"
 			(at 27.6352 163.83 0)
 			(effects
 				(font
@@ -9698,7 +9929,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0603_LED"
 			(at 231.14 278.13 0)
 			(effects
 				(font
@@ -9765,7 +9996,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:MODULE_CYNTEC_MUN12AD03-SE"
 			(at 41.91 102.87 0)
 			(effects
 				(font
@@ -9927,7 +10158,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 220.98 269.748 90)
 			(effects
 				(font
@@ -9996,7 +10227,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:CONN_U.FL_TE_1909763-1"
 			(at 203.2 135.89 0)
 			(effects
 				(font
@@ -10134,7 +10365,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 68.58 146.558 90)
 			(effects
 				(font
@@ -10272,7 +10503,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 220.98 259.588 90)
 			(effects
 				(font
@@ -10342,7 +10573,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_1210_CAP_NOSILK"
 			(at 27.6352 92.71 0)
 			(effects
 				(font
@@ -10385,6 +10616,74 @@
 		)
 	)
 	(symbol
+		(lib_id "device:R")
+		(at 48.26 198.12 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "de4187c4-51f0-48cb-9a95-e88b82f51670")
+		(property "Reference" "R87"
+			(at 48.26 192.9595 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10K"
+			(at 48.26 195.3838 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
+			(at 48.26 199.898 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 48.26 198.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 48.26 198.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "80c9a770-6402-4298-b4e8-47163c0b10db")
+		)
+		(pin "2"
+			(uuid "acd74221-d4db-4200-b42c-d35c6d4ec280")
+		)
+		(instances
+			(project "fpga-stm32-ifaces"
+				(path "/b35a72f3-8995-417e-af27-dca34b6125a3/56d77747-7310-4d4e-941c-71a62990f99c"
+					(reference "R87")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "device:C")
 		(at 74.93 88.9 0)
 		(unit 1)
@@ -10412,7 +10711,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_1210_CAP_NOSILK"
 			(at 75.8952 92.71 0)
 			(effects
 				(font
@@ -10480,7 +10779,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 68.58 169.418 90)
 			(effects
 				(font
@@ -10549,7 +10848,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:CONN_U.FL_TE_1909763-1"
 			(at 203.2 85.09 0)
 			(effects
 				(font
@@ -10616,7 +10915,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:MODULE_CYNTEC_MUN12AD03-SE"
 			(at 41.91 127 0)
 			(effects
 				(font
@@ -10707,7 +11006,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0805_CAP_NOSILK"
 			(at 75.8952 163.83 0)
 			(effects
 				(font
@@ -10846,7 +11145,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:QFN_48_0.5MM_7x7MM"
 			(at 275.59 217.17 0)
 			(effects
 				(font
@@ -11070,7 +11369,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_1210_CAP_NOSILK"
 			(at 27.6352 140.97 0)
 			(effects
 				(font
@@ -11138,7 +11437,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0603_LED"
 			(at 231.14 257.81 0)
 			(effects
 				(font
@@ -11251,6 +11550,74 @@
 		)
 	)
 	(symbol
+		(lib_id "device:R")
+		(at 48.26 207.01 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "fce2de15-facb-441d-8b7f-cf658e2264fd")
+		(property "Reference" "R88"
+			(at 48.26 201.8495 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10K"
+			(at 48.26 204.2738 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
+			(at 48.26 208.788 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 48.26 207.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 48.26 207.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6ff7c7f7-d700-4d86-9c90-a520e3096668")
+		)
+		(pin "2"
+			(uuid "0faa8299-ae14-489e-ad01-8340e50d8810")
+		)
+		(instances
+			(project "fpga-stm32-ifaces"
+				(path "/b35a72f3-8995-417e-af27-dca34b6125a3/56d77747-7310-4d4e-941c-71a62990f99c"
+					(reference "R88")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "device:C")
 		(at 74.93 113.03 0)
 		(unit 1)
@@ -11278,7 +11645,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0805_CAP_NOSILK"
 			(at 75.8952 116.84 0)
 			(effects
 				(font
