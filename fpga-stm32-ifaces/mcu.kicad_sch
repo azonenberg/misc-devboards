@@ -11189,6 +11189,10 @@
 		(uuid "14d7a4f9-fa4e-4e07-8070-e4ce9ff31230")
 	)
 	(no_connect
+		(at 186.69 53.34)
+		(uuid "15f5febd-f89e-48e8-be6e-7ded41309c7d")
+	)
+	(no_connect
 		(at 134.62 40.64)
 		(uuid "1820bfdf-2089-4e88-aece-71a9484b8c65")
 	)
@@ -11265,6 +11269,10 @@
 		(uuid "73039a04-7e8b-47b4-8ec9-5a40b84eb601")
 	)
 	(no_connect
+		(at 40.64 123.19)
+		(uuid "828bd5f6-7979-4a21-b725-213e7413499d")
+	)
+	(no_connect
 		(at 134.62 125.73)
 		(uuid "87d59535-fa08-4348-a9ea-ba12611a1ecc")
 	)
@@ -11279,10 +11287,6 @@
 	(no_connect
 		(at 186.69 97.79)
 		(uuid "951a55e9-5187-4fe4-ad8a-dc9106925399")
-	)
-	(no_connect
-		(at 134.62 53.34)
-		(uuid "95223c9f-746c-459f-86bf-fab6c43ebee2")
 	)
 	(no_connect
 		(at 40.64 58.42)
@@ -11315,10 +11319,6 @@
 	(no_connect
 		(at 134.62 118.11)
 		(uuid "a7c3975d-ccfc-4e18-ae3a-d819734e4c25")
-	)
-	(no_connect
-		(at 91.44 71.12)
-		(uuid "ac117c42-d277-408c-9263-5f8fdeb1a2fc")
 	)
 	(no_connect
 		(at 134.62 107.95)
@@ -12481,7 +12481,7 @@
 		(uuid "25adb401-5f5a-438f-a2bb-c7b7d3d69d9b")
 	)
 	(label "FMC_AD10"
-		(at 339.09 85.09 180)
+		(at 339.09 107.95 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12569,7 +12569,7 @@
 		(uuid "2fbdb38d-712b-49ce-a1f5-72b7a9265f70")
 	)
 	(label "RMII_RXD0"
-		(at 339.09 113.03 180)
+		(at 339.09 57.15 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12580,7 +12580,7 @@
 		(uuid "30bf1543-9af5-498d-8b8c-099ec541b67d")
 	)
 	(label "FPGA_QSPI_DQ0"
-		(at 339.09 102.87 180)
+		(at 339.09 92.71 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12723,7 +12723,7 @@
 		(uuid "42f014d5-77d1-4197-84b3-ec49b4864e75")
 	)
 	(label "FMC_AD9"
-		(at 339.09 82.55 180)
+		(at 339.09 59.69 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13163,7 +13163,7 @@
 		(uuid "7d610e54-8d18-4128-992e-1e4c018c727d")
 	)
 	(label "FMC_NE1"
-		(at 339.09 46.99 180)
+		(at 339.09 87.63 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13196,7 +13196,7 @@
 		(uuid "80d9d905-30d9-4024-a559-d53d00151371")
 	)
 	(label "RMII_TXD1"
-		(at 339.09 110.49 180)
+		(at 339.09 113.03 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13306,7 +13306,7 @@
 		(uuid "8a834051-59c1-4b27-85b0-468156ad0caf")
 	)
 	(label "FMC_AD11"
-		(at 339.09 87.63 180)
+		(at 339.09 46.99 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13350,7 +13350,7 @@
 		(uuid "95a9a2b9-015d-43a4-b309-2a79ccc728c6")
 	)
 	(label "FMC_AD13"
-		(at 339.09 92.71 180)
+		(at 339.09 102.87 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13427,7 +13427,7 @@
 		(uuid "a43eab6e-1e1b-4514-a35d-48d3e2038b54")
 	)
 	(label "FMC_NE1"
-		(at 186.69 53.34 180)
+		(at 134.62 53.34 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13438,7 +13438,7 @@
 		(uuid "a6d4a7d1-e0d6-4834-800d-2dc33423ba7d")
 	)
 	(label "FMC_AD7"
-		(at 339.09 77.47 180)
+		(at 339.09 161.29 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13471,7 +13471,7 @@
 		(uuid "a897850c-302d-494c-89e6-7046b5e331e4")
 	)
 	(label "FMC_AD0"
-		(at 339.09 59.69 180)
+		(at 339.09 82.55 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13537,7 +13537,7 @@
 		(uuid "b099d784-95b0-41a6-88cf-2f00f8a302e2")
 	)
 	(label "FMC_NE3"
-		(at 339.09 57.15 180)
+		(at 339.09 85.09 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13636,7 +13636,7 @@
 		(uuid "be3557f4-0462-4117-9813-2d2c51795803")
 	)
 	(label "FMC_AD12"
-		(at 339.09 138.43 180)
+		(at 339.09 148.59 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13812,7 +13812,7 @@
 		(uuid "cb9d02eb-9eae-4f9d-831a-d877c9dc7aa2")
 	)
 	(label "FPGA_LED_3"
-		(at 339.09 148.59 180)
+		(at 339.09 138.43 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13933,7 +13933,7 @@
 		(uuid "dcad23e7-0046-4ad6-bdbe-bd5bd3a5b710")
 	)
 	(label "FMC_A18"
-		(at 339.09 161.29 180)
+		(at 339.09 77.47 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13988,7 +13988,7 @@
 		(uuid "e0d00b0a-69e5-4fcc-b3dd-0fc9e6cc7f5f")
 	)
 	(label "FMC_A17"
-		(at 339.09 158.75 180)
+		(at 339.09 80.01 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14065,7 +14065,7 @@
 		(uuid "eb0cfd8b-3966-42e8-b8b9-bcc17c624ef5")
 	)
 	(label "FMC_AD8"
-		(at 339.09 80.01 180)
+		(at 339.09 158.75 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14197,7 +14197,7 @@
 		(uuid "fc61807b-0839-4b46-b543-92b7ae7cb41c")
 	)
 	(label "RMII_TXD0"
-		(at 339.09 107.95 180)
+		(at 339.09 110.49 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14230,7 +14230,7 @@
 		(uuid "fea05379-b259-4cfb-8e85-b4aa70358736")
 	)
 	(label "FMC_AD10"
-		(at 40.64 123.19 180)
+		(at 91.44 71.12 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -15459,7 +15459,6 @@
 		)
 		(pin "B8"
 			(uuid "ae757b97-9802-4d39-b900-ceb00f75dce6")
-			(alternate "FMC_NE1")
 		)
 		(pin "D13"
 			(uuid "030c903a-03f7-401b-8995-e3407554ef7d")
@@ -15469,7 +15468,6 @@
 		)
 		(pin "P13"
 			(uuid "eacdacb6-0bf6-4e90-b6b9-cf5ad157359f")
-			(alternate "FMC_AD10")
 		)
 		(pin "D14"
 			(uuid "8a46e003-aa58-4d2f-a771-b2d8a0d54ec3")
@@ -15845,6 +15843,7 @@
 		)
 		(pin "D15"
 			(uuid "cd3d98db-4b18-424a-a1c8-972ffe3edc78")
+			(alternate "FMC_NE1")
 		)
 		(pin "N14"
 			(uuid "0ffc537b-6e7f-4fdf-9907-54bdd69e45b2")
@@ -16073,6 +16072,7 @@
 		)
 		(pin "K15"
 			(uuid "2e7b025d-8298-43c0-b772-ed707f6c66dc")
+			(alternate "FMC_AD10")
 		)
 		(pin "P14"
 			(uuid "e4560ae0-3282-4ca9-b218-44a484e4cf9f")
@@ -16266,7 +16266,6 @@
 		)
 		(pin "B8"
 			(uuid "ae757b97-9802-4d39-b900-ceb00f75dce7")
-			(alternate "FMC_NE1")
 		)
 		(pin "D13"
 			(uuid "030c903a-03f7-401b-8995-e3407554ef7e")
@@ -16276,7 +16275,6 @@
 		)
 		(pin "P13"
 			(uuid "eacdacb6-0bf6-4e90-b6b9-cf5ad15735a0")
-			(alternate "FMC_AD10")
 		)
 		(pin "D14"
 			(uuid "8a46e003-aa58-4d2f-a771-b2d8a0d54ec4")
@@ -16652,6 +16650,7 @@
 		)
 		(pin "D15"
 			(uuid "cd3d98db-4b18-424a-a1c8-972ffe3edc79")
+			(alternate "FMC_NE1")
 		)
 		(pin "N14"
 			(uuid "0ffc537b-6e7f-4fdf-9907-54bdd69e45b3")
@@ -16880,6 +16879,7 @@
 		)
 		(pin "K15"
 			(uuid "2e7b025d-8298-43c0-b772-ed707f6c66dd")
+			(alternate "FMC_AD10")
 		)
 		(pin "P14"
 			(uuid "e4560ae0-3282-4ca9-b218-44a484e4cfa0")
@@ -17006,7 +17006,6 @@
 		)
 		(pin "B8"
 			(uuid "ae757b97-9802-4d39-b900-ceb00f75dce8")
-			(alternate "FMC_NE1")
 		)
 		(pin "D13"
 			(uuid "030c903a-03f7-401b-8995-e3407554ef7f")
@@ -17016,7 +17015,6 @@
 		)
 		(pin "P13"
 			(uuid "eacdacb6-0bf6-4e90-b6b9-cf5ad15735a1")
-			(alternate "FMC_AD10")
 		)
 		(pin "D14"
 			(uuid "8a46e003-aa58-4d2f-a771-b2d8a0d54ec5")
@@ -17392,6 +17390,7 @@
 		)
 		(pin "D15"
 			(uuid "cd3d98db-4b18-424a-a1c8-972ffe3edc7a")
+			(alternate "FMC_NE1")
 		)
 		(pin "N14"
 			(uuid "0ffc537b-6e7f-4fdf-9907-54bdd69e45b4")
@@ -17620,6 +17619,7 @@
 		)
 		(pin "K15"
 			(uuid "2e7b025d-8298-43c0-b772-ed707f6c66de")
+			(alternate "FMC_AD10")
 		)
 		(pin "P14"
 			(uuid "e4560ae0-3282-4ca9-b218-44a484e4cfa1")
@@ -18371,7 +18371,6 @@
 		)
 		(pin "B8"
 			(uuid "ae757b97-9802-4d39-b900-ceb00f75dce9")
-			(alternate "FMC_NE1")
 		)
 		(pin "D13"
 			(uuid "030c903a-03f7-401b-8995-e3407554ef80")
@@ -18381,7 +18380,6 @@
 		)
 		(pin "P13"
 			(uuid "eacdacb6-0bf6-4e90-b6b9-cf5ad15735a2")
-			(alternate "FMC_AD10")
 		)
 		(pin "D14"
 			(uuid "8a46e003-aa58-4d2f-a771-b2d8a0d54ec6")
@@ -18757,6 +18755,7 @@
 		)
 		(pin "D15"
 			(uuid "cd3d98db-4b18-424a-a1c8-972ffe3edc7b")
+			(alternate "FMC_NE1")
 		)
 		(pin "N14"
 			(uuid "0ffc537b-6e7f-4fdf-9907-54bdd69e45b5")
@@ -18985,6 +18984,7 @@
 		)
 		(pin "K15"
 			(uuid "2e7b025d-8298-43c0-b772-ed707f6c66df")
+			(alternate "FMC_AD10")
 		)
 		(pin "P14"
 			(uuid "e4560ae0-3282-4ca9-b218-44a484e4cfa2")
@@ -19650,7 +19650,6 @@
 		)
 		(pin "B8"
 			(uuid "ae757b97-9802-4d39-b900-ceb00f75dcea")
-			(alternate "FMC_NE1")
 		)
 		(pin "D13"
 			(uuid "030c903a-03f7-401b-8995-e3407554ef81")
@@ -19660,7 +19659,6 @@
 		)
 		(pin "P13"
 			(uuid "eacdacb6-0bf6-4e90-b6b9-cf5ad15735a3")
-			(alternate "FMC_AD10")
 		)
 		(pin "D14"
 			(uuid "8a46e003-aa58-4d2f-a771-b2d8a0d54ec7")
@@ -20036,6 +20034,7 @@
 		)
 		(pin "D15"
 			(uuid "cd3d98db-4b18-424a-a1c8-972ffe3edc7c")
+			(alternate "FMC_NE1")
 		)
 		(pin "N14"
 			(uuid "0ffc537b-6e7f-4fdf-9907-54bdd69e45b6")
@@ -20264,6 +20263,7 @@
 		)
 		(pin "K15"
 			(uuid "2e7b025d-8298-43c0-b772-ed707f6c66e0")
+			(alternate "FMC_AD10")
 		)
 		(pin "P14"
 			(uuid "e4560ae0-3282-4ca9-b218-44a484e4cfa3")
@@ -20727,7 +20727,6 @@
 		)
 		(pin "B8"
 			(uuid "ae757b97-9802-4d39-b900-ceb00f75dceb")
-			(alternate "FMC_NE1")
 		)
 		(pin "D13"
 			(uuid "030c903a-03f7-401b-8995-e3407554ef82")
@@ -20737,7 +20736,6 @@
 		)
 		(pin "P13"
 			(uuid "eacdacb6-0bf6-4e90-b6b9-cf5ad15735a4")
-			(alternate "FMC_AD10")
 		)
 		(pin "D14"
 			(uuid "8a46e003-aa58-4d2f-a771-b2d8a0d54ec8")
@@ -21113,6 +21111,7 @@
 		)
 		(pin "D15"
 			(uuid "cd3d98db-4b18-424a-a1c8-972ffe3edc7d")
+			(alternate "FMC_NE1")
 		)
 		(pin "N14"
 			(uuid "0ffc537b-6e7f-4fdf-9907-54bdd69e45b7")
@@ -21341,6 +21340,7 @@
 		)
 		(pin "K15"
 			(uuid "2e7b025d-8298-43c0-b772-ed707f6c66e1")
+			(alternate "FMC_AD10")
 		)
 		(pin "P14"
 			(uuid "e4560ae0-3282-4ca9-b218-44a484e4cfa4")
@@ -23338,7 +23338,6 @@
 		)
 		(pin "B8"
 			(uuid "ae757b97-9802-4d39-b900-ceb00f75dcec")
-			(alternate "FMC_NE1")
 		)
 		(pin "D13"
 			(uuid "030c903a-03f7-401b-8995-e3407554ef83")
@@ -23348,7 +23347,6 @@
 		)
 		(pin "P13"
 			(uuid "eacdacb6-0bf6-4e90-b6b9-cf5ad15735a5")
-			(alternate "FMC_AD10")
 		)
 		(pin "D14"
 			(uuid "8a46e003-aa58-4d2f-a771-b2d8a0d54ec9")
@@ -23724,6 +23722,7 @@
 		)
 		(pin "D15"
 			(uuid "cd3d98db-4b18-424a-a1c8-972ffe3edc7e")
+			(alternate "FMC_NE1")
 		)
 		(pin "N14"
 			(uuid "0ffc537b-6e7f-4fdf-9907-54bdd69e45b8")
@@ -23952,6 +23951,7 @@
 		)
 		(pin "K15"
 			(uuid "2e7b025d-8298-43c0-b772-ed707f6c66e2")
+			(alternate "FMC_AD10")
 		)
 		(pin "P14"
 			(uuid "e4560ae0-3282-4ca9-b218-44a484e4cfa5")
@@ -24215,7 +24215,6 @@
 		)
 		(pin "B8"
 			(uuid "ae757b97-9802-4d39-b900-ceb00f75dced")
-			(alternate "FMC_NE1")
 		)
 		(pin "D13"
 			(uuid "030c903a-03f7-401b-8995-e3407554ef84")
@@ -24225,7 +24224,6 @@
 		)
 		(pin "P13"
 			(uuid "eacdacb6-0bf6-4e90-b6b9-cf5ad15735a6")
-			(alternate "FMC_AD10")
 		)
 		(pin "D14"
 			(uuid "8a46e003-aa58-4d2f-a771-b2d8a0d54eca")
@@ -24601,6 +24599,7 @@
 		)
 		(pin "D15"
 			(uuid "cd3d98db-4b18-424a-a1c8-972ffe3edc7f")
+			(alternate "FMC_NE1")
 		)
 		(pin "N14"
 			(uuid "0ffc537b-6e7f-4fdf-9907-54bdd69e45b9")
@@ -24829,6 +24828,7 @@
 		)
 		(pin "K15"
 			(uuid "2e7b025d-8298-43c0-b772-ed707f6c66e3")
+			(alternate "FMC_AD10")
 		)
 		(pin "P14"
 			(uuid "e4560ae0-3282-4ca9-b218-44a484e4cfa6")

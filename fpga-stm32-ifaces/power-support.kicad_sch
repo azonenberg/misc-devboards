@@ -13357,7 +13357,6 @@
 		)
 		(pin "B8"
 			(uuid "ae757b97-9802-4d39-b900-ceb00f75dce6")
-			(alternate "FMC_NE1")
 		)
 		(pin "D13"
 			(uuid "030c903a-03f7-401b-8995-e3407554ef7d")
@@ -13367,7 +13366,6 @@
 		)
 		(pin "P13"
 			(uuid "eacdacb6-0bf6-4e90-b6b9-cf5ad157359f")
-			(alternate "FMC_AD10")
 		)
 		(pin "D14"
 			(uuid "8a46e003-aa58-4d2f-a771-b2d8a0d54ec3")
@@ -13743,6 +13741,7 @@
 		)
 		(pin "D15"
 			(uuid "cd3d98db-4b18-424a-a1c8-972ffe3edc78")
+			(alternate "FMC_NE1")
 		)
 		(pin "N14"
 			(uuid "0ffc537b-6e7f-4fdf-9907-54bdd69e45b2")
@@ -13971,6 +13970,7 @@
 		)
 		(pin "K15"
 			(uuid "2e7b025d-8298-43c0-b772-ed707f6c66dc")
+			(alternate "FMC_AD10")
 		)
 		(pin "P14"
 			(uuid "e4560ae0-3282-4ca9-b218-44a484e4cf9f")
@@ -16749,7 +16749,6 @@
 		)
 		(pin "B8"
 			(uuid "ae757b97-9802-4d39-b900-ceb00f75dce8")
-			(alternate "FMC_NE1")
 		)
 		(pin "D13"
 			(uuid "030c903a-03f7-401b-8995-e3407554ef7f")
@@ -16759,7 +16758,6 @@
 		)
 		(pin "P13"
 			(uuid "eacdacb6-0bf6-4e90-b6b9-cf5ad15735a1")
-			(alternate "FMC_AD10")
 		)
 		(pin "D14"
 			(uuid "8a46e003-aa58-4d2f-a771-b2d8a0d54ec5")
@@ -17135,6 +17133,7 @@
 		)
 		(pin "D15"
 			(uuid "cd3d98db-4b18-424a-a1c8-972ffe3edc7a")
+			(alternate "FMC_NE1")
 		)
 		(pin "N14"
 			(uuid "0ffc537b-6e7f-4fdf-9907-54bdd69e45b4")
@@ -17363,6 +17362,7 @@
 		)
 		(pin "K15"
 			(uuid "2e7b025d-8298-43c0-b772-ed707f6c66de")
+			(alternate "FMC_AD10")
 		)
 		(pin "P14"
 			(uuid "e4560ae0-3282-4ca9-b218-44a484e4cfa1")

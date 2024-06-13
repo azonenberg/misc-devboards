@@ -6782,10 +6782,6 @@
 		(uuid "ddd22957-4b23-47ce-b373-7f1a3c97ced8")
 	)
 	(no_connect
-		(at 354.33 46.99)
-		(uuid "e0e0fbb0-3d9a-42fe-99b1-526440f7e3fb")
-	)
-	(no_connect
 		(at 354.33 133.35)
 		(uuid "ea6aeaf3-4deb-43e6-9db0-f6b28257446b")
 	)
@@ -8187,6 +8183,16 @@
 	)
 	(wire
 		(pts
+			(xy 341.63 46.99) (xy 346.71 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fbdb0583-6b7f-4e6d-b635-690eebf564a2")
+	)
+	(wire
+		(pts
 			(xy 341.63 44.45) (xy 346.71 44.45)
 		)
 		(stroke
@@ -8677,7 +8683,7 @@
 		(uuid "3c93f169-4a13-49d1-a73f-aa09d2e7ca77")
 	)
 	(label "RGMII_TX_CLK"
-		(at 354.33 59.69 180)
+		(at 354.33 54.61 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8864,7 +8870,7 @@
 		(uuid "4fc422fa-7760-4dd3-97b6-cc9e2e9007a0")
 	)
 	(label "RGMII_TXD1"
-		(at 354.33 52.07 180)
+		(at 354.33 64.77 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8996,7 +9002,7 @@
 		(uuid "58c52b80-1e89-4889-92ea-208c4ef63a18")
 	)
 	(label "RGMII_TX_EN"
-		(at 354.33 87.63 180)
+		(at 354.33 59.69 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9205,7 +9211,7 @@
 		(uuid "80793100-2867-491d-8efe-57f06f17b743")
 	)
 	(label "RGMII_TXD0"
-		(at 354.33 54.61 180)
+		(at 354.33 49.53 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9227,7 +9233,7 @@
 		(uuid "8195ca43-c8af-4519-86c7-361a0d6b6b79")
 	)
 	(label "ETH_RXD2"
-		(at 354.33 90.17 180)
+		(at 354.33 74.93 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9249,7 +9255,7 @@
 		(uuid "8e45f698-a8c6-4b4a-89c3-c1b45777d62f")
 	)
 	(label "RGMII_TXD2"
-		(at 354.33 49.53 180)
+		(at 354.33 52.07 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9335,6 +9341,17 @@
 			(justify right bottom)
 		)
 		(uuid "96f68565-de78-4275-a439-98f7bdbc69ab")
+	)
+	(label "3V3"
+		(at 341.63 46.99 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "98d43c2f-765a-4828-b3c5-caf05c19b24b")
 	)
 	(label "FPGA_PMOD_DQ0"
 		(at 354.33 190.5 180)
@@ -9535,7 +9552,7 @@
 		(uuid "c381211c-031d-4d03-badc-dd8dd75bd67e")
 	)
 	(label "ETH_RXD0"
-		(at 354.33 64.77 180)
+		(at 354.33 87.63 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9678,7 +9695,7 @@
 		(uuid "df8fc524-36fa-4b59-aeb5-9268e274c022")
 	)
 	(label "ETH_RXD3"
-		(at 354.33 74.93 180)
+		(at 354.33 90.17 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14670,6 +14687,73 @@
 			(project "fpga-stm32-ifaces"
 				(path "/b35a72f3-8995-417e-af27-dca34b6125a3/a004f346-e36c-499d-9c4d-a7c3dff3eae4"
 					(reference "C8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "device:R")
+		(at 350.52 46.99 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c4f406b6-0a86-42fb-90ab-058e0117b375")
+		(property "Reference" "R90"
+			(at 345.44 45.72 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1K"
+			(at 350.52 46.99 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
+			(at 350.52 48.768 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 350.52 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 350.52 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7f2b67f4-04bc-4b58-85ae-25868ab0ef80")
+		)
+		(pin "2"
+			(uuid "3ea44fcc-1519-4bb6-a735-717c3388465c")
+		)
+		(instances
+			(project "fpga-stm32-ifaces"
+				(path "/b35a72f3-8995-417e-af27-dca34b6125a3/a004f346-e36c-499d-9c4d-a7c3dff3eae4"
+					(reference "R90")
 					(unit 1)
 				)
 			)
