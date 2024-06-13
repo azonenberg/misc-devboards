@@ -5270,7 +5270,7 @@
 		(uuid "485e935d-eedc-4749-9c45-51c73df1bd64")
 	)
 	(label "1V2_EN"
-		(at 212.09 228.6 180)
+		(at 212.09 205.74 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6029,7 +6029,7 @@
 		(uuid "fca9b56e-6f70-44bc-b21c-9d86a454a112")
 	)
 	(label "1V2_PGOOD"
-		(at 271.78 233.68 180)
+		(at 212.09 203.2 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6149,7 +6149,7 @@
 	)
 	(hierarchical_label "MCU_RST_N"
 		(shape output)
-		(at 212.09 205.74 180)
+		(at 271.78 233.68 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6197,7 +6197,7 @@
 	)
 	(hierarchical_label "FPGA_INIT"
 		(shape bidirectional)
-		(at 212.09 203.2 180)
+		(at 212.09 228.6 180)
 		(fields_autoplaced yes)
 		(effects
 			(font

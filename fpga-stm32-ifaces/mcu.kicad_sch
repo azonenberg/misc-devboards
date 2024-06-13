@@ -12778,7 +12778,7 @@
 		(uuid "4d4b1cd4-3204-46cc-b3fb-404da896b5e9")
 	)
 	(label "FPGA_QSPI_DQ7"
-		(at 339.09 138.43 180)
+		(at 339.09 90.17 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13009,7 +13009,7 @@
 		(uuid "69d623e9-7ac3-4213-a675-7a543c823025")
 	)
 	(label "RMII_TX_EN"
-		(at 339.09 36.83 180)
+		(at 339.09 135.89 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13636,7 +13636,7 @@
 		(uuid "be3557f4-0462-4117-9813-2d2c51795803")
 	)
 	(label "FMC_AD12"
-		(at 339.09 90.17 180)
+		(at 339.09 138.43 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13999,7 +13999,7 @@
 		(uuid "e134a4ce-a2f4-4421-90a6-ce8973cf6ee0")
 	)
 	(label "FPGA_QSPI_DQ6"
-		(at 339.09 135.89 180)
+		(at 339.09 36.83 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
