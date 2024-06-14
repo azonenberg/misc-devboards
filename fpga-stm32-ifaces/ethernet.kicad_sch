@@ -6710,10 +6710,6 @@
 		(uuid "ff32a9d3-520b-4ce3-96fd-5e5ee3bbba13")
 	)
 	(no_connect
-		(at 354.33 82.55)
-		(uuid "1742635b-42bd-4473-9d67-887ccb194d85")
-	)
-	(no_connect
 		(at 354.33 115.57)
 		(uuid "1d23d2d5-03e9-4e28-b922-13689d177265")
 	)
@@ -6722,28 +6718,36 @@
 		(uuid "31283357-6c7e-4bcf-84c6-437a26cdb53f")
 	)
 	(no_connect
+		(at 354.33 107.95)
+		(uuid "34e70a10-ca30-4fbf-a7bc-9645de2a2ece")
+	)
+	(no_connect
 		(at 354.33 110.49)
 		(uuid "3adf8b89-e014-44fa-a7b6-8fd84daf6978")
 	)
 	(no_connect
-		(at 354.33 80.01)
-		(uuid "44f9c9d1-f492-4736-a195-bf771a98b2ce")
+		(at 354.33 100.33)
+		(uuid "468628e7-62ab-4b12-8a3e-60ae5dafc9c4")
 	)
 	(no_connect
 		(at 354.33 113.03)
 		(uuid "50cdc4d9-cb17-4a81-8921-517ca6a5e191")
 	)
 	(no_connect
+		(at 354.33 105.41)
+		(uuid "52f6c431-a023-45dc-b8de-d4cf0805c65d")
+	)
+	(no_connect
 		(at 354.33 130.81)
 		(uuid "66ec9ccc-c308-4db1-a469-0e145ffd8353")
 	)
 	(no_connect
-		(at 354.33 95.25)
-		(uuid "6f4b1408-207f-4c25-9410-359db413398c")
+		(at 354.33 158.75)
+		(uuid "6e8f354e-df3c-4029-8d73-bba6086e864f")
 	)
 	(no_connect
-		(at 354.33 138.43)
-		(uuid "855808f8-b5ef-429a-aaf0-f42fa06d9eb1")
+		(at 354.33 95.25)
+		(uuid "6f4b1408-207f-4c25-9410-359db413398c")
 	)
 	(no_connect
 		(at 100.33 85.09)
@@ -6774,20 +6778,16 @@
 		(uuid "b2c408f4-6a34-4f16-a6e4-0431fbda230a")
 	)
 	(no_connect
-		(at 354.33 77.47)
-		(uuid "bd5e5a5f-1d31-4256-b735-f514bceeddb0")
-	)
-	(no_connect
 		(at 157.48 104.14)
 		(uuid "ddd22957-4b23-47ce-b373-7f1a3c97ced8")
 	)
 	(no_connect
-		(at 354.33 133.35)
-		(uuid "ea6aeaf3-4deb-43e6-9db0-f6b28257446b")
+		(at 354.33 102.87)
+		(uuid "e94dfcf2-e9bd-49cd-ac5f-e93cc60c8902")
 	)
 	(no_connect
-		(at 354.33 85.09)
-		(uuid "ec5ee35b-cf5c-487c-bf03-d3d42a278ca1")
+		(at 354.33 133.35)
+		(uuid "ea6aeaf3-4deb-43e6-9db0-f6b28257446b")
 	)
 	(no_connect
 		(at 157.48 92.71)
@@ -8298,7 +8298,7 @@
 		(uuid "f4c90b68-3cd2-415a-a932-0ec847cc8770")
 	)
 	(label "ETH_MDC"
-		(at 354.33 102.87 180)
+		(at 354.33 80.01 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8309,7 +8309,7 @@
 		(uuid "01a0cab0-19b9-494d-97af-689d2f117a03")
 	)
 	(label "ETH_MDIO"
-		(at 354.33 105.41 180)
+		(at 354.33 82.55 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8386,7 +8386,7 @@
 		(uuid "0d832ba5-8a2f-4676-86d9-f09a8162f333")
 	)
 	(label "ETH_RST_N"
-		(at 354.33 100.33 180)
+		(at 354.33 77.47 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8595,7 +8595,7 @@
 		(uuid "2c724fef-1dfc-40a6-84a2-8acbddde11e5")
 	)
 	(label "ETH_RX_DV"
-		(at 354.33 107.95 180)
+		(at 354.33 85.09 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8617,7 +8617,7 @@
 		(uuid "31419941-d5a1-4e43-b21c-9004df7cf78c")
 	)
 	(label "FPGA_PMOD_DQ4"
-		(at 354.33 151.13 180)
+		(at 354.33 140.97 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8650,7 +8650,7 @@
 		(uuid "375b215c-58d9-403b-a8c6-03c065995fda")
 	)
 	(label "FPGA_PMOD_DQ6"
-		(at 354.33 156.21 180)
+		(at 354.33 151.13 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9068,7 +9068,7 @@
 		(uuid "67ea2abf-5753-4efa-b11e-db188f92900f")
 	)
 	(label "FPGA_PMOD_DQ0"
-		(at 354.33 140.97 180)
+		(at 354.33 138.43 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9321,7 +9321,7 @@
 		(uuid "933fbed9-991f-4ba5-9929-37dc85d5632e")
 	)
 	(label "FPGA_PMOD_DQ7"
-		(at 354.33 158.75 180)
+		(at 354.33 148.59 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9519,7 +9519,7 @@
 		(uuid "b75e7be3-783c-4031-a7e9-0b1aea142c60")
 	)
 	(label "FPGA_PMOD_DQ2"
-		(at 354.33 146.05 180)
+		(at 354.33 156.21 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9552,7 +9552,7 @@
 		(uuid "c381211c-031d-4d03-badc-dd8dd75bd67e")
 	)
 	(label "ETH_RXD0"
-		(at 354.33 87.63 180)
+		(at 354.33 72.39 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9651,7 +9651,7 @@
 		(uuid "d624974e-6267-4d52-af8e-74a14d8a2ad7")
 	)
 	(label "FPGA_PMOD_DQ3"
-		(at 354.33 148.59 180)
+		(at 354.33 153.67 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9750,7 +9750,7 @@
 		(uuid "e784ef3c-e61d-4580-acc1-6a78455517b9")
 	)
 	(label "ETH_RXD1"
-		(at 354.33 72.39 180)
+		(at 354.33 87.63 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9761,7 +9761,7 @@
 		(uuid "e96c958c-7559-45a9-9de1-19de4018da43")
 	)
 	(label "FPGA_PMOD_DQ5"
-		(at 354.33 153.67 180)
+		(at 354.33 146.05 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
