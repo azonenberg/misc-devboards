@@ -6,7 +6,7 @@
 	(paper "A2")
 	(title_block
 		(title "FPGA - STM32 Interface Test")
-		(date "2024-06-12")
+		(date "2024-06-13")
 		(rev "0.1")
 		(company "Antikernel Labs")
 	)
@@ -11293,10 +11293,6 @@
 		(uuid "969c246f-d833-4ca1-9c9c-3e3d99c90490")
 	)
 	(no_connect
-		(at 134.62 50.8)
-		(uuid "96ba15b4-9116-4f62-af8b-adfd9a6d8e32")
-	)
-	(no_connect
 		(at 91.44 102.87)
 		(uuid "a156c107-47c9-44c1-8ebe-5aaefb551d9d")
 	)
@@ -11359,6 +11355,10 @@
 	(no_connect
 		(at 134.62 123.19)
 		(uuid "f01b0801-8865-4f79-aac9-3534c3a6794e")
+	)
+	(no_connect
+		(at 186.69 50.8)
+		(uuid "f3c3e480-3bd2-4879-b5b3-09bb8b1299a9")
 	)
 	(no_connect
 		(at 40.64 60.96)
@@ -12272,7 +12272,7 @@
 		(uuid "1140adfe-c004-45f7-ac91-e9777659dd50")
 	)
 	(label "MCU_PMOD_DQ4"
-		(at 186.69 128.27 180)
+		(at 186.69 107.95 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12294,7 +12294,7 @@
 		(uuid "125ef1bb-973a-425a-b28d-120894a06f9d")
 	)
 	(label "FPGA_QSPI_DQS"
-		(at 339.09 128.27 180)
+		(at 339.09 46.99 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12305,7 +12305,7 @@
 		(uuid "1432bbf7-6dea-4e77-a129-eef61bebe84f")
 	)
 	(label "FMC_AD3"
-		(at 339.09 67.31 180)
+		(at 339.09 90.17 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12382,7 +12382,7 @@
 		(uuid "208695f5-ed2b-4f51-96d8-f943c5d83b69")
 	)
 	(label "MCU_PMOD_DQ7"
-		(at 186.69 100.33 180)
+		(at 186.69 113.03 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12591,7 +12591,7 @@
 		(uuid "34922f3c-b98e-4f46-b332-a0d400cbdd12")
 	)
 	(label "FMC_AD4"
-		(at 339.09 69.85 180)
+		(at 339.09 135.89 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12778,7 +12778,7 @@
 		(uuid "4d4b1cd4-3204-46cc-b3fb-404da896b5e9")
 	)
 	(label "FPGA_QSPI_DQ7"
-		(at 339.09 90.17 180)
+		(at 339.09 67.31 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12844,7 +12844,7 @@
 		(uuid "5cf43807-0c2d-4bbf-b77a-83405d098ea4")
 	)
 	(label "MCU_PMOD_DQ5"
-		(at 186.69 113.03 180)
+		(at 186.69 100.33 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12855,7 +12855,7 @@
 		(uuid "5d2b69b4-74a2-4732-b2ee-095b9cc9424a")
 	)
 	(label "FPGA_QSPI_CS_N"
-		(at 339.09 125.73 180)
+		(at 339.09 158.75 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13009,7 +13009,7 @@
 		(uuid "69d623e9-7ac3-4213-a675-7a543c823025")
 	)
 	(label "RMII_TX_EN"
-		(at 339.09 135.89 180)
+		(at 339.09 138.43 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13185,7 +13185,7 @@
 		(uuid "80111561-3433-48cb-ace3-fca4e5fa3441")
 	)
 	(label "FPGA_QSPI_DQ5"
-		(at 339.09 133.35 180)
+		(at 339.09 74.93 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13306,7 +13306,7 @@
 		(uuid "8a834051-59c1-4b27-85b0-468156ad0caf")
 	)
 	(label "FMC_AD11"
-		(at 339.09 46.99 180)
+		(at 339.09 128.27 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13361,7 +13361,7 @@
 		(uuid "99de894f-c1b9-4e09-b575-b653ca76f593")
 	)
 	(label "MCU_PMOD_DQ2"
-		(at 186.69 107.95 180)
+		(at 186.69 128.27 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13548,7 +13548,7 @@
 		(uuid "b0a66d44-2c75-4234-bb25-5890c641c302")
 	)
 	(label "FMC_NWAIT"
-		(at 186.69 50.8 180)
+		(at 134.62 50.8 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13746,7 +13746,7 @@
 		(uuid "c7cf6c2d-0ce1-410a-8db5-3aae6e626c0d")
 	)
 	(label "FMC_AD6"
-		(at 339.09 74.93 180)
+		(at 339.09 133.35 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13812,7 +13812,7 @@
 		(uuid "cb9d02eb-9eae-4f9d-831a-d877c9dc7aa2")
 	)
 	(label "FPGA_LED_3"
-		(at 339.09 138.43 180)
+		(at 339.09 69.85 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14065,7 +14065,7 @@
 		(uuid "eb0cfd8b-3966-42e8-b8b9-bcc17c624ef5")
 	)
 	(label "FMC_AD8"
-		(at 339.09 158.75 180)
+		(at 339.09 125.73 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -15411,7 +15411,6 @@
 		)
 		(pin "D9"
 			(uuid "6512dc58-d752-4b93-bfb3-aa78394d929d")
-			(alternate "FMC_NWAIT")
 		)
 		(pin "M8"
 			(uuid "125dd906-24ca-4ed5-8823-088eacf4fec0")
@@ -15627,6 +15626,7 @@
 		)
 		(pin "E14"
 			(uuid "4dadb04b-610f-44e0-a9fa-071a7a04a3f5")
+			(alternate "FMC_NWAIT")
 		)
 		(pin "A8"
 			(uuid "81cdefef-fd06-420c-b179-1ac2a4dfb6be")
@@ -16218,7 +16218,6 @@
 		)
 		(pin "D9"
 			(uuid "6512dc58-d752-4b93-bfb3-aa78394d929e")
-			(alternate "FMC_NWAIT")
 		)
 		(pin "M8"
 			(uuid "125dd906-24ca-4ed5-8823-088eacf4fec1")
@@ -16434,6 +16433,7 @@
 		)
 		(pin "E14"
 			(uuid "4dadb04b-610f-44e0-a9fa-071a7a04a3f6")
+			(alternate "FMC_NWAIT")
 		)
 		(pin "A8"
 			(uuid "81cdefef-fd06-420c-b179-1ac2a4dfb6bf")
@@ -16958,7 +16958,6 @@
 		)
 		(pin "D9"
 			(uuid "6512dc58-d752-4b93-bfb3-aa78394d929f")
-			(alternate "FMC_NWAIT")
 		)
 		(pin "M8"
 			(uuid "125dd906-24ca-4ed5-8823-088eacf4fec2")
@@ -17174,6 +17173,7 @@
 		)
 		(pin "E14"
 			(uuid "4dadb04b-610f-44e0-a9fa-071a7a04a3f7")
+			(alternate "FMC_NWAIT")
 		)
 		(pin "A8"
 			(uuid "81cdefef-fd06-420c-b179-1ac2a4dfb6c0")
@@ -18323,7 +18323,6 @@
 		)
 		(pin "D9"
 			(uuid "6512dc58-d752-4b93-bfb3-aa78394d92a0")
-			(alternate "FMC_NWAIT")
 		)
 		(pin "M8"
 			(uuid "125dd906-24ca-4ed5-8823-088eacf4fec3")
@@ -18539,6 +18538,7 @@
 		)
 		(pin "E14"
 			(uuid "4dadb04b-610f-44e0-a9fa-071a7a04a3f8")
+			(alternate "FMC_NWAIT")
 		)
 		(pin "A8"
 			(uuid "81cdefef-fd06-420c-b179-1ac2a4dfb6c1")
@@ -19602,7 +19602,6 @@
 		)
 		(pin "D9"
 			(uuid "6512dc58-d752-4b93-bfb3-aa78394d92a1")
-			(alternate "FMC_NWAIT")
 		)
 		(pin "M8"
 			(uuid "125dd906-24ca-4ed5-8823-088eacf4fec4")
@@ -19818,6 +19817,7 @@
 		)
 		(pin "E14"
 			(uuid "4dadb04b-610f-44e0-a9fa-071a7a04a3f9")
+			(alternate "FMC_NWAIT")
 		)
 		(pin "A8"
 			(uuid "81cdefef-fd06-420c-b179-1ac2a4dfb6c2")
@@ -20679,7 +20679,6 @@
 		)
 		(pin "D9"
 			(uuid "6512dc58-d752-4b93-bfb3-aa78394d92a2")
-			(alternate "FMC_NWAIT")
 		)
 		(pin "M8"
 			(uuid "125dd906-24ca-4ed5-8823-088eacf4fec5")
@@ -20895,6 +20894,7 @@
 		)
 		(pin "E14"
 			(uuid "4dadb04b-610f-44e0-a9fa-071a7a04a3fa")
+			(alternate "FMC_NWAIT")
 		)
 		(pin "A8"
 			(uuid "81cdefef-fd06-420c-b179-1ac2a4dfb6c3")
@@ -23290,7 +23290,6 @@
 		)
 		(pin "D9"
 			(uuid "6512dc58-d752-4b93-bfb3-aa78394d92a3")
-			(alternate "FMC_NWAIT")
 		)
 		(pin "M8"
 			(uuid "125dd906-24ca-4ed5-8823-088eacf4fec6")
@@ -23506,6 +23505,7 @@
 		)
 		(pin "E14"
 			(uuid "4dadb04b-610f-44e0-a9fa-071a7a04a3fb")
+			(alternate "FMC_NWAIT")
 		)
 		(pin "A8"
 			(uuid "81cdefef-fd06-420c-b179-1ac2a4dfb6c4")
@@ -24167,7 +24167,6 @@
 		)
 		(pin "D9"
 			(uuid "6512dc58-d752-4b93-bfb3-aa78394d92a4")
-			(alternate "FMC_NWAIT")
 		)
 		(pin "M8"
 			(uuid "125dd906-24ca-4ed5-8823-088eacf4fec7")
@@ -24383,6 +24382,7 @@
 		)
 		(pin "E14"
 			(uuid "4dadb04b-610f-44e0-a9fa-071a7a04a3fc")
+			(alternate "FMC_NWAIT")
 		)
 		(pin "A8"
 			(uuid "81cdefef-fd06-420c-b179-1ac2a4dfb6c5")

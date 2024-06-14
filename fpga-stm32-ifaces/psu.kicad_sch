@@ -6,7 +6,7 @@
 	(paper "A3")
 	(title_block
 		(title "FPGA - STM32 Interface Test")
-		(date "2024-06-12")
+		(date "2024-06-13")
 		(rev "0.1")
 		(company "Antikernel Labs")
 	)
@@ -5028,7 +5028,7 @@
 		(uuid "1cb57053-1b73-4597-a8a6-c71c2c1c9e5f")
 	)
 	(label "1V0_EN"
-		(at 212.09 208.28 180)
+		(at 271.78 233.68 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6149,7 +6149,7 @@
 	)
 	(hierarchical_label "MCU_RST_N"
 		(shape output)
-		(at 271.78 233.68 180)
+		(at 212.09 208.28 180)
 		(fields_autoplaced yes)
 		(effects
 			(font

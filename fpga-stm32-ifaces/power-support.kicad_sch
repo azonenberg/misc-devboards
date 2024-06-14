@@ -6,7 +6,7 @@
 	(paper "A3")
 	(title_block
 		(title "FPGA - STM32 Interface Test")
-		(date "2024-06-12")
+		(date "2024-06-13")
 		(rev "0.1")
 		(company "Antikernel Labs")
 	)
@@ -13309,7 +13309,6 @@
 		)
 		(pin "D9"
 			(uuid "6512dc58-d752-4b93-bfb3-aa78394d929d")
-			(alternate "FMC_NWAIT")
 		)
 		(pin "M8"
 			(uuid "125dd906-24ca-4ed5-8823-088eacf4fec0")
@@ -13525,6 +13524,7 @@
 		)
 		(pin "E14"
 			(uuid "4dadb04b-610f-44e0-a9fa-071a7a04a3f5")
+			(alternate "FMC_NWAIT")
 		)
 		(pin "A8"
 			(uuid "81cdefef-fd06-420c-b179-1ac2a4dfb6be")
@@ -16701,7 +16701,6 @@
 		)
 		(pin "D9"
 			(uuid "6512dc58-d752-4b93-bfb3-aa78394d929f")
-			(alternate "FMC_NWAIT")
 		)
 		(pin "M8"
 			(uuid "125dd906-24ca-4ed5-8823-088eacf4fec2")
@@ -16917,6 +16916,7 @@
 		)
 		(pin "E14"
 			(uuid "4dadb04b-610f-44e0-a9fa-071a7a04a3f7")
+			(alternate "FMC_NWAIT")
 		)
 		(pin "A8"
 			(uuid "81cdefef-fd06-420c-b179-1ac2a4dfb6c0")
