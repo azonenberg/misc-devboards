@@ -11189,12 +11189,12 @@
 		(uuid "14d7a4f9-fa4e-4e07-8070-e4ce9ff31230")
 	)
 	(no_connect
-		(at 186.69 53.34)
-		(uuid "15f5febd-f89e-48e8-be6e-7ded41309c7d")
+		(at 91.44 107.95)
+		(uuid "15ecfbe7-fdce-442f-bf5b-3a3410f3a87b")
 	)
 	(no_connect
-		(at 134.62 40.64)
-		(uuid "1820bfdf-2089-4e88-aece-71a9484b8c65")
+		(at 186.69 53.34)
+		(uuid "15f5febd-f89e-48e8-be6e-7ded41309c7d")
 	)
 	(no_connect
 		(at 134.62 97.79)
@@ -11217,10 +11217,6 @@
 		(uuid "38718290-be9e-423e-a016-68241f6f15bc")
 	)
 	(no_connect
-		(at 134.62 105.41)
-		(uuid "3911259f-ecdd-4e20-b889-3f3c602258ea")
-	)
-	(no_connect
 		(at 134.62 43.18)
 		(uuid "399a5952-2b27-43c0-84ac-00491a30439f")
 	)
@@ -11239,10 +11235,6 @@
 	(no_connect
 		(at 91.44 115.57)
 		(uuid "4848afd5-1d5f-4194-9833-b828c654b791")
-	)
-	(no_connect
-		(at 134.62 120.65)
-		(uuid "498f03dc-5a7a-4298-9697-8ecade84e407")
 	)
 	(no_connect
 		(at 91.44 128.27)
@@ -11265,6 +11257,10 @@
 		(uuid "73039a04-7e8b-47b4-8ec9-5a40b84eb601")
 	)
 	(no_connect
+		(at 134.62 40.64)
+		(uuid "794dd920-08af-4b5c-87a8-5f20f01966d5")
+	)
+	(no_connect
 		(at 40.64 123.19)
 		(uuid "828bd5f6-7979-4a21-b725-213e7413499d")
 	)
@@ -11275,10 +11271,6 @@
 	(no_connect
 		(at 134.62 125.73)
 		(uuid "87d59535-fa08-4348-a9ea-ba12611a1ecc")
-	)
-	(no_connect
-		(at 134.62 35.56)
-		(uuid "8cd56a43-ba40-465f-9ad3-369e6c1562ab")
 	)
 	(no_connect
 		(at 134.62 115.57)
@@ -11303,6 +11295,10 @@
 	(no_connect
 		(at 40.64 45.72)
 		(uuid "a2c65a55-ded8-421a-a375-91cab06ce3dc")
+	)
+	(no_connect
+		(at 91.44 110.49)
+		(uuid "a3e6b4b7-db5a-4ebf-8b12-4df58485c343")
 	)
 	(no_connect
 		(at 134.62 92.71)
@@ -11343,6 +11339,10 @@
 	(no_connect
 		(at 91.44 58.42)
 		(uuid "d4dc9f0e-195f-4cdd-b752-c210f33d27bb")
+	)
+	(no_connect
+		(at 91.44 105.41)
+		(uuid "de85a055-3d35-42db-b5b6-97d16b048731")
 	)
 	(no_connect
 		(at 39.37 383.54)
@@ -12162,7 +12162,7 @@
 		(uuid "0517683f-be35-474c-a139-07d80634f6bd")
 	)
 	(label "FMC_NBL1"
-		(at 339.09 54.61 180)
+		(at 339.09 57.15 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12250,7 +12250,7 @@
 		(uuid "0ee8c4bf-7041-44c4-869c-bbcd99d8f255")
 	)
 	(label "MCU_LED_2"
-		(at 91.44 110.49 180)
+		(at 91.44 113.03 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12580,7 +12580,7 @@
 		(uuid "30bf1543-9af5-498d-8b8c-099ec541b67d")
 	)
 	(label "FPGA_QSPI_DQ0"
-		(at 339.09 49.53 180)
+		(at 339.09 67.31 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12602,7 +12602,7 @@
 		(uuid "350d4acd-4201-4e20-9fa5-f28ee14966cb")
 	)
 	(label "MCU_LED_3"
-		(at 91.44 113.03 180)
+		(at 134.62 35.56 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12800,7 +12800,7 @@
 		(uuid "4e86aff7-ea2e-4bd3-9cfe-47a612aeb836")
 	)
 	(label "MCU_LED_0"
-		(at 91.44 105.41 180)
+		(at 134.62 120.65 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12855,7 +12855,7 @@
 		(uuid "5d2b69b4-74a2-4732-b2ee-095b9cc9424a")
 	)
 	(label "FPGA_QSPI_CS_N"
-		(at 339.09 46.99 180)
+		(at 339.09 49.53 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13174,7 +13174,7 @@
 		(uuid "7ed0b245-4e24-46d4-a888-656bb3ef42a2")
 	)
 	(label "FPGA_QSPI_DQ1"
-		(at 339.09 67.31 180)
+		(at 339.09 54.61 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13603,7 +13603,7 @@
 		(uuid "babe8dbd-1ae6-47da-aefd-cfae3105fdbc")
 	)
 	(label "FPGA_QSPI_DQ2"
-		(at 339.09 64.77 180)
+		(at 339.09 36.83 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13889,7 +13889,7 @@
 		(uuid "d7f70178-b4c3-4f79-b64b-a4d756ef7e8d")
 	)
 	(label "FPGA_QSPI_DQ3"
-		(at 339.09 36.83 180)
+		(at 339.09 64.77 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13999,7 +13999,7 @@
 		(uuid "e134a4ce-a2f4-4421-90a6-ce8973cf6ee0")
 	)
 	(label "FPGA_QSPI_DQ6"
-		(at 339.09 57.15 180)
+		(at 339.09 46.99 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14087,7 +14087,7 @@
 		(uuid "efd52c38-7eed-4850-ab66-25541be20d82")
 	)
 	(label "MCU_LED_1"
-		(at 91.44 107.95 180)
+		(at 134.62 105.41 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
