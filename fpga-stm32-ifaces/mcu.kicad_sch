@@ -12195,7 +12195,7 @@
 		(uuid "0b5c61e6-022e-45e6-b23b-89636a02420d")
 	)
 	(label "FMC_NWAIT"
-		(at 339.09 44.45 180)
+		(at 339.09 41.91 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12294,7 +12294,7 @@
 		(uuid "125ef1bb-973a-425a-b28d-120894a06f9d")
 	)
 	(label "FPGA_QSPI_DQS"
-		(at 339.09 46.99 180)
+		(at 339.09 146.05 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12448,7 +12448,7 @@
 		(uuid "249b9027-b5b2-47ad-b006-9a6daa973fa8")
 	)
 	(label "FMC_NOE"
-		(at 339.09 39.37 180)
+		(at 339.09 44.45 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12547,7 +12547,7 @@
 		(uuid "2ad739e2-4ca1-4d7b-963f-80eb02bc2003")
 	)
 	(label "RMII_RXD1"
-		(at 339.09 115.57 180)
+		(at 339.09 120.65 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12580,7 +12580,7 @@
 		(uuid "30bf1543-9af5-498d-8b8c-099ec541b67d")
 	)
 	(label "FPGA_QSPI_DQ0"
-		(at 339.09 92.71 180)
+		(at 339.09 49.53 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12723,7 +12723,7 @@
 		(uuid "42f014d5-77d1-4197-84b3-ec49b4864e75")
 	)
 	(label "FMC_AD9"
-		(at 339.09 59.69 180)
+		(at 339.09 118.11 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12778,7 +12778,7 @@
 		(uuid "4d4b1cd4-3204-46cc-b3fb-404da896b5e9")
 	)
 	(label "FPGA_QSPI_DQ7"
-		(at 339.09 67.31 180)
+		(at 339.09 59.69 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12811,7 +12811,7 @@
 		(uuid "4ec8be13-21cf-4255-a1ba-2533ec8c5630")
 	)
 	(label "FMC_AD14"
-		(at 339.09 151.13 180)
+		(at 339.09 74.93 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12855,7 +12855,7 @@
 		(uuid "5d2b69b4-74a2-4732-b2ee-095b9cc9424a")
 	)
 	(label "FPGA_QSPI_CS_N"
-		(at 339.09 146.05 180)
+		(at 339.09 46.99 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12866,7 +12866,7 @@
 		(uuid "5d74a8e8-5dca-46ec-ba30-f1d29e645f04")
 	)
 	(label "FPGA_QSPI_DQ4"
-		(at 339.09 161.29 180)
+		(at 339.09 151.13 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12921,7 +12921,7 @@
 		(uuid "61ac05f9-58b0-4146-92fa-623ee7a91d82")
 	)
 	(label "FMC_AD5"
-		(at 339.09 72.39 180)
+		(at 339.09 123.19 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12976,7 +12976,7 @@
 		(uuid "67fb0baa-1a35-4d95-8b29-a862b1d80654")
 	)
 	(label "RMII_CRS_DV"
-		(at 339.09 97.79 180)
+		(at 339.09 115.57 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13174,7 +13174,7 @@
 		(uuid "7ed0b245-4e24-46d4-a888-656bb3ef42a2")
 	)
 	(label "FPGA_QSPI_DQ1"
-		(at 339.09 118.11 180)
+		(at 339.09 67.31 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13185,7 +13185,7 @@
 		(uuid "80111561-3433-48cb-ace3-fca4e5fa3441")
 	)
 	(label "FPGA_QSPI_DQ5"
-		(at 339.09 74.93 180)
+		(at 339.09 161.29 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13559,7 +13559,7 @@
 		(uuid "b2b5a464-a080-44dd-89f8-257e294bbfb3")
 	)
 	(label "FMC_NBL0"
-		(at 339.09 52.07 180)
+		(at 339.09 62.23 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13603,7 +13603,7 @@
 		(uuid "babe8dbd-1ae6-47da-aefd-cfae3105fdbc")
 	)
 	(label "FPGA_QSPI_DQ2"
-		(at 339.09 123.19 180)
+		(at 339.09 64.77 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13647,7 +13647,7 @@
 		(uuid "bec7ce3b-3478-485a-a370-0ed6577a9b6e")
 	)
 	(label "FMC_AD15"
-		(at 339.09 57.15 180)
+		(at 339.09 97.79 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13867,7 +13867,7 @@
 		(uuid "d798dcbd-1385-4ca1-bb2a-f0050d6b8f56")
 	)
 	(label "FMC_AD2"
-		(at 339.09 64.77 180)
+		(at 339.09 39.37 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13889,7 +13889,7 @@
 		(uuid "d7f70178-b4c3-4f79-b64b-a4d756ef7e8d")
 	)
 	(label "FPGA_QSPI_DQ3"
-		(at 339.09 120.65 180)
+		(at 339.09 36.83 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13999,7 +13999,7 @@
 		(uuid "e134a4ce-a2f4-4421-90a6-ce8973cf6ee0")
 	)
 	(label "FPGA_QSPI_DQ6"
-		(at 339.09 36.83 180)
+		(at 339.09 57.15 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14032,7 +14032,7 @@
 		(uuid "e41e6ffb-9340-403b-b164-d53056dc28ea")
 	)
 	(label "FMC_NL_NADV"
-		(at 339.09 49.53 180)
+		(at 339.09 92.71 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14098,7 +14098,7 @@
 		(uuid "efdfaba5-8e22-4697-b2d6-63d848368867")
 	)
 	(label "FMC_NWE"
-		(at 339.09 41.91 180)
+		(at 339.09 52.07 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14142,7 +14142,7 @@
 		(uuid "f7a7311e-89f0-4f68-9a01-c0c8343adc7f")
 	)
 	(label "FMC_AD1"
-		(at 339.09 62.23 180)
+		(at 339.09 72.39 180)
 		(fields_autoplaced yes)
 		(effects
 			(font

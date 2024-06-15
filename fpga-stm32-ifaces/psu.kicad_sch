@@ -4973,7 +4973,7 @@
 		(uuid "15e1f364-d97c-446e-a834-2ff2fda6ee15")
 	)
 	(label "3V3_PGOOD"
-		(at 271.78 236.22 180)
+		(at 271.78 233.68 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5028,7 +5028,7 @@
 		(uuid "1cb57053-1b73-4597-a8a6-c71c2c1c9e5f")
 	)
 	(label "1V0_EN"
-		(at 271.78 233.68 180)
+		(at 271.78 238.76 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5171,7 +5171,7 @@
 		(uuid "36b3088a-538a-483c-a65c-8cbda881fdba")
 	)
 	(label "1V0_PGOOD"
-		(at 271.78 231.14 180)
+		(at 212.09 220.98 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5215,7 +5215,7 @@
 		(uuid "3c190f5e-8689-4165-98e1-25db30eb7057")
 	)
 	(label "1V8_PGOOD"
-		(at 271.78 238.76 180)
+		(at 271.78 236.22 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5457,7 +5457,7 @@
 		(uuid "69e41b51-78b6-46a9-834a-042c7ccc90d6")
 	)
 	(label "1V8_EN"
-		(at 271.78 200.66 180)
+		(at 212.09 228.6 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5479,7 +5479,7 @@
 		(uuid "6e0b1590-0322-4830-8ff0-b1d141c85c31")
 	)
 	(label "3V3_EN"
-		(at 212.09 220.98 180)
+		(at 271.78 231.14 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6173,7 +6173,7 @@
 	)
 	(hierarchical_label "FPGA_RST_N"
 		(shape output)
-		(at 271.78 203.2 180)
+		(at 271.78 200.66 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6197,7 +6197,7 @@
 	)
 	(hierarchical_label "FPGA_INIT"
 		(shape bidirectional)
-		(at 212.09 228.6 180)
+		(at 271.78 203.2 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
