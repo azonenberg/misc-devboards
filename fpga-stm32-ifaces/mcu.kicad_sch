@@ -12250,7 +12250,7 @@
 		(uuid "0ee8c4bf-7041-44c4-869c-bbcd99d8f255")
 	)
 	(label "MCU_LED_2"
-		(at 91.44 113.03 180)
+		(at 134.62 120.65 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12602,7 +12602,7 @@
 		(uuid "350d4acd-4201-4e20-9fa5-f28ee14966cb")
 	)
 	(label "MCU_LED_3"
-		(at 134.62 35.56 180)
+		(at 134.62 105.41 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12800,7 +12800,7 @@
 		(uuid "4e86aff7-ea2e-4bd3-9cfe-47a612aeb836")
 	)
 	(label "MCU_LED_0"
-		(at 134.62 120.65 180)
+		(at 134.62 35.56 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14087,7 +14087,7 @@
 		(uuid "efd52c38-7eed-4850-ab66-25541be20d82")
 	)
 	(label "MCU_LED_1"
-		(at 134.62 105.41 180)
+		(at 91.44 113.03 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
