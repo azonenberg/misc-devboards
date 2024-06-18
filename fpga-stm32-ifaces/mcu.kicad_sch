@@ -12459,7 +12459,7 @@
 		(uuid "253b1d0e-ce90-444a-89b4-1a8a48ed6d4b")
 	)
 	(label "RMII_REF_CLK"
-		(at 339.09 95.25 180)
+		(at 339.09 100.33 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13372,7 +13372,7 @@
 		(uuid "9d03ba9a-b748-4840-a642-08bed1315e03")
 	)
 	(label "FMC_CLK"
-		(at 339.09 100.33 180)
+		(at 339.09 95.25 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
