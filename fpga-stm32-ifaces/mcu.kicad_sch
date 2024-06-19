@@ -6,7 +6,7 @@
 	(paper "A2")
 	(title_block
 		(title "FPGA - STM32 Interface Test")
-		(date "2024-06-13")
+		(date "2024-06-18")
 		(rev "0.1")
 		(company "Antikernel Labs")
 	)
@@ -12195,7 +12195,7 @@
 		(uuid "0b5c61e6-022e-45e6-b23b-89636a02420d")
 	)
 	(label "FMC_NWAIT"
-		(at 339.09 41.91 180)
+		(at 339.09 39.37 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12723,7 +12723,7 @@
 		(uuid "42f014d5-77d1-4197-84b3-ec49b4864e75")
 	)
 	(label "FMC_AD9"
-		(at 339.09 151.13 180)
+		(at 339.09 153.67 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12855,7 +12855,7 @@
 		(uuid "5d2b69b4-74a2-4732-b2ee-095b9cc9424a")
 	)
 	(label "FPGA_QSPI_CS_N"
-		(at 339.09 49.53 180)
+		(at 339.09 41.91 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12976,7 +12976,7 @@
 		(uuid "67fb0baa-1a35-4d95-8b29-a862b1d80654")
 	)
 	(label "RMII_CRS_DV"
-		(at 339.09 153.67 180)
+		(at 339.09 151.13 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13867,7 +13867,7 @@
 		(uuid "d798dcbd-1385-4ca1-bb2a-f0050d6b8f56")
 	)
 	(label "FMC_AD2"
-		(at 339.09 39.37 180)
+		(at 339.09 49.53 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
