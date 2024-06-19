@@ -13559,7 +13559,7 @@
 		(uuid "b2b5a464-a080-44dd-89f8-257e294bbfb3")
 	)
 	(label "FMC_NBL0"
-		(at 339.09 62.23 180)
+		(at 339.09 59.69 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14032,7 +14032,7 @@
 		(uuid "e41e6ffb-9340-403b-b164-d53056dc28ea")
 	)
 	(label "FMC_NL_NADV"
-		(at 339.09 59.69 180)
+		(at 339.09 62.23 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
