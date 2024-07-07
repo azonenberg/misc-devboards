@@ -115,7 +115,7 @@
 			(usegerberextensions no)
 			(usegerberattributes yes)
 			(usegerberadvancedattributes yes)
-			(creategerberjobfile yes)
+			(creategerberjobfile no)
 			(dashed_line_dash_ratio 12.000000)
 			(dashed_line_gap_ratio 3.000000)
 			(svgprecision 4)
@@ -141,9 +141,9 @@
 			(subtractmaskfromsilk no)
 			(outputformat 1)
 			(mirror no)
-			(drillshape 1)
+			(drillshape 0)
 			(scaleselection 1)
-			(outputdirectory "")
+			(outputdirectory "output/")
 		)
 	)
 	(net 0 "")
@@ -3768,7 +3768,7 @@
 	(footprint "azonenberg_pcb:EIA_0402_RES_NOSILK"
 		(layer "F.Cu")
 		(uuid "444e97e4-d800-4d53-b4df-9ab4ae49839d")
-		(at 57.75 86.75)
+		(at 57.75 86.6)
 		(property "Reference" "R17"
 			(at -2.25 0 0)
 			(unlocked yes)
@@ -10991,7 +10991,7 @@
 		(uuid "15d26ca4-f9f5-4607-be64-d37f9a37587e")
 		(at 62.6 85.5 -90)
 		(property "Reference" "C18"
-			(at -2.3 0 90)
+			(at -2 0.4 90)
 			(unlocked yes)
 			(layer "B.SilkS")
 			(uuid "4bb6a30b-ca93-4b86-9a54-9abfbb1c75d6")
