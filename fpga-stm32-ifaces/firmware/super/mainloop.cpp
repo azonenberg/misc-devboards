@@ -60,16 +60,32 @@ GPIOPin g_mcuResetN(&GPIOA, 3, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
 GPIOPin g_fpgaResetN(&GPIOA, 3, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
 GPIOPin g_fpgaInitN(&GPIOA, 3, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW, 0, true);
 
+GPIOPin g_fpgaDone(&GPIOB, 2, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
+
+bool g_fpgaUp = false;
+
 void BSP_MainLoopIteration()
 {
-	//TODO: poll sensors on IBC etc
+	bool done = g_fpgaDone;
+	if(g_fpgaUp != done)
+	{
+		//If FPGA goes down, shut down the main MCU
+		if(!done)
+		{
+			g_log("FPGA went down, resetting MCU\n");
+			g_mcuResetN = 0;
+		}
+		else
+		{
+			g_log("FPGA is up, releasing MCU reset\n");
+			g_mcuResetN = 1;
+		}
+		g_fpgaUp = done;
+	}
 }
 
 void PowerOn()
 {
-	g_log("5 second delay\n");
-	g_logTimer.Sleep(50000);
-
 	g_log("Turning power on\n");
 	LogIndenter li(g_log);
 
@@ -111,9 +127,8 @@ void PowerOn()
 	g_fpgaResetN = 1;
 	g_fpgaInitN = 1;
 
-	//Start the MCU
-	g_log("Releasing MCU reset\n");
-	g_mcuResetN = 1;
+	while(!g_fpgaDone)
+	{}
 }
 
 /**

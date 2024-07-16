@@ -10,3 +10,9 @@
 [submodule "embedded-utils"]
 	path = embedded-utils
 	url = ../embedded-utils.git
+[submodule "embedded-cli"]
+	path = embedded-cli
+	url = ../embedded-cli
+[submodule "antikernel-ipcores"]
+	path = antikernel-ipcores
+	url = ../antikernel-ipcores.git

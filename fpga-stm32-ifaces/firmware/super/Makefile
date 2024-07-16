@@ -8,9 +8,9 @@ CXXFLAGS=-g -O3 --std=c++20 -mcpu=cortex-m4 -DSTM32L431 -fno-exceptions -fno-rtt
 	-I$(ROOTDIR)/stm32-cpp/src \
 	-I$(ROOTDIR)/common-embedded-platform/ \
 	-DMICROKVS_WRITE_BLOCK_SIZE=8 \
-	-DNO_CLEAR_SCREEN \
 	-DKVS_NAMELEN=32 \
 	-ffunction-sections
+	#-DNO_CLEAR_SCREEN \
 
 LDFLAGS=-Wl,-T $(ROOTDIR)/stm32-cpp/devices/link/stm32l431.ld \
 	 -L$(ROOTDIR)/stm32-cpp/devices/link/ \
