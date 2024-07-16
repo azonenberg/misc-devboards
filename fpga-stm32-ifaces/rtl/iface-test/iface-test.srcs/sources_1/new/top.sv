@@ -177,6 +177,7 @@ module top(
 	wire[31:0]	gpioa_in;
 	wire[31:0]	gpioa_tris;
 
+	//add some latency to test reads
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) apb_gpioa();
 	APBRegisterSlice #(.DOWN_REG(0), .UP_REG(0)) regslice_apb_gpioa(
 		.upstream(apb1[0]),
