@@ -33,29 +33,23 @@
 #include <core/platform.h>
 #include <hwinit.h>
 
-/*
 #include <peripheral/DTS.h>
-#include <peripheral/Power.h>
+/*
 #include <peripheral/SPI.h>
 
 #include <util/StringBuffer.h>
 
 #include "net/ManagementTCPProtocol.h"
 #include "net/ManagementUDPProtocol.h"
-#include "OctalDAC.h"
-
 extern ManagementNTPClient* g_ntpClient;
-
-extern DigitalTempSensor* g_dts;
-
 */
+extern DigitalTempSensor g_dts;
+
 void InitLEDs();
-/*
 void InitDTS();
-void InitDACs();
+/*
 void InitSupervisor();
 void InitSensors();
-void InitRelays();
 
 uint16_t GetFanRPM(uint8_t channel);
 uint16_t GetFPGATemperature();
@@ -63,42 +57,15 @@ uint16_t GetFPGAVCCINT();
 uint16_t GetFPGAVCCAUX();
 uint16_t GetFPGAVCCBRAM();
 
-void UpdateFrontPanelDisplay();
-
 uint16_t SupervisorRegRead(uint8_t regid);
-
-extern OctalDAC* g_rxDacs[2];
-extern OctalDAC* g_txDac;
 
 extern SPI<64, 64> g_superSPI;
 extern GPIOPin* g_superSPICS;
-
-extern bool g_displayRefreshPending;
 
 extern char g_superVersion[20];
 extern char g_ibcVersion[20];
 
 extern ManagementSSHTransportServer* g_sshd;
-
-void LoadChannelConfig();
-void SaveChannelConfig();
-
-extern bool g_frontPanelDFUInProgress;
-bool IsFrontPanelDFU();
-
-#define DISPLAY_NAME_MAX 32
-extern char g_inputDisplayNames[8][DISPLAY_NAME_MAX];
-extern char g_outputDisplayNames[8][DISPLAY_NAME_MAX];
-extern char g_bidirDisplayNames[4][DISPLAY_NAME_MAX];
-
-//SFRs on the FPGA
-extern volatile APB_RelayController* g_relayController;
-extern volatile APB_GPIO* g_ledGpioInPortActivity;
-extern volatile APB_GPIO* g_ledGpioOutPortActivity;
-extern volatile APB_SPIHostInterface* g_frontPanelSPI;
-extern volatile APB_BERTConfig*	g_bertConfig[2];
-extern volatile APB_SerdesDRP* g_bertDRP[2];
-extern volatile LogicAnalyzer* g_logicAnalyzer[2];
 */
 
 #endif

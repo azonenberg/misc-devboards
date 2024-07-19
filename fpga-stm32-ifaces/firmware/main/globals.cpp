@@ -31,17 +31,12 @@
 
 /**
 	@brief Digital temperature sensor
+
+	APB4 clock is 68.75 MHz, so divide by 80 to get 859 kHz ticks
+	(must be <1 MHz)
+	15 cycles integration time = 18.75 us
  */
-//DigitalTempSensor* g_dts = nullptr;
-
-///@brief GPIO LEDs
-//GPIOPin* g_leds[4] = {0};
-
-///@brief DACs for RX channels
-//OctalDAC* g_rxDacs[2] = {nullptr, nullptr};
-
-///@brief DACs for TX channels
-//OctalDAC* g_txDac = nullptr;
+DigitalTempSensor g_dts(&DTS, 80, 15, 64000000);
 
 /**
 	@brief SPI bus to supervisor
@@ -65,44 +60,3 @@
 
 ///@brief The SSH server
 //ManagementSSHTransportServer* g_sshd = nullptr;
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Memory mapped SFRs on the FPGA
-/*
-//TODO: use linker script to locate these rather than this ugly pointer code?
-
-///@brief Relay controller
-volatile APB_RelayController* g_relayController =
-	reinterpret_cast<volatile APB_RelayController*>(FPGA_MEM_BASE + BASE_RELAY);
-
-///@brief GPIOs for LED status
-volatile APB_GPIO* g_ledGpioInPortActivity =
-	reinterpret_cast<volatile APB_GPIO*>(FPGA_MEM_BASE + BASE_IN_LED_GPIO);
-
-volatile APB_GPIO* g_ledGpioOutPortActivity =
-	reinterpret_cast<volatile APB_GPIO*>(FPGA_MEM_BASE + BASE_OUT_LED_GPIO);
-
-///@brief Front panel SPI controller
-volatile APB_SPIHostInterface* g_frontPanelSPI =
-	reinterpret_cast<volatile APB_SPIHostInterface*>(FPGA_MEM_BASE + BASE_FRONT_SPI);
-
-///@brief Low speed configuration for BERT channels
-volatile APB_BERTConfig* g_bertConfig[2] =
-{
-	reinterpret_cast<volatile APB_BERTConfig*>(FPGA_MEM_BASE + BASE_BERT_LANE0),
-	reinterpret_cast<volatile APB_BERTConfig*>(FPGA_MEM_BASE + BASE_BERT_LANE1)
-};
-
-///@brief DRP access for BERT channels
-volatile APB_SerdesDRP* g_bertDRP[2] =
-{
-	reinterpret_cast<volatile APB_SerdesDRP*>(FPGA_MEM_BASE + BASE_DRP_LANE0),
-	reinterpret_cast<volatile APB_SerdesDRP*>(FPGA_MEM_BASE + BASE_DRP_LANE1)
-};
-
-///@brief Logic analyzers
-volatile LogicAnalyzer* g_logicAnalyzer[2] =
-{
-	reinterpret_cast<volatile LogicAnalyzer*>(FPGA_MEM_BASE + BASE_LA_LANE0),
-	reinterpret_cast<volatile LogicAnalyzer*>(FPGA_MEM_BASE + BASE_LA_LANE1)
-};*/

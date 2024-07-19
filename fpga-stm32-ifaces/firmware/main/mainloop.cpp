@@ -51,6 +51,8 @@ void App_Init()
 
 	//Basic hardware setup
 	InitLEDs();
+	InitDTS();
+
 	/*
 	//Initialize the local console
 	g_localConsoleOutputStream.Initialize(&g_cliUART);
