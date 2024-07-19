@@ -16,3 +16,6 @@
 [submodule "antikernel-ipcores"]
 	path = antikernel-ipcores
 	url = ../antikernel-ipcores.git
+[submodule "staticnet"]
+	path = staticnet
+	url = ../staticnet.git

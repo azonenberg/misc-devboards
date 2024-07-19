@@ -6,6 +6,7 @@ CXXFLAGS=-g -O3 --std=c++20 -Wall -Wextra \
 	-I$(SRCDIR) \
 	-I$(ROOTDIR)/stm32-cpp/devices/inc \
 	-I$(ROOTDIR)/stm32-cpp/src \
+	-I$(ROOTDIR)/antikernel-ipcores/cpp-wrappers \
 	-I$(ROOTDIR)/common-embedded-platform/ \
 	-I$(SRCDIR)/../bsp-main/ \
 	-DMICROKVS_WRITE_BLOCK_SIZE=32 \
@@ -20,8 +21,9 @@ CXXFLAGS=-g -O3 --std=c++20 -Wall -Wextra \
 	#-DLOGGER_USE_RTC_TIMESTAMP
 	#-DNO_CLEAR_SCREEN
 
-LDFLAGS=-Wl,-T $(ROOTDIR)/stm32-cpp/devices/link/stm32h735_minitcm.ld \
+LDFLAGS=-Wl,-T $(SRCDIR)/firmware.ld \
 	 -L$(ROOTDIR)/stm32-cpp/devices/link/ \
+	 -L$(SRCDIR) \
 	 -Wl,--gc-sections
 
 .ONESHELL:
@@ -42,17 +44,18 @@ all:
 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/microkvs/driver/STM32StorageBank.cpp || exit 1
 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/embedded-cli/*.cpp || exit 1
 	#$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/cli/*.cpp || exit 1
-	#$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/contrib/*.cpp -Wno-type-limits -Wno-implicit-fallthrough|| exit 1
+	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/contrib/*.cpp -Wno-type-limits -Wno-implicit-fallthrough|| exit 1
 	#$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/crypt/*.cpp || exit 1
 	#$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/dhcp/*.cpp || exit 1
-	#$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/drivers/base/*.cpp || exit 1
-	#$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/drivers/stm32/STM32CryptoEngine.cpp || exit 1
-	#$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/net/arp/*.cpp || exit 1
-	#$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/net/ethernet/*.cpp || exit 1
-	#$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/net/icmpv4/*.cpp || exit 1
-	#$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/net/ipv4/*.cpp || exit 1
-	#$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/net/tcp/*.cpp || exit 1
-	#$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/net/udp/*.cpp || exit 1
+	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/drivers/base/*.cpp || exit 1
+	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/drivers/apb/*.cpp || exit 1
+	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/drivers/stm32/STM32CryptoEngine.cpp || exit 1
+	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/net/arp/*.cpp || exit 1
+	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/net/ethernet/*.cpp || exit 1
+	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/net/icmpv4/*.cpp || exit 1
+	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/net/ipv4/*.cpp || exit 1
+	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/net/tcp/*.cpp || exit 1
+	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/net/udp/*.cpp || exit 1
 	#$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/ntp/*.cpp || exit 1
 	#$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/sftp/*.cpp || exit 1
 	#$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/ssh/*.cpp || exit 1

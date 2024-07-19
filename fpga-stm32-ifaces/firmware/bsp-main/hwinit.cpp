@@ -39,6 +39,17 @@
 #include <ctype.h>
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Memory mapped SFRs on the FPGA
+
+volatile APB_GPIO FPGA_GPIOA __attribute__((section(".fgpioa")));
+volatile APB_DeviceInfo_7series FDEVINFO __attribute__((section(".fdevinfo")));
+volatile APB_MDIO FMDIO __attribute__((section(".fmdio")));
+volatile APB_SPIHostInterface FSPI1 __attribute__((section(".fspi1")));
+
+volatile APB_EthernetTxBuffer_10G FETHTX __attribute__((section(".fethtx")));
+volatile APB_EthernetRxBuffer FETHRX __attribute__((section(".fethrx")));
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Common peripherals used by application and bootloader
 
 //APB1 is 62.5 MHz but default is for timer clock to be 2x the bus clock (see table 53 of RM0468)
@@ -68,25 +79,27 @@ GPIOPin g_leds[4] =
 };
 
 ///@brief Global Ethernet interface
-//EthernetInterface* g_ethIface = nullptr;
-
-///@brief Interface to the FPGA via APB
-//APBFPGAInterface g_apbfpga;
+APBEthernetInterface g_ethIface(&FETHRX, &FETHTX);
 
 ///@brief Our MAC address
-//MACAddress g_macAddress;
+MACAddress g_macAddress;
 
 ///@brief Our IPv4 address
-//IPv4Config g_ipConfig;
+IPv4Config g_ipConfig;
 
 ///@brief Ethernet protocol stack
-//EthernetProtocol* g_ethProtocol = nullptr;
+EthernetProtocol* g_ethProtocol = nullptr;
 
 ///@brief QSPI interface to FPGA
 //OctoSPI* g_qspi = nullptr;
 
-///@brief MAC address I2C EEPROM
-//I2C* g_macI2C = nullptr;
+/**
+	@brief MAC address I2C EEPROM
+	Default kernel clock for I2C2 is pclk2 (68.75 MHz for our current config)
+	Prescale by 16 to get 4.29 MHz
+	Divide by 40 after that to get 107 kHz
+*/
+I2C g_macI2C(&I2C2, 16, 40);
 
 ///@brief SFP+ DOM / ID EEPROM
 //I2C* g_sfpI2C = nullptr;
@@ -116,54 +129,32 @@ GPIOPin g_leds[4] =
 //ManagementDHCPClient* g_dhcpClient = nullptr;
 
 ///@brief USERCODE of the FPGA (build timestamp)
-//uint32_t g_usercode = 0;
+uint32_t g_usercode = 0;
 
 ///@brief FPGA die serial number
-//uint8_t g_fpgaSerial[8] = {0};
+uint8_t g_fpgaSerial[8] = {0};
 
 ///@brief IRQ line to the FPGA
-//GPIOPin g_irq(&GPIOH, 6, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
+APB_GPIOPin* g_ethIRQ = nullptr;
 
 ///@brief The battery-backed RAM used to store state across power cycles
 //volatile BootloaderBBRAM* g_bbram = reinterpret_cast<volatile BootloaderBBRAM*>(&_RTC.BKP[0]);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Memory mapped SFRs on the FPGA
+// Globals
 
-//TODO: use linker script to locate these rather than this ugly pointer code?
 /*
-///@brief System information
-volatile APB_SystemInfo* g_sysInfo =
-	reinterpret_cast<volatile APB_SystemInfo*>(FPGA_MEM_BASE + BASE_SYSINFO);
-
-///@brief MDIO interface
-volatile APB_MDIO* g_mdio =
-	reinterpret_cast<volatile APB_MDIO*>(FPGA_MEM_BASE + BASE_MDIO);
-
-///@brief Curve25519 controller
-volatile APB_Curve25519* g_curve25519 =
-	reinterpret_cast<volatile APB_Curve25519*>(FPGA_MEM_BASE + BASE_25519);
-
-///@brief Interrupt status
-volatile uint16_t* g_irqStat =
-	reinterpret_cast<volatile uint16_t*>(FPGA_MEM_BASE + BASE_IRQ_STAT);
-
-///@brief Ethernet RX buffer
-volatile ManagementRxFifo* g_ethRxFifo =
-	reinterpret_cast<volatile ManagementRxFifo*>(FPGA_MEM_BASE + BASE_ETH_RX);
-
-///@brief Ethernet TX buffers
-volatile ManagementTxFifo* g_eth1GTxFifo =
-	reinterpret_cast<volatile ManagementTxFifo*>(FPGA_MEM_BASE + BASE_1G_TX);
-volatile ManagementTxFifo* g_eth10GTxFifo =
-	reinterpret_cast<volatile ManagementTxFifo*>(FPGA_MEM_BASE + BASE_XG_TX);
-
-///@brief SPI flash controller
-volatile APB_SPIHostInterface* g_flashSpi =
-	reinterpret_cast<volatile APB_SPIHostInterface*>(FPGA_MEM_BASE + BASE_FLASH_SPI);
-
-APBSpiFlashInterface* g_fpgaFlash = nullptr;
+const IPv4Address g_defaultIP			= { .m_octets{192, 168,   1,   2} };
+const IPv4Address g_defaultNetmask		= { .m_octets{255, 255, 255,   0} };
+const IPv4Address g_defaultBroadcast	= { .m_octets{192, 168,   1, 255} };
+const IPv4Address g_defaultGateway		= { .m_octets{192, 168,   1,   1} };
 */
+
+const IPv4Address g_defaultIP			= { .m_octets{ 10,   2,   6,  50} };
+const IPv4Address g_defaultNetmask		= { .m_octets{255, 255, 255,   0} };
+const IPv4Address g_defaultBroadcast	= { .m_octets{ 10,   2,   6, 255} };
+const IPv4Address g_defaultGateway		= { .m_octets{ 10,   2,   6, 252} };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Do other initialization
 
@@ -171,6 +162,13 @@ void BSP_Init()
 {
 	InitRTC();
 	InitFMC();
+	InitFPGA();
+	DoInitKVS();
+	InitI2C();
+	InitEEPROM();
+	InitManagementPHY();
+	InitIP();
+
 	App_Init();
 }
 
@@ -259,8 +257,12 @@ void BSP_InitLog()
 void InitFMC()
 {
 	g_log("Initializing FMC...\n");
-	g_logTimer.Sleep(25000);	//wait 2.5 sec in case we hang so it's easy to reset
 	LogIndenter li(g_log);
+
+	//in case of fpga bugs etc
+	g_log("2 sec wait\n");
+	g_logTimer.Sleep(20000);
+	g_log("Done\n");
 
 	static GPIOPin fmc_ad0(&GPIOD, 14, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 12);
 	static GPIOPin fmc_ad1(&GPIOD, 15, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 12);
@@ -314,54 +316,6 @@ void InitFMC()
 		FMC_BCR_FMCEN | FMC_BCR_CCLKEN | FMC_BCR_WREN | FMC_BCR_CBURSTRW | FMC_BCR_BURSTEN |
 		FMC_BCR_WIDTH_16 | FMC_BCR_TYPE_PSRAM | FMC_BCR_MUXEN | FMC_BCR_MBKEN | FMC_BCR_BMAP_SWAP |
 		FMC_BCR_WAITEN | FMC_BCR_WAITCFG | FMC_RESERVED_BITS;
-
-	g_log("Beginning test\n");
-
-	//with BMAP swapped, the PSRAM bank is at 0xc000'0000 and is mapped as a device
-	volatile uint32_t* p = reinterpret_cast<volatile uint32_t*>(0xc0000000);
-	volatile uint16_t* q = reinterpret_cast<volatile uint16_t*>(0xc0000000);
-	volatile uint8_t* r = reinterpret_cast<volatile uint8_t*>(0xc0000000);
-
-	/**
-		64 bit transactions are split into two 32 bit bursts with separate CS# cycles
-		32 bit transactions take two clocks but are conceptually one transaction
-		8/16 bit transactions are just truncated
-		Reads have two dummy clocks at the end due to errata 2.6.1
-
-		So native bus width should be x32
-		In total, base time for a transaction without any backpressure is:
-			* x32 write: 5 clocks (plus 2 CS# high delay = 7)
-			* x16 write: 4 clocks (plus 2 CS# high delay = 6)
-			* x8 write: 4 clocks (plus 2 CS# high delay = 6)
-			* x32 read: 7 clocks (plus 2 CS# high delay = 9)
-
-		So throughput at 32 bits per transaction and 125 MHz Fclk (8 ns/clock) is
-			* x32 write: 32 bits / 7 clocks = 571.4 Mbps
-			* x16 write: 16 bits / 6 clocks = 333.3 Mbps
-			* x8 write: 8 bits / 6 clocks = 166.7 Mbps
-			* x32 read: 32 bits / 9 clocks = 444.4 Mbps
-
-		On a future UltraScale platform (or maybe Kintex-7) that can sustain full 250 MHz FMC clock
-			* x32 write: 1142 Mbps
-			* x16 write: 666 Mbps
-			* x8 write: 333 Mbps
-			* x32 read: 888 Mbps
-	 */
-
-	uint8_t addr = 0;
-	volatile uint32_t tmp;
-	uint32_t count = 0;
-	while(1)
-	{
-		//Do back to back writes to test how this works
-		p[0] = count;
-		p[2] = 0xfffffff0;
-
-		g_log("read: %08x\n", p[1]);
-
-		count++;
-		g_logTimer.Sleep(5000);
-	}
 }
 
 void InitRTC()
@@ -384,33 +338,49 @@ void DoInitKVS()
 		small (SSH keys, IP addresses, etc). A 1024-entry log is a nice round number, and comes out to 64 kB or 50%,
 		leaving the remaining 64 kB or 50% for data.
 	 */
-	/*static STM32StorageBank left(reinterpret_cast<uint8_t*>(0x080c0000), 0x20000);
+	static STM32StorageBank left(reinterpret_cast<uint8_t*>(0x080c0000), 0x20000);
 	static STM32StorageBank right(reinterpret_cast<uint8_t*>(0x080e0000), 0x20000);
-	InitKVS(&left, &right, 1024);*/
+	InitKVS(&left, &right, 1024);
 }
 
 void InitI2C()
 {
-	/*
 	g_log("Initializing I2C interfaces\n");
+	static GPIOPin mac_i2c_scl(&GPIOH, 4, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
+	static GPIOPin mac_i2c_sda(&GPIOH, 5, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
+}
 
-	static GPIOPin mac_i2c_scl(&GPIOB, 8, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 6, true);
-	static GPIOPin mac_i2c_sda(&GPIOB, 9, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 6, true);
+void InitEEPROM()
+{
+	g_log("Initializing MAC address EEPROM\n");
 
-	//Default kernel clock for I2C4 is pclk4 (68.75 MHz for our current config)
-	//Prescale by 16 to get 4.29 MHz
-	//Divide by 40 after that to get 107 kHz
-	static I2C mac_i2c(&I2C4, 16, 40);
-	g_macI2C = &mac_i2c;
+	//Extended memory block for MAC address data isn't in the normal 0xa* memory address space
+	//uint8_t main_addr = 0xa0;
+	uint8_t ext_addr = 0xb0;
 
-	static GPIOPin sfp_i2c_scl(&GPIOF, 1, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
-	static GPIOPin sfp_i2c_sda(&GPIOF, 0, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
+	//Pointers within extended memory block
+	uint8_t serial_offset = 0x80;
+	uint8_t mac_offset = 0x9a;
 
-	//Default kernel clock for I2C2 is is APB1 clock (68.75 MHz for our current config)
-	//Prescale by 16 to get 4.29 MHz
-	//Divide by 40 after that to get 107 kHz
-	static I2C sfp_i2c(&I2C2, 16, 40);
-	g_sfpI2C = &sfp_i2c;*/
+	//Read MAC address
+	g_macI2C.BlockingWrite8(ext_addr, mac_offset);
+	g_macI2C.BlockingRead(ext_addr, &g_macAddress[0], sizeof(g_macAddress));
+
+	//Read serial number
+	const int serial_len = 16;
+	uint8_t serial[serial_len] = {0};
+	g_macI2C.BlockingWrite8(ext_addr, serial_offset);
+	g_macI2C.BlockingRead(ext_addr, serial, serial_len);
+
+	{
+		LogIndenter li(g_log);
+		g_log("MAC address: %02x:%02x:%02x:%02x:%02x:%02x\n",
+			g_macAddress[0], g_macAddress[1], g_macAddress[2], g_macAddress[3], g_macAddress[4], g_macAddress[5]);
+
+		g_log("EEPROM serial number: %02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x\n",
+			serial[0], serial[1], serial[2], serial[3], serial[4], serial[5], serial[6], serial[7],
+			serial[8], serial[9], serial[10], serial[11], serial[12], serial[13], serial[14], serial[15]);
+	}
 }
 
 void InitQSPI()
@@ -484,51 +454,51 @@ void InitQSPI()
  */
 void InitFPGA()
 {
-	/*
 	g_log("Initializing FPGA\n");
 	LogIndenter li(g_log);
 
 	//Wait for the DONE signal to go high
 	g_log("Waiting for FPGA boot\n");
-	static GPIOPin fpgaDone(&GPIOF, 6, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
+	static GPIOPin fpgaDone(&GPIOA, 0, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
 	while(!fpgaDone)
 	{}
 
 	//Read the FPGA IDCODE and serial number
-	//Retry until we get a nonzero result indicating FPGA is up
-	while(true)
+	while(FDEVINFO.status != 3)
+	{}
+
+	uint32_t idcode = FDEVINFO.idcode;
+	memcpy(g_fpgaSerial, (const void*)FDEVINFO.serial, 8);
+
+	//Print status
+	switch(idcode & 0x0fffffff)
 	{
-		uint32_t idcode = g_sysInfo->idcode;
-		memcpy(g_fpgaSerial, (const void*)g_sysInfo->serial, 8);
+		case 0x3647093:
+			g_log("IDCODE: %08x (XC7K70T rev %d)\n", idcode, idcode >> 28);
+			break;
 
-		//If IDCODE is all zeroes, poll again
-		if(idcode == 0)
-			continue;
+		case 0x364c093:
+			g_log("IDCODE: %08x (XC7K160T rev %d)\n", idcode, idcode >> 28);
+			break;
 
-		//Print status
-		switch(idcode & 0x0fffffff)
-		{
-			case 0x3647093:
-				g_log("IDCODE: %08x (XC7K70T rev %d)\n", idcode, idcode >> 28);
-				break;
+		case 0x37c4093:
+			g_log("IDCODE: %08x (XC7S25 rev %d)\n", idcode, idcode >> 28);
+			break;
 
-			case 0x364c093:
-				g_log("IDCODE: %08x (XC7K160T rev %d)\n", idcode, idcode >> 28);
-				break;
+		case 0x4a63093:
+			g_log("IDCODE: %08x (XCKU3P rev %d)\n", idcode, idcode >> 28);
+			break;
 
-			default:
-				g_log("IDCODE: %08x (unknown device, rev %d)\n", idcode, idcode >> 28);
-				break;
-		}
-		g_log("Serial: %02x%02x%02x%02x%02x%02x%02x%02x\n",
-			g_fpgaSerial[7], g_fpgaSerial[6], g_fpgaSerial[5], g_fpgaSerial[4],
-			g_fpgaSerial[3], g_fpgaSerial[2], g_fpgaSerial[1], g_fpgaSerial[0]);
-
-		break;
+		default:
+			g_log("IDCODE: %08x (unknown device, rev %d)\n", idcode, idcode >> 28);
+			break;
 	}
+	g_log("Serial: %02x%02x%02x%02x%02x%02x%02x%02x\n",
+		g_fpgaSerial[7], g_fpgaSerial[6], g_fpgaSerial[5], g_fpgaSerial[4],
+		g_fpgaSerial[3], g_fpgaSerial[2], g_fpgaSerial[1], g_fpgaSerial[0]);
 
 	//Read USERCODE
-	g_usercode = g_sysInfo->usercode;
+	g_usercode = FDEVINFO.usercode;
 	g_log("Usercode: %08x\n", g_usercode);
 	{
 		LogIndenter li(g_log);
@@ -551,18 +521,52 @@ void InitFPGA()
 	}
 
 	InitFPGAFlash();
-	*/
+
+	//Set up FPGA LEDs
+	FPGA_GPIOA.tris = 0xfffffff0;
+	FPGA_GPIOA.out = 0x5;
+}
+
+/**
+	@brief Initializes the management PHY
+ */
+void InitManagementPHY()
+{
+	g_log("Initializing management PHY\n");
+	LogIndenter li(g_log);
+
+	//Reset the PHY
+	static APB_GPIOPin phy_rst_n(&FPGA_GPIOA, 4, APB_GPIOPin::MODE_OUTPUT);
+	phy_rst_n = 0;
+	g_logTimer.Sleep(10);
+	phy_rst_n = 1;
+
+	//Wait 100us (datasheet page 62 note 2) before starting to program the PHY
+	g_logTimer.Sleep(10);
+
+	//Read the PHY ID
+	MDIODevice phydev(&FMDIO, 0);
+	auto phyid1 = phydev.ReadRegister(REG_PHY_ID_1);
+	auto phyid2 = phydev.ReadRegister(REG_PHY_ID_2);
+
+	if( (phyid1 == 0x22) && ( (phyid2 >> 4) == 0x162))
+	{
+		g_log("PHY ID   = %04x %04x (KSZ9031RNX rev %d)\n", phyid1, phyid2, phyid2 & 0xf);
+
+		//Adjust pad skew for RX_CLK register to improve timing FPGA side
+		//ManagementPHYExtendedWrite(2, REG_KSZ9031_MMD2_CLKSKEW, 0x01ef);
+	}
+	else
+		g_log("PHY ID   = %04x %04x (unknown)\n", phyid1, phyid2);
 }
 
 void InitFPGAFlash()
 {
-	/*
 	g_log("Initializing FPGA flash\n");
 	LogIndenter li(g_log);
 
-	static APBSpiFlashInterface flash(g_flashSpi);
-	g_fpgaFlash = &flash;
-	*/
+	static APB_SpiFlashInterface flash(&FSPI1, 10);	//125 MHz PCLK = 12.5 MHz SCK
+	//g_fpgaFlash = &flash;
 }
 
 /**
@@ -581,6 +585,44 @@ void TrimSpaces(char* str)
 
 		p --;
 	}
+}
+
+/**
+	@brief Set our IP address and initialize the IP stack
+ */
+void InitIP()
+{
+	g_log("Initializing management IPv4 interface\n");
+	LogIndenter li(g_log);
+
+	static APB_GPIOPin irq(&FPGA_GPIOA, 6, APB_GPIOPin::MODE_INPUT);
+	g_ethIRQ = &irq;
+
+	ConfigureIP();
+
+	g_log("Our IP address is %d.%d.%d.%d\n",
+		g_ipConfig.m_address.m_octets[0],
+		g_ipConfig.m_address.m_octets[1],
+		g_ipConfig.m_address.m_octets[2],
+		g_ipConfig.m_address.m_octets[3]);
+
+	//ARP cache (shared by all interfaces)
+	static ARPCache cache;
+
+	//Per-interface protocol stacks
+	static EthernetProtocol eth(g_ethIface, g_macAddress);
+	g_ethProtocol = &eth;
+	static ARPProtocol arp(eth, g_ipConfig.m_address, cache);
+
+	//Global protocol stacks
+	static IPv4Protocol ipv4(eth, g_ipConfig, cache);
+	static ICMPv4Protocol icmpv4(ipv4);
+
+	//Register protocol handlers with the lower layer
+	eth.UseARP(&arp);
+	eth.UseIPv4(&ipv4);
+	ipv4.UseICMPv4(&icmpv4);
+	//RegisterProtocolHandlers(ipv4);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -632,3 +674,14 @@ void SfrMemcpy(volatile void* dst, void* src, uint32_t len)
 		*dst8 = *src8;
 }
 */
+
+/**
+	@brief Load our IP configuration from the KVS
+ */
+void ConfigureIP()
+{
+	g_ipConfig.m_address = g_kvs->ReadObject<IPv4Address>(g_defaultIP, "ip.address");
+	g_ipConfig.m_netmask = g_kvs->ReadObject<IPv4Address>(g_defaultNetmask, "ip.netmask");
+	g_ipConfig.m_broadcast = g_kvs->ReadObject<IPv4Address>(g_defaultBroadcast, "ip.broadcast");
+	g_ipConfig.m_gateway = g_kvs->ReadObject<IPv4Address>(g_defaultGateway, "ip.gateway");
+}

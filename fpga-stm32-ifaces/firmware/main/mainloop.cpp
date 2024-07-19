@@ -51,58 +51,19 @@ void App_Init()
 
 	//Basic hardware setup
 	InitLEDs();
-/*
-	DoInitKVS();
-
-	//Set up the quad SPI and connect to the FPGA
-	InitQSPI();
-	InitFPGA();
-	InitRelays();
-
-	//Get our MAC address
-	InitI2C();
-	InitEEPROM();
-
-	//Set up the DACs
-	InitDACs();
-
-	//Connect to the supervisor
-	InitSupervisor();
-
-	//Bring up sensors
-	InitSensors();
-
-	//Begin initializing network ports
-	InitSFP();
-	InitManagementPHY();
-
-	//Initialize our local Ethernet interface and TCP/IP stack
-	InitEthernet();
-	InitIP();
-
-	//Load instrument channel configuration from the KVS
-	LoadChannelConfig();
-
+	/*
 	//Initialize the local console
 	g_localConsoleOutputStream.Initialize(&g_cliUART);
 	g_localConsoleSessionContext.Initialize(&g_localConsoleOutputStream, "localadmin");
 
-	//Bring up the front panel
-	InitFrontPanel();
-
 	//Show the initial prompt
 	g_localConsoleSessionContext.PrintPrompt();
-
-	//Initialize the FPGA IRQ pin
-	g_irq.SetPullMode(GPIOPin::PULL_DOWN);
 	*/
 }
 
 void BSP_MainLoopIteration()
 {
-	/*
 	//Main event loop
-	static uint32_t secTillNext5MinTick = 0;
 	static uint32_t next1HzTick = 0;
 	static uint32_t next10HzTick = 0;
 	static uint32_t nextPhyPoll = 0;
@@ -111,23 +72,25 @@ void BSP_MainLoopIteration()
 	//Wait for an interrupt
 	//asm("wfi");
 
-	//Check if anything happened on the FPGA
-	CheckForFPGAEvents();
+	//Handle incoming Ethernet frames
+	if(*g_ethIRQ)
+	{
+		auto frame = g_ethIface.GetRxFrame();
+		if(frame != nullptr)
+			g_ethProtocol->OnRxFrame(frame);
+	}
 
 	//Check if we had a PHY link state change at 20 Hz
 	//TODO: add irq bit for this so we don't have to poll nonstop
 	if(g_logTimer.GetCount() >= nextPhyPoll)
 	{
-		PollPHYs();
+		//PollPHYs();
 		nextPhyPoll = g_logTimer.GetCount() + 500;
 	}
 
-	//Check if we had an optic inserted or removed
-	PollSFP();
-
 	//Poll for UART input
-	if(g_cliUART.HasInput())
-		g_localConsoleSessionContext.OnKeystroke(g_cliUART.BlockingRead());
+	//if(g_cliUART.HasInput())
+	//	g_localConsoleSessionContext.OnKeystroke(g_cliUART.BlockingRead());
 
 	if(g_log.UpdateOffset(logTimerMax))
 	{
@@ -138,9 +101,7 @@ void BSP_MainLoopIteration()
 	//Refresh of activity LEDs and TCP retransmits at 10 Hz
 	if(g_logTimer.GetCount() >= next10HzTick)
 	{
-		UpdateFrontPanelActivityLEDs();
 		g_ethProtocol->OnAgingTick10x();
-
 		next10HzTick = g_logTimer.GetCount() + 1000;
 	}
 
@@ -149,21 +110,7 @@ void BSP_MainLoopIteration()
 	{
 		g_ethProtocol->OnAgingTick();
 		next1HzTick = g_logTimer.GetCount() + 10000;
-
-		//Push channel config to KVS every 5 mins if it's changed
-		//DEBUG: every 10 sec
-		if(secTillNext5MinTick == 0)
-		{
-			secTillNext5MinTick = 300;
-			SaveChannelConfig();
-		}
-		else
-			secTillNext5MinTick --;
-
-		//Push new register values to front panel every second (it will refresh the panel whenever it wants to)
-		UpdateFrontPanelDisplay();
 	}
-	*/
 }
 /*
 uint16_t SupervisorRegRead(uint8_t regid)
