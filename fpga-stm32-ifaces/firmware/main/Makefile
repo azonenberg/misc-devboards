@@ -12,13 +12,13 @@ CXXFLAGS=-g -O3 --std=c++20 -Wall -Wextra \
 	-DMICROKVS_WRITE_BLOCK_SIZE=32 \
 	-DTEST_BANK_SIZE=131072 \
 	-DMAX_TOKEN_LEN=96 \
+	-DLOGGER_USE_RTC_TIMESTAMP \
 	-Wl,--wrap=malloc \
 	-Wl,--wrap=calloc \
 	-Wl,--wrap=realloc \
 	-Wl,--wrap=alloca \
 	-Wl,--wrap=sbrk_aligned \
 	-ffunction-sections
-	#-DLOGGER_USE_RTC_TIMESTAMP
 	#-DNO_CLEAR_SCREEN
 
 LDFLAGS=-Wl,-T $(SRCDIR)/firmware.ld \
@@ -39,6 +39,7 @@ all:
 	#$(CXX) $(CXXFLAGS) -c $(SRCDIR)/net/*.cpp || exit 1
 	#$(CXX) $(CXXFLAGS) -c $(SRCDIR)/ssh/*.cpp || exit 1
 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/common-embedded-platform/core/*.cpp || exit 1
+	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/common-embedded-platform/services/*.cpp || exit 1
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/../bsp-main/*.cpp || exit 1
 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/microkvs/kvs/*.cpp || exit 1
 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/microkvs/driver/STM32StorageBank.cpp || exit 1
@@ -56,7 +57,7 @@ all:
 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/net/ipv4/*.cpp || exit 1
 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/net/tcp/*.cpp || exit 1
 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/net/udp/*.cpp || exit 1
-	#$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/ntp/*.cpp || exit 1
+	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/ntp/*.cpp || exit 1
 	#$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/sftp/*.cpp || exit 1
 	#$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/staticnet/ssh/*.cpp || exit 1
 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/stm32-cpp/src/cpu/*.* || exit 1

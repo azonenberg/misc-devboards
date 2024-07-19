@@ -28,106 +28,49 @@
 ***********************************************************************************************************************/
 
 #include "ifacetest.h"
-/*
-#include "CrossbarCLISessionContext.h"
-#include "../front/regids.h"
-#include "../super/superregs.h"
+#include "DemoUDPProtocol.h"
 
-void LogTemperatures();
-void SendFrontPanelSensor(uint8_t cmd, uint16_t value);
-void UpdateFrontPanelActivityLEDs();
-void InitFrontPanel();
-*/
-///@brief Output stream for local serial console
-//UARTOutputStream g_localConsoleOutputStream;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Construction / destruction
 
-///@brief Context data structure for local serial console
-//CrossbarCLISessionContext g_localConsoleSessionContext;
-
-void App_Init()
+DemoUDPProtocol::DemoUDPProtocol(IPv4Protocol* ipv4)
+	: UDPProtocol(ipv4)
+	//, m_dhcp(this)
+	, m_ntp(this)
 {
-	//Enable interrupts early on since we use them for e.g. debug logging during boot
-	EnableInterrupts();
-
-	//Basic hardware setup
-	InitLEDs();
-	InitDTS();
-
-	/*
-	//Initialize the local console
-	g_localConsoleOutputStream.Initialize(&g_cliUART);
-	g_localConsoleSessionContext.Initialize(&g_localConsoleOutputStream, "localadmin");
-
-	//Show the initial prompt
-	g_localConsoleSessionContext.PrintPrompt();
-	*/
 }
 
-void BSP_MainLoopIteration()
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Timer handlers
+
+void DemoUDPProtocol::OnAgingTick()
 {
-	//Main event loop
-	static uint32_t next1HzTick = 0;
-	static uint32_t next10HzTick = 0;
-	static uint32_t nextPhyPoll = 0;
-	const uint32_t logTimerMax = 0xf0000000;
+	//m_dhcp.OnAgingTick();
+	m_ntp.OnAgingTick();
+}
 
-	//Wait for an interrupt
-	//asm("wfi");
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Message handlers
 
-	//Handle incoming Ethernet frames
-	if(*g_ethIRQ)
+void DemoUDPProtocol::OnRxData(
+	IPv4Address srcip,
+	uint16_t sport,
+	uint16_t dport,
+	uint8_t* payload,
+	uint16_t payloadLen)
+{
+	switch(dport)
 	{
-		auto frame = g_ethIface.GetRxFrame();
-		if(frame != nullptr)
-			g_ethProtocol->OnRxFrame(frame);
-	}
+		//case DHCP_CLIENT_PORT:
+		//	m_dhcp.OnRxData(srcip, sport, dport, payload, payloadLen);
+		//	break;
 
-	//Check if we had a PHY link state change at 20 Hz
-	//TODO: add irq bit for this so we don't have to poll nonstop
-	if(g_logTimer.GetCount() >= nextPhyPoll)
-	{
-		PollPHYs();
-		nextPhyPoll = g_logTimer.GetCount() + 500;
-	}
+		case NTP_PORT:
+			m_ntp.OnRxData(srcip, sport, dport, payload, payloadLen);
+			break;
 
-	//Poll for UART input
-	//if(g_cliUART.HasInput())
-	//	g_localConsoleSessionContext.OnKeystroke(g_cliUART.BlockingRead());
-
-	if(g_log.UpdateOffset(logTimerMax))
-	{
-		next1HzTick -= logTimerMax;
-		next10HzTick -= logTimerMax;
-	}
-
-	//Refresh of activity LEDs and TCP retransmits at 10 Hz
-	if(g_logTimer.GetCount() >= next10HzTick)
-	{
-		g_ethProtocol->OnAgingTick10x();
-		next10HzTick = g_logTimer.GetCount() + 1000;
-	}
-
-	//1 Hz timer for various aging processes
-	if(g_logTimer.GetCount() >= next1HzTick)
-	{
-		g_ethProtocol->OnAgingTick();
-		next1HzTick = g_logTimer.GetCount() + 10000;
+		//ignore it
+		default:
+			break;
 	}
 }
-/*
-uint16_t SupervisorRegRead(uint8_t regid)
-{
-	*g_superSPICS = 0;
-	g_superSPI.BlockingWrite(regid);
-	g_superSPI.WaitForWrites();
-	g_superSPI.DiscardRxData();
-	g_superSPI.BlockingRead();	//discard dummy byte
-	uint16_t tmp = g_superSPI.BlockingRead();
-	tmp |= (g_superSPI.BlockingRead() << 8);
-	*g_superSPICS = 1;
-
-	g_logTimer.Sleep(1);
-
-	return tmp;
-}
-*/

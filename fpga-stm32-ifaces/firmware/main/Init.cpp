@@ -147,13 +147,11 @@ void InitDTS()
 		static_cast<int>(((tempval & 0xff) / 256.0) * 100));
 }
 
-/*
 void RegisterProtocolHandlers(IPv4Protocol& ipv4)
 {
-	static ManagementTCPProtocol tcp(&ipv4);
-	static ManagementUDPProtocol udp(&ipv4);
-	ipv4.UseTCP(&tcp);
+	//static ManagementTCPProtocol tcp(&ipv4);
+	static DemoUDPProtocol udp(&ipv4);
+	//ipv4.UseTCP(&tcp);
 	ipv4.UseUDP(&udp);
-	g_dhcpClient = &udp.GetDHCP();
+	//g_dhcpClient = &udp.GetDHCP();
 }
-*/

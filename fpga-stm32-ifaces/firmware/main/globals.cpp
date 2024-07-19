@@ -53,10 +53,9 @@ DigitalTempSensor g_dts(&DTS, 80, 15, 64000000);
 //char g_superVersion[20] = {0};
 
 ///@brief Version string for IBC MCU
-//char g_ibcVersion[20] = {0};
-
-///@brief The NTP client
-//ManagementNTPClient* g_ntpClient = nullptr;
+char g_ibcVersion[20] = {0};
 
 ///@brief The SSH server
 //ManagementSSHTransportServer* g_sshd = nullptr;
+
+const IPv4Address g_defaultNtpServer	= { .m_octets{10, 2, 5, 26} };

@@ -38,6 +38,17 @@
 #include <peripheral/Power.h>
 #include <ctype.h>
 
+/**
+	@brief Mapping of link speed IDs to printable names
+ */
+static const char* g_linkSpeedNamesLong[] =
+{
+	"10 Mbps",
+	"100 Mbps",
+	"1000 Mbps",
+	"10 Gbps"
+};
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Memory mapped SFRs on the FPGA
 
@@ -105,10 +116,10 @@ I2C g_macI2C(&I2C2, 16, 40);
 //I2C* g_sfpI2C = nullptr;
 
 ///@brief BaseT link status
-//bool g_basetLinkUp = false;
+bool g_basetLinkUp = false;
 
 //Ethernet link speed
-//uint8_t g_basetLinkSpeed = 0;
+uint8_t g_basetLinkSpeed = 0;
 
 ///@brief Key manager
 //CrossbarSSHKeyManager g_keyMgr;
@@ -136,6 +147,9 @@ uint8_t g_fpgaSerial[8] = {0};
 
 ///@brief IRQ line to the FPGA
 APB_GPIOPin* g_ethIRQ = nullptr;
+
+///@brief MDIO device for the PHY
+MDIODevice* g_phyMdio = nullptr;
 
 ///@brief The battery-backed RAM used to store state across power cycles
 //volatile BootloaderBBRAM* g_bbram = reinterpret_cast<volatile BootloaderBBRAM*>(&_RTC.BKP[0]);
@@ -545,7 +559,8 @@ void InitManagementPHY()
 	g_logTimer.Sleep(10);
 
 	//Read the PHY ID
-	MDIODevice phydev(&FMDIO, 0);
+	static MDIODevice phydev(&FMDIO, 0);
+	g_phyMdio = &phydev;
 	auto phyid1 = phydev.ReadRegister(REG_PHY_ID_1);
 	auto phyid2 = phydev.ReadRegister(REG_PHY_ID_2);
 
@@ -622,7 +637,7 @@ void InitIP()
 	eth.UseARP(&arp);
 	eth.UseIPv4(&ipv4);
 	ipv4.UseICMPv4(&icmpv4);
-	//RegisterProtocolHandlers(ipv4);
+	RegisterProtocolHandlers(ipv4);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -684,4 +699,34 @@ void ConfigureIP()
 	g_ipConfig.m_netmask = g_kvs->ReadObject<IPv4Address>(g_defaultNetmask, "ip.netmask");
 	g_ipConfig.m_broadcast = g_kvs->ReadObject<IPv4Address>(g_defaultBroadcast, "ip.broadcast");
 	g_ipConfig.m_gateway = g_kvs->ReadObject<IPv4Address>(g_defaultGateway, "ip.gateway");
+}
+
+/**
+	@brief Check PHYs for updates
+ */
+void PollPHYs()
+{
+	//Get the baseT link state
+	uint16_t bctl = g_phyMdio->ReadRegister(REG_BASIC_CONTROL);
+	uint16_t bstat = g_phyMdio->ReadRegister(REG_BASIC_STATUS);
+	bool bup = (bstat & 4) == 4;
+	if(bup && !g_basetLinkUp)
+	{
+		g_basetLinkSpeed = 0;
+		if( (bctl & 0x40) == 0x40)
+			g_basetLinkSpeed |= 2;
+		if( (bctl & 0x2000) == 0x2000)
+			g_basetLinkSpeed |= 1;
+		g_log("Interface mgmt0: link is up at %s\n", g_linkSpeedNamesLong[g_basetLinkSpeed]);
+		//OnEthernetLinkStateChanged();
+		g_ethProtocol->OnLinkUp();
+	}
+	else if(!bup && g_basetLinkUp)
+	{
+		g_log("Interface mgmt0: link is down\n");
+		g_basetLinkSpeed = 0xff;
+		//OnEthernetLinkStateChanged();
+		g_ethProtocol->OnLinkDown();
+	}
+	g_basetLinkUp = bup;
 }

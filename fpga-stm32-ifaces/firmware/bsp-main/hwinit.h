@@ -77,8 +77,8 @@ void InitManagementPHY();
 /*
 void PollSFP();
 void PollFPGA();
-void PollPHYs();
 */
+void PollPHYs();
 void ConfigureIP();
 
 void DoInitKVS();
@@ -98,17 +98,10 @@ extern I2C* g_macI2C;
 extern I2C* g_sfpI2C;
 */
 extern EthernetProtocol* g_ethProtocol;
-/*
 extern bool g_basetLinkUp;
 extern uint8_t g_basetLinkSpeed;
-extern bool g_sfpLinkUp;
-extern CrossbarSSHKeyManager g_keyMgr;
-extern GPIOPin* g_sfpModAbsPin;
-extern GPIOPin* g_sfpTxDisablePin;
-extern GPIOPin* g_sfpTxFaultPin;
-extern bool g_sfpFaulted;
-extern bool g_sfpPresent;
-*/
+//extern CrossbarSSHKeyManager g_keyMgr;
+
 extern APB_GPIOPin* g_ethIRQ;
 extern uint8_t g_fpgaSerial[8];
 extern uint32_t g_usercode;
@@ -128,8 +121,9 @@ void UART4_Handler();
 void OnEthernetLinkStateChanged();
 bool CheckForFPGAEvents();
 void TrimSpaces(char* str);
+*/
 void RegisterProtocolHandlers(IPv4Protocol& ipv4);
-
+/*
 //Flash controller for FPGA bitstream
 extern APBSpiFlashInterface* g_fpgaFlash;
 */

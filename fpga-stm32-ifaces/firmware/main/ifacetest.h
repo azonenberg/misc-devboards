@@ -40,7 +40,9 @@
 #include <util/StringBuffer.h>
 
 #include "net/ManagementTCPProtocol.h"
-#include "net/ManagementUDPProtocol.h"
+*/
+#include "DemoUDPProtocol.h"
+/*
 extern ManagementNTPClient* g_ntpClient;
 */
 extern DigitalTempSensor g_dts;
