@@ -28,21 +28,15 @@
 ***********************************************************************************************************************/
 
 #include "ifacetest.h"
-/*
-#include "CrossbarCLISessionContext.h"
-#include "../front/regids.h"
-#include "../super/superregs.h"
 
-void LogTemperatures();
-void SendFrontPanelSensor(uint8_t cmd, uint16_t value);
-void UpdateFrontPanelActivityLEDs();
-void InitFrontPanel();
-*/
+#include "DemoCLISessionContext.h"
+//#include "../super/superregs.h"
+
 ///@brief Output stream for local serial console
-//UARTOutputStream g_localConsoleOutputStream;
+UARTOutputStream g_localConsoleOutputStream;
 
 ///@brief Context data structure for local serial console
-//CrossbarCLISessionContext g_localConsoleSessionContext;
+DemoCLISessionContext g_localConsoleSessionContext;
 
 void App_Init()
 {
@@ -53,14 +47,12 @@ void App_Init()
 	InitLEDs();
 	InitDTS();
 
-	/*
 	//Initialize the local console
 	g_localConsoleOutputStream.Initialize(&g_cliUART);
 	g_localConsoleSessionContext.Initialize(&g_localConsoleOutputStream, "localadmin");
 
 	//Show the initial prompt
 	g_localConsoleSessionContext.PrintPrompt();
-	*/
 }
 
 void BSP_MainLoopIteration()
@@ -91,8 +83,8 @@ void BSP_MainLoopIteration()
 	}
 
 	//Poll for UART input
-	//if(g_cliUART.HasInput())
-	//	g_localConsoleSessionContext.OnKeystroke(g_cliUART.BlockingRead());
+	if(g_cliUART.HasInput())
+		g_localConsoleSessionContext.OnKeystroke(g_cliUART.BlockingRead());
 
 	if(g_log.UpdateOffset(logTimerMax))
 	{

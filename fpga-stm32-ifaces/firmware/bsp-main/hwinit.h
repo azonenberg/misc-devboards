@@ -29,9 +29,9 @@
 
 #ifndef hwinit_h
 #define hwinit_h
-/*
+
 #include <cli/UARTOutputStream.h>
-*/
+
 #include <peripheral/CRC.h>
 #include <peripheral/Flash.h>
 #include <peripheral/GPIO.h>
@@ -74,15 +74,10 @@ void InitEEPROM();
 void InitIP();
 //void InitSFP();
 void InitManagementPHY();
-/*
-void PollSFP();
-void PollFPGA();
-*/
 void PollPHYs();
 void ConfigureIP();
 
 void DoInitKVS();
-//uint16_t GetSFPTemperature();
 
 //Common hardware interface stuff (mostly Ethernet related)
 extern UART<32, 256> g_cliUART;
@@ -94,8 +89,6 @@ extern IPv4Config g_ipConfig;
 extern bool g_usingDHCP;
 extern ManagementDHCPClient* g_dhcpClient;
 extern OctoSPI* g_qspi;
-extern I2C* g_macI2C;
-extern I2C* g_sfpI2C;
 */
 extern EthernetProtocol* g_ethProtocol;
 extern bool g_basetLinkUp;
