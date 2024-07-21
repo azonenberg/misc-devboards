@@ -27,105 +27,25 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#include "ifacetest.h"
+#ifndef DemoTCPProtocol_h
+#define DemoTCPProtocol_h
 
-#include "DemoCLISessionContext.h"
-//#include "../super/superregs.h"
-
-///@brief Output stream for local serial console
-UARTOutputStream g_localConsoleOutputStream;
-
-///@brief Context data structure for local serial console
-DemoCLISessionContext g_localConsoleSessionContext;
-
-extern Iperf3Server* g_iperfServer;
-
-void App_Init()
+class DemoTCPProtocol : public TCPProtocol
 {
-	//Enable interrupts early on since we use them for e.g. debug logging during boot
-	EnableInterrupts();
+public:
+	DemoTCPProtocol(IPv4Protocol* ipv4, UDPProtocol& udp);
 
-	//Basic hardware setup
-	InitLEDs();
-	InitDTS();
+protected:
+	virtual bool IsPortOpen(uint16_t port) override;
+	virtual void OnConnectionAccepted(TCPTableEntry* state) override;
+	virtual void OnConnectionClosed(TCPTableEntry* state) override;
+	virtual void OnRxData(TCPTableEntry* state, uint8_t* payload, uint16_t payloadLen) override;
 
-	//Initialize the local console
-	g_localConsoleOutputStream.Initialize(&g_cliUART);
-	g_localConsoleSessionContext.Initialize(&g_localConsoleOutputStream, "localadmin");
+	virtual uint32_t GenerateInitialSequenceNumber() override;
 
-	//Show the initial prompt
-	g_localConsoleSessionContext.PrintPrompt();
-}
+	Iperf3Server m_iperf;
 
-void BSP_MainLoopIteration()
-{
-	//Main event loop
-	static uint32_t next1HzTick = 0;
-	static uint32_t next10HzTick = 0;
-	static uint32_t nextPhyPoll = 0;
-	const uint32_t logTimerMax = 0xf0000000;
+	STM32CryptoEngine m_crypt;
+};
 
-	//Wait for an interrupt
-	//asm("wfi");
-
-	//Handle incoming Ethernet frames
-	if(*g_ethIRQ)
-	{
-		auto frame = g_ethIface.GetRxFrame();
-		if(frame != nullptr)
-			g_ethProtocol->OnRxFrame(frame);
-	}
-
-	//Send iperf data if needed
-	g_iperfServer->SendDataOnActiveStreams();
-
-	//Check if we had a PHY link state change at 20 Hz
-	//TODO: add irq bit for this so we don't have to poll nonstop
-	if(g_logTimer.GetCount() >= nextPhyPoll)
-	{
-		PollPHYs();
-		nextPhyPoll = g_logTimer.GetCount() + 500;
-	}
-
-	//Poll for UART input
-	if(g_cliUART.HasInput())
-		g_localConsoleSessionContext.OnKeystroke(g_cliUART.BlockingRead());
-
-	//Keep the log timer from wrapping
-	if(g_log.UpdateOffset(logTimerMax))
-	{
-		next1HzTick -= logTimerMax;
-		next10HzTick -= logTimerMax;
-	}
-
-	//Refresh of activity LEDs and TCP retransmits at 10 Hz
-	if(g_logTimer.GetCount() >= next10HzTick)
-	{
-		g_ethProtocol->OnAgingTick10x();
-		next10HzTick = g_logTimer.GetCount() + 1000;
-	}
-
-	//1 Hz timer for various aging processes
-	if(g_logTimer.GetCount() >= next1HzTick)
-	{
-		g_ethProtocol->OnAgingTick();
-		next1HzTick = g_logTimer.GetCount() + 10000;
-	}
-}
-/*
-uint16_t SupervisorRegRead(uint8_t regid)
-{
-	*g_superSPICS = 0;
-	g_superSPI.BlockingWrite(regid);
-	g_superSPI.WaitForWrites();
-	g_superSPI.DiscardRxData();
-	g_superSPI.BlockingRead();	//discard dummy byte
-	uint16_t tmp = g_superSPI.BlockingRead();
-	tmp |= (g_superSPI.BlockingRead() << 8);
-	*g_superSPICS = 1;
-
-	g_logTimer.Sleep(1);
-
-	return tmp;
-}
-*/
+#endif

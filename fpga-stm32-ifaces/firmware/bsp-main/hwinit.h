@@ -57,12 +57,11 @@
 
 #include <staticnet/stack/staticnet.h>
 #include <staticnet/drivers/apb/APBEthernetInterface.h>
-#include <staticnet/ssh/SSHTransportServer.h>
+#include <staticnet/drivers/stm32/STM32CryptoEngine.h>
+//#include <staticnet/ssh/SSHTransportServer.h>
+//#include "ManagementDHCPClient.h"
+//#include "CrossbarSSHKeyManager.h"
 
-/*
-#include "ManagementDHCPClient.h"
-#include "CrossbarSSHKeyManager.h"
-*/
 void App_Init();
 void InitFMC();
 void InitRTC();
@@ -72,7 +71,6 @@ void InitFPGAFlash();
 void InitI2C();
 void InitEEPROM();
 void InitIP();
-//void InitSFP();
 void InitManagementPHY();
 void PollPHYs();
 void ConfigureIP();

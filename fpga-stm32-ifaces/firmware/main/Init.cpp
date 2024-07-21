@@ -149,9 +149,9 @@ void InitDTS()
 
 void RegisterProtocolHandlers(IPv4Protocol& ipv4)
 {
-	//static ManagementTCPProtocol tcp(&ipv4);
 	static DemoUDPProtocol udp(&ipv4);
-	//ipv4.UseTCP(&tcp);
+	static DemoTCPProtocol tcp(&ipv4, udp);
 	ipv4.UseUDP(&udp);
+	ipv4.UseTCP(&tcp);
 	//g_dhcpClient = &udp.GetDHCP();
 }

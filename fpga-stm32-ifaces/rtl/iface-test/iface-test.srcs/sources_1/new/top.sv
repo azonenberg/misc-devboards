@@ -158,6 +158,12 @@ module top(
 		.fmc_cs_n(fmc_ne1)
 	);
 
+	//Pipeline stage for timing
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(20), .USER_WIDTH(0)) fmc_apb_pipe();
+	APBRegisterSlice #(.DOWN_REG(0), .UP_REG(1)) regslice_apb_root(
+		.upstream(fmc_apb),
+		.downstream(fmc_apb_pipe));
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Ethernet MAC
 
@@ -222,18 +228,18 @@ module top(
 		.BLOCK_SIZE(32'h1_0000),
 		.NUM_PORTS(2)
 	) root_bridge (
-		.upstream(fmc_apb),
+		.upstream(fmc_apb_pipe),
 		.downstream(rootAPB)
 	);
 
 	//Pipeline stages at top side of each root in case we need to improve timing
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(16), .USER_WIDTH(0)) apb1_root();
-	APBRegisterSlice #(.DOWN_REG(0), .UP_REG(1)) regslice_apb1_root(
+	APBRegisterSlice #(.DOWN_REG(0), .UP_REG(0)) regslice_apb1_root(
 		.upstream(rootAPB[0]),
 		.downstream(apb1_root));
 
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(16), .USER_WIDTH(0)) apb2_root();
-	APBRegisterSlice #(.DOWN_REG(0), .UP_REG(1)) regslice_apb2_root(
+	APBRegisterSlice #(.DOWN_REG(0), .UP_REG(0)) regslice_apb2_root(
 		.upstream(rootAPB[1]),
 		.downstream(apb2_root));
 
@@ -275,7 +281,7 @@ module top(
 	wire[31:0]	gpioa_tris;
 
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) apb_gpioa();
-	APBRegisterSlice #(.DOWN_REG(0), .UP_REG(0)) regslice_apb_gpioa(
+	APBRegisterSlice #(.DOWN_REG(1), .UP_REG(1)) regslice_apb_gpioa(
 		.upstream(apb1[0]),
 		.downstream(apb_gpioa));
 
@@ -328,7 +334,7 @@ module top(
 	// MDIO transciever (c000_0800)
 
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) apb_mdio();
-	APBRegisterSlice #(.DOWN_REG(0), .UP_REG(1)) regslice_apb_mdio(
+	APBRegisterSlice #(.DOWN_REG(1), .UP_REG(1)) regslice_apb_mdio(
 		.upstream(apb1[2]),
 		.downstream(apb_mdio));
 
@@ -395,7 +401,7 @@ module top(
 
 	//SPI bus controller
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) apb_flash();
-	APBRegisterSlice #(.DOWN_REG(0), .UP_REG(1)) regslice_apb_flash(
+	APBRegisterSlice #(.DOWN_REG(1), .UP_REG(1)) regslice_apb_flash(
 		.upstream(apb1[3]),
 		.downstream(apb_flash));
 
@@ -422,8 +428,13 @@ module top(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Ethernet TX FIFO (c002_0000)
 
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(12), .USER_WIDTH(0)) apb_tx_fifo();
+	APBRegisterSlice #(.DOWN_REG(1), .UP_REG(0)) regslice_apb_tx_fifo(
+		.upstream(apb2[1]),
+		.downstream(apb_tx_fifo));
+
 	APB_EthernetTxBuffer_x32_1G eth_tx_fifo(
-		.apb(apb2[1]),
+		.apb(apb_tx_fifo),
 		.tx_clk(clk_125mhz),
 		.tx_bus(mgmt0_tx_bus),
 		.tx_ready(mgmt0_tx_ready),

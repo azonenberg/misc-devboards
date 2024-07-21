@@ -34,18 +34,18 @@
 #include <hwinit.h>
 
 #include <peripheral/DTS.h>
-/*
-#include <peripheral/SPI.h>
+//#include <peripheral/SPI.h>
 
-#include <util/StringBuffer.h>
+#include <common-embedded-platform/services/Iperf3Server.h>
 
-#include "net/ManagementTCPProtocol.h"
-*/
+#include <embedded-utils/StringBuffer.h>
 #include "DemoUDPProtocol.h"
-/*
-extern ManagementNTPClient* g_ntpClient;
-*/
+#include "DemoTCPProtocol.h"
+
+//extern ManagementNTPClient* g_ntpClient;
+
 extern DigitalTempSensor g_dts;
+extern Iperf3Server* g_iperfServer;
 
 void InitLEDs();
 void InitDTS();
