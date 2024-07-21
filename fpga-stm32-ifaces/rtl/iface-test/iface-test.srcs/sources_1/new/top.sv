@@ -147,6 +147,8 @@ module top(
 	FMC_APBBridge fmcbridge(
 		.apb(fmc_apb),
 
+		.clk_mgmt(clk_125mhz),
+
 		.fmc_clk(fmc_clk),
 		.fmc_nwait(fmc_nwait),
 		.fmc_noe(fmc_noe),
