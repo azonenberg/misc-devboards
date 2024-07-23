@@ -219,6 +219,20 @@ void BSP_InitClocks()
 		RCCHelper::CLOCK_SOURCE_HSE
 	);
 
+	//Set up PLL2 to run the external memory bus
+	//We have some freedom with how fast we clock this!
+	//Doesn't have to be a multiple of 500 since separate VCO from the main system
+	RCCHelper::InitializePLL(
+		2,		//PLL2
+		25,		//input is 25 MHz from the HSE
+		2,		//25/2 = 12.5 MHz at the PFD
+		20,		//12.5 * 20 = 250 MHz at the VCO
+		32,		//div P (not used for now)
+		32,		//div Q (not used for now)
+		1,		//div R (250 MHz FMC kernel clock = 125 MHz FMC clock)
+		RCCHelper::CLOCK_SOURCE_HSE
+	);
+
 	//Set up main system clock tree
 	RCCHelper::InitializeSystemClocks(
 		1,		//sysclk = 500 MHz
@@ -315,14 +329,20 @@ void InitFMC()
 	//Enable the FMC
 	RCCHelper::Enable(&_FMC);
 
+	//We can't have clock divider lower than /2 it seems
+	//FMCSEL (bits 1:0 of RCC_D1CCIPR)
+	RCC.D1CCIPR = (RCC.D1CCIPR & ~3) | 2;
+
+	//0 = hclk3 (default after reset, 250 MHz)
+	//1 = pll1_q
+	//2 = pll2_r
+	//3 = per_clk
+
 	//Enabled with free-running clock output (so FPGA can clock APB off it)
 	//TODO: may need to send read data in a phase shifted clock domain for better capture margin at receiver
 	_FMC.BTR1 =
 		(0 << 24) |		//data latency 2 clocks
 		(1 << 20) |		//clock frequency fmc_ker_clk / 2
-						//kernel clock defaults to HCLK3 = 250 MHz so this is 125 MHz
-						//Divider must be at least 2 (125 MHz) for our current FPGA design
-						//due to timing limitations on the -1 Spartan-7
 		(0 << 16);		//no bus turnaround delay added
 	_FMC.BWTR1 =
 		(0 << 16);		//no bus turnaround delay added
@@ -476,6 +496,44 @@ void InitFPGA()
 	static GPIOPin fpgaDone(&GPIOA, 0, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
 	while(!fpgaDone)
 	{}
+
+	//DEBUG
+	g_log("Poking SCRATCH register\n");
+	//g_log("SCRATCH = %08x\n", FDEVINFO.scratch);
+	bool reading = false;
+	bool one = false;
+	while(true)
+	{
+		if(reading)
+			g_log("SCRATCH = %08x\n", FDEVINFO.scratch);
+		else
+		{
+			if(one)
+				FDEVINFO.scratch = 0xffffffff;
+			else
+				FDEVINFO.scratch = 0x55aaaa55;
+		}
+
+		//wait for user to type a key
+		if(g_cliUART.HasInput())
+		{
+			char c = g_cliUART.BlockingRead();
+			if(c == 'x')
+				break;
+			if(c == 'r')
+				reading = true;
+			if(c == 'w')
+				reading = false;
+			if(c == 'o')
+			{
+				one = !one;
+				if(one)
+					g_log("Writing ffffffff\n");
+				else
+					g_log("Writing 55aaaa55\n");
+			}
+		}
+	}
 
 	//Read the FPGA IDCODE and serial number
 	while(FDEVINFO.status != 3)
