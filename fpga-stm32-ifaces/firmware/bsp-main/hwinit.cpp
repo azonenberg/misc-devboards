@@ -35,6 +35,7 @@
 #include <core/platform.h>
 #include "hwinit.h"
 //#include "LogSink.h"
+#include <peripheral/FMC.h>
 #include <peripheral/Power.h>
 #include <ctype.h>
 
@@ -89,8 +90,12 @@ GPIOPin g_leds[4] =
 	GPIOPin(&GPIOH, 6, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW)
 };
 
-///@brief Global Ethernet interface
-APBEthernetInterface g_ethIface(&FETHRX, &FETHTX);
+/**
+	@brief Global Ethernet interface
+
+	Place it in TCM since we're not currently using DMA and TCM is faster for software memory copies
+ */
+__attribute__((section(".tcmbss"))) APBEthernetInterface g_ethIface(&FETHRX, &FETHTX);
 
 ///@brief Our MAC address
 MACAddress g_macAddress;
@@ -229,7 +234,7 @@ void BSP_InitClocks()
 		20,		//12.5 * 20 = 250 MHz at the VCO
 		32,		//div P (not used for now)
 		32,		//div Q (not used for now)
-		1,		//div R (250 MHz FMC kernel clock = 125 MHz FMC clock)
+		1,		//div R (275 MHz FMC kernel clock = 137.5 MHz FMC clock)
 		RCCHelper::CLOCK_SOURCE_HSE
 	);
 
@@ -326,30 +331,26 @@ void InitFMC()
 	//Add a pullup on NWAIT
 	fmc_nwait.SetPullMode(GPIOPin::PULL_UP);
 
-	//Enable the FMC
+	//Enable the FMC and select PLL2 R as the clock source
 	RCCHelper::Enable(&_FMC);
+	RCCHelper::SetFMCKernelClock(RCCHelper::FMC_CLOCK_PLL2_R);
 
-	//We can't have clock divider lower than /2 it seems
-	//FMCSEL (bits 1:0 of RCC_D1CCIPR)
-	RCC.D1CCIPR = (RCC.D1CCIPR & ~3) | 2;
+	//Use free-running clock output (so FPGA can clock APB off it)
+	//Configured as 16-bit multiplexed synchronous PSRAM
+	static FMCBank fmc(&_FMC, 0);
+	fmc.EnableFreeRunningClock();
+	fmc.EnableWrites();
+	fmc.SetSynchronous();
+	fmc.SetBusWidth(FMC_BCR_WIDTH_16);
+	fmc.SetMemoryType(FMC_BCR_TYPE_PSRAM);
+	fmc.SetAddressDataMultiplex();
 
-	//0 = hclk3 (default after reset, 250 MHz)
-	//1 = pll1_q
-	//2 = pll2_r
-	//3 = per_clk
+	//Enable wait states wiath NWAIT active during the wait
+	fmc.EnableSynchronousWaitStates();
+	fmc.SetEarlyWaitState(false);
 
-	//Enabled with free-running clock output (so FPGA can clock APB off it)
-	//TODO: may need to send read data in a phase shifted clock domain for better capture margin at receiver
-	_FMC.BTR1 =
-		(0 << 24) |		//data latency 2 clocks
-		(1 << 20) |		//clock frequency fmc_ker_clk / 2
-		(0 << 16);		//no bus turnaround delay added
-	_FMC.BWTR1 =
-		(0 << 16);		//no bus turnaround delay added
-	_FMC.BCR1 =
-		FMC_BCR_FMCEN | FMC_BCR_CCLKEN | FMC_BCR_WREN | FMC_BCR_CBURSTRW | FMC_BCR_BURSTEN |
-		FMC_BCR_WIDTH_16 | FMC_BCR_TYPE_PSRAM | FMC_BCR_MUXEN | FMC_BCR_MBKEN | FMC_BCR_BMAP_SWAP |
-		FMC_BCR_WAITEN | FMC_BCR_WAITCFG | FMC_RESERVED_BITS;
+	//Map the PSRAM bank in slot 1 (0xc0000000) as strongly ordered / device memory
+	fmc.SetPsramBankAs1();
 }
 
 void InitRTC()
@@ -497,8 +498,30 @@ void InitFPGA()
 	while(!fpgaDone)
 	{}
 
+	//Verify reliable functionality by poking the scratchpad register (TODO: proper timing-control link training?)
+	g_log("FMC loopback test...\n");
+	{
+		LogIndenter li2(g_log);
+		uint32_t tmp = 0xbaadc0de;
+		uint32_t count = 100000;
+		uint32_t errs = 0;
+		for(uint32_t i=0; i<count; i++)
+		//for(uint32_t i=0; true; i++)
+		{
+			FDEVINFO.scratch = tmp;
+			uint32_t readback = FDEVINFO.scratch;
+			if(readback != tmp)
+			{
+				//if(errs == 0)
+					g_log(Logger::ERROR, "Iteration %u: wrote 0x%08x, read 0x%08x\n", i, tmp, readback);
+				errs ++;
+			}
+			tmp ++;
+		}
+		g_log("%u iterations complete, %u errors\n", count, errs);
+	}
+/*
 	//DEBUG
-	g_log("Poking SCRATCH register\n");
 	//g_log("SCRATCH = %08x\n", FDEVINFO.scratch);
 	bool reading = false;
 	bool one = false;
@@ -533,7 +556,7 @@ void InitFPGA()
 					g_log("Writing 55aaaa55\n");
 			}
 		}
-	}
+	}*/
 
 	//Read the FPGA IDCODE and serial number
 	while(FDEVINFO.status != 3)

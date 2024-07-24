@@ -145,10 +145,10 @@ module top(
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(20), .USER_WIDTH(0)) fmc_apb();
 
 	FMC_APBBridge #(
-		.CLOCK_PERIOD(8),	//125 MHz
-		.VCO_MULT(8),		//1 GHz VCO
-		.CAPTURE_CLOCK_PHASE(0),
-		.LAUNCH_CLOCK_PHASE(0)
+		.CLOCK_PERIOD(7.27),	//137.5 MHz
+		.VCO_MULT(8),			//1.1 GHz VCO
+		.CAPTURE_CLOCK_PHASE(-30),
+		.LAUNCH_CLOCK_PHASE(-30)
 	) fmcbridge(
 		.apb(fmc_apb),
 
@@ -216,6 +216,7 @@ module top(
 		.mac_rx_bus(mgmt0_rx_bus),
 
 		.sys_clk(fmc_apb.pclk),
+		.rst_n(fmc_apb.preset_n),
 		.cdc_rx_bus(cdc_rx_bus),
 
 		.perf_rx_cdc_frames()
