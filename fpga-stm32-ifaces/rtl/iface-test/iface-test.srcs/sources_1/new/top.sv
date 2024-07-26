@@ -434,7 +434,7 @@ module top(
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Ethernet TX FIFO (c002_0000)
+	// Ethernet TX FIFO (c001_1000)
 
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(12), .USER_WIDTH(0)) apb_tx_fifo();
 	APBRegisterSlice #(.DOWN_REG(1), .UP_REG(0)) regslice_apb_tx_fifo(

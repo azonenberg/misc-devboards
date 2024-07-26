@@ -70,7 +70,7 @@ set_property PACKAGE_PIN E2 [get_ports fmc_ne3]
 set_property IOSTANDARD LVCMOS33 [get_ports fmc_nwe]
 set_property PACKAGE_PIN A2 [get_ports fmc_nwe]
 
-create_clock -period 8.000 -name fmc_clk -waveform {0.000 4.000} [get_ports fmc_clk]
+create_clock -period 7.270 -name fmc_clk -waveform {0.000 3.635} [get_ports fmc_clk]
 
 
 
@@ -192,18 +192,17 @@ set_property DRIVE 8 [get_ports flash_cs_n]
 
 
 
-create_clock -period 6.400 -name VIRTUAL_pclk_raw -waveform {0.000 3.200}
 
 
 
-set_input_delay -clock [get_clocks fmc_clk] -min -add_delay 4.100 [get_ports {{fmc_a_hi[0]} {fmc_a_hi[1]} {fmc_a_hi[2]} {fmc_nbl[0]} {fmc_nbl[1]} fmc_ne1 fmc_ne3 fmc_nl_nadv fmc_nwe}]
-set_input_delay -clock [get_clocks fmc_clk] -max -add_delay 5.300 [get_ports {{fmc_a_hi[0]} {fmc_a_hi[1]} {fmc_a_hi[2]} {fmc_nbl[0]} {fmc_nbl[1]} fmc_ne1 fmc_ne3 fmc_nl_nadv fmc_nwe}]
-set_input_delay -clock [get_clocks fmc_clk] -min -add_delay 4.100 [get_ports {fmc_ad[*]}]
-set_input_delay -clock [get_clocks fmc_clk] -max -add_delay 5.300 [get_ports {fmc_ad[*]}]
+set_input_delay -clock [get_clocks fmc_clk] -min -add_delay 3.735 [get_ports {{fmc_a_hi[0]} {fmc_a_hi[1]} {fmc_a_hi[2]} {fmc_nbl[0]} {fmc_nbl[1]} fmc_ne1 fmc_ne3 fmc_nl_nadv fmc_nwe}]
+set_input_delay -clock [get_clocks fmc_clk] -max -add_delay 4.935 [get_ports {{fmc_a_hi[0]} {fmc_a_hi[1]} {fmc_a_hi[2]} {fmc_nbl[0]} {fmc_nbl[1]} fmc_ne1 fmc_ne3 fmc_nl_nadv fmc_nwe}]
+set_input_delay -clock [get_clocks fmc_clk] -min -add_delay 3.735 [get_ports {fmc_ad[*]}]
+set_input_delay -clock [get_clocks fmc_clk] -max -add_delay 4.935 [get_ports {fmc_ad[*]}]
 
 create_pblock pblock_debugstuff
-add_cells_to_pblock [get_pblocks pblock_debugstuff] [get_cells -quiet [list dbg_hub fmcbridge/ila fmcbridge/vio]]
 resize_pblock [get_pblocks pblock_debugstuff] -add {CLOCKREGION_X0Y1:CLOCKREGION_X1Y1}
+add_cells_to_pblock [get_pblocks pblock_debugstuff] [get_cells -quiet [list dbg_hub fmcbridge/ila fmcbridge/vio]]
 
 
 
@@ -226,6 +225,11 @@ set_property DRIVE 8 [get_ports {pmod_gpio[0]}]
 
 
 
+set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
+set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
+set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
+connect_debug_port dbg_hub/clk [get_nets clk_125mhz]
+
 set_property OFFCHIP_TERM NONE [get_ports fmc_nwait]
 set_property OFFCHIP_TERM NONE [get_ports fmc_ad[15]]
 set_property OFFCHIP_TERM NONE [get_ports fmc_ad[14]]
@@ -247,7 +251,3 @@ set_property OFFCHIP_TERM NONE [get_ports led[3]]
 set_property OFFCHIP_TERM NONE [get_ports led[2]]
 set_property OFFCHIP_TERM NONE [get_ports led[1]]
 set_property OFFCHIP_TERM NONE [get_ports led[0]]
-set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
-set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
-set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
-connect_debug_port dbg_hub/clk [get_nets clk_125mhz]
