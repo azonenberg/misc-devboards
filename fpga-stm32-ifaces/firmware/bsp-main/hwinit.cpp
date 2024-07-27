@@ -691,6 +691,8 @@ void InitIP()
 	g_log("Initializing management IPv4 interface\n");
 	LogIndenter li(g_log);
 
+	g_ethIface.Init();
+
 	static APB_GPIOPin irq(&FPGA_GPIOA, 6, APB_GPIOPin::MODE_INPUT);
 	g_ethIRQ = &irq;
 
