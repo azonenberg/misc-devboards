@@ -18,7 +18,9 @@ CXXFLAGS=-g -O3 --std=c++20 -Wall -Wextra \
 	-Wl,--wrap=realloc \
 	-Wl,--wrap=alloca \
 	-Wl,--wrap=sbrk_aligned \
-	-ffunction-sections
+	-Wl,--wrap=free \
+	-ffunction-sections \
+	-mfloat-abi=hard
 	#-DNO_CLEAR_SCREEN
 
 LDFLAGS=-Wl,-T $(SRCDIR)/firmware.ld \
@@ -30,7 +32,7 @@ LDFLAGS=-Wl,-T $(SRCDIR)/firmware.ld \
 .SILENT: all
 
 all: CXX=arm-none-eabi-g++
-all: CXXFLAGS += -DSTM32H735 -fno-rtti -fno-exceptions --specs nano.specs -mcpu=cortex-m7
+all: CXXFLAGS += -DSTM32H735 -fno-rtti -fno-exceptions --specs nano.specs -mcpu=cortex-m7 -march=armv7e-m+fpv5+fp.dp
 
 all:
 	mkdir -p output
@@ -68,6 +70,6 @@ all:
 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/stm32-cpp/devices/src/stm32h735.cpp || exit 1
 	$(CXX) $(CXXFLAGS) *.o $(LDFLAGS) -o ../firmware.elf
 	cd ../
-	arm-none-eabi-objcopy -O binary --only-section=.text --only-section=.rodata --only-section=.data firmware.elf firmware.bin
+	arm-none-eabi-objcopy -O binary --only-section=.text --only-section=.rodata --only-section=.tcmtext --only-section=.data firmware.elf firmware.bin
 	./imagesize.sh
 	arm-none-eabi-strip -s -o main-stripped.elf firmware.elf
