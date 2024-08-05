@@ -89,12 +89,11 @@ void PowerOn()
 	g_log("Turning power on\n");
 	LogIndenter li(g_log);
 
-	//active low for now
 	//12V ramp rate is slew rate controlled to about 2 kV/sec, so should take 0.5 ms to come up
 	//Give it 5 ms to be safe (plus extra delay from UART messages)
 	//(we don't have any sensing on this rail so we have to just hope it came up)
 	g_log("Enabling 12V rail\n");
-	g_12v0_en = 0;
+	g_12v0_en = 1;
 	g_logTimer.Sleep(50);
 
 	//no pgood signal, TODO poll ADCs
@@ -141,7 +140,7 @@ void PanicShutdown()
 	g_1v2_en = 0;
 	g_1v8_en = 0;
 	g_3v3_en = 0;
-	g_12v0_en = 1;
+	g_12v0_en = 0;
 
 	g_mcuResetN = 0;
 

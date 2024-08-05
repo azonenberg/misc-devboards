@@ -52,8 +52,8 @@ void InitGPIOs()
 {
 	g_log("Initializing GPIOs\n");
 
-	//active low enable as long as we're using the v0.1 IBC proto
-	g_12v0_en = 1;
+	//Disable 12V input rail
+	g_12v0_en = 0;
 
 	//turn off all regulators
 	g_1v0_en = 0;
