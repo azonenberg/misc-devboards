@@ -177,6 +177,8 @@ const IPv4Address g_defaultGateway		= { .m_octets{ 10,   2,   6, 252} };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Do other initialization
 
+void InitITM();
+
 void BSP_Init()
 {
 	InitRTC();
@@ -188,7 +190,33 @@ void BSP_Init()
 	InitManagementPHY();
 	InitIP();
 
+	InitITM();
+
 	App_Init();
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Enable trace
+
+void InitITM()
+{
+	//DEBUG: initialize ITM
+	g_log("Initializing ITM\n");
+
+	//Enable ITM
+	DBG_DEMCR|=DBG_DEMCR_TRCENA;
+	DBG_TCR |= DBG_TCR_ITMENA;
+	DBG_LAR = 0xC5ACCE55;
+
+	//Configure DWT
+	DWT_CTRL = 0x401201;
+
+	//turn on channels 0, 2, and 4 for TPIU
+	DBG_TER|=(1<<0);
+	DBG_TER|=(1<<2);
+	DBG_TER|=(1<<4);
+
+	DBG_TCR |= 0x8;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -220,7 +248,7 @@ void BSP_InitClocks()
 		40,		//12.5 * 40 = 500 MHz at the VCO
 		1,		//div P (primary output 500 MHz)
 		10,		//div Q (50 MHz kernel clock)
-		32,		//div R (not used for now),
+		5,		//div R (SWO Manchester bit clock, so 2x the data rate = 100 MHz, 50 Mbps)
 		RCCHelper::CLOCK_SOURCE_HSE
 	);
 

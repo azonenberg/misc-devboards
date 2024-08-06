@@ -106,10 +106,20 @@ void BSP_MainLoopIteration()
 	}
 
 	//1 Hz timer for various aging processes
+	static int i = 0;
 	if(g_logTimer.GetCount() >= next1HzTick)
 	{
 		g_ethProtocol->OnAgingTick();
 		next1HzTick = g_logTimer.GetCount() + 10000;
+
+		//DEBUG: send trace data
+		int nchan = 4;
+		while(DBG_PORT[nchan] == 0)
+		{}
+
+		(*((uint8_t *)&(DBG_PORT[nchan]))) = 'a' + i;
+
+		i = (i + 1) % 26;
 	}
 }
 /*

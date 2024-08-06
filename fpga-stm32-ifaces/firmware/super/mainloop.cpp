@@ -125,9 +125,6 @@ void PowerOn()
 	g_log("Releasing FPGA reset\n");
 	g_fpgaResetN = 1;
 	g_fpgaInitN = 1;
-
-	while(!g_fpgaDone)
-	{}
 }
 
 /**
