@@ -36,6 +36,7 @@
 #include "hwinit.h"
 //#include "LogSink.h"
 #include <peripheral/FMC.h>
+#include <peripheral/ITM.h>
 #include <peripheral/Power.h>
 #include <ctype.h>
 
@@ -204,19 +205,16 @@ void InitITM()
 	g_log("Initializing ITM\n");
 
 	//Enable ITM
-	DBG_DEMCR|=DBG_DEMCR_TRCENA;
-	DBG_TCR |= DBG_TCR_ITMENA;
-	DBG_LAR = 0xC5ACCE55;
+	ITM::Enable();
 
 	//Configure DWT
 	DWT_CTRL = 0x401201;
 
-	//turn on channels 0, 2, and 4 for TPIU
-	DBG_TER|=(1<<0);
-	DBG_TER|=(1<<2);
-	DBG_TER|=(1<<4);
+	//Turn on trace channel 4 for serial logging
+	ITM::EnableChannel(4);
 
-	DBG_TCR |= 0x8;
+	//Turn on DWT tracing
+	ITM::EnableDwtForwarding();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -248,7 +246,7 @@ void BSP_InitClocks()
 		40,		//12.5 * 40 = 500 MHz at the VCO
 		1,		//div P (primary output 500 MHz)
 		10,		//div Q (50 MHz kernel clock)
-		5,		//div R (SWO Manchester bit clock, so 2x the data rate = 100 MHz, 50 Mbps)
+		5,		//div R (100 MHz SWO Manchester bit clock, 50 Mbps data rate)
 		RCCHelper::CLOCK_SOURCE_HSE
 	);
 

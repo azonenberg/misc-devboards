@@ -120,14 +120,7 @@ extern APBSpiFlashInterface* g_fpgaFlash;
 */
 
 //TEMP: put this in stm32-cpp
-#define DBG_DEMCR  (*(volatile uint32_t *)0xE000EDFC)
-#define DBG_TCR    (*(volatile uint32_t *)0xE0000E80)
-#define DBG_TER    (*(volatile uint32_t *)0xE0000E00)
-#define DBG_PORT   ((volatile uint32_t *)0xE0000000)
 #define DBG_LAR    (*(volatile uint32_t *)0xE0000FB0)
 #define DWT_CTRL    (*(volatile uint32_t *)0xE0001000)
-
-#define DBG_DEMCR_TRCENA (1<<24)
-#define DBG_TCR_ITMENA   (1<<0)
 
 #endif

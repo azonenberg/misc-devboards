@@ -30,6 +30,7 @@
 #include "ifacetest.h"
 
 #include "DemoCLISessionContext.h"
+#include <peripheral/ITMStream.h>
 //#include "../super/superregs.h"
 
 ///@brief Output stream for local serial console
@@ -39,6 +40,9 @@ UARTOutputStream g_localConsoleOutputStream;
 DemoCLISessionContext g_localConsoleSessionContext;
 
 extern Iperf3Server* g_iperfServer;
+
+///@brief ITM serial trace data stream
+ITMStream g_itmStream(4);
 
 void App_Init()
 {
@@ -113,13 +117,8 @@ void BSP_MainLoopIteration()
 		next1HzTick = g_logTimer.GetCount() + 10000;
 
 		//DEBUG: send trace data
-		int nchan = 4;
-		while(DBG_PORT[nchan] == 0)
-		{}
-
-		(*((uint8_t *)&(DBG_PORT[nchan]))) = 'a' + i;
-
-		i = (i + 1) % 26;
+		g_itmStream.Printf("hai world %d\n", i);
+		i++;
 	}
 }
 /*
