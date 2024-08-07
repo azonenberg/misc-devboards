@@ -36,6 +36,7 @@
 #include "hwinit.h"
 //#include "LogSink.h"
 #include <peripheral/FMC.h>
+#include <peripheral/DWT.h>
 #include <peripheral/ITM.h>
 #include <peripheral/Power.h>
 #include <ctype.h>
@@ -199,22 +200,24 @@ void BSP_Init()
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Enable trace
 
+/**
+	@brief Initialize tracing
+ */
 void InitITM()
 {
-	//DEBUG: initialize ITM
 	g_log("Initializing ITM\n");
 
-	//Enable ITM
+	//Set the TPIU to use trace port width 4 (this isnt working, suspecting tpiu address is wrong?)
+	//_TPIU.CSPSR = 8;
+	//_TPIU.SPPR = 0;
+
+	//Enable ITM, enable PC sampling, and turn on forwarding to the TPIU
 	ITM::Enable();
-
-	//Configure DWT
-	DWT_CTRL = 0x401201;
-
-	//Turn on trace channel 4 for serial logging
-	ITM::EnableChannel(4);
-
-	//Turn on DWT tracing
+	DWT::EnablePCSampling(true);
 	ITM::EnableDwtForwarding();
+
+	//Turn on ITM stimulus channel 4 for serial logging
+	ITM::EnableChannel(4);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

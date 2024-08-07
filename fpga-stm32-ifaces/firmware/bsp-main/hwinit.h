@@ -119,8 +119,4 @@ void RegisterProtocolHandlers(IPv4Protocol& ipv4);
 extern APBSpiFlashInterface* g_fpgaFlash;
 */
 
-//TEMP: put this in stm32-cpp
-#define DBG_LAR    (*(volatile uint32_t *)0xE0000FB0)
-#define DWT_CTRL    (*(volatile uint32_t *)0xE0001000)
-
 #endif

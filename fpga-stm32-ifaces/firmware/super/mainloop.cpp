@@ -114,12 +114,12 @@ void PowerOn()
 	*/
 
 	//Turn on other rails in sequence (VCCINT - VCCAUX - VCCO)
-	StartRail(g_1v0_en, g_1v0_pgood, 50, "1V0");
-	StartRail(g_1v8_en, g_1v8_pgood, 50, "1V8");
-	StartRail(g_3v3_en, g_3v3_pgood, 50, "3V3");
+	StartRail(g_1v0_en, g_1v0_pgood, 75, "1V0");
+	StartRail(g_1v8_en, g_1v8_pgood, 75, "1V8");
+	StartRail(g_3v3_en, g_3v3_pgood, 75, "3V3");
 
 	//1V2 for the PHY can go on whenever (TODO check sequencing vs 3V3)
-	StartRail(g_1v2_en, g_1v2_pgood, 50, "1V2");
+	StartRail(g_1v2_en, g_1v2_pgood, 75, "1V2");
 
 	//Start the FPGA
 	g_log("Releasing FPGA reset\n");
