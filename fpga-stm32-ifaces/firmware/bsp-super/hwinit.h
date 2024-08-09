@@ -32,6 +32,7 @@
 
 #include <peripheral/Flash.h>
 #include <peripheral/GPIO.h>
+#include <peripheral/I2C.h>
 #include <peripheral/UART.h>
 #include <peripheral/SPI.h>
 
@@ -41,6 +42,9 @@ extern void App_Init();
 //Global hardware config used by both app and bootloader
 extern UART<16, 256> g_uart;
 extern SPI<2048, 64> g_fpgaSPI;
+extern I2C g_i2c;
+extern const uint8_t g_tempI2cAddress;
+extern const uint8_t g_ibcI2cAddress;
 
 extern uint32_t g_spiRxFifoOverflows;
 

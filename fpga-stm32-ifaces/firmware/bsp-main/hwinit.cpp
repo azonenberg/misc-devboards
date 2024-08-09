@@ -213,7 +213,7 @@ void InitITM()
 
 	//Enable ITM, enable PC sampling, and turn on forwarding to the TPIU
 	ITM::Enable();
-	DWT::EnablePCSampling(true);
+	DWT::EnablePCSampling(DWT::PC_SAMPLE_SLOW);
 	ITM::EnableDwtForwarding();
 
 	//Turn on ITM stimulus channel 4 for serial logging

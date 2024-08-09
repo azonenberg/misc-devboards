@@ -27,52 +27,34 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
+#ifndef IBCRegisterReader_h
+#define IBCRegisterReader_h
+
 /**
-	@file
-	@author	Andrew D. Zonenberg
-	@brief	Boot-time hardware intialization
+	@brief Nonblocking wrapper for reading an IBC register
  */
-#include "supervisor.h"
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Peripheral initialization
-
-void App_Init()
+class IBCRegisterReader
 {
-	RCCHelper::Enable(&_RTC);
-	InitGPIOs();
-	PowerOn();
-}
+public:
+	IBCRegisterReader()
+	: m_state(STATE_IDLE)
+	, m_tmpval(0)
+	{}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Other hardware init
+	bool ReadRegisterNonblocking(uint8_t regid, uint16_t& regval);
 
-void InitGPIOs()
-{
-	g_log("Initializing GPIOs\n");
+protected:
 
-	//Disable 12V input rail
-	g_12v0_en = 0;
+	enum state_t
+	{
+		STATE_IDLE,
+		STATE_ADDR_START,
+		STATE_REGID,
+		STATE_DATA_LO,
+		STATE_DATA_HI
+	} m_state;
 
-	//turn off all regulators
-	g_1v0_en = 0;
-	g_1v2_en = 0;
-	g_1v8_en = 0;
-	g_3v3_en = 0;
+	uint8_t m_tmpval;
+};
 
-	//Hold MCU in reset
-	g_mcuResetN = 0;
-	g_fpgaResetN = 0;
-	g_fpgaInitN = 0;
-
-	//Enable pullups on all PGOOD lines
-	g_1v0_pgood.SetPullMode(GPIOPin::PULL_UP);
-	g_1v2_pgood.SetPullMode(GPIOPin::PULL_UP);
-	g_1v8_pgood.SetPullMode(GPIOPin::PULL_UP);
-	g_3v3_pgood.SetPullMode(GPIOPin::PULL_UP);
-
-	//turn off all LEDs
-	g_pgoodLED = 0;
-	g_faultLED = 0;
-	g_sysokLED = 0;
-}
+#endif

@@ -28,11 +28,11 @@
 ***********************************************************************************************************************/
 
 #include "supervisor.h"
+#include "IBCRegisterReader.h"
+#include "TempSensorReader.h"
 
-//I2C2 runs off our APB1 clock (40 MHz)
-//Prescale by 4 to get 10 MHz
-//Divide by 100 after that to get 100 kHz
-I2C g_i2c(&I2C2, 4, 100);
+//TODO: fix this path somehow?
+#include "../../../../common-ibc/firmware/main/regids.h"
 
 //Indicates the main MCU is alive
 bool	g_mainMCUDown = true;
@@ -64,8 +64,23 @@ GPIOPin g_fpgaDone(&GPIOB, 2, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
 
 bool g_fpgaUp = false;
 
+uint16_t g_ibcTemp = 0;
+uint16_t g_vin48 = 0;
+uint16_t g_vout12 = 0;
+uint16_t g_voutsense = 0;
+
+bool PollIBCSensors();
+
 void BSP_MainLoopIteration()
 {
+	const int logTimerMax = 60000;
+	static uint32_t next1HzTick = 0;
+
+	//Check for overflows on our log message timer
+	if(g_log.UpdateOffset(logTimerMax) && (next1HzTick >= logTimerMax) )
+		next1HzTick -= logTimerMax;
+
+	//Check for FPGA state changes
 	bool done = g_fpgaDone;
 	if(g_fpgaUp != done)
 	{
@@ -74,14 +89,120 @@ void BSP_MainLoopIteration()
 		{
 			g_log("FPGA went down, resetting MCU\n");
 			g_mcuResetN = 0;
+			g_sysokLED = false;
 		}
 		else
 		{
 			g_log("FPGA is up, releasing MCU reset\n");
 			g_mcuResetN = 1;
+			g_sysokLED = true;	//TODO wait until MCU is confirmed alive?
 		}
 		g_fpgaUp = done;
 	}
+
+	//Check for sensor updates
+	PollIBCSensors();
+
+	//1 Hz timer event
+	//static uint32_t nextHealthPrint = 0;
+	if(g_logTimer.GetCount() >= next1HzTick)
+	{
+		next1HzTick = g_logTimer.GetCount() + 10000;
+
+		//DEBUG: log sensor values
+		/*
+		if(nextHealthPrint == 0)
+		{
+			g_log("Health sensors\n");
+			LogIndenter li(g_log);
+			PrintSensorValues();
+			nextHealthPrint = 60;
+		}
+		nextHealthPrint --;
+		*/
+
+		//Print sensor values
+		g_log("Health sensors\n");
+		LogIndenter li(g_log);
+		g_log("Temperature: %uhk C\n", g_ibcTemp);
+		g_log("48V0:        %2d.%03d V\n", g_vin48 / 1000, g_vin48 % 1000);
+		g_log("12V0_OUT:    %2d.%03d V\n", g_vout12 / 1000, g_vout12 % 1000);
+		g_log("12V0_SENSE:  %2d.%03d V\n", g_voutsense / 1000, g_voutsense % 1000);
+	}
+}
+
+/**
+	@brief Requests more sensor data from the IBC
+
+	@return true if sensor values are updated
+ */
+bool PollIBCSensors()
+{
+	static IBCRegisterReader regreader;
+	static TempSensorReader tempreader;
+
+	static int state = 0;
+
+	//Read the values
+	switch(state)
+	{
+		case 0:
+			if(tempreader.ReadTempNonblocking(g_ibcTemp))
+				state ++;
+			break;
+
+		case 1:
+			if(regreader.ReadRegisterNonblocking(IBC_REG_VIN, g_vin48))
+				state ++;
+			break;
+
+		case 2:
+			if(regreader.ReadRegisterNonblocking(IBC_REG_VOUT, g_vout12))
+				state ++;
+			break;
+
+		case 3:
+			if(regreader.ReadRegisterNonblocking(IBC_REG_VSENSE, g_voutsense))
+				state ++;
+			break;
+
+		/*
+		case 4:
+			if(regreader.ReadRegisterNonblocking(IBC_REG_IIN, g_iin))
+				state ++;
+			break;
+
+		case 5:
+			if(regreader.ReadRegisterNonblocking(IBC_REG_IOUT, g_iout))
+				state ++;
+			break;
+		*/
+
+		//end of loop, wrap around
+		default:
+			/*
+			//print sensor values if requested (power up or down)
+			switch(g_ibcPrintState)
+			{
+				case PRINT_REQUESTED:
+					g_ibcPrintState = PRINT_REFRESHING;
+					break;
+
+				case PRINT_REFRESHING:
+					g_ibcPrintState = PRINT_IDLE;
+					PrintIBCSensors();
+					break;
+
+				default:
+					break;
+			}
+			*/
+
+			state = 0;
+			return true;
+	}
+
+	return false;
 }
 
 void PowerOn()
@@ -125,6 +246,7 @@ void PowerOn()
 	g_log("Releasing FPGA reset\n");
 	g_fpgaResetN = 1;
 	g_fpgaInitN = 1;
+	g_pgoodLED = 1;
 }
 
 /**

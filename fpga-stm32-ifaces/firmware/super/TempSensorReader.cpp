@@ -27,52 +27,63 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-/**
-	@file
-	@author	Andrew D. Zonenberg
-	@brief	Boot-time hardware intialization
- */
 #include "supervisor.h"
+#include "TempSensorReader.h"
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Peripheral initialization
+/**
+	@brief Nonblocking read of the temperature
 
-void App_Init()
+	Call this function periodically
+
+	@return True if the temperature has been updated, false if no new data
+ */
+bool TempSensorReader::ReadTempNonblocking(uint16_t& regval)
 {
-	RCCHelper::Enable(&_RTC);
-	InitGPIOs();
-	PowerOn();
-}
+	switch(m_state)
+	{
+		//Start a new register access
+		case STATE_IDLE:
+			g_i2c.NonblockingStart(1, g_tempI2cAddress, false);
+			m_state = STATE_ADDR_START;
+			break;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Other hardware init
+		//Wait for the start sequence to finish
+		case STATE_ADDR_START:
+			if(g_i2c.IsStartDone())
+			{
+				g_i2c.NonblockingWrite(0x00);
+				m_state = STATE_REGID;
+			}
+			break;
 
-void InitGPIOs()
-{
-	g_log("Initializing GPIOs\n");
+		//Wait for register ID to send
+		case STATE_REGID:
+			if(g_i2c.IsWriteDone())
+			{
+				//Start the read
+				g_i2c.NonblockingStart(2, g_tempI2cAddress, true);
+				m_state = STATE_DATA_LO;
+			}
+			break;
 
-	//Disable 12V input rail
-	g_12v0_en = 0;
+		//Wait for the first data byte to be ready
+		case STATE_DATA_LO:
+			if(g_i2c.IsReadReady())
+			{
+				m_tmpval = g_i2c.GetReadData();
+				m_state = STATE_DATA_HI;
+			}
+			break;
 
-	//turn off all regulators
-	g_1v0_en = 0;
-	g_1v2_en = 0;
-	g_1v8_en = 0;
-	g_3v3_en = 0;
+		//Wait for the second data byte to be ready
+		case STATE_DATA_HI:
+			if(g_i2c.IsReadReady())
+			{
+				regval = g_i2c.GetReadData() | (m_tmpval << 8);
+				m_state = STATE_IDLE;
+				return true;
+			}
+	}
 
-	//Hold MCU in reset
-	g_mcuResetN = 0;
-	g_fpgaResetN = 0;
-	g_fpgaInitN = 0;
-
-	//Enable pullups on all PGOOD lines
-	g_1v0_pgood.SetPullMode(GPIOPin::PULL_UP);
-	g_1v2_pgood.SetPullMode(GPIOPin::PULL_UP);
-	g_1v8_pgood.SetPullMode(GPIOPin::PULL_UP);
-	g_3v3_pgood.SetPullMode(GPIOPin::PULL_UP);
-
-	//turn off all LEDs
-	g_pgoodLED = 0;
-	g_faultLED = 0;
-	g_sysokLED = 0;
+	return false;
 }

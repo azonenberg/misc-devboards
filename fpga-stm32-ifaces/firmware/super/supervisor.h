@@ -46,7 +46,6 @@ void InitI2C();
 void InitSPI();
 
 extern UART<16, 256> g_uart;
-extern I2C g_i2c;
 
 //GPIOs
 extern GPIOPin g_pgoodLED;

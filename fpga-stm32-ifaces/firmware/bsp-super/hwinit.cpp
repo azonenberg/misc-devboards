@@ -39,6 +39,7 @@
 #include <peripheral/Power.h>
 
 void InitFPGASPI();
+void InitI2C();
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Common global hardware config used by both bootloader and application
@@ -54,6 +55,15 @@ Timer g_logTimer(&TIM2, Timer::FEATURE_ADVANCED, 8000);
 //SPI bus to the FPGA
 SPI<2048, 64> g_fpgaSPI(&SPI1, true, 2, false);
 GPIOPin* g_fpgaSPICS = nullptr;
+
+//I2C1 defaults to running of APB clock (40 MHz)
+//Prescale by 4 to get 10 MHz
+//Divide by 100 after that to get 100 kHz
+I2C g_i2c(&I2C1, 4, 100);
+
+//Addresses on the management I2C bus
+const uint8_t g_tempI2cAddress = 0x90;
+const uint8_t g_ibcI2cAddress = 0x42;
 
 ///@brief The battery-backed RAM used to store state across power cycles
 volatile BootloaderBBRAM* g_bbram = reinterpret_cast<volatile BootloaderBBRAM*>(&_RTC.BKP[0]);
@@ -115,7 +125,21 @@ void BSP_InitLog()
 void BSP_Init()
 {
 	App_Init();
+	InitI2C();
 	InitFPGASPI();
+}
+
+void InitI2C()
+{
+	g_log("Initializing I2C interface\n");
+
+	static GPIOPin i2c_scl(&GPIOB, 6, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
+	static GPIOPin i2c_sda(&GPIOB, 7, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
+
+	//Set temperature sensor to max resolution
+	uint8_t cmd[3] = {0x01, 0x60, 0x00};
+	if(!g_i2c.BlockingWrite(g_tempI2cAddress, cmd, sizeof(cmd)))
+		g_log(Logger::ERROR, "Failed to initialize I2C temp sensor at 0x%02x\n", g_tempI2cAddress);
 }
 
 void InitFPGASPI()
