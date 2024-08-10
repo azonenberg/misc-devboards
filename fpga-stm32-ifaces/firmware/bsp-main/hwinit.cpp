@@ -40,6 +40,7 @@
 #include <peripheral/ITM.h>
 #include <peripheral/Power.h>
 #include <ctype.h>
+#include <embedded-utils/CoreSightRom.h>
 
 /**
 	@brief Mapping of link speed IDs to printable names
@@ -192,6 +193,13 @@ void BSP_Init()
 	InitManagementPHY();
 	InitIP();
 
+	//Initialize the trace clock, if we have it
+	/*if( (DBGMCU.CR & 0x100000) == 0)
+	{
+		g_log("Turning on trace clock\n");
+		DBGMCU.CR |= 0x100000;
+	}*/
+
 	InitITM();
 
 	App_Init();
@@ -207,13 +215,16 @@ void InitITM()
 {
 	g_log("Initializing ITM\n");
 
-	//Set the TPIU to use trace port width 4 (this isnt working, suspecting tpiu address is wrong?)
-	//_TPIU.CSPSR = 8;
-	//_TPIU.SPPR = 0;
+	//Set the TPIU to use trace port width 4 (this isnt working, not sure why)
+	/*
+	_TPIU.LAR = 0xc5acce55;
+	_TPIU.CSPSR = 8;
+	_TPIU.SPPR = 0;
+	*/
 
 	//Enable ITM, enable PC sampling, and turn on forwarding to the TPIU
 	ITM::Enable();
-	DWT::EnablePCSampling(DWT::PC_SAMPLE_SLOW);
+	DWT::EnablePCSampling(DWT::PC_SAMPLE_FAST);
 	ITM::EnableDwtForwarding();
 
 	//Turn on ITM stimulus channel 4 for serial logging
