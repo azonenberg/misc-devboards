@@ -43,6 +43,9 @@ public:
 
 	bool ReadTempNonblocking(uint16_t& regval);
 
+	void Reset()
+	{ m_state = STATE_IDLE; }
+
 protected:
 
 	enum state_t

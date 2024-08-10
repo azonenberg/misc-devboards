@@ -143,27 +143,55 @@ bool PollIBCSensors()
 
 	static int state = 0;
 
+	static int iLastUpdate = 0;
+	iLastUpdate ++;
+
+	if(iLastUpdate > 30000)
+	{
+		g_log(Logger::WARNING, "I2C sensor state machine timeout (IBC hang or reboot?), resetting and trying again\n");
+
+		//Reset both readers and return to the idle state, wait 10ms before retrying anything
+		tempreader.Reset();
+		regreader.Reset();
+		g_i2c.Reset();
+		state = 0;
+		iLastUpdate = 0;
+		g_logTimer.Sleep(2);
+	}
+
 	//Read the values
 	switch(state)
 	{
 		case 0:
 			if(tempreader.ReadTempNonblocking(g_ibcTemp))
+			{
+				iLastUpdate = 0;
 				state ++;
+			}
 			break;
 
 		case 1:
 			if(regreader.ReadRegisterNonblocking(IBC_REG_VIN, g_vin48))
+			{
+				iLastUpdate = 0;
 				state ++;
+			}
 			break;
 
 		case 2:
 			if(regreader.ReadRegisterNonblocking(IBC_REG_VOUT, g_vout12))
+			{
+				iLastUpdate = 0;
 				state ++;
+			}
 			break;
 
 		case 3:
 			if(regreader.ReadRegisterNonblocking(IBC_REG_VSENSE, g_voutsense))
+			{
+				iLastUpdate = 0;
 				state ++;
+			}
 			break;
 
 		/*

@@ -43,6 +43,9 @@ public:
 
 	bool ReadRegisterNonblocking(uint8_t regid, uint16_t& regval);
 
+	void Reset()
+	{ m_state = STATE_IDLE; }
+
 protected:
 
 	enum state_t
