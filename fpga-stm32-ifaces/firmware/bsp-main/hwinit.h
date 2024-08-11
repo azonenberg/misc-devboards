@@ -78,6 +78,7 @@ void DoInitKVS();
 //Interface to supervisor MCU
 extern SPI<64, 64> g_superSPI;
 extern GPIOPin* g_superSPICS;
+uint16_t ReadIBCRegister(superregs_t regid);
 
 //Common hardware interface stuff (mostly Ethernet related)
 extern UART<32, 256> g_cliUART;

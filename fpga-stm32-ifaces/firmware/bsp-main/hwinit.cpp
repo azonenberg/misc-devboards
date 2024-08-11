@@ -165,13 +165,16 @@ GPIOPin g_superCS_n(&GPIOE, 4, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_MEDIUM);
 	SPI4 runs on spi 4/5 kernel clock domain
 	default after reset is APB2 clock which is 62.5 MHz, divide by 128 to get 488 kHz
  */
-SPI<64, 64> g_superSPI(&SPI4, true, 128);
+SPI<64, 64> g_superSPI(&SPI4, true, 64);
 
 ///@brief Version string for supervisor MCU
 char g_superVersion[20] = {0};
 
 ///@brief Version string for IBC MCU
 char g_ibcVersion[20] = {0};
+
+///@brief Version string for IBC board
+char g_ibcHwVersion[20] = {0};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Globals
@@ -822,22 +825,96 @@ void InitSupervisor()
 	g_superSPI.BlockingWrite(SUPER_REG_VERSION);
 	g_superSPI.WaitForWrites();
 	g_superSPI.DiscardRxData();
+	g_logTimer.Sleep(2);
 	g_superSPI.BlockingRead();	//discard dummy byte
 	for(size_t i=0; i<sizeof(g_superVersion); i++)
 		g_superVersion[i] = g_superSPI.BlockingRead();
 	g_superVersion[sizeof(g_superVersion)-1] = '\0';
 	g_superCS_n = 1;
-	g_log("Firmware version: %s\n", g_superVersion);
+	g_log("Firmware version:     %s\n", g_superVersion);
 
 	//Get IBC firmware version
 	g_superCS_n = 0;
 	g_superSPI.BlockingWrite(SUPER_REG_IBCVERSION);
 	g_superSPI.WaitForWrites();
 	g_superSPI.DiscardRxData();
+	g_logTimer.Sleep(2);
 	g_superSPI.BlockingRead();	//discard dummy byte
 	for(size_t i=0; i<sizeof(g_ibcVersion); i++)
 		g_ibcVersion[i] = g_superSPI.BlockingRead();
 	g_ibcVersion[sizeof(g_ibcVersion)-1] = '\0';
 	g_superCS_n = 1;
 	g_log("IBC firmware version: %s\n", g_ibcVersion);
+
+	//Get IBC hardware version
+	g_superCS_n = 0;
+	g_superSPI.BlockingWrite(SUPER_REG_IBCHWVERSION);
+	g_superSPI.WaitForWrites();
+	g_superSPI.DiscardRxData();
+	g_logTimer.Sleep(2);
+	g_superSPI.BlockingRead();	//discard dummy byte
+	for(size_t i=0; i<sizeof(g_ibcHwVersion); i++)
+		g_ibcVersion[i] = g_superSPI.BlockingRead();
+	g_ibcHwVersion[sizeof(g_ibcHwVersion)-1] = '\0';
+	g_superCS_n = 1;
+	g_log("IBC hardware version: %s\n", g_ibcHwVersion);
+
+	//Read sensors
+	auto vin = ReadIBCRegister(SUPER_REG_IBCVIN);
+	g_log("IBC input:  %2d.%03d V\n", vin / 1000, vin % 1000);
+
+	auto iin = ReadIBCRegister(SUPER_REG_IBCIIN);
+	g_log("            %2d.%03d A\n", iin / 1000, iin % 1000);
+
+	auto pin = vin * iin / 1000;
+	g_log("            %2d.%03d W\n", pin / 1000, pin % 1000);
+
+	auto vout = ReadIBCRegister(SUPER_REG_IBCVOUT);
+	g_log("    output: %2d.%03d V\n", vout / 1000, vout % 1000);
+
+	auto iout = ReadIBCRegister(SUPER_REG_IBCIOUT);
+	g_log("            %2d.%03d A\n", iout / 1000, iout % 1000);
+
+	auto pout = vout * iout / 1000;
+	g_log("            %2d.%03d W\n", pout / 1000, pout % 1000);
+
+	auto vsense = ReadIBCRegister(SUPER_REG_IBCVSENSE);
+	g_log("    sense:  %2d.%03d V\n", vsense / 1000, vsense % 1000);
+
+	auto ibctemp = ReadIBCRegister(SUPER_REG_IBCTEMP);
+	g_log("    DC-DC:  %uhk C\n", ibctemp);
+
+	auto smcutemp = ReadIBCRegister(SUPER_REG_IBCMCUTEMP);
+	g_log("    MCU:    %uhk C\n", smcutemp);
+
+	auto ibc3v3 = ReadIBCRegister(SUPER_REG_IBC3V3);
+	g_log("            %2d.%03d V\n", ibc3v3 / 1000, ibc3v3 % 1000);
+
+	auto mcutemp = ReadIBCRegister(SUPER_REG_MCUTEMP);
+	g_log("    Super:  %uhk C\n", mcutemp);
+
+	auto super3v3 = ReadIBCRegister(SUPER_REG_3V3);
+	g_log("            %2d.%03d V\n", super3v3 / 1000, super3v3 % 1000);
+}
+
+uint16_t ReadIBCRegister(superregs_t regid)
+{
+	g_superCS_n = 0;
+
+	//Send the register
+	g_superSPI.BlockingWrite(regid);
+	g_superSPI.WaitForWrites();
+	g_superSPI.DiscardRxData();
+
+	//Wait a little while since the firmware on the supervisor is slow
+	//TODO: can we optimize this? or send several dummy cycles or something?
+	g_logTimer.Sleep(2);
+
+	g_superSPI.BlockingRead();	//discard dummy byte
+
+	uint16_t ret = g_superSPI.BlockingRead();
+	ret |= g_superSPI.BlockingRead() << 8;
+	g_superCS_n = 1;
+
+	return ret;
 }

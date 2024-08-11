@@ -40,12 +40,21 @@ enum superregs_t
 	SUPER_REG_VERSION		= 0x00,		//Our version string
 	SUPER_REG_IBCVERSION	= 0x01,		//IBC version string
 
+	//this block not present in original v0.3 IBC
+	SUPER_REG_IBCHWVERSION	= 0x02,		//IBC hardware version string
+
 	SUPER_REG_IBCVIN		= 0x10,		//IBC input voltage (nominal 48)
 	SUPER_REG_IBCIIN		= 0x11,		//IBC input current
-	SUPER_REG_IBCTEMP		= 0x12,		//IBC temperature
+	SUPER_REG_IBCTEMP		= 0x12,		//IBC temperature measured near the converter
 	SUPER_REG_IBCVOUT		= 0x13,		//IBC output voltage (nominal 12)
 	SUPER_REG_IBCIOUT		= 0x14,		//IBC output current
-	SUPER_REG_IBCVSENSE		= 0x15		//IBC sense voltage (nominal 12)
+	SUPER_REG_IBCVSENSE		= 0x15,		//IBC sense voltage (nominal 12)
+
+	//this block not present in original v0.3 IBC
+	SUPER_REG_IBCMCUTEMP	= 0x16,		//IBC temperature measured at the MCU
+	SUPER_REG_IBC3V3		= 0x17,		//3V3_SB rail measured at the IBC MCU
+	SUPER_REG_MCUTEMP		= 0x18,		//Logic board temperature measured at the supervisor
+	SUPER_REG_3V3			= 0x19		//3V3_SB rail measured at the supervisor
 };
 
 #endif

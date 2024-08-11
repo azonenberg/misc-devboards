@@ -201,8 +201,8 @@ set_input_delay -clock [get_clocks fmc_clk] -min -add_delay 3.735 [get_ports {fm
 set_input_delay -clock [get_clocks fmc_clk] -max -add_delay 4.935 [get_ports {fmc_ad[*]}]
 
 create_pblock pblock_debugstuff
+add_cells_to_pblock [get_pblocks pblock_debugstuff] [get_cells -quiet [list dbg_hub fmcbridge/vio]]
 resize_pblock [get_pblocks pblock_debugstuff] -add {CLOCKREGION_X0Y1:CLOCKREGION_X1Y1}
-add_cells_to_pblock [get_pblocks pblock_debugstuff] [get_cells -quiet [list dbg_hub fmcbridge/ila fmcbridge/vio]]
 
 
 
@@ -225,10 +225,7 @@ set_property DRIVE 8 [get_ports {pmod_gpio[0]}]
 
 
 
-set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
-set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
-set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
-connect_debug_port dbg_hub/clk [get_nets clk_125mhz]
+
 
 set_property OFFCHIP_TERM NONE [get_ports fmc_nwait]
 set_property OFFCHIP_TERM NONE [get_ports fmc_ad[15]]
@@ -251,3 +248,11 @@ set_property OFFCHIP_TERM NONE [get_ports led[3]]
 set_property OFFCHIP_TERM NONE [get_ports led[2]]
 set_property OFFCHIP_TERM NONE [get_ports led[1]]
 set_property OFFCHIP_TERM NONE [get_ports led[0]]
+set_property CONFIG_VOLTAGE 3.3 [current_design]
+set_property CFGBVS VCCO [current_design]
+set_property BITSTREAM.CONFIG.CONFIGRATE 33 [current_design]
+set_property CONFIG_MODE SPIx4 [current_design]
+set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
+set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
+set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
+connect_debug_port dbg_hub/clk [get_nets clk_125mhz]

@@ -175,9 +175,11 @@ void InitI2C()
 	static GPIOPin i2c_scl(&GPIOB, 6, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
 	static GPIOPin i2c_sda(&GPIOB, 7, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
 
-	//Wait a while to make sure the IBC is booted before we come up
-	//(both us and the IBC come up off 3V3_SB as soon as it's up, with no sequencing)
-	g_logTimer.Sleep(1000);
+	//Initialize the I2C then wait a bit longer
+	//(i2c pin states prior to init are unknown)
+	g_logTimer.Sleep(100);
+	g_i2c.Reset();
+	g_logTimer.Sleep(100);
 
 	//Set temperature sensor to max resolution
 	//(if it doesn't respond, the i2c is derped out so reset and try again)
@@ -201,6 +203,10 @@ void InitIBC()
 {
 	g_log("Connecting to IBC\n");
 	LogIndenter li(g_log);
+
+	//Wait a while to make sure the IBC is booted before we come up
+	//(both us and the IBC come up off 3V3_SB as soon as it's up, with no sequencing)
+	g_logTimer.Sleep(2500);
 
 	g_i2c.BlockingWrite8(g_ibcI2cAddress, IBC_REG_VERSION);
 	g_i2c.BlockingRead(g_ibcI2cAddress, (uint8_t*)g_ibcSwVersion, sizeof(g_ibcSwVersion));

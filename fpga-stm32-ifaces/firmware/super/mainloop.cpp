@@ -73,6 +73,8 @@ uint16_t g_vout12 = 0;
 uint16_t g_voutsense = 0;
 uint16_t g_iin = 0;
 uint16_t g_iout = 0;
+uint16_t g_3v3 = 0;
+uint16_t g_mcutemp = 0;
 
 bool PollIBCSensors();
 
@@ -109,11 +111,12 @@ void BSP_MainLoopIteration()
 	PollIBCSensors();
 
 	//1 Hz timer event
-	static uint32_t nextHealthPrint = 2;
+	//static uint32_t nextHealthPrint = 2;
 	if(g_logTimer.GetCount() >= next1HzTick)
 	{
 		next1HzTick = g_logTimer.GetCount() + 10000;
 
+		/*
 		//DEBUG: log sensor values
 		if(nextHealthPrint == 0)
 		{
@@ -140,6 +143,7 @@ void BSP_MainLoopIteration()
 			nextHealthPrint = 15;
 		}
 		nextHealthPrint --;
+		*/
 	}
 
 	//Read and process SPI events
@@ -236,6 +240,19 @@ bool PollIBCSensors()
 		case 7:
 			if(regreader.ReadRegisterNonblocking(IBC_REG_3V3_SB, g_ibc3v3))
 				state ++;
+			break;
+
+		//Also read our own internal health sensors at this point in the rotation
+		//(should we rename this function PollHealthSensors or something?)
+		//TODO: nonblocking ADC accesses?
+		case 8:
+			if(g_adc->GetTemperatureNonblocking(g_mcutemp))
+				state ++;
+			break;
+
+		case 9:
+			g_3v3 = g_adc->GetSupplyVoltage();
+			state ++;
 			break;
 
 		//end of loop, wrap around

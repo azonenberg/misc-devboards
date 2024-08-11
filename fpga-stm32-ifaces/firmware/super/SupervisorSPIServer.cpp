@@ -65,14 +65,71 @@ void SupervisorSPIServer::OnCommand(uint8_t b)
 {
 	m_command = b;
 
+	//Always send two dummy bytes
+	static uint8_t dummy[1] = { 0x00 };
+	g_spi.NonblockingWriteFifo(dummy, 1);
+
 	switch(m_command)
 	{
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// Stats readout commands
+
 		case SUPER_REG_VERSION:
 			g_spi.NonblockingWriteFifo((const uint8_t*)g_version, sizeof(g_version));
 			break;
 
 		case SUPER_REG_IBCVERSION:
 			g_spi.NonblockingWriteFifo((const uint8_t*)g_ibcSwVersion, sizeof(g_ibcSwVersion));
+			break;
+
+		case SUPER_REG_IBCHWVERSION:
+			g_spi.NonblockingWriteFifo((const uint8_t*)g_ibcHwVersion, sizeof(g_ibcHwVersion));
+			break;
+
+		case SUPER_REG_IBCVIN:
+			g_spi.NonblockingWriteFifo((const uint8_t*)&g_vin48, sizeof(g_vin48));
+			break;
+
+		case SUPER_REG_IBCIIN:
+			g_spi.NonblockingWriteFifo((const uint8_t*)&g_iin, sizeof(g_iin));
+			break;
+
+		case SUPER_REG_IBCTEMP:
+			g_spi.NonblockingWriteFifo((const uint8_t*)&g_ibcTemp, sizeof(g_ibcTemp));
+			break;
+
+		case SUPER_REG_IBCVOUT:
+			g_spi.NonblockingWriteFifo((const uint8_t*)&g_vout12, sizeof(g_vout12));
+			break;
+
+		case SUPER_REG_IBCIOUT:
+			g_spi.NonblockingWriteFifo((const uint8_t*)&g_iout, sizeof(g_iout));
+			break;
+
+		case SUPER_REG_IBCVSENSE:
+			g_spi.NonblockingWriteFifo((const uint8_t*)&g_voutsense, sizeof(g_voutsense));
+			break;
+
+		case SUPER_REG_IBCMCUTEMP:
+			g_spi.NonblockingWriteFifo((const uint8_t*)&g_ibcMcuTemp, sizeof(g_ibcMcuTemp));
+			break;
+
+		case SUPER_REG_IBC3V3:
+			g_spi.NonblockingWriteFifo((const uint8_t*)&g_ibc3v3, sizeof(g_ibc3v3));
+			break;
+
+		case SUPER_REG_MCUTEMP:
+			g_spi.NonblockingWriteFifo((const uint8_t*)&g_mcutemp, sizeof(g_mcutemp));
+			break;
+
+		case SUPER_REG_3V3:
+			g_spi.NonblockingWriteFifo((const uint8_t*)&g_3v3, sizeof(g_3v3));
+			break;
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// Firmware update commands etc TODO
+
+		default:
 			break;
 	}
 }
