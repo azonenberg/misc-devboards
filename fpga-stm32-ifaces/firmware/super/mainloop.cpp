@@ -30,6 +30,7 @@
 #include "supervisor.h"
 #include "IBCRegisterReader.h"
 #include "TempSensorReader.h"
+#include "SupervisorSPIServer.h"
 
 //TODO: fix this path somehow?
 #include "../../../../common-ibc/firmware/main/regids.h"
@@ -139,6 +140,18 @@ void BSP_MainLoopIteration()
 			nextHealthPrint = 15;
 		}
 		nextHealthPrint --;
+	}
+
+	//Read and process SPI events
+	static SupervisorSPIServer spiserver;
+	if(g_spi.HasEvents())
+	{
+		auto event = g_spi.GetEvent();
+
+		if(event.type == SPIEvent::TYPE_CS)
+			spiserver.OnFallingEdge();
+		else
+			spiserver.OnByte(event.data);
 	}
 }
 

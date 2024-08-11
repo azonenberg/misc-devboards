@@ -109,9 +109,6 @@ IPv4Config g_ipConfig;
 ///@brief Ethernet protocol stack
 EthernetProtocol* g_ethProtocol = nullptr;
 
-///@brief QSPI interface to FPGA
-//OctoSPI* g_qspi = nullptr;
-
 /**
 	@brief MAC address I2C EEPROM
 	Default kernel clock for I2C2 is pclk2 (68.75 MHz for our current config)
@@ -119,9 +116,6 @@ EthernetProtocol* g_ethProtocol = nullptr;
 	Divide by 40 after that to get 107 kHz
 */
 I2C g_macI2C(&I2C2, 16, 40);
-
-///@brief SFP+ DOM / ID EEPROM
-//I2C* g_sfpI2C = nullptr;
 
 ///@brief BaseT link status
 bool g_basetLinkUp = false;
@@ -162,6 +156,23 @@ MDIODevice* g_phyMdio = nullptr;
 ///@brief The battery-backed RAM used to store state across power cycles
 //volatile BootloaderBBRAM* g_bbram = reinterpret_cast<volatile BootloaderBBRAM*>(&_RTC.BKP[0]);
 
+///@brief SPI bus to the supervisor MCU
+GPIOPin g_superCS_n(&GPIOE, 4, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_MEDIUM);
+
+/**
+	@brief SPI bus to supervisor
+
+	SPI4 runs on spi 4/5 kernel clock domain
+	default after reset is APB2 clock which is 62.5 MHz, divide by 128 to get 488 kHz
+ */
+SPI<64, 64> g_superSPI(&SPI4, true, 128);
+
+///@brief Version string for supervisor MCU
+char g_superVersion[20] = {0};
+
+///@brief Version string for IBC MCU
+char g_ibcVersion[20] = {0};
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Globals
 
@@ -185,6 +196,7 @@ void InitITM();
 void BSP_Init()
 {
 	InitRTC();
+	InitSupervisor();
 	InitFMC();
 	InitFPGA();
 	DoInitKVS();
@@ -456,72 +468,6 @@ void InitEEPROM()
 			serial[0], serial[1], serial[2], serial[3], serial[4], serial[5], serial[6], serial[7],
 			serial[8], serial[9], serial[10], serial[11], serial[12], serial[13], serial[14], serial[15]);
 	}
-}
-
-void InitQSPI()
-{
-	/*
-	g_log("Initializing QSPI interface\n");
-
-	//Configure the I/O manager
-	OctoSPIManager::ConfigureMux(false);
-	OctoSPIManager::ConfigurePort(
-		1,							//Configuring port 1
-		false,						//DQ[7:4] disabled
-		OctoSPIManager::C1_HIGH,
-		true,						//DQ[3:0] enabled
-		OctoSPIManager::C1_LOW,		//DQ[3:0] from OCTOSPI1 DQ[3:0]
-		true,						//CS# enabled
-		OctoSPIManager::PORT_1,		//CS# from OCTOSPI1
-		false,						//DQS disabled
-		OctoSPIManager::PORT_1,
-		true,						//Clock enabled
-		OctoSPIManager::PORT_1);	//Clock from OCTOSPI1
-
-	//Configure the I/O pins
-	static GPIOPin qspi_cs_n(&GPIOE, 11, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 11);
-	static GPIOPin qspi_sck(&GPIOB, 2, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 9);
-	static GPIOPin qspi_dq0(&GPIOA, 2, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 6);
-	static GPIOPin qspi_dq1(&GPIOB, 0, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 4);
-	static GPIOPin qspi_dq2(&GPIOC, 2, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 9);
-	static GPIOPin qspi_dq3(&GPIOA, 1, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 9);
-
-	//Clock divider value
-	//Default is for AHB3 bus clock to be used as kernel clock (250 MHz for us)
-	//With 3.3V Vdd, we can go up to 140 MHz.
-	//FPGA currently requires <= 62.5 MHz due to the RX oversampling used (4x in 250 MHz clock domain)
-	//Dividing by 5 gives 50 MHz and a transfer rate of 200 Mbps
-	//Dividing by 10, but DDR, gives the same throughput and works around an errata
-	uint8_t prescale = 20;
-
-	//Configure the OCTOSPI itself
-	//Original code used "instruction", but we want "address" to enable memory mapping
-	static OctoSPI qspi(&OCTOSPI1, 0x02000000, prescale);
-	qspi.SetDoubleRateMode(false);
-	qspi.SetInstructionMode(OctoSPI::MODE_QUAD, 1);
-	qspi.SetAddressMode(OctoSPI::MODE_QUAD, 3);
-	qspi.SetAltBytesMode(OctoSPI::MODE_NONE);
-	qspi.SetDataMode(OctoSPI::MODE_QUAD);
-	qspi.SetDummyCycleCount(1);
-	qspi.SetDQSEnable(false);
-	qspi.SetDeselectTime(1);
-	qspi.SetSampleDelay(false, true);
-	qspi.SetDoubleRateMode(true);
-
-	//Poke MPU settings to disable caching etc on the QSPI memory range
-	MPU::Configure(MPU::KEEP_DEFAULT_MAP, MPU::DISABLE_IN_FAULT_HANDLERS);
-	MPU::ConfigureRegion(
-		0,
-		FPGA_MEM_BASE,
-		MPU::SHARED_DEVICE,
-		MPU::FULL_ACCESS,
-		MPU::EXECUTE_NEVER,
-		MPU::SIZE_16M);
-
-	//Configure memory mapping mode
-	qspi.SetMemoryMapMode(APBFPGAInterface::OP_APB_READ, APBFPGAInterface::OP_APB_WRITE);
-	g_qspi = &qspi;
-	*/
 }
 
 /**
@@ -852,4 +798,46 @@ void PollPHYs()
 		g_ethProtocol->OnLinkDown();
 	}
 	g_basetLinkUp = bup;
+}
+
+/**
+	@brief Initialize the SPI bus to the supervisor
+ */
+void InitSupervisor()
+{
+	g_log("Initializing supervisor\n");
+	LogIndenter li(g_log);
+
+	//Deselect the supervisor
+	g_superCS_n = 1;
+	g_logTimer.Sleep(1);
+
+	//Initialize the rest of our IOs
+	static GPIOPin spi_sck(&GPIOE, 12, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_MEDIUM, 5);
+	static GPIOPin spi_miso(&GPIOE, 5, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_MEDIUM, 5);
+	static GPIOPin spi_mosi(&GPIOE, 6, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_MEDIUM, 5);
+
+	//Get the supervisor firmware version
+	g_superCS_n = 0;
+	g_superSPI.BlockingWrite(SUPER_REG_VERSION);
+	g_superSPI.WaitForWrites();
+	g_superSPI.DiscardRxData();
+	g_superSPI.BlockingRead();	//discard dummy byte
+	for(size_t i=0; i<sizeof(g_superVersion); i++)
+		g_superVersion[i] = g_superSPI.BlockingRead();
+	g_superVersion[sizeof(g_superVersion)-1] = '\0';
+	g_superCS_n = 1;
+	g_log("Firmware version: %s\n", g_superVersion);
+
+	//Get IBC firmware version
+	g_superCS_n = 0;
+	g_superSPI.BlockingWrite(SUPER_REG_IBCVERSION);
+	g_superSPI.WaitForWrites();
+	g_superSPI.DiscardRxData();
+	g_superSPI.BlockingRead();	//discard dummy byte
+	for(size_t i=0; i<sizeof(g_ibcVersion); i++)
+		g_ibcVersion[i] = g_superSPI.BlockingRead();
+	g_ibcVersion[sizeof(g_ibcVersion)-1] = '\0';
+	g_superCS_n = 1;
+	g_log("IBC firmware version: %s\n", g_ibcVersion);
 }

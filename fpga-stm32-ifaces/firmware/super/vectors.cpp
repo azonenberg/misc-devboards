@@ -75,11 +75,11 @@ fnptr __attribute__((section(".vector"))) vectorTable[] =
 	defaultISR,				//irq3 RTC_WKUP
 	defaultISR,				//irq4 FLASH
 	defaultISR,				//irq5 RCC
-	SPI_CSHandler,			//irq6 EXTI0
+	defaultISR,				//irq6 EXTI0
 	defaultISR,				//irq7 EXTI1
 	defaultISR,				//irq8 EXTI1
 	defaultISR,				//irq9 EXTI3
-	defaultISR,				//irq10 EXTI4
+	SPI_CSHandler,			//irq10 EXTI4
 	defaultISR,				//irq11 DMA1_CH1
 	defaultISR,				//irq12 DMA1_CH2
 	defaultISR,				//irq13 DMA1_CH3

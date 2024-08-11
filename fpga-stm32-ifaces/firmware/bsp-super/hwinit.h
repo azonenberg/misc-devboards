@@ -31,6 +31,7 @@
 #define hwinit_h
 
 #include <peripheral/ADC.h>
+#include <peripheral/EXTI.h>
 #include <peripheral/Flash.h>
 #include <peripheral/GPIO.h>
 #include <peripheral/I2C.h>
@@ -43,7 +44,7 @@ extern void App_Init();
 //Global hardware config used by both app and bootloader
 extern ADC* g_adc;
 extern UART<16, 256> g_uart;
-extern SPI<2048, 64> g_fpgaSPI;
+extern SPI<2048, 64> g_spi;
 extern I2C g_i2c;
 extern const uint8_t g_tempI2cAddress;
 extern const uint8_t g_ibcI2cAddress;
@@ -57,5 +58,25 @@ extern char g_ibcHwVersion[20];
 void SPI_CSHandler();
 void SPI1_Handler();
 void USART2_Handler();
+
+//GPIOs
+extern GPIOPin g_pgoodLED;
+extern GPIOPin g_faultLED;
+extern GPIOPin g_sysokLED;
+extern GPIOPin g_12v0_en;
+extern GPIOPin g_1v0_en;
+extern GPIOPin g_1v0_pgood;
+extern GPIOPin g_1v2_en;
+extern GPIOPin g_1v2_pgood;
+extern GPIOPin g_1v8_en;
+extern GPIOPin g_1v8_pgood;
+extern GPIOPin g_3v3_en;
+extern GPIOPin g_3v3_pgood;
+
+extern GPIOPin g_mcuResetN;
+extern GPIOPin g_fpgaResetN;
+extern GPIOPin g_fpgaInitN;
+
+void InitGPIOs();
 
 #endif

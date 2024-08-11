@@ -49,53 +49,6 @@ void InitLEDs()
 }
 
 /**
-	@brief Initialize the SPI bus to the supervisor
- */
-void InitSupervisor()
-{
-	/*
-	g_log("Initializing supervisor\n");
-	LogIndenter li(g_log);
-
-	//Set up the GPIOs for chip selects and deselect everything
-	auto slew = GPIOPin::SLEW_MEDIUM;
-	static GPIOPin super_cs_n(&GPIOE, 4, GPIOPin::MODE_OUTPUT, slew);
-	super_cs_n = 1;
-	g_superSPICS = &super_cs_n;
-	g_logTimer.Sleep(1);
-
-	//Initialize the rest of our IOs
-	static GPIOPin spi_sck(&GPIOE, 2, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_MEDIUM, 5);
-	static GPIOPin spi_miso(&GPIOE, 5, GPIOPin::MODE_PERIPHERAL, slew, 5);
-	static GPIOPin spi_mosi(&GPIOE, 6, GPIOPin::MODE_PERIPHERAL, slew, 5);
-
-	//Get the supervisor firmware version
-	super_cs_n = 0;
-	g_superSPI.BlockingWrite(SUPER_REG_VERSION);
-	g_superSPI.WaitForWrites();
-	g_superSPI.DiscardRxData();
-	g_superSPI.BlockingRead();	//discard dummy byte
-	for(size_t i=0; i<sizeof(g_superVersion); i++)
-		g_superVersion[i] = g_superSPI.BlockingRead();
-	g_superVersion[sizeof(g_superVersion)-1] = '\0';
-	super_cs_n = 1;
-	g_log("Firmware version: %s\n", g_superVersion);
-
-	//Get IBC firmware version
-	super_cs_n = 0;
-	g_superSPI.BlockingWrite(SUPER_REG_IBCVERSION);
-	g_superSPI.WaitForWrites();
-	g_superSPI.DiscardRxData();
-	g_superSPI.BlockingRead();	//discard dummy byte
-	for(size_t i=0; i<sizeof(g_ibcVersion); i++)
-		g_ibcVersion[i] = g_superSPI.BlockingRead();
-	g_ibcVersion[sizeof(g_ibcVersion)-1] = '\0';
-	super_cs_n = 1;
-	g_log("IBC firmware version: %s\n", g_ibcVersion);
-	*/
-}
-
-/**
 	@brief Initialize sensors and log starting values for each
  */
 void InitSensors()

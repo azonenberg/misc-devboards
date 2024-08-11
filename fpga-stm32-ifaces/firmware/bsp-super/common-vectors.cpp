@@ -43,31 +43,29 @@ uint32_t g_spiRxFifoOverflows = 0;
 /**
 	@brief GPIO interrupt used for SPI chip select
  */
-[[gnu::isr]]
 void SPI_CSHandler()
 {
 	//for now only trigger on falling edge so no need to check
-	g_fpgaSPI.OnIRQCSEdge(false);
+	g_spi.OnIRQCSEdge(false);
 
 	//Acknowledge the interrupt
-	EXTI.PR1 |= 1;
+	EXTI::ClearPending(4);
 }
 
 /**
 	@brief SPI data interrupt
  */
-[[gnu::isr]]
 void SPI1_Handler()
 {
 	if(SPI1.SR & SPI_RX_NOT_EMPTY)
 	{
-		if(!g_fpgaSPI.OnIRQRxData(SPI1.DR))
+		if(!g_spi.OnIRQRxData(SPI1.DR))
 			g_spiRxFifoOverflows ++;
 	}
 	if(SPI1.SR & SPI_TX_EMPTY)
 	{
-		if(g_fpgaSPI.HasNextTxByte())
-			SPI1.DR = g_fpgaSPI.GetNextTxByte();
+		if(g_spi.HasNextTxByte())
+			SPI1.DR = g_spi.GetNextTxByte();
 
 		//if no data to send, disable the interrupt
 		else
@@ -78,7 +76,6 @@ void SPI1_Handler()
 /**
 	@brief UART1 interrupt
  */
-[[gnu::isr]]
 void USART1_Handler()
 {
 	if(USART1.ISR & USART_ISR_TXE)

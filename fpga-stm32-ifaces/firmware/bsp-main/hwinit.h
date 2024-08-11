@@ -36,11 +36,7 @@
 #include <peripheral/Flash.h>
 #include <peripheral/GPIO.h>
 #include <peripheral/I2C.h>
-/*
-#include <peripheral/MPU.h>
-#include <peripheral/OctoSPI.h>
-#include <peripheral/OctoSPIManager.h>
-*/
+#include <peripheral/SPI.h>
 #include <peripheral/RTC.h>
 #include <peripheral/UART.h>
 
@@ -62,20 +58,26 @@
 //#include "ManagementDHCPClient.h"
 //#include "CrossbarSSHKeyManager.h"
 
+#include "../super/superregs.h"
+
 void App_Init();
 void InitFMC();
 void InitRTC();
-//void InitQSPI();
 void InitFPGA();
 void InitFPGAFlash();
 void InitI2C();
 void InitEEPROM();
+void InitSupervisor();
 void InitIP();
 void InitManagementPHY();
 void PollPHYs();
 void ConfigureIP();
 
 void DoInitKVS();
+
+//Interface to supervisor MCU
+extern SPI<64, 64> g_superSPI;
+extern GPIOPin* g_superSPICS;
 
 //Common hardware interface stuff (mostly Ethernet related)
 extern UART<32, 256> g_cliUART;
@@ -86,7 +88,6 @@ extern IPv4Config g_ipConfig;
 /*
 extern bool g_usingDHCP;
 extern ManagementDHCPClient* g_dhcpClient;
-extern OctoSPI* g_qspi;
 */
 extern EthernetProtocol* g_ethProtocol;
 extern bool g_basetLinkUp;
@@ -100,13 +101,14 @@ extern uint32_t g_usercode;
 extern const char* g_defaultSshUsername;
 extern const char* g_usernameObjectID;
 extern char g_sshUsername[CLI_USERNAME_MAX];
+*/
 
 //IP address configuration
 extern const IPv4Address g_defaultIP;
 extern const IPv4Address g_defaultNetmask;
 extern const IPv4Address g_defaultBroadcast;
 extern const IPv4Address g_defaultGateway;
-*/
+
 void UART4_Handler();
 /*
 void OnEthernetLinkStateChanged();

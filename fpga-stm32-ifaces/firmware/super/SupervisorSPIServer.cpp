@@ -27,25 +27,59 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef frontpanel_h
-#define frontpanel_h
+#include "supervisor.h"
+#include "SupervisorSPIServer.h"
 
-#include <core/platform.h>
+SupervisorSPIServer::SupervisorSPIServer()
+	: m_nbyte(0)
+	, m_command(0)
+{
+}
 
-#include <peripheral/ADC.h>
-#include <peripheral/I2C.h>
+/**
+	@brief Called on CS# falling edge
+ */
+void SupervisorSPIServer::OnFallingEdge()
+{
+	m_nbyte = 0;
+	m_command = 0;
+}
 
-#include <embedded-utils/FIFO.h>
-#include <embedded-utils/StringBuffer.h>
+/**
+	@brief Called when a SPI byte arrives
+ */
+void SupervisorSPIServer::OnByte(uint8_t b)
+{
+	if(m_nbyte == 0)
+		OnCommand(b);
+	else
+		OnDataByte(b);
 
-//#include <bootloader/BootloaderAPI.h>
-#include "../bsp-super/hwinit.h"
+	m_nbyte ++;
+}
 
-extern UART<16, 256> g_uart;
+/**
+	@brief Called when a SPI command arrives
+ */
+void SupervisorSPIServer::OnCommand(uint8_t b)
+{
+	m_command = b;
 
-void PowerOn();
-void StartRail(GPIOPin& en, GPIOPin& pgood, uint32_t timeout, const char* name);
+	switch(m_command)
+	{
+		case SUPER_REG_VERSION:
+			g_spi.NonblockingWriteFifo((const uint8_t*)g_version, sizeof(g_version));
+			break;
 
-extern char g_version[20];
+		case SUPER_REG_IBCVERSION:
+			g_spi.NonblockingWriteFifo((const uint8_t*)g_ibcSwVersion, sizeof(g_ibcSwVersion));
+			break;
+	}
+}
 
-#endif
+/**
+	@brief Called when a SPI data byte (not command) arrives
+ */
+void SupervisorSPIServer::OnDataByte([[maybe_unused]] uint8_t b)
+{
+}

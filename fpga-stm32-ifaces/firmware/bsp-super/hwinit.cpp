@@ -41,7 +41,7 @@
 //TODO: fix this path somehow?
 #include "../../../../common-ibc/firmware/main/regids.h"
 
-void InitFPGASPI();
+void InitSPI();
 void InitI2C();
 void InitIBC();
 void InitADC();
@@ -60,9 +60,9 @@ UART<16, 256> g_uart(&USART1, 347);
 //Divide down to get 10 kHz ticks (note TIM2 is double rate)
 Timer g_logTimer(&TIM2, Timer::FEATURE_ADVANCED, 8000);
 
-//SPI bus to the FPGA
-SPI<2048, 64> g_fpgaSPI(&SPI1, true, 2, false);
-GPIOPin* g_fpgaSPICS = nullptr;
+//SPI bus to the main MCU
+SPI<2048, 64> g_spi(&SPI1, true, 2, false);
+GPIOPin* g_spiCS = nullptr;
 
 //I2C1 defaults to running of APB clock (40 MHz)
 //Prescale by 4 to get 10 MHz
@@ -139,11 +139,14 @@ void BSP_InitLog()
 
 void BSP_Init()
 {
-	App_Init();
+	//Bring up the IBC before powering up the rest of the system
+	InitGPIOs();
 	InitI2C();
 	InitIBC();
 	InitADC();
-	InitFPGASPI();
+	InitSPI();
+
+	App_Init();
 }
 
 void InitADC()
@@ -172,13 +175,26 @@ void InitI2C()
 	static GPIOPin i2c_scl(&GPIOB, 6, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
 	static GPIOPin i2c_sda(&GPIOB, 7, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
 
-	//Wait a while in case a previous transaction was in progress
-	g_logTimer.Sleep(500);
+	//Wait a while to make sure the IBC is booted before we come up
+	//(both us and the IBC come up off 3V3_SB as soon as it's up, with no sequencing)
+	g_logTimer.Sleep(1000);
 
 	//Set temperature sensor to max resolution
-	uint8_t cmd[3] = {0x01, 0x60, 0x00};
-	if(!g_i2c.BlockingWrite(g_tempI2cAddress, cmd, sizeof(cmd)))
-		g_log(Logger::ERROR, "Failed to initialize I2C temp sensor at 0x%02x\n", g_tempI2cAddress);
+	//(if it doesn't respond, the i2c is derped out so reset and try again)
+	for(int i=0; i<5; i++)
+	{
+		uint8_t cmd[3] = {0x01, 0x60, 0x00};
+		if(g_i2c.BlockingWrite(g_tempI2cAddress, cmd, sizeof(cmd)))
+			break;
+
+		g_log(
+			Logger::WARNING,
+			"Failed to initialize I2C temp sensor at 0x%02x, resetting and trying again\n",
+			g_tempI2cAddress);
+
+		g_i2c.Reset();
+		g_logTimer.Sleep(100);
+	}
 }
 
 void InitIBC()
@@ -195,32 +211,60 @@ void InitIBC()
 	g_log("IBC hardware version %s\n", g_ibcHwVersion);
 }
 
-void InitFPGASPI()
+void InitSPI()
 {
-	/*
-	g_log("Initializing FPGA SPI\n");
+	g_log("Initializing management SPI bus\n");
 
-	//Set up GPIOs for FPGA bus
-	static GPIOPin fpga_sck(&GPIOE, 13, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_FAST, 5);
-	static GPIOPin fpga_mosi(&GPIOE, 15, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_FAST, 5);
-	static GPIOPin fpga_cs_n(&GPIOB, 0, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_FAST, 5);
-	//DO NOT configure MISO initially since this pin doubles as JTRST
-	//If we enable it, JTAG will stop working!
+	//Set up GPIOs for management bus
+	static GPIOPin mgmt_sck(&GPIOA, 5, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_FAST, 5);
+	static GPIOPin mgmt_mosi(&GPIOA, 7, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_FAST, 5);
+	static GPIOPin mgmt_cs_n(&GPIOA, 4, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_FAST, 5);
+	static GPIOPin mgmt_miso(&GPIOA, 6, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_FAST, 5);
 
 	//Save the CS# pin
-	g_fpgaSPICS = &fpga_cs_n;
+	g_spiCS = &mgmt_cs_n;
 
-	//Set up IRQ6 for SPI CS# (PB0) change
-	//Use EXTI0 as PB0 interrupt on falling edge
-	//TODO: make a wrapper for this?
+	//Set up IRQ6 for SPI CS# (PA4) change
 	RCCHelper::EnableSyscfg();
-	NVIC_EnableIRQ(6);
-	SYSCFG.EXTICR1 = (SYSCFG.EXTICR1 & 0xfffffff8) | 0x1;
-	EXTI.IMR1 |= 1;
-	EXTI.FTSR1 |= 1;
+	NVIC_EnableIRQ(10);
+	EXTI::SetExtInterruptMux(4, EXTI::PORT_A);
+	EXTI::EnableChannel(4);
+	EXTI::EnableFallingEdgeTrigger(4);
 
 	//Set up IRQ35 as SPI1 interrupt
 	NVIC_EnableIRQ(35);
-	g_fpgaSPI.EnableRxInterrupt();
-	*/
+	g_spi.EnableRxInterrupt();
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// GPIOs for all of the rail enables
+
+void InitGPIOs()
+{
+	g_log("Initializing GPIOs\n");
+
+	//Disable 12V input rail
+	g_12v0_en = 0;
+
+	//turn off all regulators
+	g_1v0_en = 0;
+	g_1v2_en = 0;
+	g_1v8_en = 0;
+	g_3v3_en = 0;
+
+	//Hold MCU in reset
+	g_mcuResetN = 0;
+	g_fpgaResetN = 0;
+	g_fpgaInitN = 0;
+
+	//Enable pullups on all PGOOD lines
+	g_1v0_pgood.SetPullMode(GPIOPin::PULL_UP);
+	g_1v2_pgood.SetPullMode(GPIOPin::PULL_UP);
+	g_1v8_pgood.SetPullMode(GPIOPin::PULL_UP);
+	g_3v3_pgood.SetPullMode(GPIOPin::PULL_UP);
+
+	//turn off all LEDs
+	g_pgoodLED = 0;
+	g_faultLED = 0;
+	g_sysokLED = 0;
 }

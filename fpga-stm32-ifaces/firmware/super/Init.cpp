@@ -34,45 +34,22 @@
  */
 #include "supervisor.h"
 
+///@brief Firmware version string
+char g_version[20] = {0};
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Peripheral initialization
 
 void App_Init()
 {
 	RCCHelper::Enable(&_RTC);
-	InitGPIOs();
+
+	//Format version string
+	StringBuffer buf(g_version, sizeof(g_version));
+	static const char* buildtime = __TIME__;
+	buf.Printf("%s %c%c%c%c%c%c",
+		__DATE__, buildtime[0], buildtime[1], buildtime[3], buildtime[4], buildtime[6], buildtime[7]);
+	g_log("Firmware version %s\n", g_version);
+
 	PowerOn();
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Other hardware init
-
-void InitGPIOs()
-{
-	g_log("Initializing GPIOs\n");
-
-	//Disable 12V input rail
-	g_12v0_en = 0;
-
-	//turn off all regulators
-	g_1v0_en = 0;
-	g_1v2_en = 0;
-	g_1v8_en = 0;
-	g_3v3_en = 0;
-
-	//Hold MCU in reset
-	g_mcuResetN = 0;
-	g_fpgaResetN = 0;
-	g_fpgaInitN = 0;
-
-	//Enable pullups on all PGOOD lines
-	g_1v0_pgood.SetPullMode(GPIOPin::PULL_UP);
-	g_1v2_pgood.SetPullMode(GPIOPin::PULL_UP);
-	g_1v8_pgood.SetPullMode(GPIOPin::PULL_UP);
-	g_3v3_pgood.SetPullMode(GPIOPin::PULL_UP);
-
-	//turn off all LEDs
-	g_pgoodLED = 0;
-	g_faultLED = 0;
-	g_sysokLED = 0;
 }

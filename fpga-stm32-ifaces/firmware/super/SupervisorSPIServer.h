@@ -27,25 +27,25 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef frontpanel_h
-#define frontpanel_h
+#ifndef SupervisorSPIServer_h
+#define SupervisorSPIServer_h
 
-#include <core/platform.h>
+#include "superregs.h"
 
-#include <peripheral/ADC.h>
-#include <peripheral/I2C.h>
+class SupervisorSPIServer
+{
+public:
+	SupervisorSPIServer();
 
-#include <embedded-utils/FIFO.h>
-#include <embedded-utils/StringBuffer.h>
+	void OnFallingEdge();
+	void OnByte(uint8_t b);
 
-//#include <bootloader/BootloaderAPI.h>
-#include "../bsp-super/hwinit.h"
+protected:
+	void OnCommand(uint8_t b);
+	void OnDataByte(uint8_t b);
 
-extern UART<16, 256> g_uart;
-
-void PowerOn();
-void StartRail(GPIOPin& en, GPIOPin& pgood, uint32_t timeout, const char* name);
-
-extern char g_version[20];
+	uint16_t m_nbyte;
+	uint8_t m_command;
+};
 
 #endif

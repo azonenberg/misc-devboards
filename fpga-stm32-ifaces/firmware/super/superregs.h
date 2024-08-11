@@ -27,25 +27,25 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef frontpanel_h
-#define frontpanel_h
+/**
+	@file
+	@author	Andrew D. Zonenberg
+	@brief	SPI register definitions for supervisor
+ */
+#ifndef superregs_h
+#define superregs_h
 
-#include <core/platform.h>
+enum superregs_t
+{
+	SUPER_REG_VERSION		= 0x00,		//Our version string
+	SUPER_REG_IBCVERSION	= 0x01,		//IBC version string
 
-#include <peripheral/ADC.h>
-#include <peripheral/I2C.h>
-
-#include <embedded-utils/FIFO.h>
-#include <embedded-utils/StringBuffer.h>
-
-//#include <bootloader/BootloaderAPI.h>
-#include "../bsp-super/hwinit.h"
-
-extern UART<16, 256> g_uart;
-
-void PowerOn();
-void StartRail(GPIOPin& en, GPIOPin& pgood, uint32_t timeout, const char* name);
-
-extern char g_version[20];
+	SUPER_REG_IBCVIN		= 0x10,		//IBC input voltage (nominal 48)
+	SUPER_REG_IBCIIN		= 0x11,		//IBC input current
+	SUPER_REG_IBCTEMP		= 0x12,		//IBC temperature
+	SUPER_REG_IBCVOUT		= 0x13,		//IBC output voltage (nominal 12)
+	SUPER_REG_IBCIOUT		= 0x14,		//IBC output current
+	SUPER_REG_IBCVSENSE		= 0x15		//IBC sense voltage (nominal 12)
+};
 
 #endif

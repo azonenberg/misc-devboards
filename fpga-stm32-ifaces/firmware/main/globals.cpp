@@ -38,23 +38,6 @@
  */
 DigitalTempSensor g_dts(&DTS, 80, 15, 64000000);
 
-/**
-	@brief SPI bus to supervisor
-
-	SPI4 runs on spi 4/5 kernel clock domain
-	default after reset is APB2 clock which is 62.5 MHz, divide by 128 to get 488 kHz
- */
-//SPI<64, 64> g_superSPI(&SPI4, true, 128);
-
-///@brief Chip select for supervisor CS
-//GPIOPin* g_superSPICS = nullptr;
-
-///@brief Version string for supervisor MCU
-//char g_superVersion[20] = {0};
-
-///@brief Version string for IBC MCU
-char g_ibcVersion[20] = {0};
-
 ///@brief The SSH server
 //ManagementSSHTransportServer* g_sshd = nullptr;
 
