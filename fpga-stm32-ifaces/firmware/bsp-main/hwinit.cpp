@@ -347,11 +347,6 @@ void InitFMC()
 	g_log("Initializing FMC...\n");
 	LogIndenter li(g_log);
 
-	//in case of fpga bugs etc
-	g_log("2 sec wait\n");
-	g_logTimer.Sleep(20000);
-	g_log("Done\n");
-
 	static GPIOPin fmc_ad0(&GPIOD, 14, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 12);
 	static GPIOPin fmc_ad1(&GPIOD, 15, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 12);
 	static GPIOPin fmc_ad2(&GPIOD, 0, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 12);
