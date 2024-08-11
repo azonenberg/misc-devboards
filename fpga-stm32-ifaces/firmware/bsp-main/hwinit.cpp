@@ -903,7 +903,7 @@ uint16_t ReadIBCRegister(superregs_t regid)
 
 	//Wait a little while since the firmware on the supervisor is slow
 	//TODO: can we optimize this? or send several dummy cycles or something?
-	g_logTimer.Sleep(2);
+	g_logTimer.Sleep(5);
 
 	g_superSPI.BlockingRead();	//discard dummy byte
 
