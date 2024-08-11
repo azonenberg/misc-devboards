@@ -1,0 +1,5 @@
+*cache
+*.lck
+*-backups
+output/*.gbr*
+output/*.drl
