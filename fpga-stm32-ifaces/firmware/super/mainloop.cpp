@@ -65,9 +65,13 @@ GPIOPin g_fpgaDone(&GPIOB, 2, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
 bool g_fpgaUp = false;
 
 uint16_t g_ibcTemp = 0;
+uint16_t g_ibc3v3 = 0;
+uint16_t g_ibcMcuTemp = 0;
 uint16_t g_vin48 = 0;
 uint16_t g_vout12 = 0;
 uint16_t g_voutsense = 0;
+uint16_t g_iin = 0;
+uint16_t g_iout = 0;
 
 bool PollIBCSensors();
 
@@ -104,30 +108,37 @@ void BSP_MainLoopIteration()
 	PollIBCSensors();
 
 	//1 Hz timer event
-	//static uint32_t nextHealthPrint = 0;
+	static uint32_t nextHealthPrint = 2;
 	if(g_logTimer.GetCount() >= next1HzTick)
 	{
 		next1HzTick = g_logTimer.GetCount() + 10000;
 
 		//DEBUG: log sensor values
-		/*
 		if(nextHealthPrint == 0)
 		{
+			//Print sensor values
 			g_log("Health sensors\n");
 			LogIndenter li(g_log);
-			PrintSensorValues();
-			nextHealthPrint = 60;
+
+			//Supervisor sensors
+			auto temp = g_adc->GetTemperature();
+			g_log("Super temp:      %uhk C\n", temp);
+			auto vdd = g_adc->GetSupplyVoltage();
+			g_log("Super 3V3_SB:    %2d.%03d V\n", vdd/1000, vdd % 1000);
+
+			//IBC sensors
+			g_log("IBC temperature: %uhk C\n", g_ibcTemp);
+			g_log("IBC MCU:         %uhk C\n", g_ibcMcuTemp);
+			g_log("IBC 3V3_SB:      %2d.%03d V\n", g_ibc3v3 / 1000, g_ibc3v3 % 1000);
+			g_log("48V0:            %2d.%03d V\n", g_vin48 / 1000, g_vin48 % 1000);
+			g_log("12V0_OUT:        %2d.%03d V\n", g_vout12 / 1000, g_vout12 % 1000);
+			g_log("12V0_SENSE:      %2d.%03d V\n", g_voutsense / 1000, g_voutsense % 1000);
+			g_log("48V0 load:       %2d.%03d A\n", g_iin / 1000, g_iin % 1000);
+			g_log("12V0 load:       %2d.%03d A\n", g_iout / 1000, g_iout % 1000);
+
+			nextHealthPrint = 15;
 		}
 		nextHealthPrint --;
-		*/
-
-		//Print sensor values
-		g_log("Health sensors\n");
-		LogIndenter li(g_log);
-		g_log("Temperature: %uhk C\n", g_ibcTemp);
-		g_log("48V0:        %2d.%03d V\n", g_vin48 / 1000, g_vin48 % 1000);
-		g_log("12V0_OUT:    %2d.%03d V\n", g_vout12 / 1000, g_vout12 % 1000);
-		g_log("12V0_SENSE:  %2d.%03d V\n", g_voutsense / 1000, g_voutsense % 1000);
 	}
 }
 
@@ -194,7 +205,6 @@ bool PollIBCSensors()
 			}
 			break;
 
-		/*
 		case 4:
 			if(regreader.ReadRegisterNonblocking(IBC_REG_IIN, g_iin))
 				state ++;
@@ -204,28 +214,19 @@ bool PollIBCSensors()
 			if(regreader.ReadRegisterNonblocking(IBC_REG_IOUT, g_iout))
 				state ++;
 			break;
-		*/
+
+		case 6:
+			if(regreader.ReadRegisterNonblocking(IBC_REG_MCU_TEMP, g_ibcMcuTemp))
+				state ++;
+			break;
+
+		case 7:
+			if(regreader.ReadRegisterNonblocking(IBC_REG_3V3_SB, g_ibc3v3))
+				state ++;
+			break;
 
 		//end of loop, wrap around
 		default:
-			/*
-			//print sensor values if requested (power up or down)
-			switch(g_ibcPrintState)
-			{
-				case PRINT_REQUESTED:
-					g_ibcPrintState = PRINT_REFRESHING;
-					break;
-
-				case PRINT_REFRESHING:
-					g_ibcPrintState = PRINT_IDLE;
-					PrintIBCSensors();
-					break;
-
-				default:
-					break;
-			}
-			*/
-
 			state = 0;
 			return true;
 	}
