@@ -855,44 +855,44 @@ void InitSupervisor()
 	g_log("IBC hardware version: %s\n", g_ibcHwVersion);
 
 	//Read sensors
-	auto vin = ReadIBCRegister(SUPER_REG_IBCVIN);
+	auto vin = ReadSupervisorRegister(SUPER_REG_IBCVIN);
 	g_log("IBC input:  %2d.%03d V\n", vin / 1000, vin % 1000);
 
-	auto iin = ReadIBCRegister(SUPER_REG_IBCIIN);
+	auto iin = ReadSupervisorRegister(SUPER_REG_IBCIIN);
 	g_log("            %2d.%03d A\n", iin / 1000, iin % 1000);
 
 	auto pin = vin * iin / 1000;
 	g_log("            %2d.%03d W\n", pin / 1000, pin % 1000);
 
-	auto vout = ReadIBCRegister(SUPER_REG_IBCVOUT);
+	auto vout = ReadSupervisorRegister(SUPER_REG_IBCVOUT);
 	g_log("    output: %2d.%03d V\n", vout / 1000, vout % 1000);
 
-	auto iout = ReadIBCRegister(SUPER_REG_IBCIOUT);
+	auto iout = ReadSupervisorRegister(SUPER_REG_IBCIOUT);
 	g_log("            %2d.%03d A\n", iout / 1000, iout % 1000);
 
 	auto pout = vout * iout / 1000;
 	g_log("            %2d.%03d W\n", pout / 1000, pout % 1000);
 
-	auto vsense = ReadIBCRegister(SUPER_REG_IBCVSENSE);
+	auto vsense = ReadSupervisorRegister(SUPER_REG_IBCVSENSE);
 	g_log("    sense:  %2d.%03d V\n", vsense / 1000, vsense % 1000);
 
-	auto ibctemp = ReadIBCRegister(SUPER_REG_IBCTEMP);
+	auto ibctemp = ReadSupervisorRegister(SUPER_REG_IBCTEMP);
 	g_log("    DC-DC:  %uhk C\n", ibctemp);
 
-	auto smcutemp = ReadIBCRegister(SUPER_REG_IBCMCUTEMP);
+	auto smcutemp = ReadSupervisorRegister(SUPER_REG_IBCMCUTEMP);
 	g_log("    MCU:    %uhk C\n", smcutemp);
 
-	auto ibc3v3 = ReadIBCRegister(SUPER_REG_IBC3V3);
+	auto ibc3v3 = ReadSupervisorRegister(SUPER_REG_IBC3V3);
 	g_log("            %2d.%03d V\n", ibc3v3 / 1000, ibc3v3 % 1000);
 
-	auto mcutemp = ReadIBCRegister(SUPER_REG_MCUTEMP);
+	auto mcutemp = ReadSupervisorRegister(SUPER_REG_MCUTEMP);
 	g_log("    Super:  %uhk C\n", mcutemp);
 
-	auto super3v3 = ReadIBCRegister(SUPER_REG_3V3);
+	auto super3v3 = ReadSupervisorRegister(SUPER_REG_3V3);
 	g_log("            %2d.%03d V\n", super3v3 / 1000, super3v3 % 1000);
 }
 
-uint16_t ReadIBCRegister(superregs_t regid)
+uint16_t ReadSupervisorRegister(superregs_t regid)
 {
 	g_superCS_n = 0;
 
@@ -903,7 +903,7 @@ uint16_t ReadIBCRegister(superregs_t regid)
 
 	//Wait a little while since the firmware on the supervisor is slow
 	//TODO: can we optimize this? or send several dummy cycles or something?
-	g_logTimer.Sleep(5);
+	g_logTimer.Sleep(2);
 
 	g_superSPI.BlockingRead();	//discard dummy byte
 

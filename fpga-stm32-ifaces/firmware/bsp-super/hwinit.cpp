@@ -53,21 +53,21 @@ ADC* g_adc = nullptr;
 // Common global hardware config used by both bootloader and application
 
 //UART console
-//USART1 is on APB1 (40 MHz), so we need a divisor of 347.22, round to 347
-UART<16, 256> g_uart(&USART1, 347);
+//USART1 is on APB1 (80 MHz), so we need a divisor of 694.44, round to 694
+UART<16, 256> g_uart(&USART1, 694);
 
-//APB1 is 40 MHz
+//APB1 is 80 MHz
 //Divide down to get 10 kHz ticks (note TIM2 is double rate)
-Timer g_logTimer(&TIM2, Timer::FEATURE_ADVANCED, 8000);
+Timer g_logTimer(&TIM2, Timer::FEATURE_ADVANCED, 16000);
 
 //SPI bus to the main MCU
 SPI<2048, 64> g_spi(&SPI1, true, 2, false);
 GPIOPin* g_spiCS = nullptr;
 
-//I2C1 defaults to running of APB clock (40 MHz)
-//Prescale by 4 to get 10 MHz
-//Divide by 100 after that to get 100 kHz
-I2C g_i2c(&I2C1, 4, 100);
+//I2C1 defaults to running of APB clock (80 MHz)
+//Prescale by 4 to get 20 MHz
+//Divide by 200 after that to get 100 kHz
+I2C g_i2c(&I2C1, 4, 200);
 
 //Addresses on the management I2C bus
 const uint8_t g_tempI2cAddress = 0x90;
@@ -100,8 +100,8 @@ void BSP_InitClocks()
 		4,	//Q divider is 40 MHz (nominal 48 but we're not using USB so this is fine)
 		2,	//R divider is 80 MHz (fmax for CPU)
 		1,	//no further division from SYSCLK to AHB (80 MHz)
-		2,	//APB1 at 40 MHz
-		2);	//APB2 at 40 MHz
+		1,	//APB1 at 80 MHz
+		1);	//APB2 at 80 MHz
 
 	//Select ADC clock as sysclk
 	RCC.CCIPR |= 0x3000'0000;

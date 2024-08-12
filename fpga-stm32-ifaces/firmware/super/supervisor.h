@@ -30,33 +30,11 @@
 #ifndef frontpanel_h
 #define frontpanel_h
 
-#include <core/platform.h>
-
-#include <peripheral/ADC.h>
-#include <peripheral/I2C.h>
-
-#include <embedded-utils/FIFO.h>
-#include <embedded-utils/StringBuffer.h>
+#include <supervisor/supervisor-common.h>
 
 //#include <bootloader/BootloaderAPI.h>
 #include "../bsp-super/hwinit.h"
 
 extern UART<16, 256> g_uart;
-
-void PowerOn();
-void StartRail(GPIOPin& en, GPIOPin& pgood, uint32_t timeout, const char* name);
-
-extern char g_version[20];
-
-extern uint16_t g_ibcTemp;
-extern uint16_t g_ibc3v3;
-extern uint16_t g_ibcMcuTemp;
-extern uint16_t g_vin48;
-extern uint16_t g_vout12;
-extern uint16_t g_voutsense;
-extern uint16_t g_iin;
-extern uint16_t g_iout;
-extern uint16_t g_3v3;
-extern uint16_t g_mcutemp;
 
 #endif

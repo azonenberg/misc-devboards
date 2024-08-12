@@ -1,7 +1,9 @@
 SRCDIR=$(CURDIR)
 ROOTDIR=$(CURDIR)/../../../
-CXXFLAGS=-g -O3 --std=c++20 -mcpu=cortex-m4 -DSTM32L431 -fno-exceptions -fno-rtti -fno-threadsafe-statics \
-	-g --specs=nano.specs -Wall -Wextra \
+CXXFLAGS=-g -Og --std=c++20 -Wall -Wextra \
+	-mcpu=cortex-m4 -march=armv7e-m+fp -mfpu=fpv4-sp-d16 -mfloat-abi=hard \
+	-DSTM32L431 \
+	-fno-exceptions -fno-rtti -g --specs=nano.specs -fno-threadsafe-statics \
 	-I$(ROOTDIR) \
 	-I$(SRCDIR) \
 	-I$(ROOTDIR)/stm32-cpp/devices/inc \
@@ -9,8 +11,14 @@ CXXFLAGS=-g -O3 --std=c++20 -mcpu=cortex-m4 -DSTM32L431 -fno-exceptions -fno-rtt
 	-I$(ROOTDIR)/common-embedded-platform/ \
 	-DMICROKVS_WRITE_BLOCK_SIZE=8 \
 	-DKVS_NAMELEN=32 \
+	-Wl,--wrap=malloc \
+	-Wl,--wrap=calloc \
+	-Wl,--wrap=realloc \
+	-Wl,--wrap=alloca \
+	-Wl,--wrap=sbrk_aligned \
+	-Wl,--wrap=free \
 	-ffunction-sections
-	#-DNO_CLEAR_SCREEN \
+	#-DNO_CLEAR_SCREEN
 
 LDFLAGS=-Wl,-T $(ROOTDIR)/stm32-cpp/devices/link/stm32l431.ld \
 	 -L$(ROOTDIR)/stm32-cpp/devices/link/ \
@@ -28,6 +36,7 @@ all:
 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/microkvs/kvs/*.cpp || exit 1
 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/microkvs/driver/STM32StorageBank.cpp || exit 1
 	$(CXX) $(ROOTDIR)/common-embedded-platform/core/*.cpp -c $(CXXFLAGS) || exit 1
+	$(CXX) $(ROOTDIR)/common-embedded-platform/supervisor/*.cpp -c $(CXXFLAGS) || exit 1
 	$(CXX) $(ROOTDIR)/fpga-stm32-ifaces/firmware/bsp-super/*.cpp -c $(CXXFLAGS) || exit 1
 	$(CXX) $(ROOTDIR)/stm32-cpp/src/newlib-stubs/*.cpp -c $(CXXFLAGS) || exit 1
 	$(CXX) $(ROOTDIR)/stm32-cpp/src/peripheral/*.cpp -c $(CXXFLAGS) || exit 1

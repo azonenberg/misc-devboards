@@ -120,21 +120,45 @@ void BSP_MainLoopIteration()
 		g_itmStream.Printf("hai world %d\n", i);
 		i++;
 	}
-}
-/*
-uint16_t SupervisorRegRead(uint8_t regid)
-{
-	*g_superSPICS = 0;
-	g_superSPI.BlockingWrite(regid);
-	g_superSPI.WaitForWrites();
-	g_superSPI.DiscardRxData();
-	g_superSPI.BlockingRead();	//discard dummy byte
-	uint16_t tmp = g_superSPI.BlockingRead();
-	tmp |= (g_superSPI.BlockingRead() << 8);
-	*g_superSPICS = 1;
 
-	g_logTimer.Sleep(1);
+	/*
+	//DEBUG: poll various sensors reasonably fast
+	g_log("Dumping sensors\n");
+	LogIndenter li(g_log);
+	auto vin = ReadSupervisorRegister(SUPER_REG_IBCVIN);
+	g_log("IBC input:  %2d.%03d V\n", vin / 1000, vin % 1000);
 
-	return tmp;
+	auto iin = ReadSupervisorRegister(SUPER_REG_IBCIIN);
+	g_log("            %2d.%03d A\n", iin / 1000, iin % 1000);
+
+	auto pin = vin * iin / 1000;
+	g_log("            %2d.%03d W\n", pin / 1000, pin % 1000);
+
+	auto vout = ReadSupervisorRegister(SUPER_REG_IBCVOUT);
+	g_log("    output: %2d.%03d V\n", vout / 1000, vout % 1000);
+
+	auto iout = ReadSupervisorRegister(SUPER_REG_IBCIOUT);
+	g_log("            %2d.%03d A\n", iout / 1000, iout % 1000);
+
+	auto pout = vout * iout / 1000;
+	g_log("            %2d.%03d W\n", pout / 1000, pout % 1000);
+
+	auto vsense = ReadSupervisorRegister(SUPER_REG_IBCVSENSE);
+	g_log("    sense:  %2d.%03d V\n", vsense / 1000, vsense % 1000);
+
+	auto ibctemp = ReadSupervisorRegister(SUPER_REG_IBCTEMP);
+	g_log("    DC-DC:  %uhk C\n", ibctemp);
+
+	auto smcutemp = ReadSupervisorRegister(SUPER_REG_IBCMCUTEMP);
+	g_log("    MCU:    %uhk C\n", smcutemp);
+
+	auto ibc3v3 = ReadSupervisorRegister(SUPER_REG_IBC3V3);
+	g_log("            %2d.%03d V\n", ibc3v3 / 1000, ibc3v3 % 1000);
+
+	auto mcutemp = ReadSupervisorRegister(SUPER_REG_MCUTEMP);
+	g_log("    Super:  %uhk C\n", mcutemp);
+
+	auto super3v3 = ReadSupervisorRegister(SUPER_REG_3V3);
+	g_log("            %2d.%03d V\n", super3v3 / 1000, super3v3 % 1000);
+	*/
 }
-*/

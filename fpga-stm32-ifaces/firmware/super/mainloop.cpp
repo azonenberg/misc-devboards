@@ -29,7 +29,7 @@
 
 #include "supervisor.h"
 #include "IBCRegisterReader.h"
-#include "TempSensorReader.h"
+#include <supervisor/TempSensorReader.h>
 #include "SupervisorSPIServer.h"
 
 //TODO: fix this path somehow?
@@ -167,7 +167,7 @@ void BSP_MainLoopIteration()
 bool PollIBCSensors()
 {
 	static IBCRegisterReader regreader;
-	static TempSensorReader tempreader;
+	static TempSensorReader tempreader(g_i2c, g_tempI2cAddress);
 
 	static int state = 0;
 
