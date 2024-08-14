@@ -209,6 +209,10 @@ void UpdateResets()
 				g_resetSequence[i]->GetName());
 			g_resetSequenceIndex = i;
 			g_resetsDone = false;
+
+			//Assert all subsequent resets
+			for(size_t j=i+1; j<g_resetSequence.size(); j++)
+				g_resetSequence[j]->Assert();
 			break;
 		}
 	}
