@@ -150,16 +150,18 @@ bool PollIBCSensors();
 void UpdateLEDs();
 void UpdateResets();
 
+const int g_logTimerMax = 60000;
+
 void BSP_MainLoopIteration()
 {
-	//Check for overflows on our log message timer
-	const int logTimerMax = 60000;
-	g_log.UpdateOffset(logTimerMax);
+	//Handle wraps of the timer in the logger
+	g_log.UpdateOffset(g_logTimerMax);
 
 	//Core supervisor state machine
 	UpdateLEDs();
 	if(g_powerOn)
 		UpdateResets();
+	//TODO: detect runtime power failures
 
 	//Management and system health
 	static SupervisorSPIServer spiserver(g_spi);
@@ -172,9 +174,33 @@ void BSP_MainLoopIteration()
  */
 void UpdateLEDs()
 {
-	//Update indicator LED states
+	//PGOOD LED just tracks power rail states
 	g_pgoodLED = g_powerOn;
-	g_sysokLED = g_resetsDone;
+
+	//OK LED: off = down, blinking = booting, solid = normal operation
+	if(g_powerOn)
+	{
+		if(g_resetsDone)
+			g_sysokLED = true;
+
+		else
+		{
+			//Blink OK LED at 2 Hz if reset state machine is running but we're waiting for everything to come up
+			static uint32_t nextBlink = 0;
+			const uint32_t blinkDelay = 2500;
+
+			auto now = g_logTimer.GetCount();
+			if(now >= nextBlink)
+			{
+				g_sysokLED = !g_sysokLED;
+				nextBlink = now + blinkDelay;
+				if(nextBlink > g_logTimerMax)
+					nextBlink -= g_logTimerMax;
+			}
+		}
+	}
+	else
+		g_sysokLED = false;
 }
 
 /**
