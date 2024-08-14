@@ -30,22 +30,17 @@
 #ifndef SupervisorSPIServer_h
 #define SupervisorSPIServer_h
 
-#include "superregs.h"
+#include <supervisor/SupervisorSPIRegisters.h>
+#include <helpers/SPIServer.h>
 
-class SupervisorSPIServer
+class SupervisorSPIServer : public SPIServer
 {
 public:
-	SupervisorSPIServer();
-
-	void OnFallingEdge();
-	void OnByte(uint8_t b);
+	SupervisorSPIServer(SPI<64, 64>& spi);
 
 protected:
-	void OnCommand(uint8_t b);
-	void OnDataByte(uint8_t b);
+	virtual void OnCommand(uint8_t b) override;
 
-	uint16_t m_nbyte;
-	uint8_t m_command;
 };
 
 #endif

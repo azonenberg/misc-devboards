@@ -44,15 +44,12 @@ extern void App_Init();
 //Global hardware config used by both app and bootloader
 extern ADC* g_adc;
 extern UART<16, 256> g_uart;
-extern SPI<2048, 64> g_spi;
+extern SPI<64, 64> g_spi;
 extern I2C g_i2c;
 extern const uint8_t g_tempI2cAddress;
 extern const uint8_t g_ibcI2cAddress;
 
 extern uint32_t g_spiRxFifoOverflows;
-
-extern char g_ibcSwVersion[20];
-extern char g_ibcHwVersion[20];
 
 //Common ISRs used by application and bootloader
 void SPI_CSHandler();

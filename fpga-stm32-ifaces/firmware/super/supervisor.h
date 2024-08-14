@@ -37,4 +37,15 @@
 
 extern UART<16, 256> g_uart;
 
+extern uint16_t g_ibcTemp;
+extern uint16_t g_ibc3v3;
+extern uint16_t g_ibcMcuTemp;
+extern uint16_t g_vin48;
+extern uint16_t g_vout12;
+extern uint16_t g_voutsense;
+extern uint16_t g_iin;
+extern uint16_t g_iout;
+extern uint16_t g_3v3Voltage;
+extern uint16_t g_mcutemp;
+
 #endif

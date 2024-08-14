@@ -58,7 +58,7 @@
 //#include "ManagementDHCPClient.h"
 //#include "CrossbarSSHKeyManager.h"
 
-#include "../super/superregs.h"
+#include <supervisor/SupervisorSPIRegisters.h>
 
 void App_Init();
 void InitFMC();

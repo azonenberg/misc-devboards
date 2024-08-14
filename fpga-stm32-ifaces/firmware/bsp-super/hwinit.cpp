@@ -61,7 +61,7 @@ UART<16, 256> g_uart(&USART1, 694);
 Timer g_logTimer(&TIM2, Timer::FEATURE_ADVANCED, 16000);
 
 //SPI bus to the main MCU
-SPI<2048, 64> g_spi(&SPI1, true, 2, false);
+SPI<64, 64> g_spi(&SPI1, true, 2, false);
 GPIOPin* g_spiCS = nullptr;
 
 //I2C1 defaults to running of APB clock (80 MHz)
@@ -248,20 +248,6 @@ void InitSPI()
 void InitGPIOs()
 {
 	g_log("Initializing GPIOs\n");
-
-	//Disable 12V input rail
-	g_12v0_en = 0;
-
-	//turn off all regulators
-	g_1v0_en = 0;
-	g_1v2_en = 0;
-	g_1v8_en = 0;
-	g_3v3_en = 0;
-
-	//Hold MCU in reset
-	g_mcuResetN = 0;
-	g_fpgaResetN = 0;
-	g_fpgaInitN = 0;
 
 	//Enable pullups on all PGOOD lines
 	g_1v0_pgood.SetPullMode(GPIOPin::PULL_UP);

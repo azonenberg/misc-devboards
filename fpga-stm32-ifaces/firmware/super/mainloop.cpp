@@ -31,39 +31,105 @@
 #include "IBCRegisterReader.h"
 #include <supervisor/TempSensorReader.h>
 #include "SupervisorSPIServer.h"
+#include <supervisor/RailDescriptor.h>
+#include <supervisor/ResetDescriptor.h>
+#include <array>
 
 //TODO: fix this path somehow?
 #include "../../../../common-ibc/firmware/main/regids.h"
 
-//Indicates the main MCU is alive
-bool	g_mainMCUDown = true;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Power rail descriptors
+
+//12V ramp rate is slew rate controlled to about 2 kV/sec, so should take 0.5 ms to come up
+//Give it 5 ms to be safe (plus extra delay from UART messages)
+//TODO: add a new descriptor type that can get feedback from the IBC remote sense
+//to make sure we actually have correct voltage
+GPIOPin g_12v0_en(&GPIOA, 12, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
+RailDescriptorWithEnable g_12v0("12V0", g_12v0_en, g_logTimer, 50);
+
+GPIOPin g_1v0_en(&GPIOB, 15, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
+GPIOPin g_1v0_pgood(&GPIOA, 8, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
+RailDescriptorWithEnableAndPGood g_1v0("1V0", g_1v0_en, g_1v0_pgood, g_logTimer, 75);
+
+GPIOPin g_1v2_en(&GPIOA, 2, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
+GPIOPin g_1v2_pgood(&GPIOA, 1, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
+RailDescriptorWithEnableAndPGood g_1v2("1V2", g_1v2_en, g_1v2_pgood, g_logTimer, 75);
+
+GPIOPin g_1v8_en(&GPIOA, 11, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
+GPIOPin g_1v8_pgood(&GPIOB, 14, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
+RailDescriptorWithEnableAndPGood g_1v8("1V8", g_1v8_en, g_1v8_pgood, g_logTimer, 75);
+
+GPIOPin g_3v3_en(&GPIOB, 12, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
+GPIOPin g_3v3_pgood(&GPIOB, 13, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
+RailDescriptorWithEnableAndPGood g_3v3("3V3", g_3v3_en, g_3v3_pgood, g_logTimer, 75);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Power rail sequence
+
+auto g_powerSequence = std::to_array<RailDescriptor*>
+({
+	//12V has to come up first since it supplies everything else
+	&g_12v0,
+
+	//VCCINT - VCCAUX - VCCO for the FPGA
+	&g_1v0,
+	&g_1v8,
+	&g_3v3,
+
+	//1V2 rail for the PHY should come up after 3.3V rail (note 1 on page 62)
+	&g_1v2
+});
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Reset descriptors
+
+//Active low edge triggered reset
+GPIOPin g_fpgaResetN(&GPIOA, 3, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
+ActiveLowResetDescriptor g_fpgaResetDescriptor(g_fpgaResetN, "FPGA PROG");
+
+//Active low level triggered delay-boot flag
+//Use this as the "FPGA is done booting" indicator
+GPIOPin g_fpgaInitN(&GPIOA, 3, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW, 0, true);
+GPIOPin g_fpgaDone(&GPIOB, 2, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
+ActiveLowResetDescriptorWithActiveHighDone g_fpgaInitDescriptor(g_fpgaInitN, g_fpgaDone, "FPGA INIT");
+
+//MCU reset comes at the end
+GPIOPin g_mcuResetN(&GPIOA, 3, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
+ActiveLowResetDescriptor g_mcuResetDescriptor(g_mcuResetN, "MCU");
+
+auto g_resetSequence = std::to_array<ResetDescriptor*>
+({
+	//First boot the FPGA
+	&g_fpgaResetDescriptor,
+	&g_fpgaInitDescriptor,
+
+	//then release the MCU
+	&g_mcuResetDescriptor,
+});
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// System status indicator LEDs
 
 //GPIO pins
 GPIOPin g_pgoodLED(&GPIOA, 0, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
 GPIOPin g_faultLED(&GPIOH, 0, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
 GPIOPin g_sysokLED(&GPIOH, 1, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
 
-GPIOPin g_12v0_en(&GPIOA, 12, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-GPIOPin g_1v0_en(&GPIOB, 15, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-GPIOPin g_1v0_pgood(&GPIOA, 8, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Internal state for reset and power state (TODO librarize)
 
-GPIOPin g_1v2_en(&GPIOA, 2, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-GPIOPin g_1v2_pgood(&GPIOA, 1, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
+///@brief Index of the currently active line in the reset state machine
+size_t g_resetSequenceIndex = 0;
 
-GPIOPin g_1v8_en(&GPIOA, 11, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-GPIOPin g_1v8_pgood(&GPIOB, 14, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
+///@brief True if power is currently fully on
+bool g_powerOn = false;
 
-GPIOPin g_3v3_en(&GPIOB, 12, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-GPIOPin g_3v3_pgood(&GPIOB, 13, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
+///@brief True if all resets are currently up
+bool g_resetsDone = false;
 
-GPIOPin g_mcuResetN(&GPIOA, 3, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-
-GPIOPin g_fpgaResetN(&GPIOA, 3, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-GPIOPin g_fpgaInitN(&GPIOA, 3, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW, 0, true);
-
-GPIOPin g_fpgaDone(&GPIOB, 2, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
-
-bool g_fpgaUp = false;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// System health monitoring
 
 uint16_t g_ibcTemp = 0;
 uint16_t g_ibc3v3 = 0;
@@ -73,89 +139,78 @@ uint16_t g_vout12 = 0;
 uint16_t g_voutsense = 0;
 uint16_t g_iin = 0;
 uint16_t g_iout = 0;
-uint16_t g_3v3 = 0;
+uint16_t g_3v3Voltage = 0;
 uint16_t g_mcutemp = 0;
 
 bool PollIBCSensors();
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Main loop
+
+void UpdateLEDs();
+void UpdateResets();
+
 void BSP_MainLoopIteration()
 {
-	const int logTimerMax = 60000;
-	static uint32_t next1HzTick = 0;
-
 	//Check for overflows on our log message timer
-	if(g_log.UpdateOffset(logTimerMax) && (next1HzTick >= logTimerMax) )
-		next1HzTick -= logTimerMax;
+	const int logTimerMax = 60000;
+	g_log.UpdateOffset(logTimerMax);
 
-	//Check for FPGA state changes
-	bool done = g_fpgaDone;
-	if(g_fpgaUp != done)
-	{
-		//If FPGA goes down, shut down the main MCU
-		if(!done)
-		{
-			g_log("FPGA went down, resetting MCU\n");
-			g_mcuResetN = 0;
-			g_sysokLED = false;
-		}
-		else
-		{
-			g_log("FPGA is up, releasing MCU reset\n");
-			g_mcuResetN = 1;
-			g_sysokLED = true;	//TODO wait until MCU is confirmed alive?
-		}
-		g_fpgaUp = done;
-	}
+	//Core supervisor state machine
+	UpdateLEDs();
+	if(g_powerOn)
+		UpdateResets();
 
-	//Check for sensor updates
+	//Management and system health
+	static SupervisorSPIServer spiserver(g_spi);
 	PollIBCSensors();
+	spiserver.Poll();
+}
 
-	//1 Hz timer event
-	//static uint32_t nextHealthPrint = 2;
-	if(g_logTimer.GetCount() >= next1HzTick)
+/**
+	@brief Updatethe system status indicator LEDs
+ */
+void UpdateLEDs()
+{
+	//Update indicator LED states
+	g_pgoodLED = g_powerOn;
+	g_sysokLED = g_resetsDone;
+}
+
+/**
+	@brief Run the reset state machine
+ */
+void UpdateResets()
+{
+	//Actively running reset sequence. Time to advance the sequence?
+	if(!g_resetsDone && g_resetSequence[g_resetSequenceIndex]->IsReady())
 	{
-		next1HzTick = g_logTimer.GetCount() + 10000;
+		g_resetSequenceIndex ++;
 
-		/*
-		//DEBUG: log sensor values
-		if(nextHealthPrint == 0)
+		//Done with all resets? We're OK
+		if(g_resetSequenceIndex >= g_resetSequence.size())
 		{
-			//Print sensor values
-			g_log("Health sensors\n");
-			LogIndenter li(g_log);
-
-			//Supervisor sensors
-			auto temp = g_adc->GetTemperature();
-			g_log("Super temp:      %uhk C\n", temp);
-			auto vdd = g_adc->GetSupplyVoltage();
-			g_log("Super 3V3_SB:    %2d.%03d V\n", vdd/1000, vdd % 1000);
-
-			//IBC sensors
-			g_log("IBC temperature: %uhk C\n", g_ibcTemp);
-			g_log("IBC MCU:         %uhk C\n", g_ibcMcuTemp);
-			g_log("IBC 3V3_SB:      %2d.%03d V\n", g_ibc3v3 / 1000, g_ibc3v3 % 1000);
-			g_log("48V0:            %2d.%03d V\n", g_vin48 / 1000, g_vin48 % 1000);
-			g_log("12V0_OUT:        %2d.%03d V\n", g_vout12 / 1000, g_vout12 % 1000);
-			g_log("12V0_SENSE:      %2d.%03d V\n", g_voutsense / 1000, g_voutsense % 1000);
-			g_log("48V0 load:       %2d.%03d A\n", g_iin / 1000, g_iin % 1000);
-			g_log("12V0 load:       %2d.%03d A\n", g_iout / 1000, g_iout % 1000);
-
-			nextHealthPrint = 15;
+			g_log("Reset sequence complete\n");
+			g_resetsDone = true;
 		}
-		nextHealthPrint --;
-		*/
+
+		//Nope, clear the next reset in line
+		else
+			g_resetSequence[g_resetSequenceIndex]->Deassert();
 	}
 
-	//Read and process SPI events
-	static SupervisorSPIServer spiserver;
-	if(g_spi.HasEvents())
+	//Check all devices earlier in the reset sequence and see if any went down.
+	//If so, back up to that stage and resume the sequence
+	for(size_t i=0; i<g_resetSequenceIndex; i++)
 	{
-		auto event = g_spi.GetEvent();
-
-		if(event.type == SPIEvent::TYPE_CS)
-			spiserver.OnFallingEdge();
-		else
-			spiserver.OnByte(event.data);
+		if(!g_resetSequence[i]->IsReady())
+		{
+			g_log("%s is no longer ready, restarting reset sequence from that point\n",
+				g_resetSequence[i]->GetName());
+			g_resetSequenceIndex = i;
+			g_resetsDone = false;
+			break;
+		}
 	}
 }
 
@@ -251,7 +306,7 @@ bool PollIBCSensors()
 			break;
 
 		case 9:
-			g_3v3 = g_adc->GetSupplyVoltage();
+			g_3v3Voltage = g_adc->GetSupplyVoltage();
 			state ++;
 			break;
 
@@ -267,88 +322,51 @@ bool PollIBCSensors()
 void PowerOn()
 {
 	g_log("Turning power on\n");
-	LogIndenter li(g_log);
 
-	//12V ramp rate is slew rate controlled to about 2 kV/sec, so should take 0.5 ms to come up
-	//Give it 5 ms to be safe (plus extra delay from UART messages)
-	//(we don't have any sensing on this rail so we have to just hope it came up)
-	g_log("Enabling 12V rail\n");
-	g_12v0_en = 1;
-	g_logTimer.Sleep(50);
-
-	//no pgood signal, TODO poll ADCs
-
-	/*
-	//TODO: poll the 12V rail via our ADC and measure it to verify it's good
-	auto vin = Get12VRailVoltage();
-	g_log("Measured 12V0 rail voltage: %d.%03d V\n", vin/1000, vin % 1000);
-	if(vin < 11000)
+	//Turn on all rails and wait for them all to come up
+	for(auto rail : g_powerSequence)
 	{
-		PanicShutdown();
-
-		g_log(Logger::ERROR, "12V supply failed to come up\n");
-
-		while(1)
-		{}
+		LogIndenter li(g_log);
+		if(!rail->TurnOn())
+		{
+			PanicShutdown();
+			return;
+		}
 	}
-	*/
 
-	//Turn on other rails in sequence (VCCINT - VCCAUX - VCCO)
-	StartRail(g_1v0_en, g_1v0_pgood, 75, "1V0");
-	StartRail(g_1v8_en, g_1v8_pgood, 75, "1V8");
-	StartRail(g_3v3_en, g_3v3_pgood, 75, "3V3");
-
-	//1V2 for the PHY can go on whenever (TODO check sequencing vs 3V3)
-	StartRail(g_1v2_en, g_1v2_pgood, 75, "1V2");
-
-	//Start the FPGA
-	g_log("Releasing FPGA reset\n");
-	g_fpgaResetN = 1;
-	g_fpgaInitN = 1;
-	g_pgoodLED = 1;
+	//Start the reset sequence
+	g_log("Releasing resets\n");
+	g_powerOn = true;
+	g_resetsDone = false;
+	g_resetSequenceIndex = 0;
+	if(!g_resetSequence.empty())
+		g_resetSequence[0]->Deassert();
 }
 
 /**
 	@brief Shuts down all rails in reverse order but without any added sequencing delays
  */
-void PanicShutdown()
+__attribute__((noreturn)) void PanicShutdown()
 {
-	//active low for now
-	g_1v0_en = 0;
-	g_1v2_en = 0;
-	g_1v8_en = 0;
-	g_3v3_en = 0;
-	g_12v0_en = 0;
+	//Shut down all rails in reverse order
+	for(int i = g_powerSequence.size()-1; i >= 0; i--)
+		g_powerSequence[i]->TurnOff();
 
-	g_mcuResetN = 0;
+	//Assert all resets (don't care about order, we're powered down anyway)
+	for(auto r : g_resetSequence)
+		r->Assert();
 
-	//set LEDs to fault state
+	//Set LEDs to fault state
 	g_faultLED = 1;
-	g_pgoodLED = 0;
 	g_sysokLED = 0;
-}
+	g_pgoodLED = 0;
 
-/**
-	@brief Turns on a single power rail, checking for failure
- */
-void StartRail(GPIOPin& en, GPIOPin& pgood, uint32_t timeout, const char* name)
-{
-	g_log("Turning on %s\n", name);
+	//Clear status flags to indicate we're not running
+	g_powerOn = false;
+	g_resetsDone = false;
+	g_resetSequenceIndex = 0;
 
-	en = 1;
-	for(uint32_t i=0; i<timeout; i++)
-	{
-		if(pgood)
-			return;
-		g_logTimer.Sleep(1);
-	}
-	if(!pgood)
-	{
-		PanicShutdown();
-
-		g_log(Logger::ERROR, "Rail %s failed to come up\n", name);
-
-		while(1)
-		{}
-	}
+	//Hang until reset, don't attempt to auto restart
+	while(1)
+	{}
 }

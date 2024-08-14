@@ -30,32 +30,9 @@
 #include "supervisor.h"
 #include "SupervisorSPIServer.h"
 
-SupervisorSPIServer::SupervisorSPIServer()
-	: m_nbyte(0)
-	, m_command(0)
+SupervisorSPIServer::SupervisorSPIServer(SPI<64, 64>& spi)
+	: SPIServer(spi)
 {
-}
-
-/**
-	@brief Called on CS# falling edge
- */
-void SupervisorSPIServer::OnFallingEdge()
-{
-	m_nbyte = 0;
-	m_command = 0;
-}
-
-/**
-	@brief Called when a SPI byte arrives
- */
-void SupervisorSPIServer::OnByte(uint8_t b)
-{
-	if(m_nbyte == 0)
-		OnCommand(b);
-	else
-		OnDataByte(b);
-
-	m_nbyte ++;
 }
 
 /**
@@ -67,7 +44,7 @@ void SupervisorSPIServer::OnCommand(uint8_t b)
 
 	//Always send two dummy bytes
 	static uint8_t dummy[1] = { 0x00 };
-	g_spi.NonblockingWriteFifo(dummy, 1);
+	m_spi.NonblockingWriteFifo(dummy, 1);
 
 	switch(m_command)
 	{
@@ -75,55 +52,55 @@ void SupervisorSPIServer::OnCommand(uint8_t b)
 		// Stats readout commands
 
 		case SUPER_REG_VERSION:
-			g_spi.NonblockingWriteFifo((const uint8_t*)g_version, sizeof(g_version));
+			m_spi.NonblockingWriteFifo((const uint8_t*)g_version, sizeof(g_version));
 			break;
 
 		case SUPER_REG_IBCVERSION:
-			g_spi.NonblockingWriteFifo((const uint8_t*)g_ibcSwVersion, sizeof(g_ibcSwVersion));
+			m_spi.NonblockingWriteFifo((const uint8_t*)g_ibcSwVersion, sizeof(g_ibcSwVersion));
 			break;
 
 		case SUPER_REG_IBCHWVERSION:
-			g_spi.NonblockingWriteFifo((const uint8_t*)g_ibcHwVersion, sizeof(g_ibcHwVersion));
+			m_spi.NonblockingWriteFifo((const uint8_t*)g_ibcHwVersion, sizeof(g_ibcHwVersion));
 			break;
 
 		case SUPER_REG_IBCVIN:
-			g_spi.NonblockingWriteFifo((const uint8_t*)&g_vin48, sizeof(g_vin48));
+			m_spi.NonblockingWriteFifo((const uint8_t*)&g_vin48, sizeof(g_vin48));
 			break;
 
 		case SUPER_REG_IBCIIN:
-			g_spi.NonblockingWriteFifo((const uint8_t*)&g_iin, sizeof(g_iin));
+			m_spi.NonblockingWriteFifo((const uint8_t*)&g_iin, sizeof(g_iin));
 			break;
 
 		case SUPER_REG_IBCTEMP:
-			g_spi.NonblockingWriteFifo((const uint8_t*)&g_ibcTemp, sizeof(g_ibcTemp));
+			m_spi.NonblockingWriteFifo((const uint8_t*)&g_ibcTemp, sizeof(g_ibcTemp));
 			break;
 
 		case SUPER_REG_IBCVOUT:
-			g_spi.NonblockingWriteFifo((const uint8_t*)&g_vout12, sizeof(g_vout12));
+			m_spi.NonblockingWriteFifo((const uint8_t*)&g_vout12, sizeof(g_vout12));
 			break;
 
 		case SUPER_REG_IBCIOUT:
-			g_spi.NonblockingWriteFifo((const uint8_t*)&g_iout, sizeof(g_iout));
+			m_spi.NonblockingWriteFifo((const uint8_t*)&g_iout, sizeof(g_iout));
 			break;
 
 		case SUPER_REG_IBCVSENSE:
-			g_spi.NonblockingWriteFifo((const uint8_t*)&g_voutsense, sizeof(g_voutsense));
+			m_spi.NonblockingWriteFifo((const uint8_t*)&g_voutsense, sizeof(g_voutsense));
 			break;
 
 		case SUPER_REG_IBCMCUTEMP:
-			g_spi.NonblockingWriteFifo((const uint8_t*)&g_ibcMcuTemp, sizeof(g_ibcMcuTemp));
+			m_spi.NonblockingWriteFifo((const uint8_t*)&g_ibcMcuTemp, sizeof(g_ibcMcuTemp));
 			break;
 
 		case SUPER_REG_IBC3V3:
-			g_spi.NonblockingWriteFifo((const uint8_t*)&g_ibc3v3, sizeof(g_ibc3v3));
+			m_spi.NonblockingWriteFifo((const uint8_t*)&g_ibc3v3, sizeof(g_ibc3v3));
 			break;
 
 		case SUPER_REG_MCUTEMP:
-			g_spi.NonblockingWriteFifo((const uint8_t*)&g_mcutemp, sizeof(g_mcutemp));
+			m_spi.NonblockingWriteFifo((const uint8_t*)&g_mcutemp, sizeof(g_mcutemp));
 			break;
 
 		case SUPER_REG_3V3:
-			g_spi.NonblockingWriteFifo((const uint8_t*)&g_3v3, sizeof(g_3v3));
+			m_spi.NonblockingWriteFifo((const uint8_t*)&g_3v3Voltage, sizeof(g_3v3Voltage));
 			break;
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -132,11 +109,4 @@ void SupervisorSPIServer::OnCommand(uint8_t b)
 		default:
 			break;
 	}
-}
-
-/**
-	@brief Called when a SPI data byte (not command) arrives
- */
-void SupervisorSPIServer::OnDataByte([[maybe_unused]] uint8_t b)
-{
 }
