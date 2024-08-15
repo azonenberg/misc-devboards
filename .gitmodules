@@ -19,3 +19,6 @@
 [submodule "staticnet"]
 	path = staticnet
 	url = ../staticnet.git
+[submodule "etl"]
+	path = etl
+	url = https://github.com/ETLCPP/etl
