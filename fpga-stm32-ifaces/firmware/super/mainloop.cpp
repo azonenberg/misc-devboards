@@ -28,8 +28,6 @@
 ***********************************************************************************************************************/
 
 #include "supervisor.h"
-#include "IBCRegisterReader.h"
-#include <supervisor/TempSensorReader.h>
 #include "SupervisorSPIServer.h"
 
 //TODO: fix this path somehow?
@@ -120,25 +118,6 @@ etl::vector g_resetSequence
 IfacePowerResetSupervisor g_super(g_powerSequence, g_resetSequence);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// System health monitoring
-
-uint16_t g_ibcTemp = 0;
-uint16_t g_ibc3v3 = 0;
-uint16_t g_ibcMcuTemp = 0;
-uint16_t g_vin48 = 0;
-uint16_t g_vout12 = 0;
-uint16_t g_voutsense = 0;
-uint16_t g_iin = 0;
-uint16_t g_iout = 0;
-uint16_t g_3v3Voltage = 0;
-uint16_t g_mcutemp = 0;
-
-bool PollIBCSensors();
-
-///@brief Firmware version string
-char g_version[20] = {0};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Peripheral initialization
 
 void App_Init()
@@ -210,109 +189,4 @@ void UpdateLEDs()
 	}
 	else
 		g_sysokLED = false;
-}
-
-/**
-	@brief Requests more sensor data from the IBC
-
-	@return true if sensor values are updated
- */
-bool PollIBCSensors()
-{
-	static IBCRegisterReader regreader;
-	static TempSensorReader tempreader(g_i2c, g_tempI2cAddress);
-
-	static int state = 0;
-
-	static int iLastUpdate = 0;
-	iLastUpdate ++;
-
-	if(iLastUpdate > 30000)
-	{
-		g_log(Logger::WARNING, "I2C sensor state machine timeout (IBC hang or reboot?), resetting and trying again\n");
-
-		//Reset both readers and return to the idle state, wait 10ms before retrying anything
-		tempreader.Reset();
-		regreader.Reset();
-		g_i2c.Reset();
-		state = 0;
-		iLastUpdate = 0;
-		g_logTimer.Sleep(2);
-	}
-
-	//Read the values
-	switch(state)
-	{
-		case 0:
-			if(tempreader.ReadTempNonblocking(g_ibcTemp))
-			{
-				iLastUpdate = 0;
-				state ++;
-			}
-			break;
-
-		case 1:
-			if(regreader.ReadRegisterNonblocking(IBC_REG_VIN, g_vin48))
-			{
-				iLastUpdate = 0;
-				state ++;
-			}
-			break;
-
-		case 2:
-			if(regreader.ReadRegisterNonblocking(IBC_REG_VOUT, g_vout12))
-			{
-				iLastUpdate = 0;
-				state ++;
-			}
-			break;
-
-		case 3:
-			if(regreader.ReadRegisterNonblocking(IBC_REG_VSENSE, g_voutsense))
-			{
-				iLastUpdate = 0;
-				state ++;
-			}
-			break;
-
-		case 4:
-			if(regreader.ReadRegisterNonblocking(IBC_REG_IIN, g_iin))
-				state ++;
-			break;
-
-		case 5:
-			if(regreader.ReadRegisterNonblocking(IBC_REG_IOUT, g_iout))
-				state ++;
-			break;
-
-		case 6:
-			if(regreader.ReadRegisterNonblocking(IBC_REG_MCU_TEMP, g_ibcMcuTemp))
-				state ++;
-			break;
-
-		case 7:
-			if(regreader.ReadRegisterNonblocking(IBC_REG_3V3_SB, g_ibc3v3))
-				state ++;
-			break;
-
-		//Also read our own internal health sensors at this point in the rotation
-		//(should we rename this function PollHealthSensors or something?)
-		//TODO: nonblocking ADC accesses?
-		case 8:
-			if(g_adc->GetTemperatureNonblocking(g_mcutemp))
-				state ++;
-			break;
-
-		case 9:
-			g_3v3Voltage = g_adc->GetSupplyVoltage();
-			state ++;
-			break;
-
-		//end of loop, wrap around
-		default:
-			state = 0;
-			return true;
-	}
-
-	return false;
 }

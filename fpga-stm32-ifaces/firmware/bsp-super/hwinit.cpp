@@ -34,13 +34,10 @@
  */
 #include <core/platform.h>
 #include <supervisor/supervisor-common.h>
-#include <bootloader/bootloader-common.h>
-#include <bootloader/BootloaderAPI.h>
 #include "hwinit.h"
 #include <peripheral/Power.h>
 
 void InitSPI();
-void InitADC();
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Common global hardware config used by both bootloader and application
@@ -49,48 +46,16 @@ void InitADC();
 //USART1 is on APB1 (80 MHz), so we need a divisor of 694.44, round to 694
 UART<16, 256> g_uart(&USART1, 694);
 
-//APB1 is 80 MHz
-//Divide down to get 10 kHz ticks (note TIM2 is double rate)
-Timer g_logTimer(&TIM2, Timer::FEATURE_ADVANCED, 16000);
-
 //SPI bus to the main MCU
 SPI<64, 64> g_spi(&SPI1, true, 2, false);
-GPIOPin* g_spiCS = nullptr;
 
 //I2C1 defaults to running of APB clock (80 MHz)
 //Prescale by 4 to get 20 MHz
 //Divide by 200 after that to get 100 kHz
 I2C g_i2c(&I2C1, 4, 200);
 
-///@brief The battery-backed RAM used to store state across power cycles
-volatile BootloaderBBRAM* g_bbram = reinterpret_cast<volatile BootloaderBBRAM*>(&_RTC.BKP[0]);
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Low level init
-
-void BSP_InitPower()
-{
-	Power::ConfigureLDO(RANGE_VOS1);
-}
-
-void BSP_InitClocks()
-{
-	//Configure the flash with wait states and prefetching before making any changes to the clock setup.
-	//A bit of extra latency is fine, the CPU being faster than flash is not.
-	Flash::SetConfiguration(80, RANGE_VOS1);
-
-	RCCHelper::InitializePLLFromHSI16(
-		2,	//Pre-divide by 2 (PFD frequency 8 MHz)
-		20,	//VCO at 8*20 = 160 MHz
-		4,	//Q divider is 40 MHz (nominal 48 but we're not using USB so this is fine)
-		2,	//R divider is 80 MHz (fmax for CPU)
-		1,	//no further division from SYSCLK to AHB (80 MHz)
-		1,	//APB1 at 80 MHz
-		1);	//APB2 at 80 MHz
-
-	//Select ADC clock as sysclk
-	RCC.CCIPR |= 0x3000'0000;
-}
 
 void BSP_InitUART()
 {
@@ -105,20 +70,6 @@ void BSP_InitUART()
 	NVIC_EnableIRQ(37);
 }
 
-void BSP_InitLog()
-{
-	//Wait 10ms to avoid resets during shutdown from destroying diagnostic output
-	g_logTimer.Sleep(100);
-
-	//Clear screen and move cursor to X0Y0 (but only in bootloader)
-	#ifndef NO_CLEAR_SCREEN
-	g_uart.Printf("\x1b[2J\x1b[0;0H");
-	#endif
-
-	//Start the logger
-	g_log.Initialize(&g_uart, &g_logTimer);
-}
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Common features shared by both application and bootloader
 
@@ -126,31 +77,10 @@ void BSP_Init()
 {
 	//Bring up the IBC before powering up the rest of the system
 	InitGPIOs();
-	Super_InitI2C();
-	Super_InitIBC();
-	InitADC();
+	Super_Init();
 	InitSPI();
 
 	App_Init();
-}
-
-void InitADC()
-{
-	g_log("Initializing ADC\n");
-	LogIndenter li(g_log);
-
-	//Run ADC at sysclk/10 (10 MHz)
-	static ADC adc(&_ADC, &_ADC.chans[0], 10);
-	g_adc = &adc;
-	g_logTimer.Sleep(20);
-
-	//Set up sampling time. Need minimum 5us to accurately read temperature
-	//With ADC clock of 8 MHz = 125 ns per cycle this is 40 cycles
-	//Max 8 us / 64 clocks for input channels
-	//47.5 clocks fits both requirements, use it for everything
-	int tsample = 95;
-	for(int i=0; i <= 18; i++)
-		adc.SetSampleTime(tsample, i);
 }
 
 void InitSPI()

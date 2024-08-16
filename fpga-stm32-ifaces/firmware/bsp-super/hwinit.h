@@ -35,15 +35,13 @@
 #include <peripheral/Flash.h>
 #include <peripheral/GPIO.h>
 #include <peripheral/I2C.h>
-#include <peripheral/UART.h>
 #include <peripheral/SPI.h>
+#include <peripheral/UART.h>
+
+#include <supervisor/supervisor-common.h>
 
 ///@brief Initialize application-specific hardware stuff
 extern void App_Init();
-
-//Global hardware config used by both app and bootloader
-extern UART<16, 256> g_uart;
-extern SPI<64, 64> g_spi;
 
 extern uint32_t g_spiRxFifoOverflows;
 
@@ -61,10 +59,6 @@ extern GPIOPin g_1v0_pgood;
 extern GPIOPin g_1v2_pgood;
 extern GPIOPin g_1v8_pgood;
 extern GPIOPin g_3v3_pgood;
-
-extern GPIOPin g_mcuResetN;
-extern GPIOPin g_fpgaResetN;
-extern GPIOPin g_fpgaInitN;
 
 void InitGPIOs();
 
