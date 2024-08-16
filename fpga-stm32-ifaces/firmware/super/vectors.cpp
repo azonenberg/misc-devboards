@@ -186,8 +186,7 @@ void NMI_Handler()
 
 void HardFault_Handler()
 {
-	PanicShutdown();
-
+	//Save registers
 	uint32_t* msp;
 	asm volatile("mrs %[result], MSP" : [result]"=r"(msp));
 	msp += 12;	//locals/alignment
@@ -225,6 +224,9 @@ void HardFault_Handler()
 		g_uart.Printf("        %08x\n", msp[i]);
 		g_uart.BlockingFlush();
 	}
+
+	//Shut down as we can no longer properly supervise the rails
+	g_super.PanicShutdown();
 
 	while(1)
 	{}

@@ -5,6 +5,7 @@ CXXFLAGS=-g -Og --std=c++20 -Wall -Wextra \
 	-DSTM32L431 \
 	-fno-exceptions -fno-rtti -g --specs=nano.specs -fno-threadsafe-statics \
 	-I$(ROOTDIR) \
+	-I$(ROOTDIR)/etl/include \
 	-I$(SRCDIR) \
 	-I$(ROOTDIR)/stm32-cpp/devices/inc \
 	-I$(ROOTDIR)/stm32-cpp/src \

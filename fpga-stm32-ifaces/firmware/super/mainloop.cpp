@@ -31,12 +31,16 @@
 #include "IBCRegisterReader.h"
 #include <supervisor/TempSensorReader.h>
 #include "SupervisorSPIServer.h"
-#include <supervisor/RailDescriptor.h>
-#include <supervisor/ResetDescriptor.h>
-#include <array>
 
 //TODO: fix this path somehow?
 #include "../../../../common-ibc/firmware/main/regids.h"
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// System status indicator LEDs
+
+GPIOPin g_pgoodLED(&GPIOA, 0, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
+GPIOPin g_faultLED(&GPIOH, 0, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
+GPIOPin g_sysokLED(&GPIOH, 1, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Power rail descriptors
@@ -67,10 +71,11 @@ RailDescriptorWithEnableAndPGood g_3v3("3V3", g_3v3_en, g_3v3_pgood, g_logTimer,
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Power rail sequence
 
-auto g_powerSequence = std::to_array<RailDescriptor*>
-({
+etl::vector g_powerSequence
+{
 	//12V has to come up first since it supplies everything else
-	&g_12v0,
+	(RailDescriptor*)&g_12v0,					//need to cast at least one entry to base class
+												//for proper template deduction
 
 	//VCCINT - VCCAUX - VCCO for the FPGA
 	&g_1v0,
@@ -79,7 +84,7 @@ auto g_powerSequence = std::to_array<RailDescriptor*>
 
 	//1V2 rail for the PHY should come up after 3.3V rail (note 1 on page 62)
 	&g_1v2
-});
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Reset descriptors
@@ -98,35 +103,21 @@ ActiveLowResetDescriptorWithActiveHighDone g_fpgaInitDescriptor(g_fpgaInitN, g_f
 GPIOPin g_mcuResetN(&GPIOA, 3, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
 ActiveLowResetDescriptor g_mcuResetDescriptor(g_mcuResetN, "MCU");
 
-auto g_resetSequence = std::to_array<ResetDescriptor*>
-({
+etl::vector g_resetSequence
+{
 	//First boot the FPGA
-	&g_fpgaResetDescriptor,
+	(ResetDescriptor*)&g_fpgaResetDescriptor,	//need to cast at least one entry to base class
+												//for proper template deduction
 	&g_fpgaInitDescriptor,
 
 	//then release the MCU
 	&g_mcuResetDescriptor,
-});
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// System status indicator LEDs
+// The top level supervisor controller
 
-//GPIO pins
-GPIOPin g_pgoodLED(&GPIOA, 0, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-GPIOPin g_faultLED(&GPIOH, 0, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-GPIOPin g_sysokLED(&GPIOH, 1, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Internal state for reset and power state (TODO librarize)
-
-///@brief Index of the currently active line in the reset state machine
-size_t g_resetSequenceIndex = 0;
-
-///@brief True if power is currently fully on
-bool g_powerOn = false;
-
-///@brief True if all resets are currently up
-bool g_resetsDone = false;
+IfacePowerResetSupervisor g_super(g_powerSequence, g_resetSequence);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // System health monitoring
@@ -144,6 +135,26 @@ uint16_t g_mcutemp = 0;
 
 bool PollIBCSensors();
 
+///@brief Firmware version string
+char g_version[20] = {0};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Peripheral initialization
+
+void App_Init()
+{
+	RCCHelper::Enable(&_RTC);
+
+	//Format version string
+	StringBuffer buf(g_version, sizeof(g_version));
+	static const char* buildtime = __TIME__;
+	buf.Printf("%s %c%c%c%c%c%c",
+		__DATE__, buildtime[0], buildtime[1], buildtime[3], buildtime[4], buildtime[6], buildtime[7]);
+	g_log("Firmware version %s\n", g_version);
+
+	g_super.PowerOn();
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Main loop
 
@@ -159,9 +170,7 @@ void BSP_MainLoopIteration()
 
 	//Core supervisor state machine
 	UpdateLEDs();
-	if(g_powerOn)
-		UpdateResets();
-	//TODO: detect runtime power failures
+	g_super.Iteration();
 
 	//Management and system health
 	static SupervisorSPIServer spiserver(g_spi);
@@ -175,12 +184,12 @@ void BSP_MainLoopIteration()
 void UpdateLEDs()
 {
 	//PGOOD LED just tracks power rail states
-	g_pgoodLED = g_powerOn;
+	g_pgoodLED = g_super.IsPowerOn();
 
 	//OK LED: off = down, blinking = booting, solid = normal operation
-	if(g_powerOn)
+	if(g_super.IsPowerOn())
 	{
-		if(g_resetsDone)
+		if(g_super.IsResetsDone())
 			g_sysokLED = true;
 
 		else
@@ -201,47 +210,6 @@ void UpdateLEDs()
 	}
 	else
 		g_sysokLED = false;
-}
-
-/**
-	@brief Run the reset state machine
- */
-void UpdateResets()
-{
-	//Actively running reset sequence. Time to advance the sequence?
-	if(!g_resetsDone && g_resetSequence[g_resetSequenceIndex]->IsReady())
-	{
-		g_resetSequenceIndex ++;
-
-		//Done with all resets? We're OK
-		if(g_resetSequenceIndex >= g_resetSequence.size())
-		{
-			g_log("Reset sequence complete\n");
-			g_resetsDone = true;
-		}
-
-		//Nope, clear the next reset in line
-		else
-			g_resetSequence[g_resetSequenceIndex]->Deassert();
-	}
-
-	//Check all devices earlier in the reset sequence and see if any went down.
-	//If so, back up to that stage and resume the sequence
-	for(size_t i=0; i<g_resetSequenceIndex; i++)
-	{
-		if(!g_resetSequence[i]->IsReady())
-		{
-			g_log("%s is no longer ready, restarting reset sequence from that point\n",
-				g_resetSequence[i]->GetName());
-			g_resetSequenceIndex = i;
-			g_resetsDone = false;
-
-			//Assert all subsequent resets
-			for(size_t j=i+1; j<g_resetSequence.size(); j++)
-				g_resetSequence[j]->Assert();
-			break;
-		}
-	}
 }
 
 /**
@@ -347,56 +315,4 @@ bool PollIBCSensors()
 	}
 
 	return false;
-}
-
-void PowerOn()
-{
-	g_log("Turning power on\n");
-
-	//Turn on all rails and wait for them all to come up
-	for(auto rail : g_powerSequence)
-	{
-		LogIndenter li(g_log);
-		if(!rail->TurnOn())
-		{
-			PanicShutdown();
-			return;
-		}
-	}
-
-	//Start the reset sequence
-	g_log("Releasing resets\n");
-	g_powerOn = true;
-	g_resetsDone = false;
-	g_resetSequenceIndex = 0;
-	if(!g_resetSequence.empty())
-		g_resetSequence[0]->Deassert();
-}
-
-/**
-	@brief Shuts down all rails in reverse order but without any added sequencing delays
- */
-__attribute__((noreturn)) void PanicShutdown()
-{
-	//Shut down all rails in reverse order
-	for(int i = g_powerSequence.size()-1; i >= 0; i--)
-		g_powerSequence[i]->TurnOff();
-
-	//Assert all resets (don't care about order, we're powered down anyway)
-	for(auto r : g_resetSequence)
-		r->Assert();
-
-	//Set LEDs to fault state
-	g_faultLED = 1;
-	g_sysokLED = 0;
-	g_pgoodLED = 0;
-
-	//Clear status flags to indicate we're not running
-	g_powerOn = false;
-	g_resetsDone = false;
-	g_resetSequenceIndex = 0;
-
-	//Hang until reset, don't attempt to auto restart
-	while(1)
-	{}
 }

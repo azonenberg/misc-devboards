@@ -31,6 +31,7 @@
 #define frontpanel_h
 
 #include <supervisor/supervisor-common.h>
+#include <supervisor/PowerResetSupervisor.h>
 
 //#include <bootloader/BootloaderAPI.h>
 #include "../bsp-super/hwinit.h"
@@ -47,5 +48,29 @@ extern uint16_t g_iin;
 extern uint16_t g_iout;
 extern uint16_t g_3v3Voltage;
 extern uint16_t g_mcutemp;
+
+///@brief Project-specific supervisor class with hooks for controlling LEDs on panic
+class IfacePowerResetSupervisor : public PowerResetSupervisor
+{
+public:
+	IfacePowerResetSupervisor(etl::ivector<RailDescriptor*>& rails, etl::ivector<ResetDescriptor*>& resets)
+	: PowerResetSupervisor(rails, resets)
+	{}
+
+protected:
+	virtual void OnFault() override
+	{
+		//Set LEDs to fault state
+		g_faultLED = 1;
+		g_sysokLED = 0;
+		g_pgoodLED = 0;
+
+		//Hang until reset, don't attempt to auto restart
+		while(1)
+		{}
+	}
+};
+
+extern IfacePowerResetSupervisor g_super;
 
 #endif

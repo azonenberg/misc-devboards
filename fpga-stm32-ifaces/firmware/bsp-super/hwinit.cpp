@@ -33,21 +33,14 @@
 	@brief	Boot-time hardware initialization
  */
 #include <core/platform.h>
+#include <supervisor/supervisor-common.h>
 #include <bootloader/bootloader-common.h>
 #include <bootloader/BootloaderAPI.h>
 #include "hwinit.h"
 #include <peripheral/Power.h>
 
-//TODO: fix this path somehow?
-#include "../../../../common-ibc/firmware/main/regids.h"
-
 void InitSPI();
-void InitI2C();
-void InitIBC();
 void InitADC();
-
-//The ADC (can't be initialized before InitClocks() so can't be a global object)
-ADC* g_adc = nullptr;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Common global hardware config used by both bootloader and application
@@ -68,14 +61,6 @@ GPIOPin* g_spiCS = nullptr;
 //Prescale by 4 to get 20 MHz
 //Divide by 200 after that to get 100 kHz
 I2C g_i2c(&I2C1, 4, 200);
-
-//Addresses on the management I2C bus
-const uint8_t g_tempI2cAddress = 0x90;
-const uint8_t g_ibcI2cAddress = 0x42;
-
-//IBC version strings
-char g_ibcSwVersion[20] = {0};
-char g_ibcHwVersion[20] = {0};
 
 ///@brief The battery-backed RAM used to store state across power cycles
 volatile BootloaderBBRAM* g_bbram = reinterpret_cast<volatile BootloaderBBRAM*>(&_RTC.BKP[0]);
@@ -141,8 +126,8 @@ void BSP_Init()
 {
 	//Bring up the IBC before powering up the rest of the system
 	InitGPIOs();
-	InitI2C();
-	InitIBC();
+	Super_InitI2C();
+	Super_InitIBC();
 	InitADC();
 	InitSPI();
 
@@ -166,55 +151,6 @@ void InitADC()
 	int tsample = 95;
 	for(int i=0; i <= 18; i++)
 		adc.SetSampleTime(tsample, i);
-}
-
-void InitI2C()
-{
-	g_log("Initializing I2C interface\n");
-
-	static GPIOPin i2c_scl(&GPIOB, 6, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
-	static GPIOPin i2c_sda(&GPIOB, 7, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
-
-	//Initialize the I2C then wait a bit longer
-	//(i2c pin states prior to init are unknown)
-	g_logTimer.Sleep(100);
-	g_i2c.Reset();
-	g_logTimer.Sleep(100);
-
-	//Set temperature sensor to max resolution
-	//(if it doesn't respond, the i2c is derped out so reset and try again)
-	for(int i=0; i<5; i++)
-	{
-		uint8_t cmd[3] = {0x01, 0x60, 0x00};
-		if(g_i2c.BlockingWrite(g_tempI2cAddress, cmd, sizeof(cmd)))
-			break;
-
-		g_log(
-			Logger::WARNING,
-			"Failed to initialize I2C temp sensor at 0x%02x, resetting and trying again\n",
-			g_tempI2cAddress);
-
-		g_i2c.Reset();
-		g_logTimer.Sleep(100);
-	}
-}
-
-void InitIBC()
-{
-	g_log("Connecting to IBC\n");
-	LogIndenter li(g_log);
-
-	//Wait a while to make sure the IBC is booted before we come up
-	//(both us and the IBC come up off 3V3_SB as soon as it's up, with no sequencing)
-	g_logTimer.Sleep(2500);
-
-	g_i2c.BlockingWrite8(g_ibcI2cAddress, IBC_REG_VERSION);
-	g_i2c.BlockingRead(g_ibcI2cAddress, (uint8_t*)g_ibcSwVersion, sizeof(g_ibcSwVersion));
-	g_log("IBC firmware version %s\n", g_ibcSwVersion);
-
-	g_i2c.BlockingWrite8(g_ibcI2cAddress, IBC_REG_HW_VERSION);
-	g_i2c.BlockingRead(g_ibcI2cAddress, (uint8_t*)g_ibcHwVersion, sizeof(g_ibcHwVersion));
-	g_log("IBC hardware version %s\n", g_ibcHwVersion);
 }
 
 void InitSPI()
@@ -259,4 +195,8 @@ void InitGPIOs()
 	g_pgoodLED = 0;
 	g_faultLED = 0;
 	g_sysokLED = 0;
+
+	//Set up GPIOs for I2C bus
+	static GPIOPin i2c_scl(&GPIOB, 6, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
+	static GPIOPin i2c_sda(&GPIOB, 7, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
 }

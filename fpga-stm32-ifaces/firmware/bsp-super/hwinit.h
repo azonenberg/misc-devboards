@@ -42,12 +42,8 @@
 extern void App_Init();
 
 //Global hardware config used by both app and bootloader
-extern ADC* g_adc;
 extern UART<16, 256> g_uart;
 extern SPI<64, 64> g_spi;
-extern I2C g_i2c;
-extern const uint8_t g_tempI2cAddress;
-extern const uint8_t g_ibcI2cAddress;
 
 extern uint32_t g_spiRxFifoOverflows;
 
@@ -60,14 +56,10 @@ void USART2_Handler();
 extern GPIOPin g_pgoodLED;
 extern GPIOPin g_faultLED;
 extern GPIOPin g_sysokLED;
-extern GPIOPin g_12v0_en;
-extern GPIOPin g_1v0_en;
+
 extern GPIOPin g_1v0_pgood;
-extern GPIOPin g_1v2_en;
 extern GPIOPin g_1v2_pgood;
-extern GPIOPin g_1v8_en;
 extern GPIOPin g_1v8_pgood;
-extern GPIOPin g_3v3_en;
 extern GPIOPin g_3v3_pgood;
 
 extern GPIOPin g_mcuResetN;
