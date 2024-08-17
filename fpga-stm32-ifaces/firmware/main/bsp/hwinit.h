@@ -44,6 +44,7 @@
 #include <APB_GPIO.h>
 #include <APB_MDIO.h>
 #include <APB_SPIHostInterface.h>
+#include <APB_XADC.h>
 #include <APB_EthernetRxBuffer.h>
 #include <APB_EthernetTxBuffer_10G.h>
 #include <embedded-utils/APB_SpiFlashInterface.h>
@@ -121,5 +122,7 @@ void RegisterProtocolHandlers(IPv4Protocol& ipv4);
 //Flash controller for FPGA bitstream
 extern APBSpiFlashInterface* g_fpgaFlash;
 */
+
+extern volatile APB_XADC FXADC;
 
 #endif

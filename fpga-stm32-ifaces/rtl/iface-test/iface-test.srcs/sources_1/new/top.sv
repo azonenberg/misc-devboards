@@ -1,6 +1,5 @@
 `default_nettype none
 `timescale 1ns/1ps
-
 /***********************************************************************************************************************
 *                                                                                                                      *
 * misc-devboards                                                                                                       *
@@ -255,7 +254,7 @@ module top(
 	// APB bridge for small peripherals
 
 	//APB1
-	localparam NUM_APB1_PERIPHERALS = 4;
+	localparam NUM_APB1_PERIPHERALS = 5;
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) apb1[NUM_APB1_PERIPHERALS-1:0]();
 	APBBridge #(
 		.BASE_ADDR(32'h0000_0000),
@@ -420,6 +419,18 @@ module top(
 		.spi_mosi(flash_si),
 		.spi_miso(flash_so),
 		.spi_cs_n(flash_cs_n)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// XADC for on-die sensors (c000_1000)
+
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) apb_xadc();
+	APBRegisterSlice #(.DOWN_REG(1), .UP_REG(1)) regslice_apb_xadc(
+		.upstream(apb1[4]),
+		.downstream(apb_xadc));
+
+	APB_XADC xadc(
+		.apb(apb_xadc)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

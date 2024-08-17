@@ -53,40 +53,25 @@ void InitLEDs()
  */
 void InitSensors()
 {
-	/*
 	g_log("Initializing sensors\n");
 	LogIndenter li(g_log);
 
 	//Wait 50ms to get accurate readings
-	g_logTimer.Sleep(500);
+	//g_logTimer.Sleep(500);
 
-	//Read fans
-	for(uint8_t i=0; i<2; i++)
-	{
-		auto rpm = GetFanRPM(i);
-		if(rpm == 0)
-			g_log(Logger::ERROR, "Fan %d:                                 STOPPED\n", i, rpm);
-		else
-			g_log("Fan %d:                                 %d RPM\n", i, rpm);
-
-		//skip reading fan1 as we don't have it connected
-		break;
-	}
+	//No fans on this board, skip those
 
 	//Read FPGA temperature
-	auto temp = GetFPGATemperature();
-	g_log("FPGA die temperature:                  %uhk C\n", temp);
+	auto temp = FXADC.die_temp;
+	g_log("FPGA die temperature:              %uhk C\n", temp);
 
 	//Read FPGA voltage sensors
-	int volt = GetFPGAVCCINT();
-	g_log("FPGA VCCINT:                            %uhk V\n", volt);
-	volt = GetFPGAVCCBRAM();
-	g_log("FPGA VCCBRAM:                           %uhk V\n", volt);
-	volt = GetFPGAVCCAUX();
-	g_log("FPGA VCCAUX:                            %uhk V\n", volt);
-
-	InitDTS();
-	*/
+	int volt = FXADC.volt_core;
+	g_log("FPGA VCCINT:                        %uhk V\n", volt);
+	volt = FXADC.volt_ram;
+	g_log("FPGA VCCBRAM:                       %uhk V\n", volt);
+	volt = FXADC.volt_aux;
+	g_log("FPGA VCCAUX:                        %uhk V\n", volt);
 }
 
 /**

@@ -18,6 +18,8 @@ SECTIONS
 		KEEP (*(.fmdio))
 		. = ALIGN(1024);
 		KEEP (*(.fspi1))
+		. = ALIGN(1024);
+		KEEP (*(.fxadc))
 	} > FMC_APB1
 
 	.sfr_fpga_apb2  (NOLOAD):

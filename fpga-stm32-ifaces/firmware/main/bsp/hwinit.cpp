@@ -62,6 +62,7 @@ volatile APB_GPIO FPGA_GPIOA __attribute__((section(".fgpioa")));
 volatile APB_DeviceInfo_7series FDEVINFO __attribute__((section(".fdevinfo")));
 volatile APB_MDIO FMDIO __attribute__((section(".fmdio")));
 volatile APB_SPIHostInterface FSPI1 __attribute__((section(".fspi1")));
+volatile APB_XADC FXADC __attribute__((section(".fxadc")));
 
 volatile APB_EthernetTxBuffer_10G FETHTX __attribute__((section(".fethtx")));
 volatile APB_EthernetRxBuffer FETHRX __attribute__((section(".fethrx")));
