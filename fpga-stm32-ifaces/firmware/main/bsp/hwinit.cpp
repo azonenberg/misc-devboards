@@ -42,6 +42,8 @@
 #include <ctype.h>
 #include <embedded-utils/CoreSightRom.h>
 
+void TrimSpaces(char* str);
+
 /**
 	@brief Mapping of link speed IDs to printable names
  */
@@ -580,7 +582,7 @@ void InitFPGA()
 	g_usercode = FDEVINFO.usercode;
 	g_log("Usercode: %08x\n", g_usercode);
 	{
-		LogIndenter li(g_log);
+		LogIndenter li2(g_log);
 
 		//Format per XAPP1232:
 		//31:27 day

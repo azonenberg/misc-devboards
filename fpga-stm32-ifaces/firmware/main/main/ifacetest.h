@@ -49,10 +49,9 @@ extern Iperf3Server* g_iperfServer;
 
 void InitLEDs();
 void InitDTS();
-/*
-void InitSupervisor();
+//void InitSupervisor();
 void InitSensors();
-
+/*
 uint16_t GetFanRPM(uint8_t channel);
 uint16_t GetFPGATemperature();
 uint16_t GetFPGAVCCINT();
