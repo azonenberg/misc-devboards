@@ -34,7 +34,7 @@
 #include <supervisor/PowerResetSupervisor.h>
 
 //#include <bootloader/BootloaderAPI.h>
-#include "../bsp-super/hwinit.h"
+#include "../bsp/hwinit.h"
 
 ///@brief Project-specific supervisor class with hooks for controlling LEDs on panic
 class IfacePowerResetSupervisor : public PowerResetSupervisor
