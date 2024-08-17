@@ -32,11 +32,11 @@
 /**
 	@brief Digital temperature sensor
 
-	APB4 clock is 68.75 MHz, so divide by 80 to get 859 kHz ticks
+	APB4 clock is 62.5MHz, so divide by 80 to get 781.25 kHz ticks
 	(must be <1 MHz)
-	15 cycles integration time = 18.75 us
+	15 cycles integration time
  */
-DigitalTempSensor g_dts(&DTS, 80, 15, 64000000);
+DigitalTempSensor g_dts(&DTS, 80, 15, 62500000);
 
 ///@brief The SSH server
 //ManagementSSHTransportServer* g_sshd = nullptr;

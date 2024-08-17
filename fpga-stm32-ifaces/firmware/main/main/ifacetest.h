@@ -53,10 +53,6 @@ void InitDTS();
 void InitSensors();
 /*
 uint16_t GetFanRPM(uint8_t channel);
-uint16_t GetFPGATemperature();
-uint16_t GetFPGAVCCINT();
-uint16_t GetFPGAVCCAUX();
-uint16_t GetFPGAVCCBRAM();
 
 uint16_t SupervisorRegRead(uint8_t regid);
 
