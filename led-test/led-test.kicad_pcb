@@ -1,0 +1,1545 @@
+(kicad_pcb
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(general
+		(thickness 1.6)
+		(legacy_teardrops no)
+	)
+	(paper "A4")
+	(layers
+		(0 "F.Cu" signal)
+		(31 "B.Cu" signal)
+		(32 "B.Adhes" user "B.Adhesive")
+		(33 "F.Adhes" user "F.Adhesive")
+		(34 "B.Paste" user)
+		(35 "F.Paste" user)
+		(36 "B.SilkS" user "B.Silkscreen")
+		(37 "F.SilkS" user "F.Silkscreen")
+		(38 "B.Mask" user)
+		(39 "F.Mask" user)
+		(40 "Dwgs.User" user "User.Drawings")
+		(41 "Cmts.User" user "User.Comments")
+		(42 "Eco1.User" user "User.Eco1")
+		(43 "Eco2.User" user "User.Eco2")
+		(44 "Edge.Cuts" user)
+		(45 "Margin" user)
+		(46 "B.CrtYd" user "B.Courtyard")
+		(47 "F.CrtYd" user "F.Courtyard")
+		(48 "B.Fab" user)
+		(49 "F.Fab" user)
+		(50 "User.1" user)
+		(51 "User.2" user)
+		(52 "User.3" user)
+		(53 "User.4" user)
+		(54 "User.5" user)
+		(55 "User.6" user)
+		(56 "User.7" user)
+		(57 "User.8" user)
+		(58 "User.9" user)
+	)
+	(setup
+		(stackup
+			(layer "F.SilkS"
+				(type "Top Silk Screen")
+			)
+			(layer "F.Paste"
+				(type "Top Solder Paste")
+			)
+			(layer "F.Mask"
+				(type "Top Solder Mask")
+				(color "Purple")
+				(thickness 0.01)
+			)
+			(layer "F.Cu"
+				(type "copper")
+				(thickness 0.035)
+			)
+			(layer "dielectric 1"
+				(type "core")
+				(thickness 1.51)
+				(material "FR4")
+				(epsilon_r 4.5)
+				(loss_tangent 0.02)
+			)
+			(layer "B.Cu"
+				(type "copper")
+				(thickness 0.035)
+			)
+			(layer "B.Mask"
+				(type "Bottom Solder Mask")
+				(color "Purple")
+				(thickness 0.01)
+			)
+			(layer "B.Paste"
+				(type "Bottom Solder Paste")
+			)
+			(layer "B.SilkS"
+				(type "Bottom Silk Screen")
+			)
+			(copper_finish "None")
+			(dielectric_constraints no)
+		)
+		(pad_to_mask_clearance 0.05)
+		(allow_soldermask_bridges_in_footprints no)
+		(pcbplotparams
+			(layerselection 0x00010fc_ffffffff)
+			(plot_on_all_layers_selection 0x0000000_00000000)
+			(disableapertmacros no)
+			(usegerberextensions no)
+			(usegerberattributes yes)
+			(usegerberadvancedattributes yes)
+			(creategerberjobfile yes)
+			(dashed_line_dash_ratio 12.000000)
+			(dashed_line_gap_ratio 3.000000)
+			(svgprecision 4)
+			(plotframeref no)
+			(viasonmask no)
+			(mode 1)
+			(useauxorigin no)
+			(hpglpennumber 1)
+			(hpglpenspeed 20)
+			(hpglpendiameter 15.000000)
+			(pdf_front_fp_property_popups yes)
+			(pdf_back_fp_property_popups yes)
+			(dxfpolygonmode yes)
+			(dxfimperialunits yes)
+			(dxfusepcbnewfont yes)
+			(psnegative no)
+			(psa4output no)
+			(plotreference yes)
+			(plotvalue yes)
+			(plotfptext yes)
+			(plotinvisibletext no)
+			(sketchpadsonfab no)
+			(subtractmaskfromsilk no)
+			(outputformat 1)
+			(mirror no)
+			(drillshape 0)
+			(scaleselection 1)
+			(outputdirectory "output/")
+		)
+	)
+	(net 0 "")
+	(net 1 "/GND")
+	(net 2 "Net-(D1-A)")
+	(net 3 "Net-(D2-A)")
+	(net 4 "Net-(D3-A)")
+	(net 5 "/3V3")
+	(net 6 "Net-(J3-P2)")
+	(net 7 "Net-(J4-P2)")
+	(net 8 "Net-(J5-P2)")
+	(footprint "azonenberg_pcb:TESTPOINT_SMT_KEYSTONE_5016"
+		(layer "F.Cu")
+		(uuid "1b4f119d-e9fc-40b7-b60b-0bcd0d53a821")
+		(at 86 43)
+		(property "Reference" "J2"
+			(at 0 3 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "aae43f0a-f413-4fe9-9978-398c6c2498a9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "CONN_01X01"
+			(at 0 4.6 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "7063f158-714c-4a24-8c25-d61ac50db192")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:TESTPOINT_SMT_KEYSTONE_5016"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f9ff108c-5105-46c8-a2d1-b6267c0995cf")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ec45997c-0e76-4b27-a351-2fa8c11d6771")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Connector, single row, 01x01, pin header"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9a694045-0d6c-4c59-a7ac-2f4015b61cc9")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property ki_fp_filters "Pin_Header_Straight_1X* Pin_Header_Angled_1X* Socket_Strip_Straight_1X* Socket_Strip_Angled_1X*")
+		(path "/30e0837a-ba01-4f69-8d02-0f2df45840ba")
+		(sheetname "Root")
+		(sheetfile "led-test.kicad_sch")
+		(attr smd)
+		(pad "1" smd rect
+			(at 0 0)
+			(size 4.7 3.43)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 1 "/GND")
+			(pinfunction "P1")
+			(pintype "passive")
+			(uuid "00d733ef-290b-43d3-bc2c-a52f6af5a7ef")
+		)
+		(model ":DATASHEETS:Keystone/keystone-PN5016.STEP"
+			(offset
+				(xyz -1 0 2.25)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 0)
+			)
+		)
+	)
+	(footprint "azonenberg_pcb:CONN_HEADER_2.54MM_1x2"
+		(layer "F.Cu")
+		(uuid "289965a1-d41d-4c00-8fa4-a9a64cd4cfb7")
+		(at 65 58)
+		(property "Reference" "J4"
+			(at 0 3.5 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "71160244-25f1-42c9-843d-21c7c80dd658")
+			(effects
+				(font
+					(size 1.5 1.5)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "JUMPER"
+			(at 1 -3 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3a07c897-2851-41b1-ad88-367e7ba1daae")
+			(effects
+				(font
+					(size 1.5 1.5)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:CONN_HEADER_2.54MM_1x2"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "80588a4d-b12a-44b3-91b8-baaa4f6e949b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ffcde32d-b548-46ed-9e72-a263b100b667")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Connector, single row, 01x02, pin header"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8b8027a1-46d2-4141-b373-04dc8f607925")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property ki_fp_filters "Pin_Header_Straight_1X* Pin_Header_Angled_1X* Socket_Strip_Straight_1X* Socket_Strip_Angled_1X*")
+		(path "/ff429a4a-c9aa-42c4-a22f-05a6aad7c8c8")
+		(sheetname "Root")
+		(sheetfile "led-test.kicad_sch")
+		(attr through_hole)
+		(fp_line
+			(start -3.5 -2)
+			(end -3.5 2)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "2c3ff54f-13e0-4f13-be0f-8ec09c60be32")
+		)
+		(fp_line
+			(start -3.46 2)
+			(end 3.5 2)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "8de8ab1f-a468-416d-9a82-4e4e1aa55b9d")
+		)
+		(fp_line
+			(start -2.5 -2)
+			(end -3.5 -1)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "daa8d981-3716-466d-b33b-b540c42b3205")
+		)
+		(fp_line
+			(start 3.5 -2)
+			(end -3.46 -2)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "74301131-5706-439f-93e7-256dafe67138")
+		)
+		(fp_line
+			(start 3.5 2)
+			(end 3.5 -2)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "4ee16e7b-b60c-4130-b5d4-fe7b3387b589")
+		)
+		(pad "1" thru_hole circle
+			(at -1.27 0)
+			(size 1.524 1.524)
+			(drill 1)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net 5 "/3V3")
+			(pinfunction "P1")
+			(pintype "passive")
+			(uuid "73bba958-c6be-4127-93bd-870678347708")
+		)
+		(pad "2" thru_hole circle
+			(at 1.27 0)
+			(size 1.524 1.524)
+			(drill 1)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net 7 "Net-(J4-P2)")
+			(pinfunction "P2")
+			(pintype "passive")
+			(uuid "67f8e54c-1d3c-44ba-b651-3293b5b8e20b")
+		)
+		(model ":WALTER:pin_strip/pin_strip_2.wrl"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "azonenberg_pcb:EIA_0402_RES_NOSILK"
+		(layer "F.Cu")
+		(uuid "6415f356-91ff-4f9d-a1b6-dd6ff9ef2faa")
+		(at 70 67)
+		(property "Reference" "R3"
+			(at 0 1.5 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "19f4736f-27c7-4b78-a729-5d6b1398a6e8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "60.4K"
+			(at 0 3.5 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "6c5af77d-506a-431a-9281-1c3827a1f432")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c61c2ba3-59aa-44ac-85e5-1e781e7f7f79")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "cbbd802c-1b25-4f08-8647-0090cd44d347")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4810c132-8e2e-4743-bb81-46f99e209be9")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property ki_fp_filters "R_* R_*")
+		(path "/8c9e30ef-6544-4e28-9b45-680af899b916")
+		(sheetname "Root")
+		(sheetfile "led-test.kicad_sch")
+		(attr smd)
+		(pad "1" smd rect
+			(at -0.5 0)
+			(size 0.5 0.5)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 8 "Net-(J5-P2)")
+			(pintype "passive")
+			(uuid "9d774eae-2385-417a-9273-809c9d697993")
+		)
+		(pad "2" smd rect
+			(at 0.5 0)
+			(size 0.5 0.5)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 4 "Net-(D3-A)")
+			(pintype "passive")
+			(uuid "1d6ea9cb-36d7-4c52-b4a2-2101fe97ae87")
+		)
+		(model ":WALTER:smd_resistors/r_0402.wrl"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "azonenberg_pcb:EIA_0402_RES_NOSILK"
+		(layer "F.Cu")
+		(uuid "6f7b9daa-da4f-45e8-b37f-998e559be5f6")
+		(at 70 58)
+		(property "Reference" "R2"
+			(at 0 1.5 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "9556182f-c543-46e8-b08e-6499de662bf8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "60.4K"
+			(at 0 3.5 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "9091313d-c443-4fbb-b74a-8b002dcd8b6f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a6875c2e-3c32-4675-ac9b-64ea099ac9a2")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "08e1c68b-68d5-44a1-9ec7-ce27f4058176")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "94b3862f-84b8-4353-b117-b014555943d4")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property ki_fp_filters "R_* R_*")
+		(path "/f5765e07-341b-4971-9ad3-176f9ea0d54f")
+		(sheetname "Root")
+		(sheetfile "led-test.kicad_sch")
+		(attr smd)
+		(pad "1" smd rect
+			(at -0.5 0)
+			(size 0.5 0.5)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 7 "Net-(J4-P2)")
+			(pintype "passive")
+			(uuid "b3ce2aa9-792f-4bd3-8216-509b90b77d87")
+		)
+		(pad "2" smd rect
+			(at 0.5 0)
+			(size 0.5 0.5)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 3 "Net-(D2-A)")
+			(pintype "passive")
+			(uuid "c563025a-ed60-415a-9478-7fc0b8bb25f1")
+		)
+		(model ":WALTER:smd_resistors/r_0402.wrl"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "azonenberg_pcb:TESTPOINT_SMT_KEYSTONE_5016"
+		(layer "F.Cu")
+		(uuid "86211dc8-d160-4041-97c1-e08023ab8b2a")
+		(at 64 43)
+		(property "Reference" "J1"
+			(at 0 3 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "ebda18f2-b314-4b75-9033-ee5e3d70ae17")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "CONN_01X01"
+			(at 0 4.6 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "18fa32d5-f28a-4890-9895-75cf577fe241")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:TESTPOINT_SMT_KEYSTONE_5016"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c3fd3961-3338-456c-96c2-d9fb74a17d5e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4046c5eb-1ec0-4612-a11e-607bf19c1fcb")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Connector, single row, 01x01, pin header"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f065742c-3817-4c60-b2d2-c3f4a59ba67a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property ki_fp_filters "Pin_Header_Straight_1X* Pin_Header_Angled_1X* Socket_Strip_Straight_1X* Socket_Strip_Angled_1X*")
+		(path "/beaca45a-c481-438f-bb7d-33198a1a6269")
+		(sheetname "Root")
+		(sheetfile "led-test.kicad_sch")
+		(attr smd)
+		(pad "1" smd rect
+			(at 0 0)
+			(size 4.7 3.43)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 5 "/3V3")
+			(pinfunction "P1")
+			(pintype "passive")
+			(uuid "1b7b17f1-a71e-49cc-83a7-6612c254c371")
+		)
+		(model ":DATASHEETS:Keystone/keystone-PN5016.STEP"
+			(offset
+				(xyz -1 0 2.25)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 0)
+			)
+		)
+	)
+	(footprint "azonenberg_pcb:EIA_0603_LED"
+		(layer "F.Cu")
+		(uuid "a070e7c5-0b0a-4a59-9993-4997287778c6")
+		(at 79 49 180)
+		(property "Reference" "D1"
+			(at 0 1.399999 180)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "a88ead93-83c7-416a-9cc5-9c2f18083aa7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "GREEN Q971-KN-1"
+			(at 0.05 2.95 180)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "37d4abd8-929d-4216-8903-068746f818f1")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0603_LED"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d6812063-d14a-4fdb-b2ac-c9eaa00a7ce8")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "db842428-fbfc-4586-970c-591a19f0da53")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "LED generic"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "85d0bed4-61cf-49ff-afc1-0cdb4959419b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property ki_fp_filters "LED*")
+		(path "/616a6854-1cfb-492f-a96d-45447cdd47c1")
+		(sheetname "Root")
+		(sheetfile "led-test.kicad_sch")
+		(attr smd)
+		(fp_line
+			(start -1.5 -0.25)
+			(end -1.5 0.25)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "bb60ce6f-325f-4741-8d64-9db278e7cce6")
+		)
+		(pad "1" smd rect
+			(at -0.75 0 180)
+			(size 0.8 0.8)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 1 "/GND")
+			(pinfunction "K")
+			(pintype "passive")
+			(uuid "1c1fdd5f-8412-4f12-9b11-c690d484c4f8")
+		)
+		(pad "2" smd rect
+			(at 0.75 0 180)
+			(size 0.8 0.8)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 2 "Net-(D1-A)")
+			(pinfunction "A")
+			(pintype "passive")
+			(uuid "a5b57a2f-b56c-48eb-b97d-3ee752729816")
+		)
+		(model ":WALTER:smd_leds/led_0603.wrl"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 180)
+			)
+		)
+	)
+	(footprint "azonenberg_pcb:EIA_0402_LED"
+		(layer "F.Cu")
+		(uuid "c2ef8445-29ee-4bb0-931f-0929dc558ea3")
+		(at 79 58 180)
+		(property "Reference" "D2"
+			(at 0 1.5 180)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "ea47d953-7f8b-4de8-9b31-1c05e9bdd8b3")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "GREEN QBLP595-IG-2897"
+			(at 0 3.5 180)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "6c82eede-0b1e-4fac-b361-bf0eac4f4b62")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_LED"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "60a99d23-c8e5-475c-99ef-ee1c4b463a48")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2413e7bf-f5a3-4486-a2e8-8b77ff742a7e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "LED generic"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d3b12cbd-9535-410d-acd6-4557034351ef")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property ki_fp_filters "LED*")
+		(path "/47592130-297f-43d1-8770-f45d13f05464")
+		(sheetname "Root")
+		(sheetfile "led-test.kicad_sch")
+		(attr smd)
+		(pad "1" smd rect
+			(at -0.597 0 180)
+			(size 0.635 0.61)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 1 "/GND")
+			(pinfunction "K")
+			(pintype "passive")
+			(uuid "e47b317f-728e-4309-9f3d-d0aac4a8e92b")
+		)
+		(pad "2" smd rect
+			(at 0.597 0 180)
+			(size 0.635 0.61)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 3 "Net-(D2-A)")
+			(pinfunction "A")
+			(pintype "passive")
+			(uuid "c2074142-9ef4-4245-8ebd-6ea817c135b8")
+		)
+		(model ":WALTER:smd_leds/led_0402.wrl"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 180)
+			)
+		)
+	)
+	(footprint "azonenberg_pcb:CONN_HEADER_2.54MM_1x2"
+		(layer "F.Cu")
+		(uuid "d749b19a-8928-490c-8205-48b9650c3795")
+		(at 65 67)
+		(property "Reference" "J5"
+			(at 0 3.5 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "f365c4dd-c333-4f4d-a1e9-f764674a013e")
+			(effects
+				(font
+					(size 1.5 1.5)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "JUMPER"
+			(at 1 -3 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "26893d9b-e6e0-41b5-b032-8c99fa6db2fc")
+			(effects
+				(font
+					(size 1.5 1.5)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:CONN_HEADER_2.54MM_1x2"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "caf34c6e-07f6-4801-94ce-06c340bfe995")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f507266d-d37f-4ecd-8159-3a7c40b00ff7")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Connector, single row, 01x02, pin header"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2b631cc5-2230-4268-bd95-c23b7d08cfb5")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property ki_fp_filters "Pin_Header_Straight_1X* Pin_Header_Angled_1X* Socket_Strip_Straight_1X* Socket_Strip_Angled_1X*")
+		(path "/30efb686-4936-4e5b-a465-2a4dd4d4aad7")
+		(sheetname "Root")
+		(sheetfile "led-test.kicad_sch")
+		(attr through_hole)
+		(fp_line
+			(start -3.5 -2)
+			(end -3.5 2)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "df86d933-fdb4-4d77-86d1-8d50bee14b23")
+		)
+		(fp_line
+			(start -3.46 2)
+			(end 3.5 2)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "e401291a-a813-425d-88c4-045df0434943")
+		)
+		(fp_line
+			(start -2.5 -2)
+			(end -3.5 -1)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "033cd3c2-a752-42cb-a2ad-50205fb00a9c")
+		)
+		(fp_line
+			(start 3.5 -2)
+			(end -3.46 -2)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "46835735-902c-4071-8583-464fbf111c97")
+		)
+		(fp_line
+			(start 3.5 2)
+			(end 3.5 -2)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "1b336067-5efb-49e9-9e39-1601b3dc62ed")
+		)
+		(pad "1" thru_hole circle
+			(at -1.27 0)
+			(size 1.524 1.524)
+			(drill 1)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net 5 "/3V3")
+			(pinfunction "P1")
+			(pintype "passive")
+			(uuid "d834b98e-a01b-49db-8909-97c6cf0b0732")
+		)
+		(pad "2" thru_hole circle
+			(at 1.27 0)
+			(size 1.524 1.524)
+			(drill 1)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net 8 "Net-(J5-P2)")
+			(pinfunction "P2")
+			(pintype "passive")
+			(uuid "0e527b55-11b2-4826-8740-cc941ce4d77f")
+		)
+		(model ":WALTER:pin_strip/pin_strip_2.wrl"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "azonenberg_pcb:EIA_0402_RES_NOSILK"
+		(layer "F.Cu")
+		(uuid "d8f17c2b-9a1d-4a41-a074-3076de982ca5")
+		(at 70 49)
+		(property "Reference" "R1"
+			(at 0 1.5 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "c8887de8-e2ce-463a-897b-87f72bdfe116")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "470"
+			(at 0 3.5 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "58cc7afb-450e-4a40-bcfb-cc51866da9f9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2a3325b3-08e6-45df-a2de-6e224067f55f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fe78d8e8-6362-49d1-aef1-3508028d0d21")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f88ba26f-b67a-424d-901e-bad741971740")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property ki_fp_filters "R_* R_*")
+		(path "/811686b5-54ff-4278-8e47-1f2f2c8bf44b")
+		(sheetname "Root")
+		(sheetfile "led-test.kicad_sch")
+		(attr smd)
+		(pad "1" smd rect
+			(at -0.5 0)
+			(size 0.5 0.5)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 6 "Net-(J3-P2)")
+			(pintype "passive")
+			(uuid "986d4f0e-9527-4822-8862-4114a43bdd5c")
+		)
+		(pad "2" smd rect
+			(at 0.5 0)
+			(size 0.5 0.5)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 2 "Net-(D1-A)")
+			(pintype "passive")
+			(uuid "edf1c89f-a557-4f04-9213-895379cd5da7")
+		)
+		(model ":WALTER:smd_resistors/r_0402.wrl"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "azonenberg_pcb:CONN_HEADER_2.54MM_1x2"
+		(layer "F.Cu")
+		(uuid "e4b9e771-f91f-4538-b63c-93ffc1c9adde")
+		(at 65 49)
+		(property "Reference" "J3"
+			(at 0 3.5 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "925ada92-b35e-4c3e-bade-e6146e6eb54c")
+			(effects
+				(font
+					(size 1.5 1.5)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "JUMPER"
+			(at 1 -3 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8ea4b166-4397-470e-9caf-69aa897b4ab0")
+			(effects
+				(font
+					(size 1.5 1.5)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:CONN_HEADER_2.54MM_1x2"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ada541cc-fa88-4778-83bc-76d6bd67363d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ee00f440-c83e-45ec-b0e1-5c22d7d385b7")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Connector, single row, 01x02, pin header"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5e3e3756-0d9f-411b-86fd-2df3c1a3b5fe")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property ki_fp_filters "Pin_Header_Straight_1X* Pin_Header_Angled_1X* Socket_Strip_Straight_1X* Socket_Strip_Angled_1X*")
+		(path "/1cf00935-b6b6-4c84-af8e-80ed02ad0844")
+		(sheetname "Root")
+		(sheetfile "led-test.kicad_sch")
+		(attr through_hole)
+		(fp_line
+			(start -3.5 -2)
+			(end -3.5 2)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "773cf5ae-85f4-44dc-8ea1-b4a64c8be7db")
+		)
+		(fp_line
+			(start -3.46 2)
+			(end 3.5 2)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "2f104232-891f-427a-b28d-9c446bf28cb8")
+		)
+		(fp_line
+			(start -2.5 -2)
+			(end -3.5 -1)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "7400f025-9456-4b8f-99cb-f39d859797dd")
+		)
+		(fp_line
+			(start 3.5 -2)
+			(end -3.46 -2)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "8ff4a6ee-ac70-4094-8ba3-ff1ae3084499")
+		)
+		(fp_line
+			(start 3.5 2)
+			(end 3.5 -2)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "a8d193d0-5c35-4e94-9d3a-b91cf318ff5e")
+		)
+		(pad "1" thru_hole circle
+			(at -1.27 0)
+			(size 1.524 1.524)
+			(drill 1)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net 5 "/3V3")
+			(pinfunction "P1")
+			(pintype "passive")
+			(uuid "b73ac36b-b3bc-4ab8-ae7c-e785d262f750")
+		)
+		(pad "2" thru_hole circle
+			(at 1.27 0)
+			(size 1.524 1.524)
+			(drill 1)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net 6 "Net-(J3-P2)")
+			(pinfunction "P2")
+			(pintype "passive")
+			(uuid "40a5e16d-837f-4dd3-ad92-2e30587b18a4")
+		)
+		(model ":WALTER:pin_strip/pin_strip_2.wrl"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "azonenberg_pcb:EIA_0402_LED"
+		(layer "F.Cu")
+		(uuid "fcf4060f-50a3-4ca4-9ad7-893849957642")
+		(at 79 67 180)
+		(property "Reference" "D3"
+			(at 0 1.5 180)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "dca9d808-7947-448b-b439-0a21b09a7134")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "RED QBLP595-R5"
+			(at 0 3.5 180)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "fe0ba06d-f517-4538-9319-32d3fb111a27")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_LED"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f49d636b-874c-436a-a007-64b4a99af4f9")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "377d0608-e636-4391-b1c1-8c90f5a3bccc")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "LED generic"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c5e7d8d9-1743-47b7-ae27-5a38712a31cf")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property ki_fp_filters "LED*")
+		(path "/695879b5-fe7b-4a7a-99d8-fe603cbf106f")
+		(sheetname "Root")
+		(sheetfile "led-test.kicad_sch")
+		(attr smd)
+		(pad "1" smd rect
+			(at -0.597 0 180)
+			(size 0.635 0.61)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 1 "/GND")
+			(pinfunction "K")
+			(pintype "passive")
+			(uuid "9cc84e3b-5c48-4c9e-9108-37c511945e61")
+		)
+		(pad "2" smd rect
+			(at 0.597 0 180)
+			(size 0.635 0.61)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 4 "Net-(D3-A)")
+			(pinfunction "A")
+			(pintype "passive")
+			(uuid "3182af16-0323-4194-8fb4-c3197ae2ce27")
+		)
+		(model ":WALTER:smd_leds/led_0402.wrl"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 180)
+			)
+		)
+	)
+	(gr_line
+		(start 90 40)
+		(end 90 70)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "165ce83a-4f42-4059-b4a6-eab70b0c4a33")
+	)
+	(gr_line
+		(start 90 70)
+		(end 60 70)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "4b53486f-2e42-4196-a1e2-e102f7c17d25")
+	)
+	(gr_line
+		(start 60 70)
+		(end 60 40)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "83fe0e8e-7922-4b2e-9184-2c906be53d1e")
+	)
+	(gr_line
+		(start 60 40)
+		(end 90 40)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "c6ac69f4-fc57-444f-b604-6e96e409fc03")
+	)
+	(gr_text "3V3"
+		(at 67 43.5 0)
+		(layer "F.SilkS")
+		(uuid "49b9be82-7a14-40b2-9c8d-843622ad7991")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "GND"
+		(at 80 43.5 0)
+		(layer "F.SilkS")
+		(uuid "f03e0cf0-b346-4dad-b303-c4fffe4d0b0d")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(segment
+		(start 86 43)
+		(end 86 46.5)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 1)
+		(uuid "17fe3b1e-9591-4917-b3ab-4e013f9dba56")
+	)
+	(segment
+		(start 79.597 49.153)
+		(end 79.75 49)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 1)
+		(uuid "4257d136-2bc4-4522-b64e-dcfb2ce858cf")
+	)
+	(segment
+		(start 83.5 49)
+		(end 79.75 49)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 1)
+		(uuid "7df91ff1-8390-44f9-b3ab-aed75b3fd8dc")
+	)
+	(segment
+		(start 79.597 67)
+		(end 79.597 49.153)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 1)
+		(uuid "9f8c3ed4-9980-4148-85bd-c4184114eb27")
+	)
+	(segment
+		(start 86 46.5)
+		(end 83.5 49)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 1)
+		(uuid "d5d87c5a-f5da-4ec1-afe1-f0dd6be78287")
+	)
+	(segment
+		(start 70.5 49)
+		(end 78.25 49)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 2)
+		(uuid "6711592c-68f8-4d85-bd80-d1cb75f74a6f")
+	)
+	(segment
+		(start 78.403 58)
+		(end 70.5 58)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 3)
+		(uuid "f8ee7acb-cfc3-49d7-a518-3b8f77bcc5a6")
+	)
+	(segment
+		(start 70.5 67)
+		(end 78.403 67)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 4)
+		(uuid "a5b8c4e0-e971-4fa2-8798-0ac6dfdddc83")
+	)
+	(segment
+		(start 64 43)
+		(end 64 48.73)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 5)
+		(uuid "8545e1bb-4d2e-4f50-a4c8-759d3645089d")
+	)
+	(segment
+		(start 64 48.73)
+		(end 63.73 49)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 5)
+		(uuid "94965bfe-e6e1-4c47-932c-c18b0fdbe2d9")
+	)
+	(segment
+		(start 63.73 49)
+		(end 63.73 67)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 5)
+		(uuid "9f1b7247-72b7-443f-8b16-ef13b5e62872")
+	)
+	(segment
+		(start 66.27 49)
+		(end 69.5 49)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 6)
+		(uuid "e22685d2-ce68-47ad-9ec0-8252a78c50d5")
+	)
+	(segment
+		(start 69.5 58)
+		(end 66.27 58)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 7)
+		(uuid "c33a404e-250a-44a3-b463-9f302745a884")
+	)
+	(segment
+		(start 66.27 67)
+		(end 69.5 67)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 8)
+		(uuid "6d7c24ff-2cc7-49ae-bc77-c8038202dec3")
+	)
+)
