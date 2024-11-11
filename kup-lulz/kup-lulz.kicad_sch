@@ -1385,6 +1385,17 @@
 		)
 		(uuid "0ead3712-cf9d-4b18-ac62-066e59e3c11c")
 	)
+	(label "3V3_SB"
+		(at 67.31 110.49 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "16d3a273-9f00-4009-9a84-3c4c1bb9db98")
+	)
 	(label "REFCLK2_P"
 		(at 152.4 72.39 0)
 		(fields_autoplaced yes)
@@ -3938,6 +3949,16 @@
 				(justify right)
 			)
 			(uuid "1c6adf4a-b6ac-4ca2-bfba-82bf1ed22f6e")
+		)
+		(pin "3V3_SB" input
+			(at 67.31 110.49 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "08d81713-2f25-4398-a0a4-d482fbafe6fc")
 		)
 		(instances
 			(project "kup-lulz"
