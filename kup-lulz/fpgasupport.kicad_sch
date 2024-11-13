@@ -6,7 +6,7 @@
 	(paper "A3")
 	(title_block
 		(title "Kintex Ultrascale+ OshPark For The Lulz")
-		(date "2024-11-10")
+		(date "2024-11-13")
 		(rev "0.1")
 		(company "Antikernel Labs")
 		(comment 1 "Andrew D. Zonenberg")
@@ -16316,6 +16316,16 @@
 	)
 	(wire
 		(pts
+			(xy 119.38 209.55) (xy 132.08 209.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "41b11e3e-c9c1-42f1-b4dc-30a44382ef1f")
+	)
+	(wire
+		(pts
 			(xy 67.31 53.34) (xy 67.31 55.88)
 		)
 		(stroke
@@ -16423,6 +16433,16 @@
 			(type default)
 		)
 		(uuid "49fa1372-b4f5-4870-ad3b-00f6d0646e9e")
+	)
+	(wire
+		(pts
+			(xy 119.38 222.25) (xy 132.08 222.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4b315c40-b1cc-44ad-8c68-c282d8799f04")
 	)
 	(wire
 		(pts
@@ -16916,6 +16936,16 @@
 	)
 	(wire
 		(pts
+			(xy 119.38 203.2) (xy 132.08 203.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7abd6ee8-3089-49e7-9437-1ac794ad8f08")
+	)
+	(wire
+		(pts
 			(xy 67.31 119.38) (xy 67.31 121.92)
 		)
 		(stroke
@@ -17063,6 +17093,16 @@
 			(type default)
 		)
 		(uuid "8b06b0a8-de79-417b-94e6-3b36ca5347b4")
+	)
+	(wire
+		(pts
+			(xy 119.38 229.87) (xy 132.08 229.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8b0e904d-3ec5-4749-9b72-2a70309ffd2c")
 	)
 	(wire
 		(pts
@@ -17806,6 +17846,16 @@
 	)
 	(wire
 		(pts
+			(xy 119.38 217.17) (xy 132.08 217.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b745fc50-09ad-44f9-9b9d-1e3f478d6996")
+	)
+	(wire
+		(pts
 			(xy 165.1 102.87) (xy 165.1 107.95)
 		)
 		(stroke
@@ -18163,6 +18213,16 @@
 			(type default)
 		)
 		(uuid "d12f4bb6-7b8a-45eb-9148-fb485751f2dc")
+	)
+	(wire
+		(pts
+			(xy 119.38 195.58) (xy 132.08 195.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d1741165-f55d-4df0-881b-5b1a91cbfc04")
 	)
 	(wire
 		(pts
@@ -18907,6 +18967,17 @@
 		)
 		(uuid "21372aba-5f97-4d97-8179-a59b6eac4198")
 	)
+	(text "GTY decoupling\nWe have only one power supply group, so one set of caps is probably enough on a good board\nAdd two to compensate for very inductive PDN layout"
+		(exclude_from_sim no)
+		(at 119.126 233.934 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "48d59de4-983f-4b80-beff-c51e62ae3861")
+	)
 	(text "VCCO 84/86/87"
 		(exclude_from_sim no)
 		(at 29.21 269.24 0)
@@ -19017,6 +19088,17 @@
 		)
 		(uuid "1084a640-4a16-436b-b811-c3bc9bd502f5")
 	)
+	(label "GND"
+		(at 119.38 217.17 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "13bd5afb-948d-4e01-b483-1a27a5acfbfb")
+	)
 	(label "1V8"
 		(at 165.1 24.13 180)
 		(fields_autoplaced yes)
@@ -19049,6 +19131,17 @@
 			(justify right bottom)
 		)
 		(uuid "19ba8244-0584-4da8-8900-909b18a61f19")
+	)
+	(label "GND"
+		(at 119.38 203.2 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1b71bc8f-90a1-4a9f-9d96-55d07f3dee17")
 	)
 	(label "VCCINT"
 		(at 29.21 172.72 180)
@@ -19116,6 +19209,17 @@
 		)
 		(uuid "29303f3f-42f6-4702-9191-950e66427459")
 	)
+	(label "GND"
+		(at 119.38 229.87 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2aa0ba03-9f18-4fc6-94b7-2076f7615aba")
+	)
 	(label "FPGA_FLASH_DQ2"
 		(at 360.68 161.29 0)
 		(fields_autoplaced yes)
@@ -19126,6 +19230,17 @@
 			(justify left bottom)
 		)
 		(uuid "2b18fe27-4c80-4a92-942f-fe0bf466ae5a")
+	)
+	(label "GTY_VCC"
+		(at 119.38 195.58 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2b3ac668-cab7-40c5-984d-7d73191ad1f4")
 	)
 	(label "FPGA_FLASH_CS_N"
 		(at 308.61 166.37 180)
@@ -19181,6 +19296,17 @@
 			(justify left bottom)
 		)
 		(uuid "3a430f3a-8e30-450d-84d5-eb5572063a1e")
+	)
+	(label "GTY_VCCAUX"
+		(at 119.38 222.25 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3b433737-acf3-40c7-8690-8fb1656622ab")
 	)
 	(label "1V8"
 		(at 289.56 237.49 180)
@@ -19808,6 +19934,17 @@
 			(justify right bottom)
 		)
 		(uuid "d387704a-3c5d-4d10-ad72-8c269e11318c")
+	)
+	(label "GTY_VTT"
+		(at 119.38 209.55 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "de665e6b-6a2c-43a3-ab22-ff6047ea4803")
 	)
 	(label "GND"
 		(at 317.5 69.85 180)
@@ -22294,6 +22431,146 @@
 	)
 	(symbol
 		(lib_id "device:C")
+		(at 119.38 199.39 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0c02a6b0-fa3e-4f08-b5ab-bbca9bb15ef4")
+		(property "Reference" "C157"
+			(at 122.301 198.5553 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "4.7 uF"
+			(at 122.301 201.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0603_CAP_NOSILK"
+			(at 120.3452 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 119.38 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 119.38 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "363c0023-dbc8-4186-b4e6-a2fe59828cf8")
+		)
+		(pin "2"
+			(uuid "267bfea5-fbb2-4d4f-b3d8-c8a8ac43d9c3")
+		)
+		(instances
+			(project "kup-lulz"
+				(path "/4936e8e3-eab2-4ee4-931f-463e00004998/4620982e-4f83-4fcb-97c5-c21ab596d66b"
+					(reference "C157")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "device:C")
+		(at 119.38 213.36 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0e8a212c-7922-46bb-9313-0f3c1aad4bea")
+		(property "Reference" "C158"
+			(at 122.301 212.5253 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "4.7 uF"
+			(at 122.301 215.0622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0603_CAP_NOSILK"
+			(at 120.3452 217.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 119.38 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 119.38 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "144038ed-3dda-495c-aa2e-e7d6c475de23")
+		)
+		(pin "2"
+			(uuid "97b721ba-448a-46e5-a8f7-c536876ffd49")
+		)
+		(instances
+			(project "kup-lulz"
+				(path "/4936e8e3-eab2-4ee4-931f-463e00004998/4620982e-4f83-4fcb-97c5-c21ab596d66b"
+					(reference "C158")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "device:C")
 		(at 29.21 262.89 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -22771,6 +23048,76 @@
 			(project "kup-lulz"
 				(path "/4936e8e3-eab2-4ee4-931f-463e00004998/4620982e-4f83-4fcb-97c5-c21ab596d66b"
 					(reference "R48")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "device:C")
+		(at 119.38 226.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2e5c90f2-1d6c-4d95-8c7c-39f5f74a73e0")
+		(property "Reference" "C159"
+			(at 122.301 225.2253 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "4.7 uF"
+			(at 122.301 227.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0603_CAP_NOSILK"
+			(at 120.3452 229.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 119.38 226.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 119.38 226.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "436dace3-d423-43b3-8c1b-dda6f3fe303c")
+		)
+		(pin "2"
+			(uuid "73d3c528-e85e-42e6-894d-b0c125655021")
+		)
+		(instances
+			(project "kup-lulz"
+				(path "/4936e8e3-eab2-4ee4-931f-463e00004998/4620982e-4f83-4fcb-97c5-c21ab596d66b"
+					(reference "C159")
 					(unit 1)
 				)
 			)
@@ -23378,6 +23725,76 @@
 			(project "kup-lulz"
 				(path "/4936e8e3-eab2-4ee4-931f-463e00004998/4620982e-4f83-4fcb-97c5-c21ab596d66b"
 					(reference "C56")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "device:C")
+		(at 132.08 213.36 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "515a0354-1b90-42e9-9d53-be76193be613")
+		(property "Reference" "C161"
+			(at 135.001 212.5253 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "4.7 uF"
+			(at 135.001 215.0622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0603_CAP_NOSILK"
+			(at 133.0452 217.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 132.08 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 132.08 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e3b10ebf-d4a4-4c59-a71c-1b0bb536ab0f")
+		)
+		(pin "2"
+			(uuid "d306c3e9-aa3f-4cb7-b2f6-69759ad962d5")
+		)
+		(instances
+			(project "kup-lulz"
+				(path "/4936e8e3-eab2-4ee4-931f-463e00004998/4620982e-4f83-4fcb-97c5-c21ab596d66b"
+					(reference "C161")
 					(unit 1)
 				)
 			)
@@ -24365,6 +24782,76 @@
 			(project "kup-lulz"
 				(path "/4936e8e3-eab2-4ee4-931f-463e00004998/4620982e-4f83-4fcb-97c5-c21ab596d66b"
 					(reference "R54")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "device:C")
+		(at 132.08 226.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "90512fdd-0699-4b1b-bde3-45c9b68842ee")
+		(property "Reference" "C160"
+			(at 135.001 225.2253 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "4.7 uF"
+			(at 135.001 227.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0603_CAP_NOSILK"
+			(at 133.0452 229.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 132.08 226.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 132.08 226.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a85e75d6-8235-4082-b1d9-27a5539dc218")
+		)
+		(pin "2"
+			(uuid "ee090ac1-a0f2-45b6-bcb6-6061fc419263")
+		)
+		(instances
+			(project "kup-lulz"
+				(path "/4936e8e3-eab2-4ee4-931f-463e00004998/4620982e-4f83-4fcb-97c5-c21ab596d66b"
+					(reference "C160")
 					(unit 1)
 				)
 			)
@@ -31543,6 +32030,76 @@
 			(project "kup-lulz"
 				(path "/4936e8e3-eab2-4ee4-931f-463e00004998/4620982e-4f83-4fcb-97c5-c21ab596d66b"
 					(reference "R57")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "device:C")
+		(at 132.08 199.39 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "df8d14ec-6904-4d0b-8312-fbf983937f8e")
+		(property "Reference" "C162"
+			(at 135.001 198.5553 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "4.7 uF"
+			(at 135.001 201.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0603_CAP_NOSILK"
+			(at 133.0452 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 132.08 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 132.08 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f33f9565-9256-4465-88f4-44bb902d7caa")
+		)
+		(pin "2"
+			(uuid "b7ebb02c-f405-4f73-a40a-85b01e0bfc37")
+		)
+		(instances
+			(project "kup-lulz"
+				(path "/4936e8e3-eab2-4ee4-931f-463e00004998/4620982e-4f83-4fcb-97c5-c21ab596d66b"
+					(reference "C162")
 					(unit 1)
 				)
 			)

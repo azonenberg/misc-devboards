@@ -6,7 +6,7 @@
 	(paper "A2")
 	(title_block
 		(title "Kintex Ultrascale+ OshPark For The Lulz")
-		(date "2024-11-10")
+		(date "2024-11-13")
 		(rev "0.1")
 		(company "Antikernel Labs")
 		(comment 1 "Andrew D. Zonenberg")
@@ -12135,7 +12135,7 @@
 				)
 			)
 		)
-		(property "Footprint" "azonenberg_pcb:EIA_0603_LED"
+		(property "Footprint" "azonenberg_pcb:EIA_0402_LED"
 			(at 215.9 341.63 0)
 			(effects
 				(font
@@ -14344,15 +14344,15 @@
 		(fields_autoplaced yes)
 		(uuid "3bd4d018-a6bb-46fe-bfc1-1c56774e6d20")
 		(property "Reference" "R13"
-			(at 208.28 336.9142 90)
+			(at 208.28 336.4695 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "470"
-			(at 208.28 339.4511 90)
+		(property "Value" "33K"
+			(at 208.28 338.8938 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15424,7 +15424,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "azonenberg_pcb:CONN_HEADER_2.54MM_1x3"
+		(property "Footprint" "azonenberg_pcb:CONN_HEADER_2.54MM_1x3_REFLOW"
 			(at 294.64 370.84 0)
 			(effects
 				(font
@@ -17445,7 +17445,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "azonenberg_pcb:CONN_HEADER_2.54MM_1x3"
+		(property "Footprint" "azonenberg_pcb:CONN_HEADER_2.54MM_1x3_REFLOW"
 			(at 292.1 396.24 0)
 			(effects
 				(font
@@ -17952,7 +17952,7 @@
 				)
 			)
 		)
-		(property "Footprint" "azonenberg_pcb:EIA_0603_LED"
+		(property "Footprint" "azonenberg_pcb:EIA_0402_LED"
 			(at 215.9 351.79 0)
 			(effects
 				(font
@@ -18447,15 +18447,15 @@
 		(fields_autoplaced yes)
 		(uuid "b07b815c-a04c-43d3-ac2c-d9130bd6c774")
 		(property "Reference" "R14"
-			(at 208.28 347.0742 90)
+			(at 208.28 346.6295 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "470"
-			(at 208.28 349.6111 90)
+		(property "Value" "4.7K"
+			(at 208.28 349.0538 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21289,7 +21289,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "azonenberg_pcb:CONN_HEADER_2.54MM_1x5"
+		(property "Footprint" "azonenberg_pcb:CONN_HEADER_2.54MM_1x5_REFLOW"
 			(at 325.12 398.78 0)
 			(effects
 				(font
