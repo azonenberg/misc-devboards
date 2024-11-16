@@ -2,3 +2,4 @@
 output
 *.lck
 *.kicad_prl
+*cache
