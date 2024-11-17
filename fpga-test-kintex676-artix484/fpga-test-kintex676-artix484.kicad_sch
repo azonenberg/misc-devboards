@@ -1,0 +1,1791 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "bf1776c0-67d3-460d-b07d-ae318270a499")
+	(paper "A4")
+	(lib_symbols
+		(symbol "passive-azonenberg:R_PWR"
+			(pin_numbers hide)
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "R"
+				(at 2.032 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "R_PWR"
+				(at 0 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at -1.778 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Resistor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "r res resistor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "R_* R_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "R_PWR_0_1"
+				(rectangle
+					(start -1.016 -2.54)
+					(end 1.016 2.54)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "R_PWR_1_1"
+				(pin power_out line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "special-azonenberg:MECHANICAL"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "M"
+				(at 0 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MECHANICAL"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "MECHANICAL_0_1"
+				(rectangle
+					(start 0 1.27)
+					(end 2.54 -1.27)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 102.87 59.69) (xy 96.52 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0198bfdc-f7a7-4cc7-9441-25080ada0202")
+	)
+	(wire
+		(pts
+			(xy 63.5 35.56) (xy 69.85 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1195b46a-0817-4221-a4a4-930533a3a094")
+	)
+	(wire
+		(pts
+			(xy 63.5 64.77) (xy 69.85 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "15c988e7-6155-465c-b0b6-c832863a9510")
+	)
+	(wire
+		(pts
+			(xy 96.52 57.15) (xy 100.33 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1c2239c7-2e70-4836-9ec4-23542eb3d7c0")
+	)
+	(wire
+		(pts
+			(xy 96.52 35.56) (xy 110.49 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2a1f2bcf-951c-45c4-a074-dce3dfc9935d")
+	)
+	(wire
+		(pts
+			(xy 100.33 45.72) (xy 96.52 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2a99dcd0-175f-4008-b38c-654e1436e1e4")
+	)
+	(wire
+		(pts
+			(xy 96.52 43.18) (xy 102.87 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2f9ba218-2ba9-4ccb-be1e-51fed3569b3e")
+	)
+	(wire
+		(pts
+			(xy 100.33 57.15) (xy 100.33 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "37613731-4f7e-4030-a788-2a086dc9d653")
+	)
+	(wire
+		(pts
+			(xy 110.49 35.56) (xy 110.49 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "39d6999d-324b-4c78-98b8-ace08773663b")
+	)
+	(wire
+		(pts
+			(xy 63.5 40.64) (xy 69.85 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "409f24af-d396-441d-b64e-eca03a6edd25")
+	)
+	(wire
+		(pts
+			(xy 102.87 43.18) (xy 102.87 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5cc03675-d58c-491c-b565-7bdf9568fd8d")
+	)
+	(wire
+		(pts
+			(xy 55.88 67.31) (xy 69.85 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6b667bde-e375-45a3-b8b7-858caf315d2c")
+	)
+	(wire
+		(pts
+			(xy 40.64 45.72) (xy 69.85 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6f2ebd39-a011-4ecc-95cc-abf45aa9f817")
+	)
+	(wire
+		(pts
+			(xy 96.52 38.1) (xy 107.95 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "74bdd7ea-3aea-4652-a01e-5c5bf136e26e")
+	)
+	(wire
+		(pts
+			(xy 40.64 38.1) (xy 55.88 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7acf1558-7816-43bd-81e7-7cb359893f92")
+	)
+	(wire
+		(pts
+			(xy 107.95 38.1) (xy 107.95 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9af72cf7-c417-4272-ad1d-d2f0bc222db5")
+	)
+	(wire
+		(pts
+			(xy 63.5 57.15) (xy 69.85 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9bccb57a-09ba-4c1e-a6bf-1a60e37b74a2")
+	)
+	(wire
+		(pts
+			(xy 40.64 40.64) (xy 55.88 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ab5b2528-eb0f-4397-85eb-89df7eeaa625")
+	)
+	(wire
+		(pts
+			(xy 40.64 35.56) (xy 55.88 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b0143fbb-26b7-4c1a-9cd1-937a3d45f83f")
+	)
+	(wire
+		(pts
+			(xy 107.95 64.77) (xy 96.52 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b2f70123-d9cf-4cbc-9372-bf3fe8683a2b")
+	)
+	(wire
+		(pts
+			(xy 63.5 62.23) (xy 69.85 62.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c136639d-8ff1-4d4c-ae5b-e9a196669929")
+	)
+	(wire
+		(pts
+			(xy 110.49 67.31) (xy 96.52 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c4ede11b-4215-4848-a6f6-d8ed86198f08")
+	)
+	(wire
+		(pts
+			(xy 63.5 38.1) (xy 69.85 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e48650c0-70ae-487e-94b3-e8edee4999ee")
+	)
+	(wire
+		(pts
+			(xy 63.5 43.18) (xy 69.85 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eefd899f-5b6a-4eec-8fef-a467802db68b")
+	)
+	(wire
+		(pts
+			(xy 40.64 43.18) (xy 55.88 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f439e9b5-aed9-443e-973f-2c2aec64a58d")
+	)
+	(wire
+		(pts
+			(xy 63.5 59.69) (xy 69.85 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fd720a87-fab2-4d8b-aa7e-47311fa20840")
+	)
+	(text "Invert path"
+		(exclude_from_sim no)
+		(at 111.76 43.434 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4b6df271-4fc6-42a6-95c5-708e29cb000b")
+	)
+	(text "Remove 0R to enable testing DUTs independently of each other\nin case one is shorted"
+		(exclude_from_sim no)
+		(at 57.15 26.924 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "87ff89dc-2fdd-406f-bf7d-b59ab24a1391")
+	)
+	(label "3V3"
+		(at 40.64 35.56 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1a18faf6-f922-4874-9872-db00d57e96ba")
+	)
+	(label "1V0"
+		(at 55.88 64.77 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "29d45be7-1dd8-470c-a0a0-71a7916f6d1a")
+	)
+	(label "1V2"
+		(at 55.88 62.23 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2b7dde39-a03b-4b4b-aa8d-68006a3502d4")
+	)
+	(label "3V3"
+		(at 55.88 57.15 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5dad177c-2183-4618-a88c-3ce44298492d")
+	)
+	(label "1V0"
+		(at 40.64 43.18 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "63f5e6ff-88b2-4d8f-98cc-541a298dfdba")
+	)
+	(label "1V8"
+		(at 40.64 38.1 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "748b802e-997d-4cb6-9873-561c3058ad80")
+	)
+	(label "GND"
+		(at 55.88 67.31 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7774aa6b-59a6-41e9-b5d2-fe797136e7a7")
+	)
+	(label "1V2"
+		(at 40.64 40.64 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b45539de-9fba-4f42-b555-69e8a2338a1c")
+	)
+	(label "1V8"
+		(at 55.88 59.69 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "be122ced-b4ff-46a7-9d67-4fdbeb282077")
+	)
+	(label "GND"
+		(at 40.64 45.72 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f0c7279e-2893-448c-9134-31fc975ab8c2")
+	)
+	(symbol
+		(lib_id "passive-azonenberg:R_PWR")
+		(at 59.69 38.1 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2633b1d1-c985-4663-9a64-a5e3b2ad01f0")
+		(property "Reference" "R4"
+			(at 54.864 39.116 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 59.69 38.1 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_1206_CAP_NOSILK"
+			(at 59.69 36.322 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 59.69 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 59.69 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "86c7383a-f0ab-4193-8895-bd4e09839593")
+		)
+		(pin "2"
+			(uuid "fac1f73e-8b55-4223-81d7-91b322b2be30")
+		)
+		(instances
+			(project "fpga-test-kintex676-artix484"
+				(path "/bf1776c0-67d3-460d-b07d-ae318270a499"
+					(reference "R4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "special-azonenberg:MECHANICAL")
+		(at 69.85 110.49 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "58f5273b-ff3d-4806-934a-59a0c82ee341")
+		(property "Reference" "M9"
+			(at 73.025 109.2778 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MECHANICAL"
+			(at 73.025 111.7021 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "w_logo:Logo_silk_WEEE_3.4x5mm"
+			(at 69.85 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 69.85 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 69.85 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "fpga-test-kintex676-artix484"
+				(path "/bf1776c0-67d3-460d-b07d-ae318270a499"
+					(reference "M9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "passive-azonenberg:R_PWR")
+		(at 59.69 64.77 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7e22f3a1-a186-4372-a113-5cf840f92895")
+		(property "Reference" "R15"
+			(at 54.864 65.786 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 59.69 64.77 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_1206_CAP_NOSILK"
+			(at 59.69 62.992 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 59.69 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 59.69 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1eede9bc-f271-4685-b37e-8254343d4cc4")
+		)
+		(pin "2"
+			(uuid "19391fac-3aa2-4e5e-a027-6426ef157313")
+		)
+		(instances
+			(project "fpga-test-kintex676-artix484"
+				(path "/bf1776c0-67d3-460d-b07d-ae318270a499"
+					(reference "R15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "special-azonenberg:MECHANICAL")
+		(at 69.85 91.44 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "982beb34-9366-41c5-8647-5d50866f7b3e")
+		(property "Reference" "M6"
+			(at 73.025 90.2278 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MECHANICAL"
+			(at 73.025 92.6521 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:LOGO_ESD_SENSITIVE_7MM"
+			(at 69.85 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 69.85 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 69.85 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "fpga-test-kintex676-artix484"
+				(path "/bf1776c0-67d3-460d-b07d-ae318270a499"
+					(reference "M6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "special-azonenberg:MECHANICAL")
+		(at 69.85 85.09 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9fe0ebc4-62ea-4b2f-8fe1-cbe572cbebf3")
+		(property "Reference" "M5"
+			(at 73.025 83.8778 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MECHANICAL"
+			(at 73.025 86.3021 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:LONGTHING-1200DPI"
+			(at 69.85 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 69.85 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 69.85 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "fpga-test-kintex676-artix484"
+				(path "/bf1776c0-67d3-460d-b07d-ae318270a499"
+					(reference "M5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "passive-azonenberg:R_PWR")
+		(at 59.69 59.69 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a4536fbc-de8a-4ed4-9655-3d95bb57567c")
+		(property "Reference" "R13"
+			(at 54.864 60.706 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 59.69 59.69 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_1206_CAP_NOSILK"
+			(at 59.69 57.912 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 59.69 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 59.69 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a20a8427-7c17-4a1b-9c98-2b35f8cf6754")
+		)
+		(pin "2"
+			(uuid "08d8a560-272c-4e98-b6db-7569eaa7594f")
+		)
+		(instances
+			(project "fpga-test-kintex676-artix484"
+				(path "/bf1776c0-67d3-460d-b07d-ae318270a499"
+					(reference "R13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "passive-azonenberg:R_PWR")
+		(at 59.69 57.15 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a9ba524e-e9c4-4952-a4f8-771c4ab31ff4")
+		(property "Reference" "R39"
+			(at 54.864 58.166 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 59.69 57.15 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_1206_CAP_NOSILK"
+			(at 59.69 55.372 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 59.69 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 59.69 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "19665812-a79e-462e-b91b-d3027c56c24c")
+		)
+		(pin "2"
+			(uuid "1cf914cc-6cbd-44b9-bfc9-438b2c927e08")
+		)
+		(instances
+			(project "fpga-test-kintex676-artix484"
+				(path "/bf1776c0-67d3-460d-b07d-ae318270a499"
+					(reference "R39")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "special-azonenberg:MECHANICAL")
+		(at 69.85 104.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "aee57118-062d-4040-b8fc-7554324196fd")
+		(property "Reference" "M8"
+			(at 73.025 102.9278 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MECHANICAL"
+			(at 73.025 105.3521 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "w_logo:Logo_silk_ROHS_5x2.8mm"
+			(at 69.85 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 69.85 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 69.85 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "fpga-test-kintex676-artix484"
+				(path "/bf1776c0-67d3-460d-b07d-ae318270a499"
+					(reference "M8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "passive-azonenberg:R_PWR")
+		(at 59.69 62.23 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "dfdfda83-dce8-4946-a251-05f0bdb8396c")
+		(property "Reference" "R14"
+			(at 54.864 63.246 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 59.69 62.23 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_1206_CAP_NOSILK"
+			(at 59.69 60.452 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 59.69 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 59.69 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1c29f3c0-fc21-4eee-aa7e-78bde504172e")
+		)
+		(pin "2"
+			(uuid "bc08681f-c4a1-451d-9736-d3a87041b430")
+		)
+		(instances
+			(project "fpga-test-kintex676-artix484"
+				(path "/bf1776c0-67d3-460d-b07d-ae318270a499"
+					(reference "R14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "passive-azonenberg:R_PWR")
+		(at 59.69 35.56 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e38e50fd-197c-4352-aa6a-640b561ec48a")
+		(property "Reference" "R10"
+			(at 54.864 36.576 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 59.69 35.56 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_1206_CAP_NOSILK"
+			(at 59.69 33.782 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 59.69 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 59.69 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a8617bf6-3379-4348-8275-1da6c01e08ab")
+		)
+		(pin "2"
+			(uuid "f483966c-4bdb-49b7-b070-360e7951d59a")
+		)
+		(instances
+			(project "fpga-test-kintex676-artix484"
+				(path "/bf1776c0-67d3-460d-b07d-ae318270a499"
+					(reference "R10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "special-azonenberg:MECHANICAL")
+		(at 69.85 97.79 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e4b6cbb9-e089-4d25-8225-95bdc9cab695")
+		(property "Reference" "M7"
+			(at 73.025 96.5778 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MECHANICAL"
+			(at 73.025 99.0021 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "w_logo:Logo_silk_OSHW_6x6mm"
+			(at 69.85 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 69.85 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 69.85 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "fpga-test-kintex676-artix484"
+				(path "/bf1776c0-67d3-460d-b07d-ae318270a499"
+					(reference "M7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "passive-azonenberg:R_PWR")
+		(at 59.69 40.64 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ebc55cb5-08ff-434a-97be-3ab1a9a9cccd")
+		(property "Reference" "R5"
+			(at 54.864 41.656 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 59.69 40.64 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_1206_CAP_NOSILK"
+			(at 59.69 38.862 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 59.69 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 59.69 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "96d9c654-a437-401d-9785-59a5f4394b46")
+		)
+		(pin "2"
+			(uuid "6f0161b3-8c88-4ee6-b215-917010f81e3c")
+		)
+		(instances
+			(project "fpga-test-kintex676-artix484"
+				(path "/bf1776c0-67d3-460d-b07d-ae318270a499"
+					(reference "R5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "passive-azonenberg:R_PWR")
+		(at 59.69 43.18 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fb181e35-5511-4143-a310-3601b25e5bf9")
+		(property "Reference" "R6"
+			(at 54.864 44.196 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 59.69 43.18 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_1206_CAP_NOSILK"
+			(at 59.69 41.402 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 59.69 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 59.69 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "198ad893-6a8b-4413-adb9-e2b031722105")
+		)
+		(pin "2"
+			(uuid "c8ed72d8-2604-4270-aeca-1e42e312daf7")
+		)
+		(instances
+			(project "fpga-test-kintex676-artix484"
+				(path "/bf1776c0-67d3-460d-b07d-ae318270a499"
+					(reference "R6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(sheet
+		(at 69.85 34.29)
+		(size 26.67 13.97)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "1ba1c276-b854-41a7-b939-8ecc4457de49")
+		(property "Sheetname" "Artix FGG484"
+			(at 69.85 33.5784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "artix.kicad_sch"
+			(at 69.85 48.8446 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "ARTIX_TX_N" output
+			(at 96.52 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "79705459-aa28-41c9-91a1-f24f8a821d33")
+		)
+		(pin "ARTIX_TX_P" output
+			(at 96.52 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "2a7d4578-b06a-46e3-8315-55b457489eec")
+		)
+		(pin "ARTIX_RX_P" input
+			(at 96.52 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "8231bb48-8c2d-4cbb-9946-4756e3e3ed1a")
+		)
+		(pin "ARTIX_RX_N" input
+			(at 96.52 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "e100e10c-7461-4ce8-9151-cc5fae136808")
+		)
+		(pin "1V0" input
+			(at 69.85 43.18 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "b191c627-c7ef-4a59-b562-1e1dc5466a33")
+		)
+		(pin "GND" input
+			(at 69.85 45.72 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "10edd5fc-f286-4807-8c0f-6e717e285237")
+		)
+		(pin "1V8" input
+			(at 69.85 38.1 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "e35c5434-f095-460d-94a9-23da11764fb2")
+		)
+		(pin "1V2" input
+			(at 69.85 40.64 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "38d2561d-6c6a-4dc6-9b92-54e45057846b")
+		)
+		(pin "3V3" input
+			(at 69.85 35.56 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "723f77e4-9397-4300-94c9-92e66b99e43c")
+		)
+		(instances
+			(project "fpga-test-kintex676-artix484"
+				(path "/bf1776c0-67d3-460d-b07d-ae318270a499"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 69.85 55.88)
+		(size 26.67 13.97)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "d9b5cd69-bb51-4121-8b90-c6de295a165f")
+		(property "Sheetname" "Kintex FFG676"
+			(at 69.85 55.1684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "kintex.kicad_sch"
+			(at 69.85 70.4346 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "GND" input
+			(at 69.85 67.31 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "a6311c6d-1da1-469b-8eb7-3fc0ad6b3ade")
+		)
+		(pin "1V0" input
+			(at 69.85 64.77 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "d37731ab-55a7-4680-9c23-7630d297b651")
+		)
+		(pin "1V8" input
+			(at 69.85 59.69 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "d7f2637e-13d0-4874-b8fd-dac7a1c4924f")
+		)
+		(pin "1V2" input
+			(at 69.85 62.23 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "1ada8f64-6f9a-44c1-b641-02d4a70626ee")
+		)
+		(pin "3V3" input
+			(at 69.85 57.15 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "0eec6bcf-023d-48cb-9924-5526b0bb9f0c")
+		)
+		(pin "GTX1_TX_P" output
+			(at 96.52 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "a4eb6fc8-8f83-4751-932e-8f5e0ad6936e")
+		)
+		(pin "GTX1_TX_N" output
+			(at 96.52 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "3a7a3a7f-adfc-4946-b578-8fb4051782b5")
+		)
+		(pin "GTX1_RX_P" input
+			(at 96.52 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "d5d0b88d-49a3-4b9a-99a1-ec7295e89b90")
+		)
+		(pin "GTX1_RX_N" input
+			(at 96.52 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "680b456f-9dc9-440f-a6b9-e92ae5517db9")
+		)
+		(instances
+			(project "fpga-test-kintex676-artix484"
+				(path "/bf1776c0-67d3-460d-b07d-ae318270a499"
+					(page "7")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 27.94 34.29)
+		(size 12.7 12.7)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "da175334-3278-4347-b841-b9c41a53a62e")
+		(property "Sheetname" "Power Supply"
+			(at 27.94 33.5784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "psu.kicad_sch"
+			(at 27.94 47.5746 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "GND" input
+			(at 40.64 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "c59d4a8b-5073-436c-b79f-65ecafdd4ef9")
+		)
+		(pin "3V3" output
+			(at 40.64 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "393ea45c-c5b6-492d-b984-1344f5682b16")
+		)
+		(pin "1V8" output
+			(at 40.64 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "61729712-9f2f-4f2f-bc21-eca7a5093253")
+		)
+		(pin "1V0" output
+			(at 40.64 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "8d64197e-bde5-4a57-a425-fdb5c9c1bb77")
+		)
+		(pin "1V2" output
+			(at 40.64 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "88f9417c-60ea-4612-9857-291c4dc711f9")
+		)
+		(instances
+			(project "fpga-test-kintex676-artix484"
+				(path "/bf1776c0-67d3-460d-b07d-ae318270a499"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)
