@@ -13176,6 +13176,12 @@
 		(uuid "2a0d21af-1e32-4e95-9779-d6d50894f8a6")
 	)
 	(junction
+		(at 199.39 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "42ca3d4c-dcb7-4bc5-9d8d-1d3897db6601")
+	)
+	(junction
 		(at 43.18 144.78)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -13322,6 +13328,16 @@
 			(type default)
 		)
 		(uuid "2ad422ce-a245-465e-b1fd-6425d6b3aca4")
+	)
+	(wire
+		(pts
+			(xy 199.39 24.13) (xy 199.39 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2d1a888d-9b1b-4b6e-addf-814be0d584d8")
 	)
 	(wire
 		(pts
@@ -13572,6 +13588,16 @@
 			(type default)
 		)
 		(uuid "bc92cb5b-1eae-4a49-bcff-1f72c327d3ba")
+	)
+	(wire
+		(pts
+			(xy 180.34 24.13) (xy 199.39 24.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c33e587f-cad3-4e92-bd48-ae94e265f757")
 	)
 	(wire
 		(pts
@@ -13941,17 +13967,6 @@
 			(justify right bottom)
 		)
 		(uuid "3cba0ed1-3c80-4159-b39b-1e692407d2a8")
-	)
-	(label "1V2"
-		(at 194.31 21.59 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4226990e-8b30-483b-827d-81dc88b4dafc")
 	)
 	(label "GTX7_TX_AC_N"
 		(at 95.25 90.17 180)
@@ -14519,6 +14534,18 @@
 			(justify right)
 		)
 		(uuid "afea2ade-89a8-4f89-8a5b-34611457bd12")
+	)
+	(hierarchical_label "1V2"
+		(shape input)
+		(at 180.34 24.13 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "edfb3114-65b1-45e3-b840-c5f5dd45a166")
 	)
 	(symbol
 		(lib_id "device:C")

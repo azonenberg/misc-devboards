@@ -14182,7 +14182,7 @@
 		(uuid "33feaada-e4d8-4046-9f9e-323be7916c91")
 	)
 	(label "GND"
-		(at 22.86 39.37 180)
+		(at 22.86 41.91 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14357,6 +14357,17 @@
 		)
 		(uuid "8494b74c-271a-43e1-b878-bb252e203946")
 	)
+	(label "1V2"
+		(at 22.86 39.37 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9988b960-dd66-450c-b322-7a237669d060")
+	)
 	(label "3V3"
 		(at 45.72 157.48 180)
 		(fields_autoplaced yes)
@@ -14456,7 +14467,7 @@
 		)
 		(uuid "ebd20076-70e6-4088-a854-a13bd7f781f5")
 	)
-	(label "1V8"
+	(label "3V3"
 		(at 43.18 179.07 180)
 		(fields_autoplaced yes)
 		(effects
@@ -20423,7 +20434,7 @@
 			(uuid "8c7a812b-0c9d-430d-a086-bdfd7c713cba")
 		)
 		(pin "GND" input
-			(at 22.86 39.37 180)
+			(at 22.86 41.91 180)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20431,6 +20442,16 @@
 				(justify left)
 			)
 			(uuid "6910a752-234e-4d75-bb02-75bd4cf79935")
+		)
+		(pin "1V2" input
+			(at 22.86 39.37 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "29c73a52-fd50-4c4e-b00b-49be73226b0c")
 		)
 		(instances
 			(project "fpga-test-kintex676-artix484"

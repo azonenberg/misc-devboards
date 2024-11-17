@@ -1,3 +1,5 @@
 *.lck
 *backups
 *.kicad_prl
+*cache
+output
