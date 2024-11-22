@@ -57,6 +57,8 @@ public:
 protected:
 	virtual void OnTimer();
 
+	void OnTimer_ModeRandom();
+
 	GPIOPin m_green0;
 	GPIOPin m_green1;
 	GPIOPin m_green2;
@@ -72,6 +74,7 @@ protected:
 	GPIOPin m_ledCtrl;
 
 	void RefreshRGB(uint32_t* colors);
+	void RefreshRedGreen();
 	void SendBitbangRGB(uint32_t rgb);
 
 	//LED bitbang
@@ -106,6 +109,19 @@ protected:
 		else
 			SendBitbang0();
 	}
+
+	int m_step;
+
+	//LFSR for random generation
+	uint32_t m_prbs;
+
+	bool RandomBit();
+	uint32_t RandomColor();
+
+	//Current pattern state
+	uint8_t m_redPattern;
+	uint8_t m_greenPattern;
+	uint32_t m_rgbColors[8];
 };
 
 #endif

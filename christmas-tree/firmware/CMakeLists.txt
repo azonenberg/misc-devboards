@@ -25,7 +25,7 @@ include_directories(
 	)
 
 # Number of tasks we support
-add_compile_definitions(MAX_TASKS=5)
+add_compile_definitions(MAX_TASKS=2)
 add_compile_definitions(MAX_TIMER_TASKS=1)
 
 ########################################################################################################################
@@ -45,6 +45,7 @@ add_subdirectory("${PROJECT_ROOT}/stm32-cpp" "${CMAKE_BINARY_DIR}/stm32-cpp")
 
 add_executable(main
 	Init.cpp
+	TreeCLISessionContext.cpp
 	LEDTask.cpp
 	vectors.cpp)
 

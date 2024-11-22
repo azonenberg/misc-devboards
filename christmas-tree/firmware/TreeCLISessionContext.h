@@ -2,7 +2,7 @@
 *                                                                                                                      *
 * christmas-tree                                                                                                       *
 *                                                                                                                      *
-* Copyright (c) 2023-2024 Andrew D. Zonenberg and contributors                                                         *
+* Copyright (c) 2024 Andrew D. Zonenberg and contributors                                                              *
 * All rights reserved.                                                                                                 *
 *                                                                                                                      *
 * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the     *
@@ -27,24 +27,31 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef christmas_tree_h
-#define christmas_tree_h
+#ifndef TreeCLISessionContext_h
+#define TreeCLISessionContext_h
 
-#include <core/platform.h>
-#include <peripheral/Flash.h>
-#include <peripheral/GPIO.h>
-#include <peripheral/Power.h>
-#include <peripheral/UART.h>
+#include <embedded-cli/CLIOutputStream.h>
+#include <embedded-cli/CLISessionContext.h>
 
-#include <microkvs/kvs/KVS.h>
-#include <microkvs/driver/STM32StorageBank.h>
+class TreeCLISessionContext : public CLISessionContext
+{
+public:
+	TreeCLISessionContext();
 
-#include <cli/UARTOutputStream.h>
+	void Initialize(CLIOutputStream* stream, const char* username)
+	{
+		m_stream = stream;
+		CLISessionContext::Initialize(m_stream, username);
+	}
 
-extern UART<16, 256> g_uart;
+	virtual void PrintPrompt() override;
 
-void USART2_Handler();
+protected:
+	virtual void OnExecute() override;
 
-extern void App_Init();
+	void OnCommit();
+
+	CLIOutputStream* m_stream;
+};
 
 #endif

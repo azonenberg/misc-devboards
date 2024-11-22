@@ -29,6 +29,7 @@
 
 #include "christmas-tree.h"
 #include "LEDTask.h"
+#include "LocalConsoleTask.h"
 
 //UART console
 //USART2 is on APB1 (32MHz), so we need a divisor of 277.77, round to 278
@@ -110,7 +111,19 @@ void BSP_Init()
 		__DATE__, buildtime[0], buildtime[1], buildtime[3], buildtime[4], buildtime[6], buildtime[7]);
 	g_log("Firmware version %s\n", g_version);
 
+	//TODO: we have 1kB of EEPROM, figure out how to use it!
+
+	/**
+		@brief Use pages 254 and 255 for a 128 byte microkvs (256 bytes total)
+	 */
+	static STM32StorageBank left(reinterpret_cast<uint8_t*>(0x08007f00), 0x80);
+	static STM32StorageBank right(reinterpret_cast<uint8_t*>(0x08007f80), 0x80);
+	InitKVS(&left, &right, 4);
+
 	static LEDTask ledTask;
 	g_tasks.push_back(&ledTask);
 	g_timerTasks.push_back(&ledTask);
+
+	static LocalConsoleTask consoleTask;
+	g_tasks.push_back(&consoleTask);
 }

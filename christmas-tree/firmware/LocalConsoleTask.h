@@ -1,8 +1,8 @@
 /***********************************************************************************************************************
 *                                                                                                                      *
-* christmas-tree                                                                                                       *
+* common-ibc                                                                                                           *
 *                                                                                                                      *
-* Copyright (c) 2023-2024 Andrew D. Zonenberg and contributors                                                         *
+* Copyright (c) 2024 Andrew D. Zonenberg and contributors                                                              *
 * All rights reserved.                                                                                                 *
 *                                                                                                                      *
 * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the     *
@@ -27,24 +27,36 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef christmas_tree_h
-#define christmas_tree_h
+#ifndef LocalConsoleTask_h
+#define LocalConsoleTask_h
 
-#include <core/platform.h>
-#include <peripheral/Flash.h>
-#include <peripheral/GPIO.h>
-#include <peripheral/Power.h>
-#include <peripheral/UART.h>
+#include <core/Task.h>
+#include "TreeCLISessionContext.h"
 
-#include <microkvs/kvs/KVS.h>
-#include <microkvs/driver/STM32StorageBank.h>
+class LocalConsoleTask : public Task
+{
+public:
+	LocalConsoleTask()
+	{
+		m_outputStream.Initialize(&g_uart);
+		m_context.Initialize(&m_outputStream, "localadmin");
+		m_context.PrintPrompt();
+	}
 
-#include <cli/UARTOutputStream.h>
+	virtual void Iteration()
+	{
+		if(g_uart.HasInput())
+			m_context.OnKeystroke(g_uart.BlockingRead());
+	}
 
-extern UART<16, 256> g_uart;
+protected:
 
-void USART2_Handler();
+	///@brief Output stream for local serial console
+	UARTOutputStream m_outputStream;
 
-extern void App_Init();
+	///@brief Session context for local serial console
+	TreeCLISessionContext m_context;
+};
 
 #endif
+

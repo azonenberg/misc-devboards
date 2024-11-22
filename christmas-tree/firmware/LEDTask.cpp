@@ -43,57 +43,70 @@ LEDTask::LEDTask()
 	, m_red3(&GPIOB, 2, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW, 0)
 	, m_red4(&GPIOA, 4, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW, 0)
 	, m_ledCtrl(&GPIOA, 10, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW, 0)
+	, m_prbs(1)
+	, m_redPattern(0)
+	, m_greenPattern(0)
 {
-	m_green0 = 1;
-	m_green1 = 1;
-	m_green2 = 1;
-	m_green3 = 1;
-	m_green4 = 1;
-
-	m_red0 = 1;
-	m_red1 = 1;
-	m_red2 = 1;
-	m_red3 = 1;
-	m_red4 = 1;
-
-	//Try to program some LEDs
-	/*
-		All clock domains are 32 MHz (31.25 ns) period
-
-		To send data:
-		* 50us or more of logic 0
-		* 1 bit: 900ns +/- 80 high, 300 +/- 80 low
-		* 0 bit: 300ns +/- 80 high, 900 +/- 80 low
-
-		300 ns = 9.6 clocks
-		900ns = 28.8 clocks
-
-		Rounded: 10 and 29
-
-		1.2 to 3.6 us delay between 24-bit data bursts
-
-		Converted
-	 */
-
-	//Reset
+	//Reset everything
 	m_ledCtrl = 0;
 	g_logTimer.Sleep(5);
 
-	uint32_t colors[8] =
+	//Turn off all the LEDs
+	uint32_t colors[8] = {0};
+	RefreshRGB(colors);
+	RefreshRedGreen();
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Random number generation
+
+///@brief Generate a random bit using the PRBS-15 polynomial
+bool LEDTask::RandomBit()
+{
+	uint32_t next = ( (m_prbs >> 14) ^ (m_prbs >> 13) ) & 1;
+	m_prbs = (m_prbs << 1) | next;
+	return (bool) next;
+}
+
+uint32_t LEDTask::RandomColor()
+{
+	//8 random colors
+	static const uint32_t colors[]=
 	{
-		0x800000,
-		0x000080,
-		0x008000,
-		0x808000,
-		0x100010,
-		0x001010,
-		0x101010,
-		0x001010
+		0x200000,
+		0x201000,
+		0x202000,
+		0x002000,
+		0x002020,
+		0x200020,
+		0x100020,
+		0x202020
 	};
 
-	//Wait for the UART to finish printing any boot-time log messages so it doesn't mess up bitbang timing
-	g_uart.Flush();
-	RefreshRGB(colors);
+	uint8_t index =
+		(RandomBit() << 2) |
+		(RandomBit() << 1) |
+		RandomBit();
+
+	return colors[index];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Helpers for pushing state out to the LEDs
+
+void LEDTask::RefreshRedGreen()
+{
+	m_green0 = (m_greenPattern & 1) == 1;
+	m_green1 = (m_greenPattern & 2) == 2;
+	m_green2 = (m_greenPattern & 4) == 4;
+	m_green3 = (m_greenPattern & 8) == 8;
+	m_green4 = (m_greenPattern & 16) == 16;
+
+	m_red0 = (m_redPattern & 1) == 1;
+	m_red1 = (m_redPattern & 2) == 2;
+	m_red2 = (m_redPattern & 4) == 4;
+	m_red3 = (m_redPattern & 8) == 8;
+	m_red4 = (m_redPattern & 16) == 16;
 }
 
 //use fixed optimization level to ensure deterministic timing
@@ -120,6 +133,45 @@ void LEDTask::SendBitbangRGB(uint32_t rgb)
 }
 #pragma GCC pop_options
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Top level pattern control
+
 void LEDTask::OnTimer()
 {
+	/*
+	//Pattern step
+	m_step ++;
+	if(m_step > 16)
+		m_step = 0;*/
+
+	//Figure out new color
+	OnTimer_ModeRandom();
+
+	//Update the LEDs
+	RefreshRedGreen();
+	RefreshRGB(m_rgbColors);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Random mode
+
+void LEDTask::OnTimer_ModeRandom()
+{
+	//Red and green: random flashing
+	m_redPattern =
+		(RandomBit() << 4) |
+		(RandomBit() << 3) |
+		(RandomBit() << 2) |
+		(RandomBit() << 1) |
+		RandomBit();
+	m_greenPattern =
+		(RandomBit() << 4) |
+		(RandomBit() << 3) |
+		(RandomBit() << 2) |
+		(RandomBit() << 1) |
+		RandomBit();
+
+	//RGB: random colors
+	for(int i=0; i<8; i++)
+		m_rgbColors[i] = RandomColor();
 }

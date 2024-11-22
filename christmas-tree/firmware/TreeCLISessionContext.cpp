@@ -2,7 +2,7 @@
 *                                                                                                                      *
 * christmas-tree                                                                                                       *
 *                                                                                                                      *
-* Copyright (c) 2023-2024 Andrew D. Zonenberg and contributors                                                         *
+* Copyright (c) 2024 Andrew D. Zonenberg and contributors                                                              *
 * All rights reserved.                                                                                                 *
 *                                                                                                                      *
 * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the     *
@@ -27,24 +27,74 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef christmas_tree_h
-#define christmas_tree_h
+#include "christmas-tree.h"
+#include "TreeCLISessionContext.h"
+#include <math.h>
 
-#include <core/platform.h>
-#include <peripheral/Flash.h>
-#include <peripheral/GPIO.h>
-#include <peripheral/Power.h>
-#include <peripheral/UART.h>
+//const char* g_iincalObjectName = "cal.iin";
+//const char* g_ioutcalObjectName = "cal.iout";
 
-#include <microkvs/kvs/KVS.h>
-#include <microkvs/driver/STM32StorageBank.h>
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Command IDs
 
-#include <cli/UARTOutputStream.h>
+enum cmdid_t
+{
+	CMD_COMMIT,
+};
 
-extern UART<16, 256> g_uart;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Top level commands
 
-void USART2_Handler();
+static const clikeyword_t g_rootCommands[] =
+{
+	{"commit",		CMD_COMMIT,			nullptr,				"Commit pending configuration to flash" },
+	{nullptr,		INVALID_COMMAND,	nullptr,				nullptr }
+};
 
-extern void App_Init();
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Construction / destruction
 
-#endif
+TreeCLISessionContext::TreeCLISessionContext()
+	: CLISessionContext(g_rootCommands)
+{
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Top level command dispatch
+
+void TreeCLISessionContext::PrintPrompt()
+{
+	m_stream->Printf("%s@christmastree# ", m_username);
+	m_stream->Flush();
+}
+
+void TreeCLISessionContext::OnExecute()
+{
+	switch(m_command[0].m_commandID)
+	{
+		/*case CMD_CALIBRATE:
+			OnCalibrate();
+			break;
+
+		case CMD_CAT:
+			m_stream->Printf("nyaa~\n");
+			break;
+			*/
+		case CMD_COMMIT:
+			OnCommit();
+			break;
+
+		default:
+			m_stream->Printf("Unrecognized command\n");
+			break;
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// "commit"
+
+void TreeCLISessionContext::OnCommit()
+{
+	//g_kvs->StoreObjectIfNecessary(g_inputCurrentShuntOffset, (uint16_t)0, g_iincalObjectName);
+	//g_kvs->StoreObjectIfNecessary(g_outputCurrentShuntOffset, (uint16_t)0, g_ioutcalObjectName);
+}

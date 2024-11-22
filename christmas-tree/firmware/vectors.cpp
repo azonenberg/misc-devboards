@@ -143,6 +143,7 @@ void HardFault_Handler()
 	g_uart.Printf("    HFSR  = %08x\n", *(volatile uint32_t*)(0xe000ed2C));
 	g_uart.Printf("    MMFAR = %08x\n", *(volatile uint32_t*)(0xe000ed34));
 	g_uart.Printf("    BFAR  = %08x\n", *(volatile uint32_t*)(0xe000ed38));
+	g_uart.BlockingFlush();
 	g_uart.Printf("    CFSR  = %08x\n", *(volatile uint32_t*)(0xe000ed28));
 	g_uart.Printf("    UFSR  = %08x\n", *(volatile uint16_t*)(0xe000ed2a));
 	g_uart.Printf("    DFSR  = %08x\n", *(volatile uint32_t*)(0xe000ed30));
