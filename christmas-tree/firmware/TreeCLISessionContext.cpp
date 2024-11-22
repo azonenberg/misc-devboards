@@ -40,6 +40,25 @@
 enum cmdid_t
 {
 	CMD_COMMIT,
+	CMD_GREEN,
+	CMD_PATTERN,
+	CMD_RANDOM,
+	CMD_RED,
+	CMD_RED_GREEN,
+	CMD_RELOAD,
+	CMD_ZEROIZE
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// "pattern"
+
+static const clikeyword_t g_patternCommands[] =
+{
+	{"green",		CMD_GREEN,			nullptr,				"Solid green" },
+	{"random",		CMD_RANDOM,			nullptr,				"Randomly animate colors of all RGB LEDs and random flash red/green" },
+	{"red",			CMD_RED,			nullptr,				"Solid red" },
+	{"redgreen",	CMD_RED_GREEN,		nullptr,				"Solid red and green" },
+	{nullptr,		INVALID_COMMAND,	nullptr,				nullptr }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -48,6 +67,9 @@ enum cmdid_t
 static const clikeyword_t g_rootCommands[] =
 {
 	{"commit",		CMD_COMMIT,			nullptr,				"Commit pending configuration to flash" },
+	{"pattern",		CMD_PATTERN,		g_patternCommands,		"Select LED pattern"},
+	{"reload",		CMD_RELOAD,			nullptr,				"Reboot and display previous pattern configured in flash"},
+	{"zeroize",		CMD_ZEROIZE,		nullptr,				"Wipe all persistent configuration"},
 	{nullptr,		INVALID_COMMAND,	nullptr,				nullptr }
 };
 
@@ -72,16 +94,20 @@ void TreeCLISessionContext::OnExecute()
 {
 	switch(m_command[0].m_commandID)
 	{
-		/*case CMD_CALIBRATE:
-			OnCalibrate();
-			break;
-
-		case CMD_CAT:
-			m_stream->Printf("nyaa~\n");
-			break;
-			*/
 		case CMD_COMMIT:
 			OnCommit();
+			break;
+
+		case CMD_PATTERN:
+			OnPattern();
+			break;
+
+		case CMD_RELOAD:
+			Reset();
+			break;
+
+		case CMD_ZEROIZE:
+			g_kvs->WipeAll();
 			break;
 
 		default:
@@ -91,10 +117,37 @@ void TreeCLISessionContext::OnExecute()
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// "pattern"
+
+void TreeCLISessionContext::OnPattern()
+{
+	switch(m_command[1].m_commandID)
+	{
+		case CMD_GREEN:
+			g_ledTask->m_pattern = LEDTask::PATTERN_GREEN;
+			break;
+
+		case CMD_RANDOM:
+			g_ledTask->m_pattern = LEDTask::PATTERN_RANDOM;
+			break;
+
+		case CMD_RED:
+			g_ledTask->m_pattern = LEDTask::PATTERN_RED;
+			break;
+
+		case CMD_RED_GREEN:
+			g_ledTask->m_pattern = LEDTask::PATTERN_RED_GREEN;
+			break;
+
+		default:
+			break;
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // "commit"
 
 void TreeCLISessionContext::OnCommit()
 {
-	//g_kvs->StoreObjectIfNecessary(g_inputCurrentShuntOffset, (uint16_t)0, g_iincalObjectName);
-	//g_kvs->StoreObjectIfNecessary(g_outputCurrentShuntOffset, (uint16_t)0, g_ioutcalObjectName);
+	g_kvs->StoreObjectIfNecessary((uint8_t)g_ledTask->m_pattern, (uint8_t)0, g_patternName);
 }

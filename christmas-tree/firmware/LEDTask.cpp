@@ -28,10 +28,12 @@
 ***********************************************************************************************************************/
 
 #include "christmas-tree.h"
-#include "LEDTask.h"
+
+const char* g_patternName = "pat";
 
 LEDTask::LEDTask()
 	: TimerTask(0, 2500)	//250ms per tick = 2 Hz iterations
+	, m_pattern(PATTERN_RANDOM)
 	, m_green0(&GPIOA, 11, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW, 0)
 	, m_green1(&GPIOB, 7, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW, 0)
 	, m_green2(&GPIOB, 1, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW, 0)
@@ -55,6 +57,9 @@ LEDTask::LEDTask()
 	uint32_t colors[8] = {0};
 	RefreshRGB(colors);
 	RefreshRedGreen();
+
+	//Load the persisted pattern from flash
+	m_pattern = static_cast<pattern_t>(g_kvs->ReadObject<uint8_t>(0, g_patternName));
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -145,7 +150,25 @@ void LEDTask::OnTimer()
 		m_step = 0;*/
 
 	//Figure out new color
-	OnTimer_ModeRandom();
+	switch(m_pattern)
+	{
+		case PATTERN_RED:
+			OnTimer_ModeRed();
+			break;
+
+		case PATTERN_GREEN:
+			OnTimer_ModeGreen();
+			break;
+
+		case PATTERN_RED_GREEN:
+			OnTimer_ModeRedGreen();
+			break;
+
+		case PATTERN_RANDOM:
+		default:
+			OnTimer_ModeRandom();
+			break;
+	}
 
 	//Update the LEDs
 	RefreshRedGreen();
@@ -174,4 +197,46 @@ void LEDTask::OnTimer_ModeRandom()
 	//RGB: random colors
 	for(int i=0; i<8; i++)
 		m_rgbColors[i] = RandomColor();
+}
+
+void LEDTask::OnTimer_ModeRed()
+{
+	//all red on solid
+	m_redPattern = 0x1f;
+
+	//all green off
+	m_greenPattern = 0;
+
+	//RGB: all red
+	for(int i=0; i<8; i++)
+		m_rgbColors[i] = 0x1f0000;
+}
+
+void LEDTask::OnTimer_ModeGreen()
+{
+	//all red off
+	m_redPattern = 0;
+
+	//all green on solid
+	m_greenPattern = 0x1f;
+
+	//RGB: all green
+	for(int i=0; i<8; i++)
+		m_rgbColors[i] = 0x001f00;
+}
+
+void LEDTask::OnTimer_ModeRedGreen()
+{
+	//all red on solid
+	m_redPattern = 0x1f;
+
+	//all green on solid
+	m_greenPattern = 0x1f;
+
+	//RGB: mix of red and green
+	for(int i=0; i<8; i+= 2)
+	{
+		m_rgbColors[i] = 0x1f0000;
+		m_rgbColors[i+1] = 0x001f00;
+	}
 }

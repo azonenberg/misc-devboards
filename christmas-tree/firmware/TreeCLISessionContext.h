@@ -50,6 +50,7 @@ protected:
 	virtual void OnExecute() override;
 
 	void OnCommit();
+	void OnPattern();
 
 	CLIOutputStream* m_stream;
 };

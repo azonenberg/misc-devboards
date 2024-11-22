@@ -28,7 +28,6 @@
 ***********************************************************************************************************************/
 
 #include "christmas-tree.h"
-#include "LEDTask.h"
 #include "LocalConsoleTask.h"
 
 //UART console
@@ -41,6 +40,8 @@ char g_version[32] = {0};
 //APB1 is 32 MHz
 //Divide down to get 10 kHz ticks (note TIM2 is double rate)
 Timer g_logTimer(&TIMER2, Timer::FEATURE_GENERAL_PURPOSE_16BIT, 6400);
+
+LEDTask* g_ledTask = nullptr;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Task tables
@@ -123,6 +124,7 @@ void BSP_Init()
 	static LEDTask ledTask;
 	g_tasks.push_back(&ledTask);
 	g_timerTasks.push_back(&ledTask);
+	g_ledTask = &ledTask;
 
 	static LocalConsoleTask consoleTask;
 	g_tasks.push_back(&consoleTask);

@@ -54,10 +54,24 @@ class LEDTask : public TimerTask
 public:
 	LEDTask();
 
+	enum pattern_t
+	{
+		PATTERN_RANDOM,
+
+		//Solid colors
+		PATTERN_RED,
+		PATTERN_GREEN,
+		PATTERN_RED_GREEN
+
+	} m_pattern;
+
 protected:
 	virtual void OnTimer();
 
 	void OnTimer_ModeRandom();
+	void OnTimer_ModeRed();
+	void OnTimer_ModeGreen();
+	void OnTimer_ModeRedGreen();
 
 	GPIOPin m_green0;
 	GPIOPin m_green1;

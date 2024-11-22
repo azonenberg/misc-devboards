@@ -47,4 +47,9 @@ void USART2_Handler();
 
 extern void App_Init();
 
+#include "LEDTask.h"
+extern LEDTask* g_ledTask;
+
+extern const char* g_patternName;
+
 #endif
