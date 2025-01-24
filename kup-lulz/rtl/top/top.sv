@@ -69,6 +69,9 @@ module top(
 
 	wire[1:0]	qpll_clkout;
 	wire[1:0]	qpll_refout;
+	wire[1:0]	pll_clksel;
+	wire[1:0]	qpll_pd;
+	wire[1:0]	sdm_toggle;
 
 	//TODO: make the apb do something
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) qpll_apb();
@@ -76,8 +79,9 @@ module top(
 	assign qpll_apb.preset_n = 1'b0;
 
 	QuadPLL_UltraScale #(
-		.QPLL0_MULT(82),
-		.QPLL1_MULT(66)
+		.QPLL0_MULT(66),	//156.25 MHz * 66 = 10.3125 GHz
+							//note that output is DDR so we have to do sub-rate to get 10GbE
+		.QPLL1_MULT(64)		//156.25 MHz * 64 = 10.000 GHz
 	) qpll (
 		.clk_lockdet(clk_156m25),
 		.clk_ref_north(2'b0),
@@ -85,6 +89,8 @@ module top(
 		.clk_ref(2'b0),
 
 		.apb(qpll_apb),
+
+		.qpll_powerdown(qpll_pd),
 
 		.qpll0_refclk_sel(3'd5),	//GTSOUTHREFCLK00
 		.qpll1_refclk_sel(3'd5),	//GTSOUTHREFCLK00
@@ -94,6 +100,7 @@ module top(
 
 		.qpll_reset(qpll_reset),
 		.sdm_reset(sdm_reset),
+		.sdm_toggle(sdm_toggle),
 
 		.fbclk_lost(fbclk_lost),
 		.qpll_lock(qpll_lock),
@@ -109,34 +116,37 @@ module top(
 	wire[4:0] tx_postcursor;
 	wire[4:0] tx_precursor;
 
-	wire		cpll_fblost;
-	wire		cpll_reflost;
-	wire		cpll_lock;
-
 	wire[24:0]	sdm_data0;
 	wire[24:0]	sdm_data1;
+
+	wire		gty_force_reset;
+	wire[2:0]	tx_rate;
+	wire[2:0]	rx_rate;
 
 	vio_0 vio(
 		.clk(clk_156m25),
 
-		.probe_in0(fbclk_lost),		//2
-		.probe_in1(qpll_lock),		//2
-		.probe_in2(refclk_lost),	//2
-
-		.probe_in3(cpll_fblost),
-		.probe_in4(cpll_reflost),
-		.probe_in5(cpll_lock),
+		.probe_in0(fbclk_lost),			//2
+		.probe_in1(qpll_lock),			//2
+		.probe_in2(refclk_lost),		//2
 
 		.probe_out0(tx_prbssel),
 		.probe_out1(tx_diffctrl),
 		.probe_out2(tx_postcursor),
 		.probe_out3(tx_precursor),
 
-		.probe_out4(qpll_reset),	//2
-		.probe_out5(sdm_reset),		//2
+		.probe_out4(qpll_reset),		//2
+		.probe_out5(sdm_reset),			//2
 		.probe_out6(sdm_data0),
 		.probe_out7(sdm_data1),
-		.probe_out8(rx_prbssel)
+		.probe_out8(rx_prbssel),
+		.probe_out9(rx_rate),			//3
+
+		.probe_out10(gty_force_reset),	//1
+		.probe_out11(pll_clksel),		//2
+		.probe_out12(qpll_pd),			//2
+		.probe_out13(tx_rate),			//3
+		.probe_out14(sdm_toggle)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -153,6 +163,10 @@ module top(
 	wire	rxoutclk;
 	wire	txoutclk;
 
+	logic tx_reset = 1;
+	logic rx_reset = 1;
+	logic[7:0] count = 1;
+
 	//TODO: move reset logic internal
 	logic[7:0] rxcount = 1;
 	always_ff@(posedge rxoutclk) begin
@@ -160,6 +174,11 @@ module top(
 			rxcount <= rxcount + 1;
 		else
 			rxuserrdy	<= 1;
+
+		if(rx_reset) begin
+			rxuserrdy	<= 0;
+			rxcount		<= 1;
+		end
 	end
 
 	logic[7:0] txcount = 1;
@@ -168,11 +187,13 @@ module top(
 			txcount <= txcount + 1;
 		else
 			txuserrdy	<= 1;
+
+		if(tx_reset) begin
+			txuserrdy	<= 0;
+			txcount		<= 1;
+		end
 	end
 
-	logic tx_reset = 1;
-	logic rx_reset = 1;
-	logic[7:0] count = 1;
 	always_ff @(posedge clk_156m25) begin
 		if(count == 0) begin
 			tx_reset	<= 0;
@@ -183,7 +204,10 @@ module top(
 	end
 
 	GTYLane_UltraScale #(
-		.FOO("BAR")
+
+		.CPLL_FBDIV(4),			//Combined CPLL feedback divider is 16
+		.CPLL_FBDIV_45(4)		//This gives 156.25 * 16 = 2500 MHz, times 2 for DDR is 5 Gbps line rate
+
 	) lane0 (
 		.apb(lane0_apb),
 
@@ -193,8 +217,8 @@ module top(
 		.tx_p(smpm_0_tx_p),
 		.tx_n(smpm_0_tx_n),
 
-		.rx_reset(rx_reset),
-		.tx_reset(tx_reset),
+		.rx_reset(rx_reset | gty_force_reset),
+		.tx_reset(tx_reset | gty_force_reset),
 
 		.tx_data(64'h0),
 		.rx_data(),
@@ -202,6 +226,7 @@ module top(
 		.clk_ref_north(2'b0),
 		.clk_ref_south({1'b0, refclk}),
 		.clk_ref(2'b0),
+		.clk_lockdet(clk_156m25),
 
 		.rxoutclk(rxoutclk),
 		.rxusrclk(rxoutclk),
@@ -213,16 +238,23 @@ module top(
 		.txusrclk2(txoutclk),
 		.txuserrdy(txuserrdy),
 
-		.rxpllclksel(2'b11),	//RX datapath uses QPLL0
-		.txpllclksel(2'b11),	//TX datapath uses QPLL0
+		.rxpllclksel(pll_clksel),
+		.txpllclksel(pll_clksel),
 
 		.qpll_clk(qpll_clkout),
 		.qpll_refclk(qpll_refout),
 		.qpll_lock(qpll_lock),
 
-		.cpll_fblost(cpll_fblost),
-		.cpll_reflost(cpll_reflost),
-		.cpll_lock(cpll_lock),
+		.cpll_pd(1'b1),					//Don't use CPLL for now it seems to be buggy if you're not using the wizard
+		.cpll_fblost(),
+		.cpll_reflost(),
+		.cpll_lock(),
+		.cpll_refclk_sel(3'd1),	//set to 1 when only using one clock source even if it's not GTREFCLK0??
+
+		.tx_rate(tx_rate),
+		.rx_rate(rx_rate),
+
+		.rx_ctle_en(1'b1),
 
 		.txdiffctrl(tx_diffctrl),
 		.txpostcursor(tx_postcursor),
