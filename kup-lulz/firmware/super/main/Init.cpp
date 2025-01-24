@@ -34,6 +34,7 @@
 #include <math.h>
 #include <peripheral/ITM.h>
 #include <peripheral/DWT.h>
+#include <drivers/TCA6424A.h>
 
 //TODO: fix this path somehow?
 #include "../../../../common-ibc/firmware/main/regids.h"
@@ -167,7 +168,21 @@ void App_Init()
 	g_timerTasks.push_back(&ledTask);
 
 	//Add pullups for rail descriptors
-	//g_vccint_pgood.SetPullMode(
+
+	//TODO: make this a sequenced part of the powerup sequence
+	TCA6424A tca(&g_i2c, 0x44);
+	tca.SetDirection(23, false);	//logic enable is output
+	tca.SetOutputValue(23, true);	//enable logic board power
+	//tca.SetOutputValue(23, false);	//enable logic board power
+
+	//Turn on/off secondary outputs for line cards
+	tca.SetDirection(0, false);
+	tca.SetDirection(24, false);
+
+	tca.SetOutputValue(0, true);
+	tca.SetOutputValue(24, true);
+
+	tca.BatchCommitValue();
 
 	//Turn on immediately, don't wait for a button press
 	g_super.PowerOn();

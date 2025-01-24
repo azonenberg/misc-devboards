@@ -14,6 +14,7 @@ target_link_options(main
 target_link_libraries(main
 	bsp
 	common-embedded-platform-core
+	common-embedded-platform-drivers
 	common-embedded-platform-supervisor
 	embedded-cli
 	embedded-utils

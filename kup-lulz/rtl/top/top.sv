@@ -1,3 +1,6 @@
+`timescale 1ns / 1ps
+`default_nettype none
+
 module top(
 	output wire	gpio_p,
 	output wire	gpio_n,
@@ -16,6 +19,9 @@ module top(
 );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// GTY reference clock input
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// System clock input
 
 	wire	clk_156m25_raw;
@@ -31,9 +37,210 @@ module top(
 		.O(clk_156m25));
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// SERDES reference clock input
+
+	wire	refclk;
+	IBUFDS_GTE4 #(
+		.REFCLK_EN_TX_PATH(1'b0),
+		.REFCLK_HROW_CK_SEL(2'b10)
+	) refclk_ibuf(
+		.CEB(1'b0),
+		.I(refclk_p),
+		.IB(refclk_n),
+		.O(refclk),
+		.ODIV2()
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Quad PLL
+
+	/**
+		Use QPLL0 for better performance at 25G
+		At lower speeds, anything works
+	 */
+
+	//use GTSOUTHREFCLK0 (mux sel 5) because quad 224 refclk comes from quad 225 REFCLK0
+
+	wire[1:0]	qpll_reset;
+	wire[1:0]	sdm_reset;
+	wire[1:0]	fbclk_lost;
+	wire[1:0]	qpll_lock;
+	wire[1:0]	refclk_lost;
+
+	wire[1:0]	qpll_clkout;
+	wire[1:0]	qpll_refout;
+
+	//TODO: make the apb do something
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) qpll_apb();
+	assign qpll_apb.pclk = clk_156m25;
+	assign qpll_apb.preset_n = 1'b0;
+
+	QuadPLL_UltraScale #(
+		.QPLL0_MULT(82),
+		.QPLL1_MULT(66)
+	) qpll (
+		.clk_lockdet(clk_156m25),
+		.clk_ref_north(2'b0),
+		.clk_ref_south({1'b0, refclk}),
+		.clk_ref(2'b0),
+
+		.apb(qpll_apb),
+
+		.qpll0_refclk_sel(3'd5),	//GTSOUTHREFCLK00
+		.qpll1_refclk_sel(3'd5),	//GTSOUTHREFCLK00
+
+		.qpll_clkout(qpll_clkout),
+		.qpll_refout(qpll_refout),
+
+		.qpll_reset(qpll_reset),
+		.sdm_reset(sdm_reset),
+
+		.fbclk_lost(fbclk_lost),
+		.qpll_lock(qpll_lock),
+		.refclk_lost(refclk_lost)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// VIO for SERDES config
+
+	wire[3:0] tx_prbssel;
+	wire[3:0] rx_prbssel;
+	wire[4:0] tx_diffctrl;
+	wire[4:0] tx_postcursor;
+	wire[4:0] tx_precursor;
+
+	wire		cpll_fblost;
+	wire		cpll_reflost;
+	wire		cpll_lock;
+
+	wire[24:0]	sdm_data0;
+	wire[24:0]	sdm_data1;
+
+	vio_0 vio(
+		.clk(clk_156m25),
+
+		.probe_in0(fbclk_lost),		//2
+		.probe_in1(qpll_lock),		//2
+		.probe_in2(refclk_lost),	//2
+
+		.probe_in3(cpll_fblost),
+		.probe_in4(cpll_reflost),
+		.probe_in5(cpll_lock),
+
+		.probe_out0(tx_prbssel),
+		.probe_out1(tx_diffctrl),
+		.probe_out2(tx_postcursor),
+		.probe_out3(tx_precursor),
+
+		.probe_out4(qpll_reset),	//2
+		.probe_out5(sdm_reset),		//2
+		.probe_out6(sdm_data0),
+		.probe_out7(sdm_data1),
+		.probe_out8(rx_prbssel)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// GTY block
+
+	//TODO: make the apb do something
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) lane0_apb();
+	assign lane0_apb.pclk = clk_156m25;
+	assign lane0_apb.preset_n = 1'b0;
+
+	logic	rxuserrdy = 0;
+	logic	txuserrdy = 0;
+
+	wire	rxoutclk;
+	wire	txoutclk;
+
+	//TODO: move reset logic internal
+	logic[7:0] rxcount = 1;
+	always_ff@(posedge rxoutclk) begin
+		if(rxcount != 0)
+			rxcount <= rxcount + 1;
+		else
+			rxuserrdy	<= 1;
+	end
+
+	logic[7:0] txcount = 1;
+	always_ff@(posedge txoutclk) begin
+		if(txcount != 0)
+			txcount <= txcount + 1;
+		else
+			txuserrdy	<= 1;
+	end
+
+	logic tx_reset = 1;
+	logic rx_reset = 1;
+	logic[7:0] count = 1;
+	always_ff @(posedge clk_156m25) begin
+		if(count == 0) begin
+			tx_reset	<= 0;
+			rx_reset	<= 0;
+		end
+		else
+			count <= count + 1;
+	end
+
+	GTYLane_UltraScale #(
+		.FOO("BAR")
+	) lane0 (
+		.apb(lane0_apb),
+
+		.rx_p(smpm_0_rx_p),
+		.rx_n(smpm_0_rx_n),
+
+		.tx_p(smpm_0_tx_p),
+		.tx_n(smpm_0_tx_n),
+
+		.rx_reset(rx_reset),
+		.tx_reset(tx_reset),
+
+		.tx_data(64'h0),
+		.rx_data(),
+
+		.clk_ref_north(2'b0),
+		.clk_ref_south({1'b0, refclk}),
+		.clk_ref(2'b0),
+
+		.rxoutclk(rxoutclk),
+		.rxusrclk(rxoutclk),
+		.rxusrclk2(rxoutclk),
+		.rxuserrdy(rxuserrdy),
+
+		.txoutclk(txoutclk),
+		.txusrclk(txoutclk),
+		.txusrclk2(txoutclk),
+		.txuserrdy(txuserrdy),
+
+		.rxpllclksel(2'b11),	//RX datapath uses QPLL0
+		.txpllclksel(2'b11),	//TX datapath uses QPLL0
+
+		.qpll_clk(qpll_clkout),
+		.qpll_refclk(qpll_refout),
+		.qpll_lock(qpll_lock),
+
+		.cpll_fblost(cpll_fblost),
+		.cpll_reflost(cpll_reflost),
+		.cpll_lock(cpll_lock),
+
+		.txdiffctrl(tx_diffctrl),
+		.txpostcursor(tx_postcursor),
+		.txprecursor(tx_precursor),
+		.tx_invert(1'b0),
+		.rx_invert(1'b0),
+
+		.rxprbssel(rx_prbssel),
+		.txprbssel(tx_prbssel)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Echo clock output
 
 	wire	clk_echo;
+
+	wire	clk_echo_raw;
+	assign	clk_echo_raw = clk_156m25;
 
 	ODDRE1 #
 	(
@@ -44,7 +251,7 @@ module top(
 		.SIM_DEVICE("ULTRASCALE_PLUS")
 	) ddr_obuf
 	(
-		.C(clk_156m25),
+		.C(clk_echo_raw),
 		.D1(0),
 		.D2(1),
 		.SR(1'b0),
@@ -59,76 +266,5 @@ module top(
 		.OB(gpio_n),
 		.I(clk_echo)
 	);
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// TODO VIO
-
-	wire[3:0] tx_prbssel;
-	wire[4:0] tx_diffctrl;
-	wire[4:0] tx_postcursor;
-	wire[4:0] tx_precursor;
-
-	vio_0 vio(
-		.clk(clk_156m25),
-		.probe_out0(tx_prbssel),
-		.probe_out1(tx_diffctrl),
-		.probe_out2(tx_postcursor),
-		.probe_out3(tx_precursor)
-	);
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// GTY block
-
-	wire	txsrcclk;
-	wire	txusrclk;
-	wire	txusrclk2;
-	wire	rxsrcclk;
-	wire	rxusrclk;
-	wire	rxusrclk2;
-
-	wire	refclk;
-	IBUFDS_GTE4 refclk_ibuf(
-		.I(refclk_p),
-		.IB(refclk_n),
-		.O(refclk)
-	);
-
-	gtwizard_ultrascale_0 gty (
-		.gtwiz_userclk_tx_reset_in(1'b0),
-		.gtwiz_userclk_tx_srcclk_out(txsrcclk),
-		.gtwiz_userclk_tx_usrclk_out(txusrclk),
-		.gtwiz_userclk_tx_usrclk2_out(txusrclk2),
-		.gtwiz_userclk_tx_active_out(),
-		.gtwiz_userclk_rx_reset_in(1'b0),
-		.gtwiz_userclk_rx_srcclk_out(rxsrcclk),
-		.gtwiz_userclk_rx_usrclk_out(rxusrclk),
-		.gtwiz_userclk_rx_usrclk2_out(rxusrclk2),
-		.gtwiz_userclk_rx_active_out(),
-		.gtwiz_reset_clk_freerun_in(clk_156m25),
-		.gtwiz_reset_all_in(1'b0),
-		.gtwiz_reset_tx_pll_and_datapath_in(1'b0),
-		.gtwiz_reset_tx_datapath_in(1'b0),
-		.gtwiz_reset_rx_pll_and_datapath_in(1'b0),
-		.gtwiz_reset_rx_datapath_in(1'b0),
-		.gtwiz_reset_rx_cdr_stable_out(),
-		.gtwiz_reset_tx_done_out(),
-		.gtwiz_reset_rx_done_out(),
-		.gtwiz_userdata_tx_in(32'h55555555),
-		.gtwiz_userdata_rx_out(),
-		.gtrefclk00_in(refclk),
-		.qpll0outclk_out(),
-		.qpll0outrefclk_out(),
-		.gtyrxn_in(smpm_0_rx_n),
-		.gtyrxp_in(smpm_0_rx_p),
-		.txdiffctrl_in(tx_diffctrl),
-		.txpostcursor_in(tx_postcursor),
-		.txprbssel_in(tx_prbssel),
-		.txprecursor_in(tx_precursor),
-		.gtpowergood_out(),
-		.gtytxn_out(smpm_0_tx_n),
-		.gtytxp_out(smpm_0_tx_p),
-		.rxpmaresetdone_out(),
-		.txpmaresetdone_out()
-		);
 
 endmodule
