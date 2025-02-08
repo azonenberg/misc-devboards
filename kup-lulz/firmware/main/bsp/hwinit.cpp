@@ -173,6 +173,15 @@ void BSP_Init()
 	#endif
 
 	App_Init();
+
+	//Configure SFP28 GPIOs for now
+	g_log("Configuring SFP28 GPIOs for lane 1\n");
+	static GPIOPin sfp1_tx_disable(&GPIOD, 4, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW, 0);
+	static GPIOPin sfp1_rs0(&GPIOD, 5, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW, 0);
+	static GPIOPin sfp1_rs1(&GPIOD, 2, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW, 0);
+	sfp1_tx_disable = 0;
+	sfp1_rs0 = 1;
+	sfp1_rs1 = 1;
 }
 
 #ifdef _DEBUG

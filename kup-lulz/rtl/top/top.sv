@@ -2,24 +2,61 @@
 `default_nettype none
 
 module top(
-	output wire	gpio_p,
-	output wire	gpio_n,
 
-	input wire	clk_156m25_p,
-	input wire	clk_156m25_n,
+	//GPIO output on side SMPMs
+	output wire			gpio_p,
+	output wire			gpio_n,
 
-	input wire	refclk_p,
-	input wire	refclk_n,
+	//System refclk
+	input wire			clk_156m25_p,
+	input wire			clk_156m25_n,
 
-	input wire	smpm_0_rx_p,
-	input wire	smpm_0_rx_n,
+	//GTY refclk
+	input wire			refclk_p,
+	input wire			refclk_n,
 
-	output wire	smpm_0_tx_p,
-	output wire	smpm_0_tx_n
+	//SMPM GTY ports
+	input wire			smpm_0_rx_p,
+	input wire			smpm_0_rx_n,
+
+	output wire			smpm_0_tx_p,
+	output wire			smpm_0_tx_n,
+
+	input wire			smpm_1_rx_p,
+	input wire			smpm_1_rx_n,
+
+	output wire			smpm_1_tx_p,
+	output wire			smpm_1_tx_n,
+
+	input wire			smpm_2_rx_p,
+	input wire			smpm_2_rx_n,
+
+	output wire			smpm_2_tx_p,
+	output wire			smpm_2_tx_n,
+
+
+	//SFP28 GTY ports and control signals
+	input wire			sfp_0_rx_p,
+	input wire			sfp_0_rx_n,
+
+	output wire			sfp_0_tx_p,
+	output wire			sfp_0_tx_n,
+
+	input wire			sfp_1_rx_p,
+	input wire			sfp_1_rx_n,
+
+	output wire			sfp_1_tx_p,
+	output wire			sfp_1_tx_n,
+
+	output wire[1:0]	sfp0_rs,
+	output wire			sfp0_tx_disable
 );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// GTY reference clock input
+	// Tie off SFP control signals
+
+	assign sfp0_tx_disable = 0;
+	assign sfp0_rs = 2'b11;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// System clock input
@@ -60,18 +97,14 @@ module top(
 	 */
 
 	//use GTSOUTHREFCLK0 (mux sel 5) because quad 224 refclk comes from quad 225 REFCLK0
-
-	wire[1:0]	qpll_reset;
-	wire[1:0]	sdm_reset;
+	wire[1:0]	sdm_reset = 2'b0;
 	wire[1:0]	fbclk_lost;
 	wire[1:0]	qpll_lock;
 	wire[1:0]	refclk_lost;
 
 	wire[1:0]	qpll_clkout;
 	wire[1:0]	qpll_refout;
-	wire[1:0]	pll_clksel;
-	wire[1:0]	qpll_pd;
-	wire[1:0]	sdm_toggle;
+	wire[1:0]	sdm_toggle = 2'b0;
 
 	//TODO: make the apb do something
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) qpll_apb();
@@ -90,7 +123,7 @@ module top(
 
 		.apb(qpll_apb),
 
-		.qpll_powerdown(qpll_pd),
+		.qpll_powerdown(2'b00),		//using QPLL1 for everything
 
 		.qpll0_refclk_sel(3'd5),	//GTSOUTHREFCLK00
 		.qpll1_refclk_sel(3'd5),	//GTSOUTHREFCLK00
@@ -98,7 +131,7 @@ module top(
 		.qpll_clkout(qpll_clkout),
 		.qpll_refout(qpll_refout),
 
-		.qpll_reset(qpll_reset),
+		.qpll_reset(2'h0),			//No runtime resets used
 		.sdm_reset(sdm_reset),
 		.sdm_toggle(sdm_toggle),
 
@@ -110,98 +143,27 @@ module top(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// VIO for SERDES config
 
-	wire[3:0] tx_prbssel;
-	wire[3:0] rx_prbssel;
-	wire[4:0] tx_diffctrl;
-	wire[4:0] tx_postcursor;
-	wire[4:0] tx_precursor;
+	wire[4:0] tx_diffctrl = 8;
+	wire[4:0] tx_postcursor = 4;
+	wire[4:0] tx_precursor = 0;
 
-	wire[24:0]	sdm_data0;
-	wire[24:0]	sdm_data1;
+	wire[24:0]	sdm_data0 = 0;
+	wire[24:0]	sdm_data1 = 0;
 
-	wire		gty_force_reset;
-	wire[2:0]	tx_rate;
-	wire[2:0]	rx_rate;
-
-	vio_0 vio(
-		.clk(clk_156m25),
-
-		.probe_in0(fbclk_lost),			//2
-		.probe_in1(qpll_lock),			//2
-		.probe_in2(refclk_lost),		//2
-
-		.probe_out0(tx_prbssel),
-		.probe_out1(tx_diffctrl),
-		.probe_out2(tx_postcursor),
-		.probe_out3(tx_precursor),
-
-		.probe_out4(qpll_reset),		//2
-		.probe_out5(sdm_reset),			//2
-		.probe_out6(sdm_data0),
-		.probe_out7(sdm_data1),
-		.probe_out8(rx_prbssel),
-		.probe_out9(rx_rate),			//3
-
-		.probe_out10(gty_force_reset),	//1
-		.probe_out11(pll_clksel),		//2
-		.probe_out12(qpll_pd),			//2
-		.probe_out13(tx_rate),			//3
-		.probe_out14(sdm_toggle)
-	);
+	wire		gty_force_reset = 0;
+	wire[2:0]	tx_rate = 3;
+	wire[2:0]	rx_rate = 3;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// GTY block
+	// GTY block on SMPM 0 going to scope
 
 	//TODO: make the apb do something
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) lane0_apb();
 	assign lane0_apb.pclk = clk_156m25;
 	assign lane0_apb.preset_n = 1'b0;
 
-	logic	rxuserrdy = 0;
-	logic	txuserrdy = 0;
-
 	wire	rxoutclk;
 	wire	txoutclk;
-
-	logic tx_reset = 1;
-	logic rx_reset = 1;
-	logic[7:0] count = 1;
-
-	//TODO: move reset logic internal
-	logic[7:0] rxcount = 1;
-	always_ff@(posedge rxoutclk) begin
-		if(rxcount != 0)
-			rxcount <= rxcount + 1;
-		else
-			rxuserrdy	<= 1;
-
-		if(rx_reset) begin
-			rxuserrdy	<= 0;
-			rxcount		<= 1;
-		end
-	end
-
-	logic[7:0] txcount = 1;
-	always_ff@(posedge txoutclk) begin
-		if(txcount != 0)
-			txcount <= txcount + 1;
-		else
-			txuserrdy	<= 1;
-
-		if(tx_reset) begin
-			txuserrdy	<= 0;
-			txcount		<= 1;
-		end
-	end
-
-	always_ff @(posedge clk_156m25) begin
-		if(count == 0) begin
-			tx_reset	<= 0;
-			rx_reset	<= 0;
-		end
-		else
-			count <= count + 1;
-	end
 
 	GTYLane_UltraScale #(
 
@@ -217,10 +179,10 @@ module top(
 		.tx_p(smpm_0_tx_p),
 		.tx_n(smpm_0_tx_n),
 
-		.rx_reset(rx_reset | gty_force_reset),
-		.tx_reset(tx_reset | gty_force_reset),
+		.rx_reset(gty_force_reset),
+		.tx_reset(gty_force_reset),
 
-		.tx_data(64'h0),
+		.tx_data(32'h0),
 		.rx_data(),
 
 		.clk_ref_north(2'b0),
@@ -231,15 +193,15 @@ module top(
 		.rxoutclk(rxoutclk),
 		.rxusrclk(rxoutclk),
 		.rxusrclk2(rxoutclk),
-		.rxuserrdy(rxuserrdy),
+		.rxuserrdy(1'b1),
 
 		.txoutclk(txoutclk),
 		.txusrclk(txoutclk),
 		.txusrclk2(txoutclk),
-		.txuserrdy(txuserrdy),
+		.txuserrdy(1'b1),
 
-		.rxpllclksel(pll_clksel),
-		.txpllclksel(pll_clksel),
+		.rxpllclksel(2'b10),		//QPLL1
+		.txpllclksel(2'b10),		//QPLL1
 
 		.qpll_clk(qpll_clkout),
 		.qpll_refclk(qpll_refout),
@@ -262,8 +224,109 @@ module top(
 		.tx_invert(1'b0),
 		.rx_invert(1'b0),
 
-		.rxprbssel(rx_prbssel),
-		.txprbssel(tx_prbssel)
+		.rxprbssel(4'b0101),	//PRBS-31
+		.txprbssel(4'b0101)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Second clone GTY block on SMPM 1 going to BERT
+
+	//TODO: make the apb do something
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) lane1_apb();
+	assign lane1_apb.pclk = clk_156m25;
+	assign lane1_apb.preset_n = 1'b0;
+
+	wire	lane1_txoutclk;
+	wire	lane1_rxoutclk;
+
+	wire		rxprbserr;
+	wire		rxprbslocked;
+	wire[31:0]	rx_data;
+
+	GTYLane_UltraScale #(
+
+		.CPLL_FBDIV(4),			//Combined CPLL feedback divider is 16
+		.CPLL_FBDIV_45(4)		//This gives 156.25 * 16 = 2500 MHz, times 2 for DDR is 5 Gbps line rate
+
+	) lane1 (
+		.apb(lane1_apb),
+
+		.rx_p(smpm_1_rx_p),
+		.rx_n(smpm_1_rx_n),
+
+		.tx_p(smpm_1_tx_p),
+		.tx_n(smpm_1_tx_n),
+
+		.rx_reset(gty_force_reset),
+		.tx_reset(gty_force_reset),
+
+		.tx_data(32'h0),
+		.rx_data(rx_data),
+
+		.clk_ref_north(2'b0),
+		.clk_ref_south({1'b0, refclk}),
+		.clk_ref(2'b0),
+		.clk_lockdet(clk_156m25),
+
+		.rxoutclk(lane1_rxoutclk),
+		.rxusrclk(lane1_rxoutclk),
+		.rxusrclk2(lane1_rxoutclk),
+		.rxuserrdy(1'b1),
+
+		.txoutclk(lane1_txoutclk),
+		.txusrclk(lane1_txoutclk),
+		.txusrclk2(lane1_txoutclk),
+		.txuserrdy(1'b1),
+
+		.rxpllclksel(2'b10),		//QPLL1
+		.txpllclksel(2'b10),		//QPLL1
+
+		.qpll_clk(qpll_clkout),
+		.qpll_refclk(qpll_refout),
+		.qpll_lock(qpll_lock),
+
+		.cpll_pd(1'b1),					//Don't use CPLL for now it seems to be buggy if you're not using the wizard
+		.cpll_fblost(),
+		.cpll_reflost(),
+		.cpll_lock(),
+		.cpll_refclk_sel(3'd1),		//set to 1 when only using one clock source even if it's not GTREFCLK0??
+
+		.tx_rate(tx_rate),
+		.rx_rate(rx_rate),
+
+		.rx_ctle_en(1'b0),
+
+		.txdiffctrl(tx_diffctrl),
+		.txpostcursor(tx_postcursor),
+		.txprecursor(tx_precursor),
+		.tx_invert(1'b0),
+		.rx_invert(1'b0),
+
+		.rxprbssel(4'b0101),	//PRBS-31
+		.txprbssel(4'b0101),
+		.rxprbserr(rxprbserr),
+		.rxprbslocked(rxprbslocked)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// GTY block on SMPM 2 going to Artix board
+
+	GTY_APBBridge #(
+		.TX_INVERT(0),
+		.RX_INVERT(0)
+	) artix_bridge (
+		.sysclk(clk_156m25),
+		.clk_ref({1'b0, refclk}),
+
+		.rx_p(smpm_2_rx_p),
+		.rx_n(smpm_2_rx_n),
+
+		.tx_p(smpm_2_tx_p),
+		.tx_n(smpm_2_tx_n),
+
+		.qpll_clkout(qpll_clkout),
+		.qpll_refout(qpll_refout),
+		.qpll_lock(qpll_lock)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -297,6 +360,27 @@ module top(
 		.O(gpio_p),
 		.OB(gpio_n),
 		.I(clk_echo)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// SFP28 ports
+
+	APB_SerdesTest test(
+		.refclk(refclk),
+
+		.sysclk(clk_156m25),
+
+		.sfp_0_rx_p(sfp_0_rx_p),
+		.sfp_0_rx_n(sfp_0_rx_n),
+
+		.sfp_0_tx_p(sfp_0_tx_p),
+		.sfp_0_tx_n(sfp_0_tx_n),
+
+		.sfp_1_rx_p(sfp_1_rx_p),
+		.sfp_1_rx_n(sfp_1_rx_n),
+
+		.sfp_1_tx_p(sfp_1_tx_p),
+		.sfp_1_tx_n(sfp_1_tx_n)
 	);
 
 endmodule
