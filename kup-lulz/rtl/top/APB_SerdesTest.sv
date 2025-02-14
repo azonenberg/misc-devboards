@@ -63,12 +63,26 @@ module APB_SerdesTest(
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB interfaces for everything
+
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(32), .USER_WIDTH(0)) apb_device_req();
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(32), .USER_WIDTH(0)) apb_device_comp();
+
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(32), .USER_WIDTH(0)) apb_host_req();
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(32), .USER_WIDTH(0)) apb_host_comp();
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// GTY tx and rx lanes for the two test interfaces
+
+	wire host_tx_clk;
 
 	GTY_APBBridge #(
 		.TX_INVERT(0),
-		.RX_INVERT(1)
-	) bridge0 (
+		.RX_INVERT(1),
+		.TX_ILA(1),
+		.RX_ILA(0),
+		.TX_CDC_BYPASS(1)
+	) host_bridge (
 		.sysclk(sysclk),
 		.clk_ref({1'b0, refclk}),
 
@@ -78,15 +92,24 @@ module APB_SerdesTest(
 		.tx_p(sfp_0_tx_p),
 		.tx_n(sfp_0_tx_n),
 
+		.rxoutclk(),
+		.txoutclk(host_tx_clk),
+
 		.qpll_clkout(qpll_clkout),
 		.qpll_refout(qpll_refout),
-		.qpll_lock(qpll_lock)
+		.qpll_lock(qpll_lock),
+
+		.apb_req(apb_host_req),
+		.apb_comp(apb_host_comp)
 	);
 
 	GTY_APBBridge #(
 		.TX_INVERT(0),
-		.RX_INVERT(1)
-	) bridge1 (
+		.RX_INVERT(1),
+		.TX_ILA(0),
+		.RX_ILA(1),
+		.TX_CDC_BYPASS(1)
+	) device_bridge (
 		.sysclk(sysclk),
 		.clk_ref({1'b0, refclk}),
 
@@ -96,9 +119,91 @@ module APB_SerdesTest(
 		.tx_p(sfp_1_tx_p),
 		.tx_n(sfp_1_tx_n),
 
+		.rxoutclk(),
+		.txoutclk(),
+
 		.qpll_clkout(qpll_clkout),
 		.qpll_refout(qpll_refout),
-		.qpll_lock(qpll_lock)
+		.qpll_lock(qpll_lock),
+
+		.apb_req(apb_device_req),
+		.apb_comp(apb_device_comp)
 	);
 
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Dummy peripheral for testing stuff
+
+	APB_DummyPeripheral dummy(.apb(apb_device_req));
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// VIO for sending traffic
+
+	assign apb_host_comp.pclk 		= host_tx_clk;
+	assign apb_host_comp.preset_n	= 1;
+
+	wire	apb_req_en;
+
+	vio_0 vio(
+		.clk(host_tx_clk),
+		.probe_out0(apb_host_comp.paddr),
+		.probe_out1(apb_host_comp.pwdata),
+		.probe_out2(apb_host_comp.pwrite),
+		.probe_out3(apb_req_en),
+		.probe_in0(apb_host_comp.prdata)
+	);
+
+	initial begin
+		apb_host_comp.penable	= 0;
+		apb_host_comp.psel		= 0;
+	end
+
+	logic	apb_req_en_ff	= 0;
+	always_ff @(posedge host_tx_clk) begin
+		apb_req_en_ff	<= apb_req_en;
+
+		if(apb_req_en && !apb_req_en_ff)
+			apb_host_comp.psel		<= 1;
+		if(apb_host_comp.psel)
+			apb_host_comp.penable	<= 1;
+
+		if(apb_host_comp.pready) begin
+			apb_host_comp.psel		<= 0;
+			apb_host_comp.penable	<= 0;
+		end
+
+	end
+
 endmodule
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Dummy APB peripheral
+
+module APB_DummyPeripheral(
+	APB.completer 		apb
+);
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Register logic
+
+	logic[31:0] foo = 0;
+
+	//Combinatorial readback and writes
+	always_comb begin
+
+		apb.pready		= apb.psel && apb.penable;
+		apb.prdata		= 0;
+		apb.pslverr		= 0;
+		apb.prdata		= 0;
+
+		if(apb.pready && !apb.pwrite)
+			apb.prdata		= foo;
+
+	end
+
+	always_ff @(posedge apb.pclk) begin
+		if(apb.pwrite && apb.pready)
+			foo	<= apb.pwdata;
+	end
+
+endmodule
+
+

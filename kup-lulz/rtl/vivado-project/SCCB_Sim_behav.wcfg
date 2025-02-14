@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="SCCB_Sim_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="SCCB_Sim" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="515.750 ns"></ZoomStartTime>
+      <ZoomEndTime time="671.047 ns"></ZoomEndTime>
+      <Cursor1Time time="518.981 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="236"></NameColumnWidth>
+      <ValueColumnWidth column_width="104"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="11" />
+   <wvobject type="logic" fp_name="/SCCB_Sim/clk_host">
+      <obj_property name="ElementShortName">clk_host</obj_property>
+      <obj_property name="ObjectShortName">clk_host</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/SCCB_Sim/clk_dev">
+      <obj_property name="ElementShortName">clk_dev</obj_property>
+      <obj_property name="ObjectShortName">clk_dev</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/SCCB_Sim/host_tx_data">
+      <obj_property name="ElementShortName">host_tx_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">host_tx_data[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/SCCB_Sim/host_tx_kchar">
+      <obj_property name="ElementShortName">host_tx_kchar[3:0]</obj_property>
+      <obj_property name="ObjectShortName">host_tx_kchar[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/SCCB_Sim/dev_tx_data">
+      <obj_property name="ElementShortName">dev_tx_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dev_tx_data[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/SCCB_Sim/dev_tx_kchar">
+      <obj_property name="ElementShortName">dev_tx_kchar[3:0]</obj_property>
+      <obj_property name="ObjectShortName">dev_tx_kchar[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider7" type="divider">
+   </wvobject>
+   <wvobject type="group" fp_name="group655">
+      <obj_property name="label">comp</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/SCCB_Sim/apb_comp/preset_n">
+         <obj_property name="ElementShortName">preset_n</obj_property>
+         <obj_property name="ObjectShortName">preset_n</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/SCCB_Sim/apb_comp/paddr">
+         <obj_property name="ElementShortName">paddr[31:0]</obj_property>
+         <obj_property name="ObjectShortName">paddr[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/SCCB_Sim/apb_comp/pwrite">
+         <obj_property name="ElementShortName">pwrite</obj_property>
+         <obj_property name="ObjectShortName">pwrite</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/SCCB_Sim/apb_comp/psel">
+         <obj_property name="ElementShortName">psel</obj_property>
+         <obj_property name="ObjectShortName">psel</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/SCCB_Sim/apb_comp/penable">
+         <obj_property name="ElementShortName">penable</obj_property>
+         <obj_property name="ObjectShortName">penable</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/SCCB_Sim/apb_comp/pready">
+         <obj_property name="ElementShortName">pready</obj_property>
+         <obj_property name="ObjectShortName">pready</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/SCCB_Sim/apb_comp/pslverr">
+         <obj_property name="ElementShortName">pslverr</obj_property>
+         <obj_property name="ObjectShortName">pslverr</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/SCCB_Sim/apb_comp/pwdata">
+         <obj_property name="ElementShortName">pwdata[31:0]</obj_property>
+         <obj_property name="ObjectShortName">pwdata[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/SCCB_Sim/apb_comp/prdata">
+         <obj_property name="ElementShortName">prdata[31:0]</obj_property>
+         <obj_property name="ObjectShortName">prdata[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/SCCB_Sim/apb_comp/pprot">
+         <obj_property name="ElementShortName">pprot[2:0]</obj_property>
+         <obj_property name="ObjectShortName">pprot[2:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/SCCB_Sim/apb_comp/pstrb">
+         <obj_property name="ElementShortName">pstrb[3:0]</obj_property>
+         <obj_property name="ObjectShortName">pstrb[3:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group379">
+      <obj_property name="label">host</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="group" fp_name="group899">
+         <obj_property name="label">rx</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject type="array" fp_name="/SCCB_Sim/host_bridge/rx_kchar">
+            <obj_property name="ElementShortName">rx_kchar[3:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_kchar[3:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/host_bridge/rx_data">
+            <obj_property name="ElementShortName">rx_data[31:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_data[31:0]</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/host_bridge/rx_data_valid">
+            <obj_property name="ElementShortName">rx_data_valid</obj_property>
+            <obj_property name="ObjectShortName">rx_data_valid</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/host_bridge/rx_ll_link_up">
+            <obj_property name="ElementShortName">rx_ll_link_up</obj_property>
+            <obj_property name="ObjectShortName">rx_ll_link_up</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/host_bridge/rx_ll_start">
+            <obj_property name="ElementShortName">rx_ll_start</obj_property>
+            <obj_property name="ObjectShortName">rx_ll_start</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/host_bridge/rx_ll_valid">
+            <obj_property name="ElementShortName">rx_ll_valid</obj_property>
+            <obj_property name="ObjectShortName">rx_ll_valid</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/host_bridge/rx_ll_nvalid">
+            <obj_property name="ElementShortName">rx_ll_nvalid[2:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_ll_nvalid[2:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/host_bridge/rx_ll_data">
+            <obj_property name="ElementShortName">rx_ll_data[31:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_ll_data[31:0]</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/host_bridge/rx_ll_commit">
+            <obj_property name="ElementShortName">rx_ll_commit</obj_property>
+            <obj_property name="ObjectShortName">rx_ll_commit</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/host_bridge/rx_ll_drop">
+            <obj_property name="ElementShortName">rx_ll_drop</obj_property>
+            <obj_property name="ObjectShortName">rx_ll_drop</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/host_bridge/rx_state">
+            <obj_property name="ElementShortName">rx_state[2:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_state[2:0]</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/host_bridge/ack_pending">
+            <obj_property name="ElementShortName">ack_pending</obj_property>
+            <obj_property name="ObjectShortName">ack_pending</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/host_bridge/ack_error">
+            <obj_property name="ElementShortName">ack_error</obj_property>
+            <obj_property name="ObjectShortName">ack_error</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/host_bridge/ack_req_sync">
+            <obj_property name="ElementShortName">ack_req_sync</obj_property>
+            <obj_property name="ObjectShortName">ack_req_sync</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/host_bridge/ack_error_sync">
+            <obj_property name="ElementShortName">ack_error_sync</obj_property>
+            <obj_property name="ObjectShortName">ack_error_sync</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="group" fp_name="group898">
+         <obj_property name="label">rx crc</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="logic" fp_name="/SCCB_Sim/host_bridge/link_layer/rx_crc_reset">
+            <obj_property name="ElementShortName">rx_crc_reset</obj_property>
+            <obj_property name="ObjectShortName">rx_crc_reset</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/host_bridge/link_layer/rx_crc_din_len">
+            <obj_property name="ElementShortName">rx_crc_din_len[2:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_crc_din_len[2:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/host_bridge/link_layer/rx_crc_din">
+            <obj_property name="ElementShortName">rx_crc_din[31:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_crc_din[31:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/host_bridge/link_layer/rx_crc_dout">
+            <obj_property name="ElementShortName">rx_crc_dout[7:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_crc_dout[7:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/host_bridge/link_layer/rx_checksum_expected">
+            <obj_property name="ElementShortName">rx_checksum_expected[7:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_checksum_expected[7:0]</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/host_bridge/link_layer/rx_checksum_next">
+            <obj_property name="ElementShortName">rx_checksum_next</obj_property>
+            <obj_property name="ObjectShortName">rx_checksum_next</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/host_bridge/link_layer/rx_done_next">
+            <obj_property name="ElementShortName">rx_done_next</obj_property>
+            <obj_property name="ObjectShortName">rx_done_next</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/host_bridge/link_layer/rx_done">
+            <obj_property name="ElementShortName">rx_done</obj_property>
+            <obj_property name="ObjectShortName">rx_done</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="group" fp_name="group900">
+         <obj_property name="label">tx</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="array" fp_name="/SCCB_Sim/host_bridge/tx_kchar">
+            <obj_property name="ElementShortName">tx_kchar[3:0]</obj_property>
+            <obj_property name="ObjectShortName">tx_kchar[3:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/host_bridge/tx_data">
+            <obj_property name="ElementShortName">tx_data[31:0]</obj_property>
+            <obj_property name="ObjectShortName">tx_data[31:0]</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/host_bridge/apb_tx_pending">
+            <obj_property name="ElementShortName">apb_tx_pending</obj_property>
+            <obj_property name="ObjectShortName">apb_tx_pending</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/host_bridge/tx_ll_start">
+            <obj_property name="ElementShortName">tx_ll_start</obj_property>
+            <obj_property name="ObjectShortName">tx_ll_start</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/host_bridge/tx_ll_valid">
+            <obj_property name="ElementShortName">tx_ll_valid[2:0]</obj_property>
+            <obj_property name="ObjectShortName">tx_ll_valid[2:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/host_bridge/tx_ll_data">
+            <obj_property name="ElementShortName">tx_ll_data[31:0]</obj_property>
+            <obj_property name="ObjectShortName">tx_ll_data[31:0]</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/host_bridge/tx_ll_link_up">
+            <obj_property name="ElementShortName">tx_ll_link_up</obj_property>
+            <obj_property name="ObjectShortName">tx_ll_link_up</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/host_bridge/tx_state">
+            <obj_property name="ElementShortName">tx_state[2:0]</obj_property>
+            <obj_property name="ObjectShortName">tx_state[2:0]</obj_property>
+         </wvobject>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group380">
+      <obj_property name="label">device</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="group" fp_name="group901">
+         <obj_property name="label">rx</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/rx_kchar">
+            <obj_property name="ElementShortName">rx_kchar[3:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_kchar[3:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/rx_data">
+            <obj_property name="ElementShortName">rx_data[31:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_data[31:0]</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/rx_data_valid">
+            <obj_property name="ElementShortName">rx_data_valid</obj_property>
+            <obj_property name="ObjectShortName">rx_data_valid</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/rx_ll_link_up">
+            <obj_property name="ElementShortName">rx_ll_link_up</obj_property>
+            <obj_property name="ObjectShortName">rx_ll_link_up</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/rx_ll_start">
+            <obj_property name="ElementShortName">rx_ll_start</obj_property>
+            <obj_property name="ObjectShortName">rx_ll_start</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/rx_ll_valid">
+            <obj_property name="ElementShortName">rx_ll_valid</obj_property>
+            <obj_property name="ObjectShortName">rx_ll_valid</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/rx_ll_nvalid">
+            <obj_property name="ElementShortName">rx_ll_nvalid[2:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_ll_nvalid[2:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/rx_ll_data">
+            <obj_property name="ElementShortName">rx_ll_data[31:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_ll_data[31:0]</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/rx_ll_commit">
+            <obj_property name="ElementShortName">rx_ll_commit</obj_property>
+            <obj_property name="ObjectShortName">rx_ll_commit</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/rx_ll_drop">
+            <obj_property name="ElementShortName">rx_ll_drop</obj_property>
+            <obj_property name="ObjectShortName">rx_ll_drop</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/rx_state">
+            <obj_property name="ElementShortName">rx_state[2:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_state[2:0]</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/link_layer/rx_done">
+            <obj_property name="ElementShortName">rx_done</obj_property>
+            <obj_property name="ObjectShortName">rx_done</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="group" fp_name="group902">
+         <obj_property name="label">completions</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/completion_req">
+            <obj_property name="ElementShortName">completion_req</obj_property>
+            <obj_property name="ObjectShortName">completion_req</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/completion_has_data">
+            <obj_property name="ElementShortName">completion_has_data</obj_property>
+            <obj_property name="ObjectShortName">completion_has_data</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/completion_success">
+            <obj_property name="ElementShortName">completion_success</obj_property>
+            <obj_property name="ObjectShortName">completion_success</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/completion_data">
+            <obj_property name="ElementShortName">completion_data[31:0]</obj_property>
+            <obj_property name="ObjectShortName">completion_data[31:0]</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/completion_pending">
+            <obj_property name="ElementShortName">completion_pending</obj_property>
+            <obj_property name="ObjectShortName">completion_pending</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/completion_req_sync">
+            <obj_property name="ElementShortName">completion_req_sync</obj_property>
+            <obj_property name="ObjectShortName">completion_req_sync</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/completion_has_data_sync">
+            <obj_property name="ElementShortName">completion_has_data_sync</obj_property>
+            <obj_property name="ObjectShortName">completion_has_data_sync</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/completion_success_sync">
+            <obj_property name="ElementShortName">completion_success_sync</obj_property>
+            <obj_property name="ObjectShortName">completion_success_sync</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/completion_data_sync">
+            <obj_property name="ElementShortName">completion_data_sync[31:0]</obj_property>
+            <obj_property name="ObjectShortName">completion_data_sync[31:0]</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="group" fp_name="group903">
+         <obj_property name="label">tx</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/tx_kchar">
+            <obj_property name="ElementShortName">tx_kchar[3:0]</obj_property>
+            <obj_property name="ObjectShortName">tx_kchar[3:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/tx_data">
+            <obj_property name="ElementShortName">tx_data[31:0]</obj_property>
+            <obj_property name="ObjectShortName">tx_data[31:0]</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/tx_ll_link_up">
+            <obj_property name="ElementShortName">tx_ll_link_up</obj_property>
+            <obj_property name="ObjectShortName">tx_ll_link_up</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/tx_ll_start">
+            <obj_property name="ElementShortName">tx_ll_start</obj_property>
+            <obj_property name="ObjectShortName">tx_ll_start</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/tx_ll_valid">
+            <obj_property name="ElementShortName">tx_ll_valid[2:0]</obj_property>
+            <obj_property name="ObjectShortName">tx_ll_valid[2:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/tx_ll_data">
+            <obj_property name="ElementShortName">tx_ll_data[31:0]</obj_property>
+            <obj_property name="ObjectShortName">tx_ll_data[31:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/tx_state">
+            <obj_property name="ElementShortName">tx_state[2:0]</obj_property>
+            <obj_property name="ObjectShortName">tx_state[2:0]</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="group" fp_name="group904">
+         <obj_property name="label">tx crc</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/link_layer/tx_crc_reset">
+            <obj_property name="ElementShortName">tx_crc_reset</obj_property>
+            <obj_property name="ObjectShortName">tx_crc_reset</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/link_layer/tx_crc_din_len">
+            <obj_property name="ElementShortName">tx_crc_din_len[2:0]</obj_property>
+            <obj_property name="ObjectShortName">tx_crc_din_len[2:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/link_layer/tx_crc_din">
+            <obj_property name="ElementShortName">tx_crc_din[31:0]</obj_property>
+            <obj_property name="ObjectShortName">tx_crc_din[31:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/link_layer/tx_crc_dout">
+            <obj_property name="ElementShortName">tx_crc_dout[7:0]</obj_property>
+            <obj_property name="ObjectShortName">tx_crc_dout[7:0]</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/link_layer/tx_crc_last">
+            <obj_property name="ElementShortName">tx_crc_last</obj_property>
+            <obj_property name="ObjectShortName">tx_crc_last</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/link_layer/tx_crc_last_adv">
+            <obj_property name="ElementShortName">tx_crc_last_adv</obj_property>
+            <obj_property name="ObjectShortName">tx_crc_last_adv</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/link_layer/tx_crc_pos">
+            <obj_property name="ElementShortName">tx_crc_pos[1:0]</obj_property>
+            <obj_property name="ObjectShortName">tx_crc_pos[1:0]</obj_property>
+         </wvobject>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group654">
+      <obj_property name="label">req</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/SCCB_Sim/apb_req/preset_n">
+         <obj_property name="ElementShortName">preset_n</obj_property>
+         <obj_property name="ObjectShortName">preset_n</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/SCCB_Sim/apb_req/paddr">
+         <obj_property name="ElementShortName">paddr[31:0]</obj_property>
+         <obj_property name="ObjectShortName">paddr[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/SCCB_Sim/apb_req/psel">
+         <obj_property name="ElementShortName">psel</obj_property>
+         <obj_property name="ObjectShortName">psel</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/SCCB_Sim/apb_req/penable">
+         <obj_property name="ElementShortName">penable</obj_property>
+         <obj_property name="ObjectShortName">penable</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/SCCB_Sim/apb_req/pwrite">
+         <obj_property name="ElementShortName">pwrite</obj_property>
+         <obj_property name="ObjectShortName">pwrite</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/SCCB_Sim/apb_req/pwdata">
+         <obj_property name="ElementShortName">pwdata[31:0]</obj_property>
+         <obj_property name="ObjectShortName">pwdata[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/SCCB_Sim/apb_req/pready">
+         <obj_property name="ElementShortName">pready</obj_property>
+         <obj_property name="ObjectShortName">pready</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/SCCB_Sim/apb_req/prdata">
+         <obj_property name="ElementShortName">prdata[31:0]</obj_property>
+         <obj_property name="ObjectShortName">prdata[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/SCCB_Sim/apb_req/pprot">
+         <obj_property name="ElementShortName">pprot[2:0]</obj_property>
+         <obj_property name="ObjectShortName">pprot[2:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/SCCB_Sim/apb_req/pstrb">
+         <obj_property name="ElementShortName">pstrb[3:0]</obj_property>
+         <obj_property name="ObjectShortName">pstrb[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/SCCB_Sim/apb_req/pslverr">
+         <obj_property name="ElementShortName">pslverr</obj_property>
+         <obj_property name="ObjectShortName">pslverr</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>

@@ -311,9 +311,14 @@ module top(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// GTY block on SMPM 2 going to Artix board
 
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(32), .USER_WIDTH(0)) apb_req();
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(32), .USER_WIDTH(0)) apb_comp();
+
 	GTY_APBBridge #(
 		.TX_INVERT(0),
-		.RX_INVERT(0)
+		.RX_INVERT(0),
+		.TX_ILA(0),
+		.RX_ILA(0)
 	) artix_bridge (
 		.sysclk(clk_156m25),
 		.clk_ref({1'b0, refclk}),
@@ -326,7 +331,10 @@ module top(
 
 		.qpll_clkout(qpll_clkout),
 		.qpll_refout(qpll_refout),
-		.qpll_lock(qpll_lock)
+		.qpll_lock(qpll_lock),
+
+		.apb_req(apb_req),
+		.apb_comp(apb_comp)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
