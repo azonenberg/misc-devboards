@@ -16,6 +16,7 @@ module top(
 	input wire			refclk_n,
 
 	//SMPM GTY ports
+	/*
 	input wire			smpm_0_rx_p,
 	input wire			smpm_0_rx_n,
 
@@ -27,7 +28,7 @@ module top(
 
 	output wire			smpm_1_tx_p,
 	output wire			smpm_1_tx_n,
-
+*/
 	input wire			smpm_2_rx_p,
 	input wire			smpm_2_rx_n,
 
@@ -36,6 +37,7 @@ module top(
 
 
 	//SFP28 GTY ports and control signals
+	/*
 	input wire			sfp_0_rx_p,
 	input wire			sfp_0_rx_n,
 
@@ -47,7 +49,7 @@ module top(
 
 	output wire			sfp_1_tx_p,
 	output wire			sfp_1_tx_n,
-
+*/
 	output wire[1:0]	sfp0_rs,
 	output wire			sfp0_tx_disable
 );
@@ -156,7 +158,7 @@ module top(
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// GTY block on SMPM 0 going to scope
-
+/*
 	//TODO: make the apb do something
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) lane0_apb();
 	assign lane0_apb.pclk = clk_156m25;
@@ -227,10 +229,10 @@ module top(
 		.rxprbssel(4'b0101),	//PRBS-31
 		.txprbssel(4'b0101)
 	);
-
+*/
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Second clone GTY block on SMPM 1 going to BERT
-
+/*
 	//TODO: make the apb do something
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) lane1_apb();
 	assign lane1_apb.pclk = clk_156m25;
@@ -307,18 +309,21 @@ module top(
 		.rxprbserr(rxprbserr),
 		.rxprbslocked(rxprbslocked)
 	);
-
+*/
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// GTY block on SMPM 2 going to Artix board
 
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(32), .USER_WIDTH(0)) apb_req();
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(32), .USER_WIDTH(0)) apb_comp();
 
+	//For initial testing, ignore the requester since the Artix board doesn't send anything ot us
+	wire	artix_tx_clk;
+
 	GTY_APBBridge #(
 		.TX_INVERT(0),
 		.RX_INVERT(0),
-		.TX_ILA(0),
-		.RX_ILA(0)
+		.TX_ILA(1),
+		.RX_ILA(1)
 	) artix_bridge (
 		.sysclk(clk_156m25),
 		.clk_ref({1'b0, refclk}),
@@ -329,6 +334,9 @@ module top(
 		.tx_p(smpm_2_tx_p),
 		.tx_n(smpm_2_tx_n),
 
+		.rxoutclk(),
+		.txoutclk(artix_tx_clk),
+
 		.qpll_clkout(qpll_clkout),
 		.qpll_refout(qpll_refout),
 		.qpll_lock(qpll_lock),
@@ -336,6 +344,41 @@ module top(
 		.apb_req(apb_req),
 		.apb_comp(apb_comp)
 	);
+
+	assign apb_comp.pclk 		= artix_tx_clk;
+	assign apb_comp.preset_n	= 1;
+
+	wire	apb_req_en;
+
+	vio_0 vio(
+		.clk(artix_tx_clk),
+		.probe_out0(apb_comp.paddr),
+		.probe_out1(apb_comp.pwdata),
+		.probe_out2(apb_comp.pwrite),
+		.probe_out3(apb_req_en),
+		.probe_in0(apb_comp.prdata)
+	);
+
+	initial begin
+		apb_comp.penable	= 0;
+		apb_comp.psel		= 0;
+	end
+
+	logic	apb_req_en_ff	= 0;
+	always_ff @(posedge artix_tx_clk) begin
+		apb_req_en_ff	<= apb_req_en;
+
+		if(apb_req_en && !apb_req_en_ff)
+			apb_comp.psel		<= 1;
+		if(apb_comp.psel)
+			apb_comp.penable	<= 1;
+
+		if(apb_comp.pready) begin
+			apb_comp.psel		<= 0;
+			apb_comp.penable	<= 0;
+		end
+
+	end
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Echo clock output
@@ -370,6 +413,7 @@ module top(
 		.I(clk_echo)
 	);
 
+/*
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// SFP28 ports
 
@@ -390,5 +434,6 @@ module top(
 		.sfp_1_tx_p(sfp_1_tx_p),
 		.sfp_1_tx_n(sfp_1_tx_n)
 	);
+	*/
 
 endmodule
