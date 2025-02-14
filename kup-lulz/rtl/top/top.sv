@@ -350,13 +350,17 @@ module top(
 
 	wire	apb_req_en;
 
+	logic[7:0]	latency			= 0;
+
 	vio_0 vio(
 		.clk(artix_tx_clk),
 		.probe_out0(apb_comp.paddr),
 		.probe_out1(apb_comp.pwdata),
 		.probe_out2(apb_comp.pwrite),
 		.probe_out3(apb_req_en),
-		.probe_in0(apb_comp.prdata)
+		.probe_in0(apb_comp.prdata),
+
+		.probe_in1(latency)
 	);
 
 	initial begin
@@ -368,8 +372,13 @@ module top(
 	always_ff @(posedge artix_tx_clk) begin
 		apb_req_en_ff	<= apb_req_en;
 
-		if(apb_req_en && !apb_req_en_ff)
+		if(apb_comp.penable)
+			latency	<= latency + 1;
+
+		if(apb_req_en && !apb_req_en_ff) begin
 			apb_comp.psel		<= 1;
+			latency				<= 1;
+		end
 		if(apb_comp.psel)
 			apb_comp.penable	<= 1;
 
@@ -412,28 +421,5 @@ module top(
 		.OB(gpio_n),
 		.I(clk_echo)
 	);
-
-/*
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// SFP28 ports
-
-	APB_SerdesTest test(
-		.refclk(refclk),
-
-		.sysclk(clk_156m25),
-
-		.sfp_0_rx_p(sfp_0_rx_p),
-		.sfp_0_rx_n(sfp_0_rx_n),
-
-		.sfp_0_tx_p(sfp_0_tx_p),
-		.sfp_0_tx_n(sfp_0_tx_n),
-
-		.sfp_1_rx_p(sfp_1_rx_p),
-		.sfp_1_rx_n(sfp_1_rx_n),
-
-		.sfp_1_tx_p(sfp_1_tx_p),
-		.sfp_1_tx_n(sfp_1_tx_n)
-	);
-	*/
 
 endmodule
