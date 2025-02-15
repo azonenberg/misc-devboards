@@ -136,38 +136,18 @@ module top(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Shift comma alignment to the correct position (we have a 32 bit bus but internal datapath is 16 bit)
 
-	logic		comma_lane	= 0;
+	wire[3:0]	gtp_rx_charisk_aligned;
+	wire[31:0]	gtp_rx_data_aligned;
 
-	logic[3:0]	gtp_rx_charisk_ff	= 0;
-	logic[31:0]	gtp_rx_data_ff		= 0;
+	BlockAligner8b10b aligner(
+		.clk(gtp_rxusrclk2),
 
-	logic[3:0]	gtp_rx_charisk_aligned		= 0;
-	logic[31:0]	gtp_rx_data_aligned			= 0;
+		.kchar_in(gtp_rx_charisk),
+		.data_in(gtp_rx_data),
 
-	always_ff @(posedge gtp_rxusrclk2) begin
-
-		gtp_rx_charisk_ff	<= gtp_rx_charisk;
-		gtp_rx_data_ff		<= gtp_rx_data;
-
-		if( (gtp_rx_data[7:0] == 8'hbc) && gtp_rx_charisk[0])
-			comma_lane	<= 0;
-
-		if( (gtp_rx_data[23:16] == 8'hbc) && gtp_rx_charisk[2])
-			comma_lane	<= 1;
-
-		//Comma already in low lane? Pass data through already
-		if(comma_lane == 0) begin
-			gtp_rx_charisk_aligned	<= gtp_rx_charisk;
-			gtp_rx_data_aligned		<= gtp_rx_data;
-		end
-
-		//Phase shift the data
-		else begin
-			gtp_rx_charisk_aligned	<= { gtp_rx_charisk[1:0], gtp_rx_charisk_ff[3:2] };
-			gtp_rx_data_aligned		<= { gtp_rx_data[15:0], gtp_rx_data_ff[31:16] };
-		end
-
-	end
+		.kchar_out(gtp_rx_charisk_aligned),
+		.data_out(gtp_rx_data_aligned)
+	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// SCCB endpoint
@@ -227,35 +207,5 @@ module top(
 	);
 
 	assign led = gpio_out[3:0];
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Debug ILA
-
-	ila_0 ila(
-		.clk(gtp_rxusrclk2),
-
-		.probe0(gtp_rx_data),
-		.probe1(gtp_rx_charisk),
-
-		.probe2(gtp_rx_data_ff),
-		.probe3(gtp_rx_charisk_ff),
-		.probe4(gtp_rx_data_aligned),
-		.probe5(gtp_rx_charisk_aligned),
-		.probe6(comma_lane),
-
-		.probe7(rx_ll_link_up),
-		.probe8(apb_req.penable),
-		.probe9(apb_req.pwrite),
-		.probe10(apb_req.psel),
-		.probe11(apb_req.paddr),
-		.probe12(apb_req.pwdata),
-		.probe13(apb_req.prdata),
-		.probe14(apb_req.pslverr),
-		.probe15(apb_req.pready),
-
-		.probe16(rootAPB[0].penable),
-		.probe17(rootAPB[0].psel),
-		.probe18(gpio_out)
-	);
 
 endmodule
