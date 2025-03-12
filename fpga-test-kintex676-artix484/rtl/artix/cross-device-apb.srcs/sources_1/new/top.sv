@@ -178,6 +178,20 @@ module top(
 		.apb_comp(apb_comp)
 	);
 
+	ila_0 ila(
+		.clk(gtp_rxusrclk2),
+		.probe0(gtp_rx_charisk_aligned),
+		.probe1(gtp_rx_data_aligned),
+		.probe2(rx_ll_link_up),
+		.probe3(apb_req.penable),
+		.probe4(apb_req.psel),
+		.probe5(apb_req.pwrite),
+		.probe6(apb_req.paddr),
+		.probe7(apb_req.pwdata),
+		.probe8(gtp_rx_data),
+		.probe9(gtp_rx_charisk)
+	);
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Root APB bridge
 

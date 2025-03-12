@@ -52,11 +52,18 @@ module SCCB_Sim();
 		.apb_comp(apb_comp)
 	);
 
+	//Tie off unused bus
+	assign apb_req_unused.pready = 0;
+
 	//Tie off unused APB signals
 	assign apb_comp.pprot 		= 0;
 	assign apb_comp.pwakeup 	= 0;
 	assign apb_comp.pauser		= 0;
 	assign apb_comp.pwuser		= 0;
+
+	assign apb_req_unused.pready	= 0;
+	assign apb_req_unused.prdata	= 0;
+	assign apb_req_unused.pslverr	= 0;
 
 	//Hook up clock
 	assign apb_comp.pclk 		= clk_host;
@@ -69,6 +76,17 @@ module SCCB_Sim();
 
 	//APB interface for reverse direction, not used
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(32), .USER_WIDTH(0)) apb_comp_unused();
+
+	assign apb_comp_unused.pclk = clk_dev;
+	assign apb_comp_unused.pprot = 0;
+	assign apb_comp_unused.pwakeup = 0;
+	assign apb_comp_unused.pauser = 0;
+	assign apb_comp_unused.pwuser = 0;
+	assign apb_comp_unused.penable = 0;
+	assign apb_comp_unused.psel = 0;
+	assign apb_comp_unused.paddr = 0;
+	assign apb_comp_unused.pwrite = 0;
+	assign apb_comp_unused.pwdata = 0;
 
 	wire	device_tx_ll_link_up;
 

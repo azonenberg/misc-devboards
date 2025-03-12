@@ -28,12 +28,12 @@ module top(
 
 	output wire			smpm_1_tx_p,
 	output wire			smpm_1_tx_n,
-*/
+
 	input wire			smpm_2_rx_p,
 	input wire			smpm_2_rx_n,
 
 	output wire			smpm_2_tx_p,
-	output wire			smpm_2_tx_n,
+	output wire			smpm_2_tx_n,*/
 
 
 	//SFP28 GTY ports and control signals
@@ -43,13 +43,13 @@ module top(
 
 	output wire			sfp_0_tx_p,
 	output wire			sfp_0_tx_n,
-
+	*/
 	input wire			sfp_1_rx_p,
 	input wire			sfp_1_rx_n,
 
 	output wire			sfp_1_tx_p,
 	output wire			sfp_1_tx_n,
-*/
+
 	output wire[1:0]	sfp0_rs,
 	output wire			sfp0_tx_disable
 );
@@ -143,175 +143,7 @@ module top(
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// VIO for SERDES config
-
-	wire[4:0] tx_diffctrl = 8;
-	wire[4:0] tx_postcursor = 4;
-	wire[4:0] tx_precursor = 0;
-
-	wire[24:0]	sdm_data0 = 0;
-	wire[24:0]	sdm_data1 = 0;
-
-	wire		gty_force_reset = 0;
-	wire[2:0]	tx_rate = 3;
-	wire[2:0]	rx_rate = 3;
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// GTY block on SMPM 0 going to scope
-/*
-	//TODO: make the apb do something
-	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) lane0_apb();
-	assign lane0_apb.pclk = clk_156m25;
-	assign lane0_apb.preset_n = 1'b0;
-
-	wire	rxoutclk;
-	wire	txoutclk;
-
-	GTYLane_UltraScale #(
-
-		.CPLL_FBDIV(4),			//Combined CPLL feedback divider is 16
-		.CPLL_FBDIV_45(4)		//This gives 156.25 * 16 = 2500 MHz, times 2 for DDR is 5 Gbps line rate
-
-	) lane0 (
-		.apb(lane0_apb),
-
-		.rx_p(smpm_0_rx_p),
-		.rx_n(smpm_0_rx_n),
-
-		.tx_p(smpm_0_tx_p),
-		.tx_n(smpm_0_tx_n),
-
-		.rx_reset(gty_force_reset),
-		.tx_reset(gty_force_reset),
-
-		.tx_data(32'h0),
-		.rx_data(),
-
-		.clk_ref_north(2'b0),
-		.clk_ref_south({1'b0, refclk}),
-		.clk_ref(2'b0),
-		.clk_lockdet(clk_156m25),
-
-		.rxoutclk(rxoutclk),
-		.rxusrclk(rxoutclk),
-		.rxusrclk2(rxoutclk),
-		.rxuserrdy(1'b1),
-
-		.txoutclk(txoutclk),
-		.txusrclk(txoutclk),
-		.txusrclk2(txoutclk),
-		.txuserrdy(1'b1),
-
-		.rxpllclksel(2'b10),		//QPLL1
-		.txpllclksel(2'b10),		//QPLL1
-
-		.qpll_clk(qpll_clkout),
-		.qpll_refclk(qpll_refout),
-		.qpll_lock(qpll_lock),
-
-		.cpll_pd(1'b1),					//Don't use CPLL for now it seems to be buggy if you're not using the wizard
-		.cpll_fblost(),
-		.cpll_reflost(),
-		.cpll_lock(),
-		.cpll_refclk_sel(3'd1),	//set to 1 when only using one clock source even if it's not GTREFCLK0??
-
-		.tx_rate(tx_rate),
-		.rx_rate(rx_rate),
-
-		.rx_ctle_en(1'b1),
-
-		.txdiffctrl(tx_diffctrl),
-		.txpostcursor(tx_postcursor),
-		.txprecursor(tx_precursor),
-		.tx_invert(1'b0),
-		.rx_invert(1'b0),
-
-		.rxprbssel(4'b0101),	//PRBS-31
-		.txprbssel(4'b0101)
-	);
-*/
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Second clone GTY block on SMPM 1 going to BERT
-/*
-	//TODO: make the apb do something
-	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) lane1_apb();
-	assign lane1_apb.pclk = clk_156m25;
-	assign lane1_apb.preset_n = 1'b0;
-
-	wire	lane1_txoutclk;
-	wire	lane1_rxoutclk;
-
-	wire		rxprbserr;
-	wire		rxprbslocked;
-	wire[31:0]	rx_data;
-
-	GTYLane_UltraScale #(
-
-		.CPLL_FBDIV(4),			//Combined CPLL feedback divider is 16
-		.CPLL_FBDIV_45(4)		//This gives 156.25 * 16 = 2500 MHz, times 2 for DDR is 5 Gbps line rate
-
-	) lane1 (
-		.apb(lane1_apb),
-
-		.rx_p(smpm_1_rx_p),
-		.rx_n(smpm_1_rx_n),
-
-		.tx_p(smpm_1_tx_p),
-		.tx_n(smpm_1_tx_n),
-
-		.rx_reset(gty_force_reset),
-		.tx_reset(gty_force_reset),
-
-		.tx_data(32'h0),
-		.rx_data(rx_data),
-
-		.clk_ref_north(2'b0),
-		.clk_ref_south({1'b0, refclk}),
-		.clk_ref(2'b0),
-		.clk_lockdet(clk_156m25),
-
-		.rxoutclk(lane1_rxoutclk),
-		.rxusrclk(lane1_rxoutclk),
-		.rxusrclk2(lane1_rxoutclk),
-		.rxuserrdy(1'b1),
-
-		.txoutclk(lane1_txoutclk),
-		.txusrclk(lane1_txoutclk),
-		.txusrclk2(lane1_txoutclk),
-		.txuserrdy(1'b1),
-
-		.rxpllclksel(2'b10),		//QPLL1
-		.txpllclksel(2'b10),		//QPLL1
-
-		.qpll_clk(qpll_clkout),
-		.qpll_refclk(qpll_refout),
-		.qpll_lock(qpll_lock),
-
-		.cpll_pd(1'b1),					//Don't use CPLL for now it seems to be buggy if you're not using the wizard
-		.cpll_fblost(),
-		.cpll_reflost(),
-		.cpll_lock(),
-		.cpll_refclk_sel(3'd1),		//set to 1 when only using one clock source even if it's not GTREFCLK0??
-
-		.tx_rate(tx_rate),
-		.rx_rate(rx_rate),
-
-		.rx_ctle_en(1'b0),
-
-		.txdiffctrl(tx_diffctrl),
-		.txpostcursor(tx_postcursor),
-		.txprecursor(tx_precursor),
-		.tx_invert(1'b0),
-		.rx_invert(1'b0),
-
-		.rxprbssel(4'b0101),	//PRBS-31
-		.txprbssel(4'b0101),
-		.rxprbserr(rxprbserr),
-		.rxprbslocked(rxprbslocked)
-	);
-*/
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// GTY block on SMPM 2 going to Artix board
+	// GTY APB bridge on SFP+ 1 going to Artix board
 
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(32), .USER_WIDTH(0)) apb_req();
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(32), .USER_WIDTH(0)) apb_comp();
@@ -328,11 +160,11 @@ module top(
 		.sysclk(clk_156m25),
 		.clk_ref({1'b0, refclk}),
 
-		.rx_p(smpm_2_rx_p),
-		.rx_n(smpm_2_rx_n),
+		.rx_p(sfp_1_rx_p),
+		.rx_n(sfp_1_rx_n),
 
-		.tx_p(smpm_2_tx_p),
-		.tx_n(smpm_2_tx_n),
+		.tx_p(sfp_1_tx_p),
+		.tx_n(sfp_1_tx_n),
 
 		.rxoutclk(),
 		.txoutclk(artix_tx_clk),
@@ -345,49 +177,17 @@ module top(
 		.apb_comp(apb_comp)
 	);
 
+	//Ignore APB completer interface
 	assign apb_comp.pclk 		= artix_tx_clk;
 	assign apb_comp.preset_n	= 1;
+	assign apb_comp.penable		= 0;
+	assign apb_comp.psel		= 0;
+	assign apb_comp.paddr		= 0;
+	assign apb_comp.pwrite		= 0;
+	assign apb_comp.pwdata		= 0;
+	assign apb_comp.pstrb		= 0;
 
-	wire	apb_req_en;
-
-	logic[7:0]	latency			= 0;
-
-	vio_0 vio(
-		.clk(artix_tx_clk),
-		.probe_out0(apb_comp.paddr),
-		.probe_out1(apb_comp.pwdata),
-		.probe_out2(apb_comp.pwrite),
-		.probe_out3(apb_req_en),
-		.probe_in0(apb_comp.prdata),
-
-		.probe_in1(latency)
-	);
-
-	initial begin
-		apb_comp.penable	= 0;
-		apb_comp.psel		= 0;
-	end
-
-	logic	apb_req_en_ff	= 0;
-	always_ff @(posedge artix_tx_clk) begin
-		apb_req_en_ff	<= apb_req_en;
-
-		if(apb_comp.penable)
-			latency	<= latency + 1;
-
-		if(apb_req_en && !apb_req_en_ff) begin
-			apb_comp.psel		<= 1;
-			latency				<= 1;
-		end
-		if(apb_comp.psel)
-			apb_comp.penable	<= 1;
-
-		if(apb_comp.pready) begin
-			apb_comp.psel		<= 0;
-			apb_comp.penable	<= 0;
-		end
-
-	end
+	//TODO: tie APB requester interface to something interesting
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Echo clock output

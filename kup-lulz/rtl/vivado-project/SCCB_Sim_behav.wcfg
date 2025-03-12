@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="515.750 ns"></ZoomStartTime>
-      <ZoomEndTime time="671.047 ns"></ZoomEndTime>
-      <Cursor1Time time="518.981 ns"></Cursor1Time>
+      <ZoomStartTime time="448.700 ns"></ZoomStartTime>
+      <ZoomEndTime time="711.901 ns"></ZoomEndTime>
+      <Cursor1Time time="621.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="236"></NameColumnWidth>
-      <ValueColumnWidth column_width="104"></ValueColumnWidth>
+      <ValueColumnWidth column_width="92"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="11" />
+   <WVObjectSize size="12" />
    <wvobject type="logic" fp_name="/SCCB_Sim/clk_host">
       <obj_property name="ElementShortName">clk_host</obj_property>
       <obj_property name="ObjectShortName">clk_host</obj_property>
@@ -167,6 +167,7 @@
       <wvobject type="group" fp_name="group898">
          <obj_property name="label">rx crc</obj_property>
          <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
          <wvobject type="logic" fp_name="/SCCB_Sim/host_bridge/link_layer/rx_crc_reset">
             <obj_property name="ElementShortName">rx_crc_reset</obj_property>
             <obj_property name="ObjectShortName">rx_crc_reset</obj_property>
@@ -241,9 +242,47 @@
       <obj_property name="label">device</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
+      <wvobject type="group" fp_name="group1934">
+         <obj_property name="label">rx crc</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/link_layer/rx_crc_reset">
+            <obj_property name="ElementShortName">rx_crc_reset</obj_property>
+            <obj_property name="ObjectShortName">rx_crc_reset</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/link_layer/rx_crc_din_len">
+            <obj_property name="ElementShortName">rx_crc_din_len[2:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_crc_din_len[2:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/link_layer/rx_crc_din">
+            <obj_property name="ElementShortName">rx_crc_din[31:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_crc_din[31:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/link_layer/rx_crc_dout">
+            <obj_property name="ElementShortName">rx_crc_dout[7:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_crc_dout[7:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/link_layer/rx_checksum_expected">
+            <obj_property name="ElementShortName">rx_checksum_expected[7:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_checksum_expected[7:0]</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/link_layer/rx_checksum_next">
+            <obj_property name="ElementShortName">rx_checksum_next</obj_property>
+            <obj_property name="ObjectShortName">rx_checksum_next</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/link_layer/rx_done_next">
+            <obj_property name="ElementShortName">rx_done_next</obj_property>
+            <obj_property name="ObjectShortName">rx_done_next</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/link_layer/rx_done">
+            <obj_property name="ElementShortName">rx_done</obj_property>
+            <obj_property name="ObjectShortName">rx_done</obj_property>
+         </wvobject>
+      </wvobject>
       <wvobject type="group" fp_name="group901">
          <obj_property name="label">rx</obj_property>
          <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
          <wvobject type="array" fp_name="/SCCB_Sim/device_bridge/rx_kchar">
             <obj_property name="ElementShortName">rx_kchar[3:0]</obj_property>
             <obj_property name="ObjectShortName">rx_kchar[3:0]</obj_property>
@@ -296,11 +335,6 @@
       <wvobject type="group" fp_name="group902">
          <obj_property name="label">completions</obj_property>
          <obj_property name="DisplayName">label</obj_property>
-         <obj_property name="isExpanded"></obj_property>
-         <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/completion_req">
-            <obj_property name="ElementShortName">completion_req</obj_property>
-            <obj_property name="ObjectShortName">completion_req</obj_property>
-         </wvobject>
          <wvobject type="logic" fp_name="/SCCB_Sim/device_bridge/completion_has_data">
             <obj_property name="ElementShortName">completion_has_data</obj_property>
             <obj_property name="ObjectShortName">completion_has_data</obj_property>
@@ -447,5 +481,7 @@
          <obj_property name="ElementShortName">pslverr</obj_property>
          <obj_property name="ObjectShortName">pslverr</obj_property>
       </wvobject>
+   </wvobject>
+   <wvobject fp_name="divider1659" type="divider">
    </wvobject>
 </wave_config>
