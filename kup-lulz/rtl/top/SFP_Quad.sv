@@ -30,42 +30,19 @@
 ***********************************************************************************************************************/
 
 /**
-	@brief Top level module for the design
+	@brief Stuff related to the GTY quad (225) running the four SFP28 interfaces
+
+	This includes the single 10G uplink in the testbed as well as the 5G SCCB link.
  */
-module top(
+module SFP_Quad(
 
-	//GPIO output on side SMPMs
-	output wire			gpio_p,
-	output wire			gpio_n,
+	//System clock input
+	input wire			clk_156m25,
 
-	//System refclk
-	input wire			clk_156m25_p,
-	input wire			clk_156m25_n,
+	//SERDES reference clock
+	input wire			refclk,
 
-	//GTY refclk
-	input wire			refclk_p,
-	input wire			refclk_n,
-
-	//SMPM ports are to left PHY on line card
-	input wire			smpm_0_rx_p,
-	input wire			smpm_0_rx_n,
-
-	output wire			smpm_0_tx_p,
-	output wire			smpm_0_tx_n,
-
-	input wire			smpm_1_rx_p,
-	input wire			smpm_1_rx_n,
-
-	output wire			smpm_1_tx_p,
-	output wire			smpm_1_tx_n,
-
-	input wire			smpm_2_rx_p,
-	input wire			smpm_2_rx_n,
-
-	output wire			smpm_2_tx_p,
-	output wire			smpm_2_tx_n,
-
-	//SFP0 is 10Gbase-R management interface
+	//SFP0 10Gbase-R management interface
 	input wire			sfp_0_rx_p,
 	input wire			sfp_0_rx_n,
 
@@ -80,107 +57,133 @@ module top(
 	output wire			sfp_1_tx_n,
 
 	output wire[1:0]	sfp0_rs,
-	output wire			sfp0_tx_disable
+	output wire			sfp0_tx_disable,
+
+	//SCCB root APB out
+	APB.requester		apb_req
 );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// System clock inputs
+	// Tie off SFP control signals
 
-	wire	clk_156m25;
-	wire	refclk;
+	assign sfp0_tx_disable = 0;
+	assign sfp0_rs = 2'b11;
 
-	TopLevelClocks clocks(
-		.clk_156m25_p(clk_156m25_p),
-		.clk_156m25_n(clk_156m25_n),
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Quad PLL
 
-		.refclk_p(refclk_p),
-		.refclk_n(refclk_n),
+	wire[1:0]	sdm_reset = 2'b0;
+	wire[1:0]	fbclk_lost;
+	wire[1:0]	qpll_lock;
+	wire[1:0]	refclk_lost;
 
-		.gpio_p(gpio_p),
-		.gpio_n(gpio_n),
+	wire[1:0]	qpll_clkout;
+	wire[1:0]	qpll_refout;
+	wire[1:0]	sdm_toggle = 2'b0;
 
-		.clk_156m25(clk_156m25),
-		.refclk(refclk)
+	//TODO: make the apb do something
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) qpll_apb();
+	assign qpll_apb.pclk = clk_156m25;
+	assign qpll_apb.preset_n = 1'b0;
+
+	QuadPLL_UltraScale #(
+		.QPLL0_MULT(66),	//156.25 MHz * 66 = 10.3125 GHz
+							//note that output is DDR so we have to do sub-rate to get 10GbE
+		.QPLL1_MULT(64)		//156.25 MHz * 64 = 10.000 GHz
+	) qpll_225 (
+		.clk_lockdet(clk_156m25),
+		.clk_ref_north(2'b0),
+		.clk_ref_south(2'b0),
+		.clk_ref({1'b0, refclk}),
+
+		.apb(qpll_apb),
+
+		.qpll_powerdown(2'b00),		//using both QPLLs for now
+
+		.qpll0_refclk_sel(3'd1),	//GTREFCLK00
+		.qpll1_refclk_sel(3'd1),	//GTREFCLK01
+
+		.qpll_clkout(qpll_clkout),
+		.qpll_refout(qpll_refout),
+
+		.qpll_reset(2'h0),			//No runtime resets used
+		.sdm_reset(sdm_reset),
+		.sdm_toggle(sdm_toggle),
+
+		.fbclk_lost(fbclk_lost),
+		.qpll_lock(qpll_lock),
+		.refclk_lost(refclk_lost)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// GTY quad for the SFP+ interfaces
+	// 10Gbase-R management link on SFP+ 0 going to core switch
 
-	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(32), .USER_WIDTH(0)) apb_req();
+	AXIS_XGEthernetMACWrapper #(
+		.SERDES_TYPE("GTY")
+	) xg_mgmt (
+		.sfp_rx_p(sfp_0_rx_p),
+		.sfp_rx_n(sfp_0_rx_n),
 
-	SFP_Quad sfp_quad_225(
-		.clk_156m25(clk_156m25),
-		.refclk(refclk),
+		.sfp_tx_p(sfp_0_tx_p),
+		.sfp_tx_n(sfp_0_tx_n),
 
-		.sfp_0_rx_p(sfp_0_rx_p),
-		.sfp_0_rx_n(sfp_0_rx_n),
+		.clk_sys(clk_156m25),
 
-		.sfp_0_tx_p(sfp_0_tx_p),
-		.sfp_0_tx_n(sfp_0_tx_n),
+		.clk_ref_north(2'b0),
+		.clk_ref_south(2'b0),
+		.clk_lockdet(clk_156m25),
+		.clk_ref({1'b0, refclk}),
 
-		.sfp_1_rx_p(sfp_1_rx_p),
-		.sfp_1_rx_n(sfp_1_rx_n),
+		.qpll_clk(qpll_clkout),
+		.qpll_refclk(qpll_refout),
+		.qpll_lock(qpll_lock),
 
-		.sfp_1_tx_p(sfp_1_tx_p),
-		.sfp_1_tx_n(sfp_1_tx_n),
-
-		.sfp0_rs(sfp0_rs),
-		.sfp0_tx_disable(sfp0_tx_disable),
-
-		.apb_req(apb_req)
+		.rxpllclksel(2'b11),		//QPLL0
+		.txpllclksel(2'b11)			//QPLL0
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// GTY quad for the SMPM interfaces
+	// GTY APB bridge on SFP+ 1 going to Artix board
 
-	SMPM_Quad smpm_quad_224(
-		.clk_156m25(clk_156m25),
-		.refclk(refclk),
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(32), .USER_WIDTH(0)) apb_comp();
 
-		.smpm_0_rx_p(smpm_0_rx_p),
-		.smpm_0_rx_n(smpm_0_rx_n),
+	//For initial testing, ignore the requester since the Artix board doesn't send anything ot us
+	wire	artix_tx_clk;
 
-		.smpm_0_tx_p(smpm_0_tx_p),
-		.smpm_0_tx_n(smpm_0_tx_n),
+	GTY_APBBridge #(
+		.TX_INVERT(0),
+		.RX_INVERT(1),
+		.TX_ILA(0),
+		.RX_ILA(0)
+	) artix_bridge (
+		.sysclk(clk_156m25),
+		.clk_ref({1'b0, refclk}),
 
-		.smpm_1_rx_p(smpm_1_rx_p),
-		.smpm_1_rx_n(smpm_1_rx_n),
+		.rx_p(sfp_1_rx_p),
+		.rx_n(sfp_1_rx_n),
 
-		.smpm_1_tx_p(smpm_1_tx_p),
-		.smpm_1_tx_n(smpm_1_tx_n),
+		.tx_p(sfp_1_tx_p),
+		.tx_n(sfp_1_tx_n),
 
-		.smpm_2_rx_p(smpm_2_rx_p),
-		.smpm_2_rx_n(smpm_2_rx_n),
+		.rxoutclk(),
+		.txoutclk(artix_tx_clk),
 
-		.smpm_2_tx_p(smpm_2_tx_p),
-		.smpm_2_tx_n(smpm_2_tx_n)
+		.qpll_clkout(qpll_clkout),
+		.qpll_refout(qpll_refout),
+		.qpll_lock(qpll_lock),
+
+		.apb_req(apb_req),
+		.apb_comp(apb_comp)
 	);
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Root APB bridge (0xc010_0000)
-
-	//TODO: this is temporary just to let us validate things
-
-	localparam NUM_PERIPHERALS	= 4;
-	localparam BLOCK_SIZE		= 32'h400;
-	localparam ADDR_WIDTH		= $clog2(BLOCK_SIZE);
-	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(ADDR_WIDTH), .USER_WIDTH(0)) apb1[NUM_PERIPHERALS-1:0]();
-	APBBridge #(
-		.BASE_ADDR(32'h0000_0000),
-		.BLOCK_SIZE(BLOCK_SIZE),
-		.NUM_PORTS(NUM_PERIPHERALS)
-	) bridge (
-		.upstream(apb_req),
-		.downstream(apb1)
-	);
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Device information
-
-	APB_DeviceInfo_UltraScale devinfo(
-		.apb(apb1[0]),
-		.clk_dna(apb1[0].pclk),
-		.clk_icap(apb1[0].pclk)
-	);
+	//Ignore APB completer interface
+	assign apb_comp.pclk 		= artix_tx_clk;
+	assign apb_comp.preset_n	= 1;
+	assign apb_comp.penable		= 0;
+	assign apb_comp.psel		= 0;
+	assign apb_comp.paddr		= 0;
+	assign apb_comp.pwrite		= 0;
+	assign apb_comp.pwdata		= 0;
+	assign apb_comp.pstrb		= 0;
 
 endmodule

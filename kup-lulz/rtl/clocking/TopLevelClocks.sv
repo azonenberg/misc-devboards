@@ -30,13 +30,9 @@
 ***********************************************************************************************************************/
 
 /**
-	@brief Top level module for the design
+	@brief Top level clock input buffers etc
  */
-module top(
-
-	//GPIO output on side SMPMs
-	output wire			gpio_p,
-	output wire			gpio_n,
+module TopLevelClocks(
 
 	//System refclk
 	input wire			clk_156m25_p,
@@ -46,141 +42,74 @@ module top(
 	input wire			refclk_p,
 	input wire			refclk_n,
 
-	//SMPM ports are to left PHY on line card
-	input wire			smpm_0_rx_p,
-	input wire			smpm_0_rx_n,
+	//GPIO output on side SMPMs
+	output wire			gpio_p,
+	output wire			gpio_n,
 
-	output wire			smpm_0_tx_p,
-	output wire			smpm_0_tx_n,
-
-	input wire			smpm_1_rx_p,
-	input wire			smpm_1_rx_n,
-
-	output wire			smpm_1_tx_p,
-	output wire			smpm_1_tx_n,
-
-	input wire			smpm_2_rx_p,
-	input wire			smpm_2_rx_n,
-
-	output wire			smpm_2_tx_p,
-	output wire			smpm_2_tx_n,
-
-	//SFP0 is 10Gbase-R management interface
-	input wire			sfp_0_rx_p,
-	input wire			sfp_0_rx_n,
-
-	output wire			sfp_0_tx_p,
-	output wire			sfp_0_tx_n,
-
-	//SFP1 is SCCB link to lcbringup
-	input wire			sfp_1_rx_p,
-	input wire			sfp_1_rx_n,
-
-	output wire			sfp_1_tx_p,
-	output wire			sfp_1_tx_n,
-
-	output wire[1:0]	sfp0_rs,
-	output wire			sfp0_tx_disable
+	//Clocks out to rest of the system
+	output wire			clk_156m25,
+	output wire			refclk
 );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// System clock inputs
+	// System clock input
 
-	wire	clk_156m25;
-	wire	refclk;
+	wire	clk_156m25_raw;
+	IBUFDS ibuf(
+		.I(clk_156m25_p),
+		.IB(clk_156m25_n),
+		.O(clk_156m25_raw)
+		);
 
-	TopLevelClocks clocks(
-		.clk_156m25_p(clk_156m25_p),
-		.clk_156m25_n(clk_156m25_n),
+	BUFG bufg(
+		.I(clk_156m25_raw),
+		.O(clk_156m25));
 
-		.refclk_p(refclk_p),
-		.refclk_n(refclk_n),
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// SERDES reference clock input
 
-		.gpio_p(gpio_p),
-		.gpio_n(gpio_n),
-
-		.clk_156m25(clk_156m25),
-		.refclk(refclk)
+	IBUFDS_GTE4 #(
+		.REFCLK_EN_TX_PATH(1'b0),
+		.REFCLK_HROW_CK_SEL(2'b10)
+	) refclk_ibuf(
+		.CEB(1'b0),
+		.I(refclk_p),
+		.IB(refclk_n),
+		.O(refclk),
+		.ODIV2()
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// GTY quad for the SFP+ interfaces
+	// Echo clock output
 
-	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(32), .USER_WIDTH(0)) apb_req();
+	wire	clk_echo;
 
-	SFP_Quad sfp_quad_225(
-		.clk_156m25(clk_156m25),
-		.refclk(refclk),
+	wire	clk_echo_raw;
+	assign	clk_echo_raw = clk_156m25;
 
-		.sfp_0_rx_p(sfp_0_rx_p),
-		.sfp_0_rx_n(sfp_0_rx_n),
-
-		.sfp_0_tx_p(sfp_0_tx_p),
-		.sfp_0_tx_n(sfp_0_tx_n),
-
-		.sfp_1_rx_p(sfp_1_rx_p),
-		.sfp_1_rx_n(sfp_1_rx_n),
-
-		.sfp_1_tx_p(sfp_1_tx_p),
-		.sfp_1_tx_n(sfp_1_tx_n),
-
-		.sfp0_rs(sfp0_rs),
-		.sfp0_tx_disable(sfp0_tx_disable),
-
-		.apb_req(apb_req)
+	ODDRE1 #
+	(
+		.SRVAL(0),
+		.IS_C_INVERTED(0),
+		.IS_D1_INVERTED(0),
+		.IS_D2_INVERTED(0),
+		.SIM_DEVICE("ULTRASCALE_PLUS")
+	) ddr_obuf
+	(
+		.C(clk_echo_raw),
+		.D1(0),
+		.D2(1),
+		.SR(1'b0),
+		.Q(clk_echo)
 	);
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// GTY quad for the SMPM interfaces
-
-	SMPM_Quad smpm_quad_224(
-		.clk_156m25(clk_156m25),
-		.refclk(refclk),
-
-		.smpm_0_rx_p(smpm_0_rx_p),
-		.smpm_0_rx_n(smpm_0_rx_n),
-
-		.smpm_0_tx_p(smpm_0_tx_p),
-		.smpm_0_tx_n(smpm_0_tx_n),
-
-		.smpm_1_rx_p(smpm_1_rx_p),
-		.smpm_1_rx_n(smpm_1_rx_n),
-
-		.smpm_1_tx_p(smpm_1_tx_p),
-		.smpm_1_tx_n(smpm_1_tx_n),
-
-		.smpm_2_rx_p(smpm_2_rx_p),
-		.smpm_2_rx_n(smpm_2_rx_n),
-
-		.smpm_2_tx_p(smpm_2_tx_p),
-		.smpm_2_tx_n(smpm_2_tx_n)
-	);
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Root APB bridge (0xc010_0000)
-
-	//TODO: this is temporary just to let us validate things
-
-	localparam NUM_PERIPHERALS	= 4;
-	localparam BLOCK_SIZE		= 32'h400;
-	localparam ADDR_WIDTH		= $clog2(BLOCK_SIZE);
-	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(ADDR_WIDTH), .USER_WIDTH(0)) apb1[NUM_PERIPHERALS-1:0]();
-	APBBridge #(
-		.BASE_ADDR(32'h0000_0000),
-		.BLOCK_SIZE(BLOCK_SIZE),
-		.NUM_PORTS(NUM_PERIPHERALS)
-	) bridge (
-		.upstream(apb_req),
-		.downstream(apb1)
-	);
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Device information
-
-	APB_DeviceInfo_UltraScale devinfo(
-		.apb(apb1[0]),
-		.clk_dna(apb1[0].pclk),
-		.clk_icap(apb1[0].pclk)
+	OBUFDS #(
+		.IOSTANDARD("LVDS"),
+		.SLEW("FAST")
+	) obuf (
+		.O(gpio_p),
+		.OB(gpio_n),
+		.I(clk_echo)
 	);
 
 endmodule
