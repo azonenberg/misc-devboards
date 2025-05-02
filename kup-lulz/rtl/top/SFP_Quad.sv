@@ -37,30 +37,39 @@
 module SFP_Quad(
 
 	//System clock input
-	input wire			clk_156m25,
+	input wire				clk_156m25,
 
 	//SERDES reference clock
-	input wire			refclk,
+	input wire				refclk,
 
 	//SFP0 10Gbase-R management interface
-	input wire			sfp_0_rx_p,
-	input wire			sfp_0_rx_n,
+	input wire				sfp_0_rx_p,
+	input wire				sfp_0_rx_n,
 
-	output wire			sfp_0_tx_p,
-	output wire			sfp_0_tx_n,
+	output wire				sfp_0_tx_p,
+	output wire				sfp_0_tx_n,
 
 	//SFP1 is SCCB link to lcbringup
-	input wire			sfp_1_rx_p,
-	input wire			sfp_1_rx_n,
+	input wire				sfp_1_rx_p,
+	input wire				sfp_1_rx_n,
 
-	output wire			sfp_1_tx_p,
-	output wire			sfp_1_tx_n,
+	output wire				sfp_1_tx_p,
+	output wire				sfp_1_tx_n,
 
-	output wire[1:0]	sfp0_rs,
-	output wire			sfp0_tx_disable,
+	input wire				sfp0_rx_los,
+	output wire[1:0]		sfp0_rs,
+	output wire				sfp0_tx_disable,
 
 	//SCCB root APB out
-	APB.requester		apb_req
+	APB.requester			apb_req,
+
+	//AXI interfaces
+	AXIStream.transmitter	mgmt0_rx_data,
+	AXIStream.receiver		mgmt0_tx_data,
+	output wire				mgmt0_tx_clk,
+
+	//Status GPIOs
+	output wire				mgmt0_link_up
 );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -127,6 +136,8 @@ module SFP_Quad(
 		.sfp_tx_p(sfp_0_tx_p),
 		.sfp_tx_n(sfp_0_tx_n),
 
+		.sfp_rx_los(sfp0_rx_los),
+
 		.clk_sys(clk_156m25),
 
 		.clk_ref_north(2'b0),
@@ -139,7 +150,13 @@ module SFP_Quad(
 		.qpll_lock(qpll_lock),
 
 		.rxpllclksel(2'b11),		//QPLL0
-		.txpllclksel(2'b11)			//QPLL0
+		.txpllclksel(2'b11),		//QPLL0
+
+		.eth_rx_data(mgmt0_rx_data),
+		.eth_tx_data(mgmt0_tx_data),
+		.eth_tx_clk(mgmt0_tx_clk),
+
+		.link_up(mgmt0_link_up)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

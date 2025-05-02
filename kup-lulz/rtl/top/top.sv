@@ -66,6 +66,10 @@ module top(
 	output wire			smpm_2_tx_n,
 
 	//SFP0 is 10Gbase-R management interface
+	input wire			sfp0_rx_los,
+	output wire[1:0]	sfp0_rs,
+	output wire			sfp0_tx_disable,
+
 	input wire			sfp_0_rx_p,
 	input wire			sfp_0_rx_n,
 
@@ -77,10 +81,7 @@ module top(
 	input wire			sfp_1_rx_n,
 
 	output wire			sfp_1_tx_p,
-	output wire			sfp_1_tx_n,
-
-	output wire[1:0]	sfp0_rs,
-	output wire			sfp0_tx_disable
+	output wire			sfp_1_tx_n
 );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -108,6 +109,12 @@ module top(
 
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(32), .USER_WIDTH(0)) apb_req();
 
+	AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) mgmt0_rx_data();
+	AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) mgmt0_tx_data();
+
+	wire	mgmt0_link_up;
+	wire	mgmt0_tx_clk;
+
 	SFP_Quad sfp_quad_225(
 		.clk_156m25(clk_156m25),
 		.refclk(refclk),
@@ -124,11 +131,51 @@ module top(
 		.sfp_1_tx_p(sfp_1_tx_p),
 		.sfp_1_tx_n(sfp_1_tx_n),
 
+		.sfp0_rx_los(sfp0_rx_los),
 		.sfp0_rs(sfp0_rs),
 		.sfp0_tx_disable(sfp0_tx_disable),
 
-		.apb_req(apb_req)
+		.apb_req(apb_req),
+
+		.mgmt0_rx_data(mgmt0_rx_data),
+		.mgmt0_tx_data(mgmt0_tx_data),
+		.mgmt0_tx_clk(mgmt0_tx_clk),
+
+		.mgmt0_link_up(mgmt0_link_up)
 	);
+
+	//Transfer the RX-side Ethernet data into the SCCB clock domain
+	AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) mgmt0_rx_data_pclk();
+	AXIS_CDC #(
+		.FIFO_DEPTH(256)
+	) mgmt0_rx_cdc (
+		.axi_rx(mgmt0_rx_data),
+
+		.tx_clk(apb_req.pclk),
+		.axi_tx(mgmt0_rx_data_pclk)
+	);
+
+	//Transfer the TX-side Ethernet data into the SFP+ clock domain
+	AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) mgmt0_tx_data_pclk();
+	AXIS_CDC #(
+		.FIFO_DEPTH(256)
+	) mgmt0_tx_cdc (
+		.axi_rx(mgmt0_tx_data_pclk),
+
+		.tx_clk(mgmt0_tx_clk),
+		.axi_tx(mgmt0_tx_data)
+	);
+
+	//Shift link state into the SCCB clock domain
+	wire	mgmt0_link_up_pclk;
+
+	ThreeStageSynchronizer #(
+		.IN_REG(1)
+	) sync_link_up(
+		.clk_in(mgmt0_rx_data.aclk),
+		.din(mgmt0_link_up),
+		.clk_out(mgmt0_rx_data_pclk.aclk),
+		.dout(mgmt0_link_up_pclk));
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// GTY quad for the SMPM interfaces
@@ -159,28 +206,114 @@ module top(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Root APB bridge (0xc010_0000)
 
-	//TODO: this is temporary just to let us validate things
+	//64 kB blocks
+	localparam ROOT_BLOCK_SIZE	= 32'h1_0000;
+	localparam ROOT_ADDR_WIDTH	= $clog2(ROOT_BLOCK_SIZE);
+	localparam ROOT_NUM_BLOCKS	= 2;
 
-	localparam NUM_PERIPHERALS	= 4;
-	localparam BLOCK_SIZE		= 32'h400;
-	localparam ADDR_WIDTH		= $clog2(BLOCK_SIZE);
-	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(ADDR_WIDTH), .USER_WIDTH(0)) apb1[NUM_PERIPHERALS-1:0]();
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(ROOT_ADDR_WIDTH), .USER_WIDTH(0)) apb_root[ROOT_NUM_BLOCKS-1:0]();
 	APBBridge #(
 		.BASE_ADDR(32'h0000_0000),
-		.BLOCK_SIZE(BLOCK_SIZE),
-		.NUM_PORTS(NUM_PERIPHERALS)
-	) bridge (
+		.BLOCK_SIZE(ROOT_BLOCK_SIZE),
+		.NUM_PORTS(ROOT_NUM_BLOCKS)
+	) root_bridge (
 		.upstream(apb_req),
+		.downstream(apb_root)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB1 (0xc010_0000)
+
+	localparam NUM_APB1_PERIPHERALS	= 4;
+	localparam APB1_BLOCK_SIZE		= 32'h400;
+	localparam APB1_ADDR_WIDTH		= $clog2(APB1_BLOCK_SIZE);
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb1[NUM_APB1_PERIPHERALS-1:0]();
+	APBBridge #(
+		.BASE_ADDR(32'h0000_0000),
+		.BLOCK_SIZE(APB1_BLOCK_SIZE),
+		.NUM_PORTS(NUM_APB1_PERIPHERALS)
+	) apb1_bridge (
+		.upstream(apb_root[0]),
 		.downstream(apb1)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Device information
+	// APB1: Device information (0xc010_0000)
 
 	APB_DeviceInfo_UltraScale devinfo(
 		.apb(apb1[0]),
 		.clk_dna(apb1[0].pclk),
 		.clk_icap(apb1[0].pclk)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB1: GPIO with status/control signals (0xc010_0400)
+
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb_gpioa();
+	APBRegisterSlice #(.DOWN_REG(1), .UP_REG(1)) regslice_apb_gpioa(
+		.upstream(apb1[1]),
+		.downstream(apb_gpioa));
+
+	wire[31:0]	gpioa_out;
+	wire[31:0]	gpioa_in;
+	wire[31:0]	gpioa_tris;
+
+	wire	mgmt0_frame_ready;
+
+	APB_GPIO gpioA(
+		.apb(apb_gpioa),
+
+		.gpio_out(gpioa_out),
+		.gpio_in(gpioa_in),
+		.gpio_tris(gpioa_tris)
+	);
+
+	//Hook up inputs
+	assign gpioa_in[0]		= mgmt0_frame_ready;
+
+	//Tie off unused signals
+	assign gpioa_in[31:1]	= 31'h0;
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB2 (0xc011_0000)
+
+	localparam NUM_APB2_PERIPHERALS	= 4;
+	localparam APB2_BLOCK_SIZE		= 32'h1000;
+	localparam APB2_ADDR_WIDTH		= $clog2(APB2_BLOCK_SIZE);
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB2_ADDR_WIDTH), .USER_WIDTH(0)) apb2[NUM_APB2_PERIPHERALS-1:0]();
+	APBBridge #(
+		.BASE_ADDR(32'h0000_0000),
+		.BLOCK_SIZE(APB2_BLOCK_SIZE),
+		.NUM_PORTS(NUM_APB2_PERIPHERALS)
+	) apb2_bridge (
+		.upstream(apb_root[1]),
+		.downstream(apb2)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Ethernet RX FIFO (0xc011_0000)
+
+	APB_AXIS_EthernetRxBuffer mgmt0_rx_fifo(
+		.apb(apb2[0]),
+
+		.axi_rx(mgmt0_rx_data_pclk),
+		.eth_link_up(mgmt0_link_up_pclk),
+
+		.rx_frame_ready(mgmt0_frame_ready)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Ethernet TX FIFO (0xc011_1000)
+
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB2_ADDR_WIDTH), .USER_WIDTH(0)) apb_tx_fifo();
+	APBRegisterSlice #(.DOWN_REG(1), .UP_REG(0)) regslice_apb_tx_fifo(
+		.upstream(apb2[1]),
+		.downstream(apb_tx_fifo));
+
+	APB_AXIS_EthernetTxBuffer mgmt0_tx_fifo(
+		.apb(apb_tx_fifo),
+		.link_up_pclk(mgmt0_link_up_pclk),
+		.axi_tx(mgmt0_tx_data_pclk)
 	);
 
 endmodule
