@@ -155,18 +155,7 @@ module top(
 		.axi_tx(mgmt0_rx_data_pclk)
 	);
 
-	//Transfer the TX-side Ethernet data into the SFP+ clock domain
-	AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) mgmt0_tx_data_pclk();
-	AXIS_CDC #(
-		.FIFO_DEPTH(256)
-	) mgmt0_tx_cdc (
-		.axi_rx(mgmt0_tx_data_pclk),
-
-		.tx_clk(mgmt0_tx_clk),
-		.axi_tx(mgmt0_tx_data)
-	);
-
-	//Shift link state into the SCCB clock domain
+	//Shift link state into the SCCB and TX clock domains
 	wire	mgmt0_link_up_pclk;
 
 	ThreeStageSynchronizer #(
@@ -270,9 +259,21 @@ module top(
 
 	//Hook up inputs
 	assign gpioa_in[0]		= mgmt0_frame_ready;
+	assign gpioa_in[1]		= mgmt0_link_up_pclk;
 
 	//Tie off unused signals
-	assign gpioa_in[31:1]	= 31'h0;
+	assign gpioa_in[31:2]	= 31'h0;
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB1: curve25519 accelerator (0xc010_0800)
+
+	//For now, run in the same clock domain as the normal PCLK but this may change
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB2_ADDR_WIDTH), .USER_WIDTH(0)) cryptBus();
+
+	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
+		apb_regslice_crypt( .upstream(apb1[2]), .downstream(cryptBus) );
+
+	APB_Curve25519 crypt25519(.apb(cryptBus));
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// APB2 (0xc011_0000)
@@ -313,7 +314,8 @@ module top(
 	APB_AXIS_EthernetTxBuffer mgmt0_tx_fifo(
 		.apb(apb_tx_fifo),
 		.link_up_pclk(mgmt0_link_up_pclk),
-		.axi_tx(mgmt0_tx_data_pclk)
+		.tx_clk(mgmt0_tx_clk),
+		.axi_tx(mgmt0_tx_data)
 	);
 
 endmodule
