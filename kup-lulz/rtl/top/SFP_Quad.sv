@@ -63,6 +63,9 @@ module SFP_Quad(
 	//SCCB root APB out
 	APB.requester			apb_req,
 
+	//APB management bus for QPLL
+	APB.completer			apb_qpll,
+
 	//AXI interfaces
 	AXIStream.transmitter	mgmt0_rx_data,
 	AXIStream.receiver		mgmt0_tx_data,
@@ -90,11 +93,6 @@ module SFP_Quad(
 	wire[1:0]	qpll_refout;
 	wire[1:0]	sdm_toggle = 2'b0;
 
-	//TODO: make the apb do something
-	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) qpll_apb();
-	assign qpll_apb.pclk = clk_156m25;
-	assign qpll_apb.preset_n = 1'b0;
-
 	QuadPLL_UltraScale #(
 		.QPLL0_MULT(66),	//156.25 MHz * 66 = 10.3125 GHz
 							//note that output is DDR so we have to do sub-rate to get 10GbE
@@ -105,7 +103,7 @@ module SFP_Quad(
 		.clk_ref_south(2'b0),
 		.clk_ref({1'b0, refclk}),
 
-		.apb(qpll_apb),
+		.apb(apb_qpll),
 
 		.qpll_powerdown(2'b00),		//using both QPLLs for now
 

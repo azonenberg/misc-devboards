@@ -61,6 +61,9 @@ set_clock_groups -asynchronous -group [get_clocks rxoutclk_raw_2] -group [get_cl
 set_clock_groups -asynchronous -group [get_clocks rxoutclk_raw_3] -group [get_clocks txoutclk_raw_3]
 set_clock_groups -asynchronous -group [get_clocks rxoutclk_raw_4] -group [get_clocks txoutclk_raw_4]
 set_clock_groups -asynchronous -group [get_clocks txoutclk_raw_1] -group [get_clocks rxoutclk_raw]
+
+set_clock_groups -asynchronous -group [get_clocks txoutclk_raw_2] -group [get_clocks clk_156m25_p]
+set_clock_groups -asynchronous -group [get_clocks clk_156m25_p] -group [get_clocks txoutclk_raw_2]
 set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
 set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
 set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]

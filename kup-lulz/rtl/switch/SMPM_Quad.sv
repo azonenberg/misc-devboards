@@ -35,29 +35,38 @@
 module SMPM_Quad(
 
 	//System clock input
-	input wire			clk_156m25,
+	input wire				clk_156m25,
+	input wire				clk_fabric,
 
 	//SERDES reference clock
-	input wire			refclk,
+	input wire				refclk,
 
 	//The actual SERDES interfaces
-	input wire			smpm_0_rx_p,
-	input wire			smpm_0_rx_n,
+	input wire				smpm_0_rx_p,
+	input wire				smpm_0_rx_n,
 
-	output wire			smpm_0_tx_p,
-	output wire			smpm_0_tx_n,
+	output wire				smpm_0_tx_p,
+	output wire				smpm_0_tx_n,
 
-	input wire			smpm_1_rx_p,
-	input wire			smpm_1_rx_n,
+	input wire				smpm_1_rx_p,
+	input wire				smpm_1_rx_n,
 
-	output wire			smpm_1_tx_p,
-	output wire			smpm_1_tx_n,
+	output wire				smpm_1_tx_p,
+	output wire				smpm_1_tx_n,
 
-	input wire			smpm_2_rx_p,
-	input wire			smpm_2_rx_n,
+	input wire				smpm_2_rx_p,
+	input wire				smpm_2_rx_n,
 
-	output wire			smpm_2_tx_p,
-	output wire			smpm_2_tx_n
+	output wire				smpm_2_tx_p,
+	output wire				smpm_2_tx_n,
+
+	//APB management bus for QPLL
+	APB.completer			apb_qpll,
+	APB.completer			apb_serdes_lane[2:0],
+
+	//AXI streams for the individual port data streams (clk_fabric domain)
+	AXIStream.transmitter	axi_rx[11:0],
+	AXIStream.receiver		axi_tx[11:0]
 );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,11 +81,6 @@ module SMPM_Quad(
 	wire[1:0]	qpll_refout;
 	wire[1:0]	sdm_toggle = 2'b0;
 
-	//TODO: make the apb do something
-	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) qpll_apb();
-	assign qpll_apb.pclk = clk_156m25;
-	assign qpll_apb.preset_n = 1'b0;
-
 	QuadPLL_UltraScale #(
 		.QPLL0_MULT(66),	//156.25 MHz * 66 = 10.3125 GHz
 							//note that output is DDR so we have to do sub-rate to get 10GbE
@@ -87,7 +91,7 @@ module SMPM_Quad(
 		.clk_ref_south({1'b0, refclk}),
 		.clk_ref(2'b0),
 
-		.apb(qpll_apb),
+		.apb(apb_qpll),
 
 		.qpll_powerdown(2'b01),		//using QPLL1 for everything so shut down QPLL0
 
@@ -112,18 +116,18 @@ module SMPM_Quad(
 	wire[2:0]	rx_p = {smpm_2_rx_p, smpm_1_rx_p, smpm_0_rx_p};
 	wire[2:0]	rx_n = {smpm_2_rx_n, smpm_1_rx_n, smpm_0_rx_n};
 
-	wire[2:0]	tx_p = {smpm_2_tx_p, smpm_1_tx_p, smpm_0_tx_p};
-	wire[2:0]	tx_n = {smpm_2_tx_n, smpm_1_tx_n, smpm_0_tx_n};
+	wire[2:0]	tx_p;
+	wire[2:0]	tx_n;
+	assign smpm_2_tx_p = tx_p[2];
+	assign smpm_2_tx_n = tx_n[2];
+	assign smpm_1_tx_p = tx_p[1];
+	assign smpm_1_tx_n = tx_n[1];
+	assign smpm_0_tx_p = tx_p[0];
+	assign smpm_0_tx_n = tx_n[0];
 
-	/*
-	logic[2:0]	tx_invert = 3'b111;
-	logic[2:0]	rx_invert = 3'b100;
-	*/
-	wire[2:0] tx_invert;
-	wire[2:0] rx_invert;
-
-	//0: both invert
-	//1:
+	//TODO: only validated on lane 0
+	wire[2:0]	tx_invert = 3'b111;
+	wire[2:0]	rx_invert = 3'b111;
 
 	//Reset generation
 	logic[14:0] rst_count = 1;
@@ -141,11 +145,6 @@ module SMPM_Quad(
 
 	for(genvar g=0; g <= 2; g++) begin : lanes
 
-		//TODO: make the apb do something
-		APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) serdes_apb();
-		assign serdes_apb.pclk = clk_156m25;
-		assign serdes_apb.preset_n = 1'b0;
-
 		wire[39:0]	rx_data;
 		wire[39:0]	tx_data;
 		wire		rx_comma_is_aligned;
@@ -160,13 +159,13 @@ module SMPM_Quad(
 		wire		rx_commadet_slip;
 
 		GTYLane_UltraScale #(
-			.ROUGH_RATE_GBPS(10),
+			.ROUGH_RATE_GBPS(5),
 			.DATA_WIDTH(40),
 			.RX_COMMA_ALIGN(1),
 			.RX_COMMA_ANY_LANE(1),	//needed for QSGMII because we can have commas in all four lanes
-			.RX_BUF_BYPASS(0)
+			.RX_BUF_BYPASS(1)
 		) lane (
-			.apb(serdes_apb),
+			.apb(apb_serdes_lane[g]),
 
 			.rx_p(rx_p[g]),
 			.rx_n(rx_n[g]),
@@ -195,8 +194,8 @@ module SMPM_Quad(
 			.txusrclk2(txoutclk),
 			.txuserrdy(1'b1),
 
-			.rxpllclksel(2'b11),			//QPLL0 hard coded for now
-			.txpllclksel(2'b11),
+			.rxpllclksel(2'b10),			//QPLL1 hard coded for now
+			.txpllclksel(2'b10),
 
 			.qpll_clk(qpll_clkout),
 			.qpll_refclk(qpll_refout),
@@ -237,9 +236,13 @@ module SMPM_Quad(
 		wire[3:0] link_up;
 		lspeed_t[3:0] link_speed;
 
-		EthernetRxBus[3:0] mac_rx_bus;
+		//MAC-side TX/RX data in SERDES clock domain
+		AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) mac_axi_rx[3:0]();
+		AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) mac_axi_tx[3:0]();
 
-		QSGMIIMACWrapper macs(
+		AXIS_QSGMIIMACWrapper #(
+			.DEBUG_LANE(g)
+		) macs (
 			.rx_clk(rxoutclk),
 			.rx_data_valid(1'b1),
 			.rx_data_is_ctl(rx_char_is_k[3:0]),
@@ -252,48 +255,17 @@ module SMPM_Quad(
 			.tx_data(tx_data[31:0]),
 			.tx_force_disparity_negative(),	//TODO
 
-			.mac_rx_bus(mac_rx_bus),
 			.link_up(link_up),
 			.link_speed(link_speed),
 
-			.mac_tx_bus(),
-			.mac_tx_ready()
+			.axi_rx(mac_axi_rx),
+			.axi_tx(mac_axi_tx)
 		);
 
-		/*
-		//Debug ILA
-		ila_2 ila(
-			.clk(rxoutclk),
-			.probe0(rx_data[31:0]),
-			.probe1(rx_comma_is_aligned),
-			.probe2(rx_char_is_k),
-			.probe3(rx_char_is_comma),
-			.probe4(macs.sgmii_rx_data_valid),
-			.probe5(macs.sgmii_rx_data_is_ctl[0]),
-			.probe6(macs.sgmii_rx_data[7:0]),
-			.probe7(rx_symbol_err),
-			.probe8(rx_disparity_err),
-
-			.probe9(rx_commadet_slip),
-			.probe10(macs.sgmii_rx_data_is_ctl[3]),
-			.probe11(macs.sgmii_rx_data[31:24])
-		);
-
-		ila_3 ila3(
-			.clk(txoutclk),
-			.probe0(mac_rx_bus)
-		);
-
-
-		vio_0 vio(
-			.clk(txoutclk),
-			.probe_in0(link_up),
-			.probe_in1(link_speed),
-
-			.probe_out0(tx_invert[g]),
-			.probe_out1(rx_invert[g])
-		);
-		*/
+		for(genvar h=0; h<4; h++) begin : cdc_fifos
+			AXIS_CDC #(.FIFO_DEPTH(512)) rx_fifo (.axi_rx(mac_axi_rx[h]), .tx_clk(clk_fabric), .axi_tx(axi_rx[g*4 + h]));
+			AXIS_CDC #(.FIFO_DEPTH(512)) tx_fifo (.axi_rx(axi_tx[g*4 + h]), .tx_clk(clk_fabric), .axi_tx(mac_axi_tx[h]));
+		end
 
 	end
 

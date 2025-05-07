@@ -64,13 +64,13 @@
     <Option Name="WTVcsLaunchSim" Val="0"/>
     <Option Name="WTRivieraLaunchSim" Val="0"/>
     <Option Name="WTActivehdlLaunchSim" Val="0"/>
-    <Option Name="WTXSimExportSim" Val="68"/>
-    <Option Name="WTModelSimExportSim" Val="68"/>
-    <Option Name="WTQuestaExportSim" Val="68"/>
+    <Option Name="WTXSimExportSim" Val="77"/>
+    <Option Name="WTModelSimExportSim" Val="77"/>
+    <Option Name="WTQuestaExportSim" Val="77"/>
     <Option Name="WTIesExportSim" Val="0"/>
-    <Option Name="WTVcsExportSim" Val="68"/>
-    <Option Name="WTRivieraExportSim" Val="68"/>
-    <Option Name="WTActivehdlExportSim" Val="68"/>
+    <Option Name="WTVcsExportSim" Val="77"/>
+    <Option Name="WTRivieraExportSim" Val="77"/>
+    <Option Name="WTActivehdlExportSim" Val="77"/>
     <Option Name="GenerateIPUpgradeLog" Val="TRUE"/>
     <Option Name="XSimRadix" Val="hex"/>
     <Option Name="XSimTimeUnit" Val="ns"/>
@@ -158,7 +158,7 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../../../latentred/antikernel-ipcores/device_abstraction/APB_DeviceInfo_UltraScale.sv">
+      <File Path="$PPRDIR/../../../antikernel-ipcores/device_abstraction/APB_DeviceInfo_UltraScale.sv">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
@@ -173,6 +173,20 @@
         </FileInfo>
       </File>
       <File Path="$PPRDIR/../../../antikernel-ipcores/amba/axistream/AXIS_CDC.sv">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../../antikernel-ipcores/interface/ethernet-stream/AXIS_QSGMIIMACWrapper.sv">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../../antikernel-ipcores/interface/ethernet-stream/AXIS_TriSpeedEthernetMAC.sv">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
@@ -284,13 +298,6 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../../antikernel-ipcores/interface/ethernet/QSGMIIMACWrapper.sv">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
       <File Path="$PPRDIR/../../../antikernel-ipcores/interface/ethernet/QSGMIIToSGMIIBridge.sv">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -389,13 +396,6 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../../antikernel-ipcores/interface/ethernet/TriSpeedEthernetMAC.sv">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
       <File Path="$PPRDIR/../../../antikernel-ipcores/crypt/x25519/X25519_Add.sv">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -475,6 +475,14 @@
       </File>
       <File Path="$PPRDIR/../top/top.sv">
         <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../../antikernel-ipcores/interface/ethernet/TriSpeedEthernetMAC.sv">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -639,6 +647,20 @@
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
+    <FileSet Name="ila_4" Type="BlockSrcs" RelSrcDir="$PSRCDIR/ila_4" RelGenDir="$PGENDIR/ila_4">
+      <File Path="$PSRCDIR/sources_1/ip/ila_4/ila_4.xci">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="ila_4"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
   </FileSets>
   <Simulators>
     <Simulator Name="XSim">
@@ -733,6 +755,16 @@
       <RQSFiles/>
     </Run>
     <Run Id="vio_2_synth_1" Type="Ft3:Synth" SrcSet="vio_2" Part="xcku5p-ffvb676-2-i" ConstrsSet="vio_2" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/vio_2_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/vio_2_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/vio_2_synth_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2024"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2024"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="ila_4_synth_1" Type="Ft3:Synth" SrcSet="ila_4" Part="xcku5p-ffvb676-2-i" ConstrsSet="ila_4" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/ila_4_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/ila_4_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/ila_4_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2024">
           <Desc>Vivado Synthesis Defaults</Desc>
@@ -865,6 +897,23 @@
       <RQSFiles/>
     </Run>
     <Run Id="vio_2_impl_1" Type="Ft2:EntireDesign" Part="xcku5p-ffvb676-2-i" ConstrsSet="vio_2" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="vio_2_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/vio_2_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/vio_2_impl_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2024"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2024"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="ila_4_impl_1" Type="Ft2:EntireDesign" Part="xcku5p-ffvb676-2-i" ConstrsSet="ila_4" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="ila_4_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/ila_4_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/ila_4_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2024">
           <Desc>Default settings for Implementation.</Desc>

@@ -112,6 +112,8 @@ module top(
 	AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) mgmt0_rx_data();
 	AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) mgmt0_tx_data();
 
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) apb_sfp_qpll();
+
 	wire	mgmt0_link_up;
 	wire	mgmt0_tx_clk;
 
@@ -137,6 +139,8 @@ module top(
 
 		.apb_req(apb_req),
 
+		.apb_qpll(apb_sfp_qpll),
+
 		.mgmt0_rx_data(mgmt0_rx_data),
 		.mgmt0_tx_data(mgmt0_tx_data),
 		.mgmt0_tx_clk(mgmt0_tx_clk),
@@ -147,7 +151,7 @@ module top(
 	//Transfer the RX-side Ethernet data into the SCCB clock domain
 	AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) mgmt0_rx_data_pclk();
 	AXIS_CDC #(
-		.FIFO_DEPTH(256)
+		.FIFO_DEPTH(1024)
 	) mgmt0_rx_cdc (
 		.axi_rx(mgmt0_rx_data),
 
@@ -169,8 +173,16 @@ module top(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// GTY quad for the SMPM interfaces
 
+	//Ethernet links coming off the QSGMII PHY
+	AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) linecard_rx_data[11:0]();
+	AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) linecard_tx_data[11:0]();
+
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) apb_smpm_qpll();
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) apb_smpm_serdes_lane[2:0]();
+
 	SMPM_Quad smpm_quad_224(
 		.clk_156m25(clk_156m25),
+		.clk_fabric(clk_156m25),	//TODO: switch to 312.5 MHz fabric clock??
 		.refclk(refclk),
 
 		.smpm_0_rx_p(smpm_0_rx_p),
@@ -189,7 +201,13 @@ module top(
 		.smpm_2_rx_n(smpm_2_rx_n),
 
 		.smpm_2_tx_p(smpm_2_tx_p),
-		.smpm_2_tx_n(smpm_2_tx_n)
+		.smpm_2_tx_n(smpm_2_tx_n),
+
+		.apb_qpll(apb_smpm_qpll),
+		.apb_serdes_lane(apb_smpm_serdes_lane),
+
+		.axi_rx(linecard_rx_data),
+		.axi_tx(linecard_tx_data)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -213,7 +231,7 @@ module top(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// APB1 (0xc010_0000)
 
-	localparam NUM_APB1_PERIPHERALS	= 4;
+	localparam NUM_APB1_PERIPHERALS	= 8;
 	localparam APB1_BLOCK_SIZE		= 32'h400;
 	localparam APB1_ADDR_WIDTH		= $clog2(APB1_BLOCK_SIZE);
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb1[NUM_APB1_PERIPHERALS-1:0]();
@@ -268,12 +286,34 @@ module top(
 	// APB1: curve25519 accelerator (0xc010_0800)
 
 	//For now, run in the same clock domain as the normal PCLK but this may change
-	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB2_ADDR_WIDTH), .USER_WIDTH(0)) cryptBus();
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) cryptBus();
 
 	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
 		apb_regslice_crypt( .upstream(apb1[2]), .downstream(cryptBus) );
 
 	APB_Curve25519 crypt25519(.apb(cryptBus));
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB1: QPLL DRP for SMPM interface (0xc010_0c00)
+
+	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
+		apb_regslice_smpm_qpll( .upstream(apb1[3]), .downstream(apb_smpm_qpll) );
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB1: QPLL DRP for SFP interface (0xc010_1000)
+
+	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
+		apb_regslice_sfp_qpll( .upstream(apb1[4]), .downstream(apb_sfp_qpll) );
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB1: SERDES lane DRPs (0xc010_1400, 0xc010_1800, 0xc010_1c00)
+
+	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
+		apb_regslice_smpm_serdes_0( .upstream(apb1[5]), .downstream(apb_smpm_serdes_lane[0]) );
+	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
+		apb_regslice_smpm_serdes_1( .upstream(apb1[6]), .downstream(apb_smpm_serdes_lane[1]) );
+	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
+		apb_regslice_smpm_serdes_2( .upstream(apb1[7]), .downstream(apb_smpm_serdes_lane[2]) );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// APB2 (0xc011_0000)
@@ -317,5 +357,23 @@ module top(
 		.tx_clk(mgmt0_tx_clk),
 		.axi_tx(mgmt0_tx_data)
 	);
+
+	/*
+	EthernetChecksumOffload eth_offload(
+		.clk(mgmt0_tx_clk),
+		.link_up(mgmt0_link_up_pclk),
+		.buf_tx_ready(fifo_tx_ready),
+		.buf_tx_bus(fifo_tx_bus),
+		.mac_tx_ready(mgmt0_tx_ready),
+		.mac_tx_bus(mgmt0_tx_bus)
+	);
+	*/
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Switch fabric TODO
+
+	//dummy sink fabric is always ready for new data for now
+	for(genvar g=0; g<12; g=g+1)
+		assign linecard_rx_data[g].tready = 1;
 
 endmodule
