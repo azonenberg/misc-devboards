@@ -235,143 +235,32 @@ module top(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// APB1 (0xc010_0000)
 
-	localparam NUM_APB1_PERIPHERALS	= 8;
-	localparam APB1_BLOCK_SIZE		= 32'h400;
-	localparam APB1_ADDR_WIDTH		= $clog2(APB1_BLOCK_SIZE);
-	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb1[NUM_APB1_PERIPHERALS-1:0]();
-	APBBridge #(
-		.BASE_ADDR(32'h0000_0000),
-		.BLOCK_SIZE(APB1_BLOCK_SIZE),
-		.NUM_PORTS(NUM_APB1_PERIPHERALS)
-	) apb1_bridge (
-		.upstream(apb_root[0]),
-		.downstream(apb1)
-	);
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// APB1: Device information (0xc010_0000)
-
-	APB_DeviceInfo_UltraScale devinfo(
-		.apb(apb1[0]),
-		.clk_dna(apb1[0].pclk),
-		.clk_icap(apb1[0].pclk)
-	);
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// APB1: GPIO with status/control signals (0xc010_0400)
-
-	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb_gpioa();
-	APBRegisterSlice #(.DOWN_REG(1), .UP_REG(1)) regslice_apb_gpioa(
-		.upstream(apb1[1]),
-		.downstream(apb_gpioa));
-
-	wire[31:0]	gpioa_out;
-	wire[31:0]	gpioa_in;
-	wire[31:0]	gpioa_tris;
-
 	wire	mgmt0_frame_ready;
 
-	APB_GPIO gpioA(
-		.apb(apb_gpioa),
+	Peripherals_APB1 apb1(
+		.apb(apb_root[0]),
 
-		.gpio_out(gpioa_out),
-		.gpio_in(gpioa_in),
-		.gpio_tris(gpioa_tris)
+		.mgmt0_frame_ready(mgmt0_frame_ready),
+		.mgmt0_link_up_pclk(mgmt0_link_up_pclk),
+
+		.apb_smpm_qpll(apb_smpm_qpll),
+		.apb_sfp_qpll(apb_sfp_qpll),
+		.apb_smpm_serdes_lane(apb_smpm_serdes_lane)
 	);
-
-	//Hook up inputs
-	assign gpioa_in[0]		= mgmt0_frame_ready;
-	assign gpioa_in[1]		= mgmt0_link_up_pclk;
-
-	//Tie off unused signals
-	assign gpioa_in[31:2]	= 31'h0;
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// APB1: curve25519 accelerator (0xc010_0800)
-
-	//For now, run in the same clock domain as the normal PCLK but this may change
-	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) cryptBus();
-
-	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
-		apb_regslice_crypt( .upstream(apb1[2]), .downstream(cryptBus) );
-
-	APB_Curve25519 crypt25519(.apb(cryptBus));
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// APB1: QPLL DRP for SMPM interface (0xc010_0c00)
-
-	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
-		apb_regslice_smpm_qpll( .upstream(apb1[3]), .downstream(apb_smpm_qpll) );
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// APB1: QPLL DRP for SFP interface (0xc010_1000)
-
-	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
-		apb_regslice_sfp_qpll( .upstream(apb1[4]), .downstream(apb_sfp_qpll) );
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// APB1: SERDES lane DRPs (0xc010_1400, 0xc010_1800, 0xc010_1c00)
-
-	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
-		apb_regslice_smpm_serdes_0( .upstream(apb1[5]), .downstream(apb_smpm_serdes_lane[0]) );
-	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
-		apb_regslice_smpm_serdes_1( .upstream(apb1[6]), .downstream(apb_smpm_serdes_lane[1]) );
-	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
-		apb_regslice_smpm_serdes_2( .upstream(apb1[7]), .downstream(apb_smpm_serdes_lane[2]) );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// APB2 (0xc011_0000)
 
-	localparam NUM_APB2_PERIPHERALS	= 4;
-	localparam APB2_BLOCK_SIZE		= 32'h1000;
-	localparam APB2_ADDR_WIDTH		= $clog2(APB2_BLOCK_SIZE);
-	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB2_ADDR_WIDTH), .USER_WIDTH(0)) apb2[NUM_APB2_PERIPHERALS-1:0]();
-	APBBridge #(
-		.BASE_ADDR(32'h0000_0000),
-		.BLOCK_SIZE(APB2_BLOCK_SIZE),
-		.NUM_PORTS(NUM_APB2_PERIPHERALS)
-	) apb2_bridge (
-		.upstream(apb_root[1]),
-		.downstream(apb2)
+	Peripherals_APB2 apb2(
+		.apb(apb_root[1]),
+
+		.mgmt_eth_link_up(mgmt0_link_up_pclk),
+		.mgmt_eth_frame_ready(mgmt0_frame_ready),
+
+		.mgmt_eth_tx_clk(mgmt0_tx_clk),
+		.mgmt_eth_rx(mgmt0_rx_data_pclk),
+		.mgmt_eth_tx(mgmt0_tx_data)
 	);
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Ethernet RX FIFO (0xc011_0000)
-
-	APB_AXIS_EthernetRxBuffer mgmt0_rx_fifo(
-		.apb(apb2[0]),
-
-		.axi_rx(mgmt0_rx_data_pclk),
-		.eth_link_up(mgmt0_link_up_pclk),
-
-		.rx_frame_ready(mgmt0_frame_ready)
-	);
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Ethernet TX FIFO (0xc011_1000)
-
-	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB2_ADDR_WIDTH), .USER_WIDTH(0)) apb_tx_fifo();
-	APBRegisterSlice #(.DOWN_REG(1), .UP_REG(0)) regslice_apb_tx_fifo(
-		.upstream(apb2[1]),
-		.downstream(apb_tx_fifo));
-
-	APB_AXIS_EthernetTxBuffer mgmt0_tx_fifo(
-		.apb(apb_tx_fifo),
-		.link_up_pclk(mgmt0_link_up_pclk),
-		.tx_clk(mgmt0_tx_clk),
-		.axi_tx(mgmt0_tx_data)
-	);
-
-	/*
-	EthernetChecksumOffload eth_offload(
-		.clk(mgmt0_tx_clk),
-		.link_up(mgmt0_link_up_pclk),
-		.buf_tx_ready(fifo_tx_ready),
-		.buf_tx_bus(fifo_tx_bus),
-		.mac_tx_ready(mgmt0_tx_ready),
-		.mac_tx_bus(mgmt0_tx_bus)
-	);
-	*/
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Switch fabric TODO
