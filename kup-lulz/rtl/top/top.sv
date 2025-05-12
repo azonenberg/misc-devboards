@@ -180,6 +180,8 @@ module top(
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) apb_smpm_qpll();
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) apb_smpm_serdes_lane[2:0]();
 
+	wire[11:0]	smpm_link_up;
+
 	SMPM_Quad smpm_quad_224(
 		.clk_156m25(clk_156m25),
 		.clk_fabric(clk_156m25),	//TODO: switch to 312.5 MHz fabric clock??
@@ -202,6 +204,8 @@ module top(
 
 		.smpm_2_tx_p(smpm_2_tx_p),
 		.smpm_2_tx_n(smpm_2_tx_n),
+
+		.link_up(smpm_link_up),
 
 		.apb_qpll(apb_smpm_qpll),
 		.apb_serdes_lane(apb_smpm_serdes_lane),
@@ -373,7 +377,8 @@ module top(
 	// Switch fabric TODO
 
 	//dummy sink fabric is always ready for new data for now
-	for(genvar g=0; g<12; g=g+1)
+	//for(genvar g=0; g<12; g=g+1)
+	for(genvar g=1; g<12; g=g+1)
 		assign linecard_rx_data[g].tready = 1;
 
 endmodule

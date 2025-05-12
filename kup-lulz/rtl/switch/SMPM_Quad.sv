@@ -64,6 +64,9 @@ module SMPM_Quad(
 	APB.completer			apb_qpll,
 	APB.completer			apb_serdes_lane[2:0],
 
+	//Link state
+	wire[11:0]				link_up,
+
 	//AXI streams for the individual port data streams (clk_fabric domain)
 	AXIStream.transmitter	axi_rx[11:0],
 	AXIStream.receiver		axi_tx[11:0]
@@ -233,16 +236,13 @@ module SMPM_Quad(
 			.tx_char_is_k(tx_char_is_k)
 		);
 
-		wire[3:0] link_up;
 		lspeed_t[3:0] link_speed;
 
 		//MAC-side TX/RX data in SERDES clock domain
 		AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) mac_axi_rx[3:0]();
 		AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) mac_axi_tx[3:0]();
 
-		AXIS_QSGMIIMACWrapper #(
-			.DEBUG_LANE(g)
-		) macs (
+		AXIS_QSGMIIMACWrapper macs (
 			.rx_clk(rxoutclk),
 			.rx_data_valid(1'b1),
 			.rx_data_is_ctl(rx_char_is_k[3:0]),
@@ -255,7 +255,7 @@ module SMPM_Quad(
 			.tx_data(tx_data[31:0]),
 			.tx_force_disparity_negative(),	//TODO
 
-			.link_up(link_up),
+			.link_up(link_up[g*4 +: 4]),
 			.link_speed(link_speed),
 
 			.axi_rx(mac_axi_rx),
@@ -264,7 +264,7 @@ module SMPM_Quad(
 
 		for(genvar h=0; h<4; h++) begin : cdc_fifos
 			AXIS_CDC #(.FIFO_DEPTH(512)) rx_fifo (.axi_rx(mac_axi_rx[h]), .tx_clk(clk_fabric), .axi_tx(axi_rx[g*4 + h]));
-			AXIS_CDC #(.FIFO_DEPTH(512)) tx_fifo (.axi_rx(axi_tx[g*4 + h]), .tx_clk(clk_fabric), .axi_tx(mac_axi_tx[h]));
+			AXIS_CDC #(.FIFO_DEPTH(512)) tx_fifo (.axi_rx(axi_tx[g*4 + h]), .tx_clk(txoutclk), .axi_tx(mac_axi_tx[h]));
 		end
 
 	end
