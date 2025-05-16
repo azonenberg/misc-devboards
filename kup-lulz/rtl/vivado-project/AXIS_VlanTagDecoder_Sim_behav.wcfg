@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="AXIS_VlanTagDecoder_Sim_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="AXIS_VlanTagDecoder_Sim" />
+            <top_module name="EthernetBus" />
+            <top_module name="\$unit_APBBridge_sv_3687178654 " />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="99.875 ns"></ZoomStartTime>
+      <ZoomEndTime time="229.652 ns"></ZoomEndTime>
+      <Cursor1Time time="124.653 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="232"></NameColumnWidth>
+      <ValueColumnWidth column_width="193"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="29" />
+   <wvobject type="logic" fp_name="/AXIS_VlanTagDecoder_Sim/ready">
+      <obj_property name="ElementShortName">ready</obj_property>
+      <obj_property name="ObjectShortName">ready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXIS_VlanTagDecoder_Sim/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXIS_VlanTagDecoder_Sim/next">
+      <obj_property name="ElementShortName">next</obj_property>
+      <obj_property name="ObjectShortName">next</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/AXIS_VlanTagDecoder_Sim/state">
+      <obj_property name="ElementShortName">state[7:0]</obj_property>
+      <obj_property name="ObjectShortName">state[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider989" type="divider">
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXIS_VlanTagDecoder_Sim/eth_tx_data/areset_n">
+      <obj_property name="ElementShortName">areset_n</obj_property>
+      <obj_property name="ObjectShortName">areset_n</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXIS_VlanTagDecoder_Sim/eth_tx_data/tvalid">
+      <obj_property name="ElementShortName">tvalid</obj_property>
+      <obj_property name="ObjectShortName">tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXIS_VlanTagDecoder_Sim/eth_tx_data/tready">
+      <obj_property name="ElementShortName">tready</obj_property>
+      <obj_property name="ObjectShortName">tready</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/AXIS_VlanTagDecoder_Sim/eth_tx_data/tdata">
+      <obj_property name="ElementShortName">tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">tdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/AXIS_VlanTagDecoder_Sim/eth_tx_data/tkeep">
+      <obj_property name="ElementShortName">tkeep[3:0]</obj_property>
+      <obj_property name="ObjectShortName">tkeep[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXIS_VlanTagDecoder_Sim/eth_tx_data/tlast">
+      <obj_property name="ElementShortName">tlast</obj_property>
+      <obj_property name="ObjectShortName">tlast</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/AXIS_VlanTagDecoder_Sim/eth_tx_data/tstrb">
+      <obj_property name="ElementShortName">tstrb[3:0]</obj_property>
+      <obj_property name="ObjectShortName">tstrb[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/AXIS_VlanTagDecoder_Sim/eth_tx_data/tuser">
+      <obj_property name="ElementShortName">tuser[0:0]</obj_property>
+      <obj_property name="ObjectShortName">tuser[0:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider1035" type="divider">
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXIS_VlanTagDecoder_Sim/decoded/areset_n">
+      <obj_property name="ElementShortName">areset_n</obj_property>
+      <obj_property name="ObjectShortName">areset_n</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/AXIS_VlanTagDecoder_Sim/decoded/tdata">
+      <obj_property name="ElementShortName">tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">tdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/AXIS_VlanTagDecoder_Sim/decoded/tdest">
+      <obj_property name="ElementShortName">tdest[11:0]</obj_property>
+      <obj_property name="ObjectShortName">tdest[11:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/AXIS_VlanTagDecoder_Sim/decoded/tkeep">
+      <obj_property name="ElementShortName">tkeep[3:0]</obj_property>
+      <obj_property name="ObjectShortName">tkeep[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXIS_VlanTagDecoder_Sim/decoded/tlast">
+      <obj_property name="ElementShortName">tlast</obj_property>
+      <obj_property name="ObjectShortName">tlast</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXIS_VlanTagDecoder_Sim/decoded/tready">
+      <obj_property name="ElementShortName">tready</obj_property>
+      <obj_property name="ObjectShortName">tready</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/AXIS_VlanTagDecoder_Sim/decoded/tstrb">
+      <obj_property name="ElementShortName">tstrb[3:0]</obj_property>
+      <obj_property name="ObjectShortName">tstrb[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/AXIS_VlanTagDecoder_Sim/decoded/tuser">
+      <obj_property name="ElementShortName">tuser[0:0]</obj_property>
+      <obj_property name="ObjectShortName">tuser[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXIS_VlanTagDecoder_Sim/decoded/tvalid">
+      <obj_property name="ElementShortName">tvalid</obj_property>
+      <obj_property name="ObjectShortName">tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXIS_VlanTagDecoder_Sim/decoded/twakeup">
+      <obj_property name="ElementShortName">twakeup</obj_property>
+      <obj_property name="ObjectShortName">twakeup</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/AXIS_VlanTagDecoder_Sim/decoder/count">
+      <obj_property name="ElementShortName">count[10:0]</obj_property>
+      <obj_property name="ObjectShortName">count[10:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider1049" type="divider">
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXIS_VlanTagDecoder_Sim/decoder/dropping">
+      <obj_property name="ElementShortName">dropping</obj_property>
+      <obj_property name="ObjectShortName">dropping</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXIS_VlanTagDecoder_Sim/decoder/is_dot1q_tagged">
+      <obj_property name="ElementShortName">is_dot1q_tagged</obj_property>
+      <obj_property name="ObjectShortName">is_dot1q_tagged</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXIS_VlanTagDecoder_Sim/decoder/is_ethertype">
+      <obj_property name="ElementShortName">is_ethertype</obj_property>
+      <obj_property name="ObjectShortName">is_ethertype</obj_property>
+   </wvobject>
+</wave_config>

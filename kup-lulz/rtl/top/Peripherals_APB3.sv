@@ -30,177 +30,62 @@
 ***********************************************************************************************************************/
 
 /**
-	@brief Top level clock input buffers etc
+	@brief Small (1 kB) peripherals on the APB3 bus segment (0xc012_0000 - 0xc012_ffff) in the switch fabric clock domain
  */
-module TopLevelClocks(
+module Peripherals_APB3(
 
-	//System refclk
-	input wire			clk_156m25_p,
-	input wire			clk_156m25_n,
+	//Upstream APB to the root bridge
+	APB.completer	apb,
 
-	//GTY refclk
-	input wire			refclk_p,
-	input wire			refclk_n,
+	//Switch fabric clock domain (lots of registers have to be shifted to this)
+	input wire		clk_fabric,
 
-	//GPIO output on side SMPMs
-	output wire			gpio_p,
-	output wire			gpio_n,
+	//Line card 0 control registers
+	//TODO: move module instantiation under switch fabric hierarchy area?
+	output wire[11:0]	lc0_port_vlan[23:0],
+	output wire			lc0_port_drop_tagged[23:0],
+	output wire			lc0_port_drop_untagged[23:0]
 
-	//Clocks out to rest of the system
-	output wire			clk_156m25,
-	output wire			clk_fabric,
-	output wire			refclk
+	//TODO: performance counters etc?
 );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// System clock input
+	// Shift the entire APB segment into the switch fabric clock domain upstream of the bridge
 
-	wire	clk_156m25_raw;
-	IBUFDS ibuf(
-		.I(clk_156m25_p),
-		.IB(clk_156m25_n),
-		.O(clk_156m25_raw)
-		);
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(16), .USER_WIDTH(0)) apb_clk_fabric();
+	APB_CDC cdc_fabric(
+		.upstream(apb),
 
-	/*BUFG bufg(
-		.I(clk_156m25_raw),
-		.O(clk_156m25));*/
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// SERDES reference clock input
-
-	IBUFDS_GTE4 #(
-		.REFCLK_EN_TX_PATH(1'b0),
-		.REFCLK_HROW_CK_SEL(2'b10)
-	) refclk_ibuf(
-		.CEB(1'b0),
-		.I(refclk_p),
-		.IB(refclk_n),
-		.O(refclk),
-		.ODIV2()
+		.downstream_pclk(clk_fabric),
+		.downstream(apb_clk_fabric)
 	);
 
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Output clock buffers
+	// APB3 (0xc012_0000)
 
-	wire	pll_lock;
-
-	wire	clk_fabric_raw;
-	BUFGCE obuf_fabric(
-		.I(clk_fabric_raw),
-		.O(clk_fabric),
-		.CE(pll_lock)
-	);
-
-	wire	clk_156m25_out_raw;
-	BUFGCE obuf_156m25(
-		.I(clk_156m25_out_raw),
-		.O(clk_156m25),
-		.CE(pll_lock)
+	localparam NUM_APB3_PERIPHERALS	= 4;
+	localparam APB3_BLOCK_SIZE		= 32'h400;
+	localparam APB3_ADDR_WIDTH		= $clog2(APB3_BLOCK_SIZE);
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB3_ADDR_WIDTH), .USER_WIDTH(0)) apb3[NUM_APB3_PERIPHERALS-1:0]();
+	APBBridge #(
+		.BASE_ADDR(32'h0000_0000),
+		.BLOCK_SIZE(APB3_BLOCK_SIZE),
+		.NUM_PORTS(NUM_APB3_PERIPHERALS)
+	) bridge (
+		.upstream(apb_clk_fabric),
+		.downstream(apb3)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Main system PLL
+	// APB3: Line card 0 control registers (0xc012_0000)
 
-	/*
-		156.25 MHz in
-		need 156.25 and ~400 out to start (minimum is 390.625 to work... this is actually a nice even multiple of 2.5)
+	LineCardControlRegisters lc0_ctlregs(
+		.apb(apb3[0]),
 
-		VCO 1562.5
-
-		VCO 800 - 1600
-		PFD 10 - 500
-	 */
-	wire	clk_fb;
-	MMCME4_BASE #(
-		.BANDWIDTH("OPTIMIZED"),
-		.CLKOUT0_DIVIDE_F(4),		//1562.5 / 4 = 390.625 MHz
-		.CLKOUT1_DIVIDE(10),		//1562.5 / 10 = 156.25 MHz
-		.CLKOUT2_DIVIDE(10),
-		.CLKOUT3_DIVIDE(10),
-		.CLKOUT4_DIVIDE(10),
-		.CLKOUT5_DIVIDE(10),
-		.CLKOUT6_DIVIDE(10),
-
-		.CLKOUT0_PHASE(0.0),
-		.CLKOUT1_PHASE(0.0),
-		.CLKOUT2_PHASE(0.0),
-		.CLKOUT3_PHASE(0.0),
-		.CLKOUT4_PHASE(0.0),
-		.CLKOUT5_PHASE(0.0),
-		.CLKOUT6_PHASE(0.0),
-
-		.CLKOUT0_DUTY_CYCLE(0.5),
-		.CLKOUT1_DUTY_CYCLE(0.5),
-		.CLKOUT2_DUTY_CYCLE(0.5),
-		.CLKOUT3_DUTY_CYCLE(0.5),
-		.CLKOUT4_DUTY_CYCLE(0.5),
-		.CLKOUT5_DUTY_CYCLE(0.5),
-		.CLKOUT6_DUTY_CYCLE(0.5),
-
-		.CLKFBOUT_PHASE(0.0),
-		.CLKFBOUT_MULT_F(10),		//156.25 * 10 = 1562.5 MHz VCO
-		.DIVCLK_DIVIDE(1),
-
-		.CLKIN1_PERIOD(6.4),		//156.25 MHz in
-
-		.STARTUP_WAIT("FALSE")
-	) pll (
-		.CLKIN1(clk_156m25_raw),
-		.RST(1'b0),
-
-		.CLKOUT0(clk_fabric_raw),
-		.CLKOUT0B(),
-		.CLKOUT1(clk_156m25_out_raw),
-		.CLKOUT1B(),
-		.CLKOUT2(),
-		.CLKOUT2B(),
-		.CLKOUT3(),
-		.CLKOUT3B(),
-		.CLKOUT4(),
-		.CLKOUT5(),
-		.CLKOUT6(),
-
-		.CLKFBOUT(clk_fb),
-		.CLKFBOUTB(),
-		.CLKFBIN(clk_fb),
-
-		.LOCKED(pll_lock),
-
-		.PWRDWN(1'b0)
-	);
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Echo clock output (not used for anything right now, remove?)
-
-	wire	clk_echo;
-
-	wire	clk_echo_raw;
-	assign	clk_echo_raw = clk_156m25;
-
-	ODDRE1 #
-	(
-		.SRVAL(0),
-		.IS_C_INVERTED(0),
-		.IS_D1_INVERTED(0),
-		.IS_D2_INVERTED(0),
-		.SIM_DEVICE("ULTRASCALE_PLUS")
-	) ddr_obuf
-	(
-		.C(clk_echo_raw),
-		.D1(0),
-		.D2(1),
-		.SR(1'b0),
-		.Q(clk_echo)
-	);
-
-	OBUFDS #(
-		.IOSTANDARD("LVDS"),
-		.SLEW("FAST")
-	) obuf (
-		.O(gpio_p),
-		.OB(gpio_n),
-		.I(clk_echo)
+		.port_vlan(lc0_port_vlan),
+		.port_drop_tagged(lc0_port_drop_tagged),
+		.port_drop_untagged(lc0_port_drop_untagged)
 	);
 
 endmodule

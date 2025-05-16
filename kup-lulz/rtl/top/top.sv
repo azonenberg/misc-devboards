@@ -88,6 +88,7 @@ module top(
 	// System clock inputs
 
 	wire	clk_156m25;
+	wire	clk_fabric;
 	wire	refclk;
 
 	TopLevelClocks clocks(
@@ -101,6 +102,7 @@ module top(
 		.gpio_n(gpio_n),
 
 		.clk_156m25(clk_156m25),
+		.clk_fabric(clk_fabric),
 		.refclk(refclk)
 	);
 
@@ -174,8 +176,8 @@ module top(
 	// GTY quad for the SMPM interfaces
 
 	//Ethernet links coming off the QSGMII PHY
-	AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) linecard_rx_data[11:0]();
-	AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) linecard_tx_data[11:0]();
+	AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) linecard_rx_data[23:0]();
+	AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) linecard_tx_data[23:0]();
 
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) apb_smpm_qpll();
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) apb_smpm_serdes_lane[2:0]();
@@ -210,9 +212,11 @@ module top(
 		.apb_qpll(apb_smpm_qpll),
 		.apb_serdes_lane(apb_smpm_serdes_lane),
 
-		.axi_rx(linecard_rx_data),
-		.axi_tx(linecard_tx_data)
+		.axi_rx(linecard_rx_data[11:0]),
+		.axi_tx(linecard_tx_data[11:0])
 	);
+
+	//TODO: GTY quad for the second PHY
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Root APB bridge (0xc010_0000)
@@ -220,7 +224,7 @@ module top(
 	//64 kB blocks
 	localparam ROOT_BLOCK_SIZE	= 32'h1_0000;
 	localparam ROOT_ADDR_WIDTH	= $clog2(ROOT_BLOCK_SIZE);
-	localparam ROOT_NUM_BLOCKS	= 2;
+	localparam ROOT_NUM_BLOCKS	= 3;
 
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(ROOT_ADDR_WIDTH), .USER_WIDTH(0)) apb_root[ROOT_NUM_BLOCKS-1:0]();
 	APBBridge #(
@@ -233,7 +237,7 @@ module top(
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// APB1 (0xc010_0000)
+	// APB1 (0xc010_0000): system-level control stuff
 
 	wire	mgmt0_frame_ready;
 
@@ -249,7 +253,7 @@ module top(
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// APB2 (0xc011_0000)
+	// APB2 (0xc011_0000): management tx/rx buffers
 
 	Peripherals_APB2 apb2(
 		.apb(apb_root[1]),
@@ -263,11 +267,32 @@ module top(
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Switch fabric TODO
+	// APB3 (0xc012_0000): line card control and status
 
-	//dummy sink fabric is always ready for new data for now
-	//for(genvar g=0; g<12; g=g+1)
-	for(genvar g=1; g<12; g=g+1)
-		assign linecard_rx_data[g].tready = 1;
+	wire[11:0]	lc0_port_vlan[23:0];
+	wire		lc0_port_drop_tagged[23:0];
+	wire		lc0_port_drop_untagged[23:0];
+
+	Peripherals_APB3 apb3(
+		.apb(apb_root[2]),
+
+		.lc0_port_vlan(lc0_port_vlan),
+		.lc0_port_drop_tagged(lc0_port_drop_tagged),
+		.lc0_port_drop_untagged(lc0_port_drop_untagged)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// The actual switch fabric
+
+	SwitchFabric fabric(
+		.clk_fabric(clk_fabric),
+
+		.lc0_axi_rx(linecard_rx_data),
+
+		.lc0_port_vlan(lc0_port_vlan),
+		.lc0_port_drop_tagged(lc0_port_drop_tagged),
+		.lc0_port_drop_untagged(lc0_port_drop_untagged)
+	);
+
 
 endmodule
