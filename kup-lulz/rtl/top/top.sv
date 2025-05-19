@@ -42,9 +42,12 @@ module top(
 	input wire			clk_156m25_p,
 	input wire			clk_156m25_n,
 
-	//GTY refclk
+	//GTY refclks
 	input wire			refclk_p,
 	input wire			refclk_n,
+
+	input wire			refclk2_p,
+	input wire			refclk2_n,
 
 	//SMPM ports are to left PHY on line card
 	input wire			smpm_0_rx_p,
@@ -81,7 +84,20 @@ module top(
 	input wire			sfp_1_rx_n,
 
 	output wire			sfp_1_tx_p,
-	output wire			sfp_1_tx_n
+	output wire			sfp_1_tx_n,
+
+	//QSFP0 is right PHY on line card
+
+	//QSFP GPIOs
+	output wire			qsfp0_lpmode,
+	output wire			qsfp0_i2c_sel_n,
+	output wire			qsfp0_rst_n,
+	input wire			qsfp0_present_n,
+	input wire			qsfp0_int_n,
+
+	//QSFP I2C
+	inout wire			qsfp0_i2c_sda,
+	output wire			qsfp0_i2c_scl
 );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -90,6 +106,7 @@ module top(
 	wire	clk_156m25;
 	wire	clk_fabric;
 	wire	refclk;
+	wire	refclk2;
 
 	TopLevelClocks clocks(
 		.clk_156m25_p(clk_156m25_p),
@@ -98,12 +115,16 @@ module top(
 		.refclk_p(refclk_p),
 		.refclk_n(refclk_n),
 
+		.refclk2_p(refclk2_p),
+		.refclk2_n(refclk2_n),
+
 		.gpio_p(gpio_p),
 		.gpio_n(gpio_n),
 
 		.clk_156m25(clk_156m25),
 		.clk_fabric(clk_fabric),
-		.refclk(refclk)
+		.refclk(refclk),
+		.refclk2(refclk2)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -186,7 +207,7 @@ module top(
 
 	SMPM_Quad smpm_quad_224(
 		.clk_156m25(clk_156m25),
-		.clk_fabric(clk_156m25),	//TODO: switch to 312.5 MHz fabric clock??
+		.clk_fabric(clk_156m25),	//TODO switch this to the main fabric clock and skip some CDCs
 		.refclk(refclk),
 
 		.smpm_0_rx_p(smpm_0_rx_p),
@@ -216,7 +237,44 @@ module top(
 		.axi_tx(linecard_tx_data[11:0])
 	);
 
-	//TODO: GTY quad for the second PHY
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// GTY quad for the QSFP0 link to the second PHY
+
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) apb_qsfp0_qpll();
+
+	QSFP0_Quad qsfp_quad_227(
+		.clk_156m25(clk_156m25),
+		.clk_fabric(clk_156m25),	//TODO switch this to the main fabric clock and skip some CDCs
+		.refclk(refclk2),
+
+		/*
+		.smpm_0_rx_p(smpm_0_rx_p),
+		.smpm_0_rx_n(smpm_0_rx_n),
+
+		.smpm_0_tx_p(smpm_0_tx_p),
+		.smpm_0_tx_n(smpm_0_tx_n),
+
+		.smpm_1_rx_p(smpm_1_rx_p),
+		.smpm_1_rx_n(smpm_1_rx_n),
+
+		.smpm_1_tx_p(smpm_1_tx_p),
+		.smpm_1_tx_n(smpm_1_tx_n),
+
+		.smpm_2_rx_p(smpm_2_rx_p),
+		.smpm_2_rx_n(smpm_2_rx_n),
+
+		.smpm_2_tx_p(smpm_2_tx_p),
+		.smpm_2_tx_n(smpm_2_tx_n),
+
+		.link_up(smpm_link_up),
+		*/
+		.apb_qpll(apb_qsfp0_qpll)/*,
+		.apb_serdes_lane(apb_smpm_serdes_lane),
+
+		.axi_rx(linecard_rx_data[11:0]),
+		.axi_tx(linecard_tx_data[11:0])
+		*/
+	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Root APB bridge (0xc010_0000)
@@ -247,9 +305,19 @@ module top(
 		.mgmt0_frame_ready(mgmt0_frame_ready),
 		.mgmt0_link_up_pclk(mgmt0_link_up_pclk),
 
+		.qsfp0_lpmode(qsfp0_lpmode),
+		.qsfp0_i2c_sel_n(qsfp0_i2c_sel_n),
+		.qsfp0_rst_n(qsfp0_rst_n),
+		.qsfp0_present_n(qsfp0_present_n),
+		.qsfp0_int_n(qsfp0_int_n),
+
+		.qsfp0_i2c_sda(qsfp0_i2c_sda),
+		.qsfp0_i2c_scl(qsfp0_i2c_scl),
+
 		.apb_smpm_qpll(apb_smpm_qpll),
 		.apb_sfp_qpll(apb_sfp_qpll),
-		.apb_smpm_serdes_lane(apb_smpm_serdes_lane)
+		.apb_smpm_serdes_lane(apb_smpm_serdes_lane),
+		.apb_qsfp0_qpll(apb_qsfp0_qpll)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -38,9 +38,12 @@ module TopLevelClocks(
 	input wire			clk_156m25_p,
 	input wire			clk_156m25_n,
 
-	//GTY refclk
+	//GTY refclks
 	input wire			refclk_p,
 	input wire			refclk_n,
+
+	input wire			refclk2_p,
+	input wire			refclk2_n,
 
 	//GPIO output on side SMPMs
 	output wire			gpio_p,
@@ -49,7 +52,8 @@ module TopLevelClocks(
 	//Clocks out to rest of the system
 	output wire			clk_156m25,
 	output wire			clk_fabric,
-	output wire			refclk
+	output wire			refclk,
+	output wire			refclk2
 );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,12 +66,8 @@ module TopLevelClocks(
 		.O(clk_156m25_raw)
 		);
 
-	/*BUFG bufg(
-		.I(clk_156m25_raw),
-		.O(clk_156m25));*/
-
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// SERDES reference clock input
+	// SERDES reference clock inputs
 
 	IBUFDS_GTE4 #(
 		.REFCLK_EN_TX_PATH(1'b0),
@@ -77,6 +77,17 @@ module TopLevelClocks(
 		.I(refclk_p),
 		.IB(refclk_n),
 		.O(refclk),
+		.ODIV2()
+	);
+
+	IBUFDS_GTE4 #(
+		.REFCLK_EN_TX_PATH(1'b0),
+		.REFCLK_HROW_CK_SEL(2'b10)
+	) refclk2_ibuf(
+		.CEB(1'b0),
+		.I(refclk2_p),
+		.IB(refclk2_n),
+		.O(refclk2),
 		.ODIV2()
 	);
 

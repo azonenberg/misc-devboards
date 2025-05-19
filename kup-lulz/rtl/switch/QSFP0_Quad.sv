@@ -30,9 +30,9 @@
 ***********************************************************************************************************************/
 
 /**
-	@brief Stuff related to the GTY quad (224) running the four SMPM interfaces (only 3 of 4 provisioned for now)
+	@brief Stuff related to the GTY quad (227) running the QSFP28 interface to the second PHY (only 3 of 4 used)
  */
-module SMPM_Quad(
+module QSFP0_Quad(
 
 	//System clock input
 	input wire				clk_156m25,
@@ -41,6 +41,7 @@ module SMPM_Quad(
 	//SERDES reference clock
 	input wire				refclk,
 
+	/*
 	//The actual SERDES interfaces
 	input wire				smpm_0_rx_p,
 	input wire				smpm_0_rx_n,
@@ -59,18 +60,21 @@ module SMPM_Quad(
 
 	output wire				smpm_2_tx_p,
 	output wire				smpm_2_tx_n,
+	*/
 
 	//APB management bus for QPLL
-	APB.completer			apb_qpll,
-	APB.completer			apb_serdes_lane[2:0],
+	APB.completer			apb_qpll
+	//APB.completer			apb_serdes_lane[2:0],
 
+	/*
 	//Link state
 	wire[11:0]				link_up,
 
 	//AXI streams for the individual port data streams (clk_fabric domain)
 	AXIStream.transmitter	axi_rx[11:0],
 	AXIStream.receiver		axi_tx[11:0]
-);
+	*/
+	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Quad PLL
@@ -88,18 +92,18 @@ module SMPM_Quad(
 		.QPLL0_MULT(66),	//156.25 MHz * 66 = 10.3125 GHz
 							//note that output is DDR so we have to do sub-rate to get 10GbE
 		.QPLL1_MULT(64)		//156.25 MHz * 64 = 10.000 GHz
-	) qpll_224 (
+	) qpll_227 (
 		.clk_lockdet(clk_156m25),
 		.clk_ref_north(2'b0),
-		.clk_ref_south({1'b0, refclk}),
-		.clk_ref(2'b0),
+		.clk_ref_south(2'b0),
+		.clk_ref({refclk, 1'b0}),
 
 		.apb(apb_qpll),
 
 		.qpll_powerdown(2'b01),		//using QPLL1 for everything so shut down QPLL0
 
-		.qpll0_refclk_sel(3'd5),	//GTSOUTHREFCLK00
-		.qpll1_refclk_sel(3'd5),	//GTSOUTHREFCLK01
+		.qpll0_refclk_sel(3'd2),	//GTREFCLK00
+		.qpll1_refclk_sel(3'd2),	//GTREFCLK01
 
 		.qpll_clkout(qpll_clkout),
 		.qpll_refout(qpll_refout),
@@ -113,6 +117,7 @@ module SMPM_Quad(
 		.refclk_lost(refclk_lost)
 	);
 
+	/*
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// The actual SERDES interfaces
 
@@ -262,15 +267,22 @@ module SMPM_Quad(
 			.axi_tx(mac_axi_tx)
 		);
 
-		//TODO: eliminate these redundant CDCs?? or the ones further up the stack?
 		for(genvar h=0; h<4; h++) begin : cdc_fifos
 			AXIS_CDC #(.FIFO_DEPTH(512)) rx_fifo (.axi_rx(mac_axi_rx[h]), .tx_clk(clk_fabric), .axi_tx(axi_rx[g*4 + h]));
 			AXIS_CDC #(.FIFO_DEPTH(512)) tx_fifo (.axi_rx(axi_tx[g*4 + h]), .tx_clk(txoutclk), .axi_tx(mac_axi_tx[h]));
 		end
 
 	end
+	*/
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Debug VIO
+
+	vio_0 vio(
+		.clk(clk_156m25),
+		.probe_in0(fbclk_lost),
+		.probe_in1(refclk_lost),
+		.probe_in2(qpll_lock)
+	);
 
 endmodule

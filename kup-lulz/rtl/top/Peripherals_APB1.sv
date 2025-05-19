@@ -41,16 +41,28 @@ module Peripherals_APB1(
 	input wire		mgmt0_frame_ready,
 	input wire		mgmt0_link_up_pclk,
 
+	//QSFP GPIOs
+	output wire		qsfp0_lpmode,
+	output wire		qsfp0_i2c_sel_n,
+	output wire		qsfp0_rst_n,
+	input wire		qsfp0_present_n,
+	input wire		qsfp0_int_n,
+
+	//QSFP I2C
+	inout wire		qsfp0_i2c_sda,
+	output wire		qsfp0_i2c_scl,
+
 	//Buses out to other blocks
 	APB.requester	apb_smpm_qpll,
 	APB.requester	apb_sfp_qpll,
-	APB.requester	apb_smpm_serdes_lane[2:0]
+	APB.requester	apb_smpm_serdes_lane[2:0],
+	APB.requester	apb_qsfp0_qpll
 );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// APB1 (0xc010_0000)
 
-	localparam NUM_APB1_PERIPHERALS	= 8;
+	localparam NUM_APB1_PERIPHERALS	= 9;
 	localparam APB1_BLOCK_SIZE		= 32'h400;
 	localparam APB1_ADDR_WIDTH		= $clog2(APB1_BLOCK_SIZE);
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb1[NUM_APB1_PERIPHERALS-1:0]();
@@ -95,9 +107,19 @@ module Peripherals_APB1(
 	//Hook up inputs
 	assign gpioa_in[0]		= mgmt0_frame_ready;
 	assign gpioa_in[1]		= mgmt0_link_up_pclk;
+	assign gpioa_in[2]		= qsfp0_lpmode;
+	assign gpioa_in[3]		= qsfp0_i2c_sel_n;
+	assign gpioa_in[4]		= qsfp0_rst_n;
+	assign gpioa_in[5]		= qsfp0_present_n;
+	assign gpioa_in[6]		= qsfp0_int_n;
+
+	//Hook up outputs
+	assign qsfp0_lpmode		= gpioa_out[2];
+	assign qsfp0_i2c_sel_n	= gpioa_out[3];
+	assign qsfp0_rst_n		= gpioa_out[4];
 
 	//Tie off unused signals
-	assign gpioa_in[31:2]	= 31'h0;
+	assign gpioa_in[31:7]	= 0;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// APB1: curve25519 accelerator (0xc010_0800)
@@ -131,5 +153,11 @@ module Peripherals_APB1(
 		apb_regslice_smpm_serdes_1( .upstream(apb1[6]), .downstream(apb_smpm_serdes_lane[1]) );
 	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
 		apb_regslice_smpm_serdes_2( .upstream(apb1[7]), .downstream(apb_smpm_serdes_lane[2]) );
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB1: QPLL DRP for QSFP0 interface (0xc010_2000)
+
+	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
+		apb_regslice_qsfp0_qpll( .upstream(apb1[8]), .downstream(apb_qsfp0_qpll) );
 
 endmodule
