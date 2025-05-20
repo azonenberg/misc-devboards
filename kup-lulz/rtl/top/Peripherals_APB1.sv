@@ -56,13 +56,14 @@ module Peripherals_APB1(
 	APB.requester	apb_smpm_qpll,
 	APB.requester	apb_sfp_qpll,
 	APB.requester	apb_smpm_serdes_lane[2:0],
-	APB.requester	apb_qsfp0_qpll
+	APB.requester	apb_qsfp0_qpll,
+	APB.requester	apb_qsfp0_serdes_lane[3:0]
 );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// APB1 (0xc010_0000)
 
-	localparam NUM_APB1_PERIPHERALS	= 9;
+	localparam NUM_APB1_PERIPHERALS	= 13;
 	localparam APB1_BLOCK_SIZE		= 32'h400;
 	localparam APB1_ADDR_WIDTH		= $clog2(APB1_BLOCK_SIZE);
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb1[NUM_APB1_PERIPHERALS-1:0]();
@@ -145,7 +146,7 @@ module Peripherals_APB1(
 		apb_regslice_sfp_qpll( .upstream(apb1[4]), .downstream(apb_sfp_qpll) );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// APB1: SERDES lane DRPs (0xc010_1400, 0xc010_1800, 0xc010_1c00)
+	// APB1: SMPM SERDES lane DRPs (0xc010_1400, 0xc010_1800, 0xc010_1c00)
 
 	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
 		apb_regslice_smpm_serdes_0( .upstream(apb1[5]), .downstream(apb_smpm_serdes_lane[0]) );
@@ -159,5 +160,17 @@ module Peripherals_APB1(
 
 	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
 		apb_regslice_qsfp0_qpll( .upstream(apb1[8]), .downstream(apb_qsfp0_qpll) );
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB1: QSFP0 SERDES lane DRPs (0xc010_2400, 0xc010_2800, 0xc010_2c00, 0xc010_3000)
+
+	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
+		apb_regslice_qsfp0_serdes_0( .upstream(apb1[9]), .downstream(apb_qsfp0_serdes_lane[0]) );
+	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
+		apb_regslice_qsfp0_serdes_1( .upstream(apb1[10]), .downstream(apb_qsfp0_serdes_lane[1]) );
+	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
+		apb_regslice_qsfp0_serdes_2( .upstream(apb1[11]), .downstream(apb_qsfp0_serdes_lane[2]) );
+	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
+		apb_regslice_qsfp0_serdes_3( .upstream(apb1[12]), .downstream(apb_qsfp0_serdes_lane[3]) );
 
 endmodule

@@ -87,6 +87,30 @@ module top(
 	output wire			sfp_1_tx_n,
 
 	//QSFP0 is right PHY on line card
+	/*
+	input wire			qsfp0_lane0_rx_p,
+	input wire			qsfp0_lane0_rx_n,
+
+	output wire			qsfp0_lane0_tx_p,
+	output wire			qsfp0_lane0_tx_n,
+	*/
+	input wire			qsfp0_lane1_rx_p,
+	input wire			qsfp0_lane1_rx_n,
+
+	output wire			qsfp0_lane1_tx_p,
+	output wire			qsfp0_lane1_tx_n,
+
+	input wire			qsfp0_lane2_rx_p,
+	input wire			qsfp0_lane2_rx_n,
+
+	output wire			qsfp0_lane2_tx_p,
+	output wire			qsfp0_lane2_tx_n,
+
+	input wire			qsfp0_lane3_rx_p,
+	input wire			qsfp0_lane3_rx_n,
+
+	output wire			qsfp0_lane3_tx_p,
+	output wire			qsfp0_lane3_tx_n,
 
 	//QSFP GPIOs
 	output wire			qsfp0_lpmode,
@@ -241,6 +265,9 @@ module top(
 	// GTY quad for the QSFP0 link to the second PHY
 
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) apb_qsfp0_qpll();
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(10), .USER_WIDTH(0)) apb_qsfp0_serdes_lane[3:0]();
+
+	wire[11:0]	qsfp0_link_up;
 
 	QSFP0_Quad qsfp_quad_227(
 		.clk_156m25(clk_156m25),
@@ -248,32 +275,38 @@ module top(
 		.refclk(refclk2),
 
 		/*
-		.smpm_0_rx_p(smpm_0_rx_p),
-		.smpm_0_rx_n(smpm_0_rx_n),
+		.qsfp0_lane0_rx_p(qsfp0_lane0_rx_p),
+		.qsfp0_lane0_rx_n(qsfp0_lane0_rx_n),
 
-		.smpm_0_tx_p(smpm_0_tx_p),
-		.smpm_0_tx_n(smpm_0_tx_n),
-
-		.smpm_1_rx_p(smpm_1_rx_p),
-		.smpm_1_rx_n(smpm_1_rx_n),
-
-		.smpm_1_tx_p(smpm_1_tx_p),
-		.smpm_1_tx_n(smpm_1_tx_n),
-
-		.smpm_2_rx_p(smpm_2_rx_p),
-		.smpm_2_rx_n(smpm_2_rx_n),
-
-		.smpm_2_tx_p(smpm_2_tx_p),
-		.smpm_2_tx_n(smpm_2_tx_n),
-
-		.link_up(smpm_link_up),
+		.qsfp0_lane0_tx_p(qsfp0_lane0_tx_p),
+		.qsfp0_lane0_tx_n(qsfp0_lane0_tx_n),
 		*/
-		.apb_qpll(apb_qsfp0_qpll)/*,
-		.apb_serdes_lane(apb_smpm_serdes_lane),
 
-		.axi_rx(linecard_rx_data[11:0]),
-		.axi_tx(linecard_tx_data[11:0])
-		*/
+		.qsfp0_lane1_rx_p(qsfp0_lane1_rx_p),
+		.qsfp0_lane1_rx_n(qsfp0_lane1_rx_n),
+
+		.qsfp0_lane1_tx_p(qsfp0_lane1_tx_p),
+		.qsfp0_lane1_tx_n(qsfp0_lane1_tx_n),
+
+		.qsfp0_lane2_rx_p(qsfp0_lane2_rx_p),
+		.qsfp0_lane2_rx_n(qsfp0_lane2_rx_n),
+
+		.qsfp0_lane2_tx_p(qsfp0_lane2_tx_p),
+		.qsfp0_lane2_tx_n(qsfp0_lane2_tx_n),
+
+		.qsfp0_lane3_rx_p(qsfp0_lane3_rx_p),
+		.qsfp0_lane3_rx_n(qsfp0_lane3_rx_n),
+
+		.qsfp0_lane3_tx_p(qsfp0_lane3_tx_p),
+		.qsfp0_lane3_tx_n(qsfp0_lane3_tx_n),
+
+		.link_up(qsfp0_link_up),
+
+		.apb_qpll(apb_qsfp0_qpll),
+		.apb_serdes_lane(apb_qsfp0_serdes_lane),
+
+		.axi_rx(linecard_rx_data[23:12]),
+		.axi_tx(linecard_tx_data[23:12])
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -317,7 +350,8 @@ module top(
 		.apb_smpm_qpll(apb_smpm_qpll),
 		.apb_sfp_qpll(apb_sfp_qpll),
 		.apb_smpm_serdes_lane(apb_smpm_serdes_lane),
-		.apb_qsfp0_qpll(apb_qsfp0_qpll)
+		.apb_qsfp0_qpll(apb_qsfp0_qpll),
+		.apb_qsfp0_serdes_lane(apb_qsfp0_serdes_lane)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
