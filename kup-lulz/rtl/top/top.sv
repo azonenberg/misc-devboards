@@ -231,7 +231,6 @@ module top(
 
 	SMPM_Quad smpm_quad_224(
 		.clk_156m25(clk_156m25),
-		.clk_fabric(clk_156m25),	//TODO switch this to the main fabric clock and skip some CDCs
 		.refclk(refclk),
 
 		.smpm_0_rx_p(smpm_0_rx_p),
@@ -271,7 +270,6 @@ module top(
 
 	QSFP0_Quad qsfp_quad_227(
 		.clk_156m25(clk_156m25),
-		.clk_fabric(clk_156m25),	//TODO switch this to the main fabric clock and skip some CDCs
 		.refclk(refclk2),
 
 		/*

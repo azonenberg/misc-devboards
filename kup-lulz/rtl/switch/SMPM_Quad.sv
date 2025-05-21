@@ -36,7 +36,6 @@ module SMPM_Quad(
 
 	//System clock input
 	input wire				clk_156m25,
-	input wire				clk_fabric,
 
 	//SERDES reference clock
 	input wire				refclk,
@@ -67,7 +66,7 @@ module SMPM_Quad(
 	//Link state
 	wire[11:0]				link_up,
 
-	//AXI streams for the individual port data streams (clk_fabric domain)
+	//AXI streams for the individual port data streams (clk_fabric domain for TX, port clock for RX)
 	AXIStream.transmitter	axi_rx[11:0],
 	AXIStream.receiver		axi_tx[11:0]
 );
@@ -239,7 +238,6 @@ module SMPM_Quad(
 		lspeed_t[3:0] link_speed;
 
 		//MAC-side TX/RX data in SERDES clock domain
-		AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) mac_axi_rx[3:0]();
 		AXIStream #(.DATA_WIDTH(32), .ID_WIDTH(0), .DEST_WIDTH(0), .USER_WIDTH(1)) mac_axi_tx[3:0]();
 
 		AXIS_QSGMIIMACWrapper macs (
@@ -258,13 +256,12 @@ module SMPM_Quad(
 			.link_up(link_up[g*4 +: 4]),
 			.link_speed(link_speed),
 
-			.axi_rx(mac_axi_rx),
+			.axi_rx(axi_rx[g*4 +: 4]),
 			.axi_tx(mac_axi_tx)
 		);
 
-		//TODO: eliminate these redundant CDCs?? or the ones further up the stack?
+		//TODO: can we eliminate the TX FIFO?
 		for(genvar h=0; h<4; h++) begin : cdc_fifos
-			AXIS_CDC #(.FIFO_DEPTH(512)) rx_fifo (.axi_rx(mac_axi_rx[h]), .tx_clk(clk_fabric), .axi_tx(axi_rx[g*4 + h]));
 			AXIS_CDC #(.FIFO_DEPTH(512)) tx_fifo (.axi_rx(axi_tx[g*4 + h]), .tx_clk(txoutclk), .axi_tx(mac_axi_tx[h]));
 		end
 
