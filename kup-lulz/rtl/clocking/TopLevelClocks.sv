@@ -52,6 +52,7 @@ module TopLevelClocks(
 	//Clocks out to rest of the system
 	output wire			clk_156m25,
 	output wire			clk_fabric,
+	output wire			clk_fabric_div2,
 	output wire			refclk,
 	output wire			refclk2
 );
@@ -110,6 +111,13 @@ module TopLevelClocks(
 		.CE(pll_lock)
 	);
 
+	wire	clk_fabric_div2_raw;
+	BUFGCE obuf_fabric_div2(
+		.I(clk_fabric_div2_raw),
+		.O(clk_fabric_div2),
+		.CE(pll_lock)
+	);
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Main system PLL
 
@@ -127,7 +135,7 @@ module TopLevelClocks(
 		.BANDWIDTH("OPTIMIZED"),
 		.CLKOUT0_DIVIDE_F(4),		//1562.5 / 4 = 390.625 MHz
 		.CLKOUT1_DIVIDE(10),		//1562.5 / 10 = 156.25 MHz
-		.CLKOUT2_DIVIDE(10),
+		.CLKOUT2_DIVIDE(8),			//1562.5 / 8 = 195.3125 MHz
 		.CLKOUT3_DIVIDE(10),
 		.CLKOUT4_DIVIDE(10),
 		.CLKOUT5_DIVIDE(10),
@@ -164,7 +172,7 @@ module TopLevelClocks(
 		.CLKOUT0B(),
 		.CLKOUT1(clk_156m25_out_raw),
 		.CLKOUT1B(),
-		.CLKOUT2(),
+		.CLKOUT2(clk_fabric_div2_raw),
 		.CLKOUT2B(),
 		.CLKOUT3(),
 		.CLKOUT3B(),

@@ -129,6 +129,7 @@ module top(
 
 	wire	clk_156m25;
 	wire	clk_fabric;
+	wire	clk_fabric_div2;
 	wire	refclk;
 	wire	refclk2;
 
@@ -147,6 +148,7 @@ module top(
 
 		.clk_156m25(clk_156m25),
 		.clk_fabric(clk_fabric),
+		.clk_fabric_div2(clk_fabric_div2),
 		.refclk(refclk),
 		.refclk2(refclk2)
 	);
