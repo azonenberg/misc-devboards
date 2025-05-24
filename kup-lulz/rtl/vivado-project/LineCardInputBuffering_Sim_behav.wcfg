@@ -13,15 +13,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="303.237 ns"></ZoomStartTime>
-      <ZoomEndTime time="354.418 ns"></ZoomEndTime>
-      <Cursor1Time time="311.657 ns"></Cursor1Time>
+      <ZoomStartTime time="1,143.208 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,271.359 ns"></ZoomEndTime>
+      <Cursor1Time time="1,250.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="232"></NameColumnWidth>
-      <ValueColumnWidth column_width="169"></ValueColumnWidth>
+      <ValueColumnWidth column_width="165"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="12" />
+   <WVObjectSize size="13" />
    <wvobject type="logic" fp_name="/LineCardInputBuffering_Sim/ready">
       <obj_property name="ElementShortName">ready</obj_property>
       <obj_property name="ObjectShortName">ready</obj_property>
@@ -182,6 +182,7 @@
       <wvobject type="group" fp_name="group1138">
          <obj_property name="label">Write</obj_property>
          <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
          <wvobject type="logic" fp_name="/LineCardInputBuffering_Sim/dut/\fifos[0].ctrl /wr_en">
             <obj_property name="ElementShortName">wr_en</obj_property>
             <obj_property name="ObjectShortName">wr_en</obj_property>
@@ -250,7 +251,6 @@
    <wvobject type="group" fp_name="group145">
       <obj_property name="label">Port 1</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject type="logic" fp_name="/LineCardInputBuffering_Sim/dut/\fifos[1].ctrl /wr_en">
          <obj_property name="ElementShortName">wr_en</obj_property>
          <obj_property name="ObjectShortName">wr_en</obj_property>
@@ -262,6 +262,10 @@
       <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/\fifos[1].ctrl /wr_data">
          <obj_property name="ElementShortName">wr_data[71:0]</obj_property>
          <obj_property name="ObjectShortName">wr_data[71:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/\fifos[1].ctrl /rd_ptr">
+         <obj_property name="ElementShortName">rd_ptr[12:0]</obj_property>
+         <obj_property name="ObjectShortName">rd_ptr[12:0]</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/\fifos[1].ctrl /wr_ptr_committed">
          <obj_property name="ElementShortName">wr_ptr_committed[12:0]</obj_property>
@@ -276,6 +280,38 @@
          <obj_property name="ObjectShortName">sof_ptr[11:0]</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/\fifos[1].ctrl /wr_state">
+         <obj_property name="ElementShortName">wr_state[1:0]</obj_property>
+         <obj_property name="ObjectShortName">wr_state[1:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group538">
+      <obj_property name="label">Port 2</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/LineCardInputBuffering_Sim/dut/\fifos[2].ctrl /wr_en">
+         <obj_property name="ElementShortName">wr_en</obj_property>
+         <obj_property name="ObjectShortName">wr_en</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/\fifos[2].ctrl /wr_addr">
+         <obj_property name="ElementShortName">wr_addr[11:0]</obj_property>
+         <obj_property name="ObjectShortName">wr_addr[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/\fifos[2].ctrl /wr_data">
+         <obj_property name="ElementShortName">wr_data[71:0]</obj_property>
+         <obj_property name="ObjectShortName">wr_data[71:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/\fifos[2].ctrl /wr_ptr_committed">
+         <obj_property name="ElementShortName">wr_ptr_committed[12:0]</obj_property>
+         <obj_property name="ObjectShortName">wr_ptr_committed[12:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/\fifos[2].ctrl /rd_ptr">
+         <obj_property name="ElementShortName">rd_ptr[12:0]</obj_property>
+         <obj_property name="ObjectShortName">rd_ptr[12:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/\fifos[2].ctrl /sof_ptr">
+         <obj_property name="ElementShortName">sof_ptr[11:0]</obj_property>
+         <obj_property name="ObjectShortName">sof_ptr[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/\fifos[2].ctrl /wr_state">
          <obj_property name="ElementShortName">wr_state[1:0]</obj_property>
          <obj_property name="ObjectShortName">wr_state[1:0]</obj_property>
       </wvobject>
@@ -307,44 +343,92 @@
             <obj_property name="ObjectShortName">rd_valid</obj_property>
          </wvobject>
       </wvobject>
-      <wvobject type="group" fp_name="group112">
-         <obj_property name="label">mac lookup</obj_property>
+      <wvobject type="group" fp_name="group526">
+         <obj_property name="label">mac</obj_property>
          <obj_property name="DisplayName">label</obj_property>
-         <wvobject type="logic" fp_name="/LineCardInputBuffering_Sim/dut/reader/mac_lookup_en">
-            <obj_property name="ElementShortName">mac_lookup_en</obj_property>
-            <obj_property name="ObjectShortName">mac_lookup_en</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject type="group" fp_name="group527">
+            <obj_property name="label">lookup</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <obj_property name="isExpanded"></obj_property>
+            <wvobject type="logic" fp_name="/LineCardInputBuffering_Sim/eth_mac_lookup/tvalid">
+               <obj_property name="ElementShortName">tvalid</obj_property>
+               <obj_property name="ObjectShortName">tvalid</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/eth_mac_lookup/tdata">
+               <obj_property name="ElementShortName">tdata[113:0]</obj_property>
+               <obj_property name="ObjectShortName">tdata[113:0]</obj_property>
+            </wvobject>
+            <wvobject type="logic" fp_name="/LineCardInputBuffering_Sim/eth_mac_lookup/tlast">
+               <obj_property name="ElementShortName">tlast</obj_property>
+               <obj_property name="ObjectShortName">tlast</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/eth_mac_lookup/tid">
+               <obj_property name="ElementShortName">tid[4:0]</obj_property>
+               <obj_property name="ObjectShortName">tid[4:0]</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/eth_mac_lookup/tdest">
+               <obj_property name="ElementShortName">tdest[1:0]</obj_property>
+               <obj_property name="ObjectShortName">tdest[1:0]</obj_property>
+            </wvobject>
          </wvobject>
-         <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/reader/mac_lookup_src_vlan">
-            <obj_property name="ElementShortName">mac_lookup_src_vlan[11:0]</obj_property>
-            <obj_property name="ObjectShortName">mac_lookup_src_vlan[11:0]</obj_property>
+         <wvobject type="group" fp_name="group547">
+            <obj_property name="label">results</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <obj_property name="isExpanded"></obj_property>
+            <wvobject type="logic" fp_name="/LineCardInputBuffering_Sim/eth_mac_results/tvalid">
+               <obj_property name="ElementShortName">tvalid</obj_property>
+               <obj_property name="ObjectShortName">tvalid</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/eth_mac_results/tdata">
+               <obj_property name="ElementShortName">tdata[5:0]</obj_property>
+               <obj_property name="ObjectShortName">tdata[5:0]</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/eth_mac_results/tid">
+               <obj_property name="ElementShortName">tid[4:0]</obj_property>
+               <obj_property name="ObjectShortName">tid[4:0]</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/eth_mac_results/tdest">
+               <obj_property name="ElementShortName">tdest[1:0]</obj_property>
+               <obj_property name="ObjectShortName">tdest[1:0]</obj_property>
+            </wvobject>
+            <wvobject type="logic" fp_name="/LineCardInputBuffering_Sim/eth_mac_results/tlast">
+               <obj_property name="ElementShortName">tlast</obj_property>
+               <obj_property name="ObjectShortName">tlast</obj_property>
+            </wvobject>
          </wvobject>
-         <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/reader/mac_lookup_src_mac">
-            <obj_property name="ElementShortName">mac_lookup_src_mac[47:0]</obj_property>
-            <obj_property name="ObjectShortName">mac_lookup_src_mac[47:0]</obj_property>
+      </wvobject>
+      <wvobject type="group" fp_name="group553">
+         <obj_property name="label">prefetch</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/reader/prefetch_buf">
+            <obj_property name="ElementShortName">prefetch_buf[255:0][63:0]</obj_property>
+            <obj_property name="ObjectShortName">prefetch_buf[255:0][63:0]</obj_property>
          </wvobject>
-         <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/reader/mac_lookup_src_port">
-            <obj_property name="ElementShortName">mac_lookup_src_port[4:0]</obj_property>
-            <obj_property name="ObjectShortName">mac_lookup_src_port[4:0]</obj_property>
+         <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/reader/prefetch_rd_count">
+            <obj_property name="ElementShortName">prefetch_rd_count[2:0]</obj_property>
+            <obj_property name="ObjectShortName">prefetch_rd_count[2:0]</obj_property>
          </wvobject>
-         <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/reader/mac_lookup_dst_mac">
-            <obj_property name="ElementShortName">mac_lookup_dst_mac[47:0]</obj_property>
-            <obj_property name="ObjectShortName">mac_lookup_dst_mac[47:0]</obj_property>
+         <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/reader/prefetch_rd_count_ff6">
+            <obj_property name="ElementShortName">prefetch_rd_count_ff6[2:0]</obj_property>
+            <obj_property name="ObjectShortName">prefetch_rd_count_ff6[2:0]</obj_property>
          </wvobject>
-         <wvobject type="logic" fp_name="/LineCardInputBuffering_Sim/mac_lookup_done">
-            <obj_property name="ElementShortName">mac_lookup_done</obj_property>
-            <obj_property name="ObjectShortName">mac_lookup_done</obj_property>
+         <wvobject type="logic" fp_name="/LineCardInputBuffering_Sim/dut/reader/prefetch_wr_en">
+            <obj_property name="ElementShortName">prefetch_wr_en</obj_property>
+            <obj_property name="ObjectShortName">prefetch_wr_en</obj_property>
          </wvobject>
-         <wvobject type="logic" fp_name="/LineCardInputBuffering_Sim/mac_lookup_hit">
-            <obj_property name="ElementShortName">mac_lookup_hit</obj_property>
-            <obj_property name="ObjectShortName">mac_lookup_hit</obj_property>
+         <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/reader/prefetch_wr_addr">
+            <obj_property name="ElementShortName">prefetch_wr_addr[7:0]</obj_property>
+            <obj_property name="ObjectShortName">prefetch_wr_addr[7:0]</obj_property>
          </wvobject>
-         <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/mac_lookup_dst_port">
-            <obj_property name="ElementShortName">mac_lookup_dst_port[5:0]</obj_property>
-            <obj_property name="ObjectShortName">mac_lookup_dst_port[5:0]</obj_property>
+         <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/reader/prefetch_rd_addr">
+            <obj_property name="ElementShortName">prefetch_rd_addr[7:0]</obj_property>
+            <obj_property name="ObjectShortName">prefetch_rd_addr[7:0]</obj_property>
          </wvobject>
-         <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/reader/next_mac_local_port">
-            <obj_property name="ElementShortName">next_mac_local_port[4:0]</obj_property>
-            <obj_property name="ObjectShortName">next_mac_local_port[4:0]</obj_property>
+         <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/reader/prefetch_rd_data">
+            <obj_property name="ElementShortName">prefetch_rd_data[63:0]</obj_property>
+            <obj_property name="ObjectShortName">prefetch_rd_data[63:0]</obj_property>
          </wvobject>
       </wvobject>
       <wvobject type="group" fp_name="group114">
@@ -356,8 +440,8 @@
             <obj_property name="ObjectShortName">fifo_rd_size[23:0][12:0]</obj_property>
          </wvobject>
          <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/reader/port_states">
-            <obj_property name="ElementShortName">port_states[23:0][2:0]</obj_property>
-            <obj_property name="ObjectShortName">port_states[23:0][2:0]</obj_property>
+            <obj_property name="ElementShortName">port_states[23:0][3:0]</obj_property>
+            <obj_property name="ObjectShortName">port_states[23:0][3:0]</obj_property>
          </wvobject>
          <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/reader/port_vlans">
             <obj_property name="ElementShortName">port_vlans[23:0][11:0]</obj_property>
@@ -390,10 +474,6 @@
          <wvobject type="logic" fp_name="/LineCardInputBuffering_Sim/dut/reader/meta_empty">
             <obj_property name="ElementShortName">meta_empty</obj_property>
             <obj_property name="ObjectShortName">meta_empty</obj_property>
-         </wvobject>
-         <wvobject type="logic" fp_name="/LineCardInputBuffering_Sim/dut/reader/meta_rd_en">
-            <obj_property name="ElementShortName">meta_rd_en</obj_property>
-            <obj_property name="ObjectShortName">meta_rd_en</obj_property>
          </wvobject>
          <wvobject type="array" fp_name="/LineCardInputBuffering_Sim/dut/reader/meta_rdata">
             <obj_property name="ElementShortName">meta_rdata</obj_property>

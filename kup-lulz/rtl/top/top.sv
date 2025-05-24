@@ -388,6 +388,7 @@ module top(
 
 	SwitchFabric fabric(
 		.clk_fabric(clk_fabric),
+		.clk_fabric_div2(clk_fabric_div2),
 
 		.lc0_axi_rx(linecard_rx_data),
 
