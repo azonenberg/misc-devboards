@@ -76,53 +76,31 @@ create_generated_clock -name phy0_lane2_txclk -source [get_pins {smpm_quad_224/l
 ########################################################################################################################
 # CDC constraints
 
-set_false_path -from [get_clocks rxoutclk_raw] -to [get_clocks clk_156m25_p]
+set _xlnx_shared_i0 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*reg_a_ff*" }]
+set _xlnx_shared_i1 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*reg_b*" }]
+set _xlnx_shared_i2 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*tx_a_reg*" }]
+set _xlnx_shared_i3 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*dout1_reg*" }]
+set _xlnx_shared_i4 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*a_ff*" }]
+set _xlnx_shared_i5 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*dout0_reg*" }]
 
-#set _xlnx_shared_i0 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*reg_a_ff*" }]
-#set _xlnx_shared_i1 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*reg_b*" }]
-#set_max_delay -from $_xlnx_shared_i0 -to $_xlnx_shared_i1 2.500
+set_max_delay -datapath_only -from $_xlnx_shared_i0 -to $_xlnx_shared_i1 2.500
+set_bus_skew -from $_xlnx_shared_i0 -to $_xlnx_shared_i1 2.500
 
-#set _xlnx_shared_i2 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*tx_a_reg*" }]
-#set _xlnx_shared_i3 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*dout1_reg*" }]
-#set_max_delay -from $_xlnx_shared_i2 -to $_xlnx_shared_i3 2.500
-#set_max_delay -from [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*dout0_reg*" }] -to $_xlnx_shared_i3 2.500
+set_max_delay -datapath_only -from $_xlnx_shared_i2 -to $_xlnx_shared_i3 2.500
+set_bus_skew -from $_xlnx_shared_i2 -to $_xlnx_shared_i3 2.500
 
-#set _xlnx_shared_i4 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*a_ff*" }]
-#set_max_delay -datapath_only -from $_xlnx_shared_i4 -to $_xlnx_shared_i1 5.000
-#set_max_delay -from [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*dout0_reg*" }] -to $_xlnx_shared_i3 5.000
+set_max_delay -datapath_only -from $_xlnx_shared_i5 -to $_xlnx_shared_i3 2.500
+set_bus_skew -from $_xlnx_shared_i5 -to $_xlnx_shared_i3 2.500
 
-# treat these as async even though they come from the same pll
-set_clock_groups -asynchronous -group [get_clocks sccb_apb_rxclk] -group [get_clocks clk_fabric]
+set_max_delay -datapath_only -from $_xlnx_shared_i4 -to $_xlnx_shared_i1 2.500
+set_bus_skew -from $_xlnx_shared_i4 -to $_xlnx_shared_i1 2.500
 
-set_clock_groups -asynchronous -group [get_clocks sccb_apb_rxclk] -group [get_clocks sccb_apb_txclk]
-set_clock_groups -asynchronous -group [get_clocks phy0_lane0_txclk] -group [get_clocks clk_fabric]
-set_clock_groups -asynchronous -group [get_clocks phy0_lane1_txclk] -group [get_clocks clk_fabric]
-set_clock_groups -asynchronous -group [get_clocks phy0_lane2_txclk] -group [get_clocks clk_fabric]
-set_clock_groups -asynchronous -group [get_clocks phy1_lane0_txclk] -group [get_clocks clk_fabric]
-set_clock_groups -asynchronous -group [get_clocks phy1_lane1_txclk] -group [get_clocks clk_fabric]
-set_clock_groups -asynchronous -group [get_clocks phy1_lane2_txclk] -group [get_clocks clk_fabric]
-set_clock_groups -asynchronous -group [get_clocks clk_fabric] -group [get_clocks phy0_lane0_txclk]
-set_clock_groups -asynchronous -group [get_clocks clk_fabric] -group [get_clocks phy0_lane1_txclk]
-set_clock_groups -asynchronous -group [get_clocks clk_fabric] -group [get_clocks phy0_lane2_txclk]
-set_clock_groups -asynchronous -group [get_clocks clk_fabric] -group [get_clocks phy1_lane0_txclk]
-set_clock_groups -asynchronous -group [get_clocks clk_fabric] -group [get_clocks phy1_lane1_txclk]
-set_clock_groups -asynchronous -group [get_clocks clk_fabric] -group [get_clocks phy1_lane2_txclk]
-set_clock_groups -asynchronous -group [get_clocks sccb_apb_rxclk] -group [get_clocks mgmt_xg_rxclk]
-set_clock_groups -asynchronous -group [get_clocks sccb_apb_rxclk] -group [get_clocks mgmt_xg_txclk]
-set_clock_groups -asynchronous -group [get_clocks phy0_lane0_txclk] -group [get_clocks phy0_lane0_rxclk]
-set_clock_groups -asynchronous -group [get_clocks phy0_lane0_rxclk] -group [get_clocks phy0_lane0_txclk]
-set_clock_groups -asynchronous -group [get_clocks phy0_lane1_txclk] -group [get_clocks phy0_lane1_rxclk]
-set_clock_groups -asynchronous -group [get_clocks phy0_lane1_rxclk] -group [get_clocks phy0_lane1_txclk]
-set_clock_groups -asynchronous -group [get_clocks phy0_lane2_txclk] -group [get_clocks phy0_lane2_rxclk]
-set_clock_groups -asynchronous -group [get_clocks phy0_lane2_rxclk] -group [get_clocks phy0_lane2_txclk]
-set_clock_groups -asynchronous -group [get_clocks phy1_lane0_txclk] -group [get_clocks phy1_lane0_rxclk]
-set_clock_groups -asynchronous -group [get_clocks phy1_lane0_rxclk] -group [get_clocks phy1_lane0_txclk]
-set_clock_groups -asynchronous -group [get_clocks phy1_lane2_txclk] -group [get_clocks phy1_lane1_rxclk]
-set_clock_groups -asynchronous -group [get_clocks phy1_lane2_rxclk] -group [get_clocks phy1_lane1_txclk]
-set_clock_groups -asynchronous -group [get_clocks phy1_lane1_txclk] -group [get_clocks phy1_lane2_rxclk]
-set_clock_groups -asynchronous -group [get_clocks phy1_lane1_rxclk] -group [get_clocks phy1_lane2_txclk]
-set_clock_groups -asynchronous -group [get_clocks mgmt_xg_rxclk] -group [get_clocks sccb_apb_rxclk]
-set_clock_groups -asynchronous -group [get_clocks mgmt_xg_txclk] -group [get_clocks sccb_apb_rxclk]
+set_max_delay -datapath_only -from $_xlnx_shared_i5 -to $_xlnx_shared_i3 2.500
+set_bus_skew -from $_xlnx_shared_i5 -to $_xlnx_shared_i3 2.500
+
+# this is a LUTRAM driving a fabric flop, false path from write to read
+set _xlnx_shared_i6 [get_cells -hierarchical -filter { NAME =~  "*fifomem*" }]
+set_false_path -from [get_clocks sccb_apb_rxclk] -through $_xlnx_shared_i6 -to [get_clocks mgmt_xg_txclk]
 
 ########################################################################################################################
 # Put the timestamp in the bitstream USERCODE
