@@ -3,7 +3,7 @@
 	(generator "eeschema")
 	(generator_version "9.0")
 	(uuid "dc26d11c-396b-42f1-8413-ca23e7fbc715")
-	(paper "A3")
+	(paper "A4")
 	(lib_symbols
 		(symbol "device:C"
 			(pin_numbers
@@ -1636,60 +1636,6 @@
 				(pin bidirectional line
 					(at -3.81 19.05 0)
 					(length 3.81)
-					(name "GPIOR_154"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "J6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at -3.81 16.51 0)
-					(length 3.81)
-					(name "GPIOR_155"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "K6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at -3.81 13.97 0)
-					(length 3.81)
-					(name "GPIOR_133_CDI18"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "H7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at -3.81 11.43 0)
-					(length 3.81)
 					(name "GPIOR_151_CBUS0"
 						(effects
 							(font
@@ -1706,7 +1652,43 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 8.89 0)
+					(at -3.81 16.51 0)
+					(length 3.81)
+					(name "GPIOR_150_CBUS1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 13.97 0)
+					(length 3.81)
+					(name "GPIOR_149_CBUS2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "H8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 11.43 0)
 					(length 3.81)
 					(name "GPIOR_158_TEST_N"
 						(effects
@@ -1716,6 +1698,24 @@
 						)
 					)
 					(number "K7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 8.89 0)
+					(length 3.81)
+					(name "GPIOR_155"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "K6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1744,14 +1744,14 @@
 				(pin bidirectional line
 					(at -3.81 3.81 0)
 					(length 3.81)
-					(name "GPIOR_149_CBUS2"
+					(name "GPIOR_154"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "H8"
+					(number "J6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1762,14 +1762,14 @@
 				(pin bidirectional line
 					(at -3.81 1.27 0)
 					(length 3.81)
-					(name "GPIOR_150_CBUS1"
+					(name "GPIOR_133_CDI18"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "J8"
+					(number "H7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3613,6 +3613,12 @@
 		(uuid "6431cf60-1239-46ff-b291-e5bad5cec040")
 	)
 	(junction
+		(at 92.71 99.06)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6882d8ea-0267-4045-98e5-2b9a3516f7de")
+	)
+	(junction
 		(at 26.67 30.48)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3934,6 +3940,16 @@
 	)
 	(wire
 		(pts
+			(xy 92.71 99.06) (xy 105.41 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6b84cba4-49e2-4aaa-ad0d-265272788bb4")
+	)
+	(wire
+		(pts
 			(xy 26.67 76.2) (xy 26.67 78.74)
 		)
 		(stroke
@@ -4091,6 +4107,16 @@
 			(type default)
 		)
 		(uuid "c9922c00-54d4-40d1-9cf1-0902a353eea0")
+	)
+	(wire
+		(pts
+			(xy 92.71 106.68) (xy 105.41 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cbfa6ea9-71d0-4a5f-8828-b7ea2c237d27")
 	)
 	(wire
 		(pts
@@ -4422,6 +4448,17 @@
 		)
 		(uuid "fb834afd-eccf-4336-bd10-4c0124855433")
 	)
+	(hierarchical_label "1V8"
+		(shape output)
+		(at 151.13 64.77 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "052f4f40-58d7-4685-99fb-12dbfb55f171")
+	)
 	(hierarchical_label "VBAT"
 		(shape input)
 		(at 26.67 17.78 180)
@@ -4483,7 +4520,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 60.6552 67.31 0)
 			(effects
 				(font
@@ -4561,7 +4598,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_64_0.35MM_3p1MM_STM32L431"
 			(at 30.48 49.53 0)
 			(effects
 				(font
@@ -4817,7 +4854,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 74.6252 67.31 0)
 			(effects
 				(font
@@ -4896,7 +4933,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 117.8052 81.28 0)
 			(effects
 				(font
@@ -4975,7 +5012,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 86.0552 67.31 0)
 			(effects
 				(font
@@ -5054,7 +5091,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 83.5152 46.99 0)
 			(effects
 				(font
@@ -5133,7 +5170,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 60.6552 81.28 0)
 			(effects
 				(font
@@ -5212,7 +5249,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 94.9452 81.28 0)
 			(effects
 				(font
@@ -5291,7 +5328,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 83.5152 81.28 0)
 			(effects
 				(font
@@ -5370,7 +5407,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 60.6552 93.98 0)
 			(effects
 				(font
@@ -5448,7 +5485,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_80_0.4MM_4p4x3p5_T20W80"
 			(at 30.48 125.73 0)
 			(effects
 				(font
@@ -5725,6 +5762,85 @@
 		)
 	)
 	(symbol
+		(lib_id "device:C")
+		(at 105.41 102.87 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a021479b-7f58-4d1e-ac89-aaa1bc202361")
+		(property "Reference" "C18"
+			(at 108.331 101.6578 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1 uF"
+			(at 108.331 104.0821 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
+			(at 106.3752 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 105.41 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 105.41 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "GRM033C80J105ME05D"
+			(at 105.41 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "9831e7af-01fb-4f32-b63e-41c8f9f5fcb2")
+		)
+		(pin "1"
+			(uuid "949c06cf-8b51-438b-a135-eb4957fb2eef")
+		)
+		(instances
+			(project "t20-l431-som"
+				(path "/c9028163-a5a7-4e78-bba9-fb79df7846cd/cee616b2-310c-4168-8c64-88604d0390f4"
+					(reference "C18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "passive-azonenberg:INDUCTOR_PWROUT")
 		(at 76.2 99.06 270)
 		(unit 1)
@@ -5750,12 +5866,13 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 76.2 99.06 0)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -5818,7 +5935,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 72.0852 81.28 0)
 			(effects
 				(font
@@ -5897,7 +6014,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 97.4852 67.31 0)
 			(effects
 				(font
@@ -5976,7 +6093,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 72.0852 46.99 0)
 			(effects
 				(font
@@ -6055,7 +6172,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 106.3752 81.28 0)
 			(effects
 				(font
@@ -6134,7 +6251,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 93.6752 34.29 0)
 			(effects
 				(font
@@ -6213,7 +6330,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 93.6752 106.68 0)
 			(effects
 				(font
@@ -6292,7 +6409,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 93.6752 46.99 0)
 			(effects
 				(font
@@ -6371,7 +6488,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 60.6552 46.99 0)
 			(effects
 				(font
@@ -6448,12 +6565,13 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0201_CAP_NOSILK"
 			(at 76.2 26.67 0)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
