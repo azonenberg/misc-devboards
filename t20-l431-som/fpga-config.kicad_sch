@@ -144,6 +144,130 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "device:R"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "R"
+				(at 2.032 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "R"
+				(at 0 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at -1.778 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Resistor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "r res resistor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "R_* R_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "R_0_1"
+				(rectangle
+					(start -1.016 -2.54)
+					(end 1.016 2.54)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "R_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "efinix-azonenberg:T20W80"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -2069,6 +2193,748 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "special-azonenberg:MODULE_INTERNAL_T20_L431_HOST"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at 0 -6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MODULE_INTERNAL_T20_L431_HOST"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "MODULE_INTERNAL_T20_L431_HOST_1_1"
+				(rectangle
+					(start 0 49.53)
+					(end 16.51 0)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin power_out line
+					(at -3.81 48.26 0)
+					(length 3.81)
+					(name "3V3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "C6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 45.72 0)
+					(length 3.81)
+					(name "3V3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "D6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 40.64 0)
+					(length 3.81)
+					(name "1V2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "C2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 38.1 0)
+					(length 3.81)
+					(name "1V2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "C3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 35.56 0)
+					(length 3.81)
+					(name "1V2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "G4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 33.02 0)
+					(length 3.81)
+					(name "1V2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "E2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 30.48 0)
+					(length 3.81)
+					(name "1V2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "F2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 27.94 0)
+					(length 3.81)
+					(name "1V2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "D2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 25.4 0)
+					(length 3.81)
+					(name "1V2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "C2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at -3.81 20.32 0)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "D5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 17.78 0)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 15.24 0)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 12.7 0)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "D4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 10.16 0)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "MODULE_INTERNAL_T20_L431_HOST_2_1"
+				(rectangle
+					(start 0 48.26)
+					(end 20.32 0)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy 16.51 46.99) (xy 17.78 46.99) (xy 17.78 39.37) (xy 16.51 39.37)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(text "LVCMOS18"
+					(at 19.05 43.18 900)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(pin output line
+					(at -3.81 46.99 0)
+					(length 3.81)
+					(name "FPGA_JTAG_TCK"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "C8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at -3.81 44.45 0)
+					(length 3.81)
+					(name "FPGA_JTAG_TMS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "D7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at -3.81 41.91 0)
+					(length 3.81)
+					(name "FPGA_JTAG_TDI"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -3.81 39.37 0)
+					(length 3.81)
+					(name "FPGA_JTAG_TDO"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "MODULE_INTERNAL_T20_L431_HOST_3_1"
+				(rectangle
+					(start 0 48.26)
+					(end 27.94 0)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(text "Bank 1B_1D_1E"
+					(at 26.67 33.02 900)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 46.99 0)
+					(length 3.81)
+					(name "GPIOL_72_EXTFB0_CDI14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 44.45 0)
+					(length 3.81)
+					(name "GPIOL_69_CBSEL1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 41.91 0)
+					(length 3.81)
+					(name "GPIOL_70_CBSEL0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 39.37 0)
+					(length 3.81)
+					(name "GPIOL_71_NSTATUS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 36.83 0)
+					(length 3.81)
+					(name "GPIOL_46"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "C5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 34.29 0)
+					(length 3.81)
+					(name "GPIOL_74_PLLIN0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 31.75 0)
+					(length 3.81)
+					(name "GPIOL_25_CLK1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 29.21 0)
+					(length 3.81)
+					(name "GPIOL_20_CTRL0_CDI4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 26.67 0)
+					(length 3.81)
+					(name "GPIOL_24_CLK0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 24.13 0)
+					(length 3.81)
+					(name "GPIOL_12_CDI2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 21.59 0)
+					(length 3.81)
+					(name "GPIOL_13_CDI3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "MODULE_INTERNAL_T20_L431_HOST_4_1"
+				(rectangle
+					(start 0 49.53)
+					(end 22.86 0)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(text "Bank 3A_3B_3C"
+					(at 21.59 38.1 900)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 48.26 0)
+					(length 3.81)
+					(name "GPIOR_76_PLLIN0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "E5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 45.72 0)
+					(length 3.81)
+					(name "GPIOR_117_CTRL14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "E7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "MODULE_INTERNAL_T20_L431_HOST_5_1"
+				(rectangle
+					(start 0 49.53)
+					(end 22.86 0)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(text "Bank 3D_3E"
+					(at 21.59 38.1 900)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 48.26 0)
+					(length 3.81)
+					(name "GPIOR_154"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "E8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 	)
 	(text "JTAG and config signals are LVCMOS18 since flash is 1.8V only"
 		(exclude_from_sim no)
@@ -2102,17 +2968,6 @@
 			(justify left)
 		)
 		(uuid "be6d6adc-af29-433d-9ecd-aa126d9db68b")
-	)
-	(text "TODO: JTAG pins to host board"
-		(exclude_from_sim no)
-		(at 113.03 24.13 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "d8d14405-cad8-4763-90bf-3b035077e75e")
 	)
 	(no_connect
 		(at 45.72 85.09)
@@ -2162,6 +3017,26 @@
 		)
 		(uuid "2407a6be-c39c-4b85-ab7a-66143828f6bc")
 	)
+	(label "FPGA_JTAG_TCK"
+		(at 45.72 110.49 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "31afd85f-daca-416c-bd39-5a9c7103333d")
+	)
+	(label "FPGA_JTAG_TDI"
+		(at 45.72 115.57 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "31d11982-5292-4c4b-8dd6-ddec4bf7fe15")
+	)
 	(label "FPGA_FLASH_CS_N"
 		(at 45.72 74.93 180)
 		(effects
@@ -2182,6 +3057,16 @@
 		)
 		(uuid "3d58c856-fd3f-4bf6-8b2b-55789bb2ba39")
 	)
+	(label "FPGA_JTAG_TDO"
+		(at 45.72 118.11 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4b730c7e-6603-47f7-9947-decd6179cd2d")
+	)
 	(label "FPGA_FLASH_SCK"
 		(at 45.72 77.47 180)
 		(effects
@@ -2191,6 +3076,16 @@
 			(justify right bottom)
 		)
 		(uuid "56a72447-23cf-401e-a77d-de27b655c8e7")
+	)
+	(label "FPGA_FLASH_CS_N"
+		(at 118.11 67.31 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5b6c6456-1c23-4373-b5b1-41379cf22bbf")
 	)
 	(label "FPGA_FLASH_DQ0"
 		(at 45.72 80.01 180)
@@ -2222,6 +3117,16 @@
 		)
 		(uuid "b38a859a-11eb-49d1-b19a-e31155276ae3")
 	)
+	(label "FPGA_JTAG_TMS"
+		(at 45.72 113.03 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d95c32eb-a6dd-4861-967f-9b00ed313c05")
+	)
 	(label "FPGA_JTAG_TCK"
 		(at 45.72 41.91 180)
 		(effects
@@ -2251,6 +3156,16 @@
 			(justify right bottom)
 		)
 		(uuid "e23cf165-1548-4be0-8ff0-9ee0cc93b6e3")
+	)
+	(label "1V8"
+		(at 125.73 67.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ef21d6b9-93bd-47f0-bdfd-f52aa7af73ac")
 	)
 	(label "FPGA_FLASH_DQ1"
 		(at 45.72 82.55 180)
@@ -2381,6 +3296,232 @@
 				(path "/c9028163-a5a7-4e78-bba9-fb79df7846cd/bd86606c-2acb-477c-972b-5bc80fa54b47"
 					(reference "C19")
 					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "device:R")
+		(at 121.92 67.31 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6604c52d-810a-4469-b153-cbce53e3c456")
+		(property "Reference" "R1"
+			(at 121.92 64.77 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10K"
+			(at 121.92 67.31 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0201_RES_NOSILK"
+			(at 121.92 69.088 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 121.92 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 121.92 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a3c67544-b2b4-4155-a709-1dfd8b0db663")
+		)
+		(pin "2"
+			(uuid "a5d6cded-3980-4f0f-8973-e2ece46a9742")
+		)
+		(instances
+			(project "t20-l431-som"
+				(path "/c9028163-a5a7-4e78-bba9-fb79df7846cd/bd86606c-2acb-477c-972b-5bc80fa54b47"
+					(reference "R1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "special-azonenberg:MODULE_INTERNAL_T20_L431_HOST")
+		(at 49.53 157.48 0)
+		(unit 2)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8d4e01b6-fbf5-444d-82f9-16c6bc5d317b")
+		(property "Reference" "U4"
+			(at 49.53 158.8657 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MODULE_INTERNAL_T20_L431_HOST"
+			(at 49.53 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:MODULE_INTERNAL_T20_L431_HOST"
+			(at 49.53 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 49.53 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 49.53 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "B7"
+			(uuid "ef2cfc8e-d13e-4d4e-8b0a-5ea06e0f58ab")
+		)
+		(pin "D6"
+			(uuid "48eaaedf-3d04-49eb-bc32-ecf2ce89e4c9")
+		)
+		(pin "B8"
+			(uuid "e6dd9a16-ee79-413a-a0b1-549ecbfaa01c")
+		)
+		(pin "C6"
+			(uuid "5962c3b7-debe-4af7-8e4d-79e912b5d908")
+		)
+		(pin "C8"
+			(uuid "6d7a2063-5f8a-4c26-95b6-e35de5f40091")
+		)
+		(pin "D5"
+			(uuid "d3f5ae46-6070-4f0a-843f-240259fc8731")
+		)
+		(pin "D7"
+			(uuid "5404fe31-48a4-4eee-9dcb-dbc4dc770d05")
+		)
+		(pin "B3"
+			(uuid "e11b9654-0555-46cb-9861-c8d70c04860f")
+		)
+		(pin "A3"
+			(uuid "0c6a6888-d772-4349-995b-afdf05a5e944")
+		)
+		(pin "B2"
+			(uuid "c988b0b7-a25d-4513-95d8-fbb287d211cf")
+		)
+		(pin "C2"
+			(uuid "b5634390-480f-4e33-b648-beb4e628fef2")
+		)
+		(pin "C3"
+			(uuid "8dad3bfc-56cc-4ec3-95c8-4c823b85b065")
+		)
+		(pin "B4"
+			(uuid "2a599088-e820-4431-9302-52959fff8802")
+		)
+		(pin "A4"
+			(uuid "c1085071-d33a-4fac-bfe1-774d73eb96a7")
+		)
+		(pin "B5"
+			(uuid "8fd54940-287d-4fb1-8ec4-f124af057a54")
+		)
+		(pin "C5"
+			(uuid "9badb7ac-c612-4349-bf40-dc455b405aba")
+		)
+		(pin "E5"
+			(uuid "8b5933e1-08aa-42a8-befe-7f2b27da3b5d")
+		)
+		(pin "A5"
+			(uuid "dc8f5b4a-acf4-415d-a0ae-cc10337ebf06")
+		)
+		(pin "B1"
+			(uuid "9a034805-107b-44c7-86a1-1d6235710250")
+		)
+		(pin "B6"
+			(uuid "a996fe83-2ff2-47e6-906f-6e1018aa609b")
+		)
+		(pin "G4"
+			(uuid "eb0fb1a8-8815-4ebb-8080-528c1ddfbc03")
+		)
+		(pin "A6"
+			(uuid "6a5ab4b5-9699-423e-9734-4f3dd2568218")
+		)
+		(pin "E7"
+			(uuid "e52a1207-73f2-4d69-86dd-a2d9a0c2ce2e")
+		)
+		(pin "A7"
+			(uuid "2455ce8a-1e77-4528-8de7-799c09d9f9c3")
+		)
+		(pin "A8"
+			(uuid "8aa15e50-9b20-4cb2-adf5-37c95424bb0c")
+		)
+		(pin "C2"
+			(uuid "366ae6b2-9cd0-4c5b-9970-eef389dc721b")
+		)
+		(pin "E2"
+			(uuid "d9228964-1d62-4e26-9252-2cfc519d2290")
+		)
+		(pin "A3"
+			(uuid "e4c3679c-857b-4d8e-a1a8-63746e88ce61")
+		)
+		(pin "E8"
+			(uuid "81d4e311-e854-4ad2-8d4f-c961f3f9e969")
+		)
+		(pin "D4"
+			(uuid "f121d738-c32a-4155-95da-cb3edc1784dd")
+		)
+		(pin "D2"
+			(uuid "cfdc472d-422f-4312-adb6-2bbff0f8d299")
+		)
+		(pin "F2"
+			(uuid "ec5642ed-be14-4048-a359-75d2f6c156a3")
+		)
+		(instances
+			(project "t20-l431-som"
+				(path "/c9028163-a5a7-4e78-bba9-fb79df7846cd/bd86606c-2acb-477c-972b-5bc80fa54b47"
+					(reference "U4")
+					(unit 2)
 				)
 			)
 		)
