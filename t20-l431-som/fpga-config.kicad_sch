@@ -2251,7 +2251,7 @@
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_1_1"
 				(rectangle
 					(start 0 49.53)
-					(end 16.51 0)
+					(end 22.86 0)
 					(stroke
 						(width 0)
 						(type solid)
@@ -2260,10 +2260,10 @@
 						(type background)
 					)
 				)
-				(pin power_out line
+				(pin power_in line
 					(at -3.81 48.26 0)
 					(length 3.81)
-					(name "3V3"
+					(name "3V3_FPGA"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2281,7 +2281,7 @@
 				(pin power_in line
 					(at -3.81 45.72 0)
 					(length 3.81)
-					(name "3V3"
+					(name "3V3_FPGA"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2296,17 +2296,17 @@
 						)
 					)
 				)
-				(pin power_in line
+				(pin power_out line
 					(at -3.81 40.64 0)
 					(length 3.81)
-					(name "1V2"
+					(name "3V3"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "C2"
+					(number "G11"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2317,32 +2317,14 @@
 				(pin power_in line
 					(at -3.81 38.1 0)
 					(length 3.81)
-					(name "1V2"
+					(name "3V3"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "C3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at -3.81 35.56 0)
-					(length 3.81)
-					(name "1V2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "G4"
+					(number "J4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2353,32 +2335,14 @@
 				(pin power_in line
 					(at -3.81 33.02 0)
 					(length 3.81)
-					(name "1V2"
+					(name "2V5"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "E2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at -3.81 30.48 0)
-					(length 3.81)
-					(name "1V2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "F2"
+					(number "C4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2396,7 +2360,7 @@
 							)
 						)
 					)
-					(number "D2"
+					(number "C2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2414,6 +2378,96 @@
 							)
 						)
 					)
+					(number "C3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 22.86 0)
+					(length 3.81)
+					(name "1V2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "G4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 20.32 0)
+					(length 3.81)
+					(name "1V2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "E2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 17.78 0)
+					(length 3.81)
+					(name "1V2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "F2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 15.24 0)
+					(length 3.81)
+					(name "1V2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "D2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 12.7 0)
+					(length 3.81)
+					(name "1V2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
 					(number "C2"
 						(effects
 							(font
@@ -2423,7 +2477,25 @@
 					)
 				)
 				(pin power_out line
-					(at -3.81 20.32 0)
+					(at -3.81 6.35 0)
+					(length 3.81)
+					(name "VBAT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "N3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 26.67 48.26 180)
 					(length 3.81)
 					(name "GND"
 						(effects
@@ -2441,7 +2513,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 17.78 0)
+					(at 26.67 45.72 180)
 					(length 3.81)
 					(name "GND"
 						(effects
@@ -2459,7 +2531,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 15.24 0)
+					(at 26.67 43.18 180)
 					(length 3.81)
 					(name "GND"
 						(effects
@@ -2477,7 +2549,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 12.7 0)
+					(at 26.67 40.64 180)
 					(length 3.81)
 					(name "GND"
 						(effects
@@ -2495,7 +2567,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 10.16 0)
+					(at 26.67 38.1 180)
 					(length 3.81)
 					(name "GND"
 						(effects
@@ -2512,10 +2584,118 @@
 						)
 					)
 				)
+				(pin power_in line
+					(at 26.67 35.56 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "G10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 33.02 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "G12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 30.48 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "G8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 27.94 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "F8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 25.4 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 22.86 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_2_1"
 				(rectangle
-					(start 0 48.26)
+					(start 0 10.16)
 					(end 20.32 0)
 					(stroke
 						(width 0)
@@ -2527,7 +2707,7 @@
 				)
 				(polyline
 					(pts
-						(xy 16.51 46.99) (xy 17.78 46.99) (xy 17.78 39.37) (xy 16.51 39.37)
+						(xy 16.51 8.89) (xy 17.78 8.89) (xy 17.78 1.27) (xy 16.51 1.27)
 					)
 					(stroke
 						(width 0)
@@ -2538,7 +2718,7 @@
 					)
 				)
 				(text "LVCMOS18"
-					(at 19.05 43.18 900)
+					(at 19.05 5.08 900)
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -2546,7 +2726,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 46.99 0)
+					(at -3.81 8.89 0)
 					(length 3.81)
 					(name "FPGA_JTAG_TCK"
 						(effects
@@ -2564,7 +2744,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 44.45 0)
+					(at -3.81 6.35 0)
 					(length 3.81)
 					(name "FPGA_JTAG_TMS"
 						(effects
@@ -2582,7 +2762,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 41.91 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "FPGA_JTAG_TDI"
 						(effects
@@ -2600,7 +2780,7 @@
 					)
 				)
 				(pin input line
-					(at -3.81 39.37 0)
+					(at -3.81 1.27 0)
 					(length 3.81)
 					(name "FPGA_JTAG_TDO"
 						(effects
@@ -2620,7 +2800,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_3_1"
 				(rectangle
-					(start 0 48.26)
+					(start 0 30.48)
 					(end 27.94 0)
 					(stroke
 						(width 0)
@@ -2631,7 +2811,7 @@
 					)
 				)
 				(text "Bank 1B_1D_1E"
-					(at 26.67 33.02 900)
+					(at 26.67 15.24 900)
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -2639,7 +2819,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 46.99 0)
+					(at -3.81 29.21 0)
 					(length 3.81)
 					(name "GPIOL_72_EXTFB0_CDI14"
 						(effects
@@ -2657,7 +2837,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 44.45 0)
+					(at -3.81 26.67 0)
 					(length 3.81)
 					(name "GPIOL_69_CBSEL1"
 						(effects
@@ -2675,7 +2855,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 41.91 0)
+					(at -3.81 24.13 0)
 					(length 3.81)
 					(name "GPIOL_70_CBSEL0"
 						(effects
@@ -2693,7 +2873,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 39.37 0)
+					(at -3.81 21.59 0)
 					(length 3.81)
 					(name "GPIOL_71_NSTATUS"
 						(effects
@@ -2711,7 +2891,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 36.83 0)
+					(at -3.81 19.05 0)
 					(length 3.81)
 					(name "GPIOL_46"
 						(effects
@@ -2729,7 +2909,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 34.29 0)
+					(at -3.81 16.51 0)
 					(length 3.81)
 					(name "GPIOL_74_PLLIN0"
 						(effects
@@ -2747,7 +2927,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 31.75 0)
+					(at -3.81 13.97 0)
 					(length 3.81)
 					(name "GPIOL_25_CLK1"
 						(effects
@@ -2765,7 +2945,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 29.21 0)
+					(at -3.81 11.43 0)
 					(length 3.81)
 					(name "GPIOL_20_CTRL0_CDI4"
 						(effects
@@ -2783,7 +2963,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 26.67 0)
+					(at -3.81 8.89 0)
 					(length 3.81)
 					(name "GPIOL_24_CLK0"
 						(effects
@@ -2801,7 +2981,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 24.13 0)
+					(at -3.81 6.35 0)
 					(length 3.81)
 					(name "GPIOL_12_CDI2"
 						(effects
@@ -2819,7 +2999,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 21.59 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "GPIOL_13_CDI3"
 						(effects
@@ -2839,8 +3019,8 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_4_1"
 				(rectangle
-					(start 0 49.53)
-					(end 22.86 0)
+					(start 0 20.32)
+					(end 27.94 0)
 					(stroke
 						(width 0)
 						(type solid)
@@ -2850,7 +3030,7 @@
 					)
 				)
 				(text "Bank 3A_3B_3C"
-					(at 21.59 38.1 900)
+					(at 26.67 10.16 900)
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -2858,7 +3038,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 48.26 0)
+					(at -3.81 19.05 0)
 					(length 3.81)
 					(name "GPIOR_76_PLLIN0"
 						(effects
@@ -2876,7 +3056,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 45.72 0)
+					(at -3.81 16.51 0)
 					(length 3.81)
 					(name "GPIOR_117_CTRL14"
 						(effects
@@ -2893,8 +3073,209 @@
 						)
 					)
 				)
+				(pin bidirectional line
+					(at -3.81 13.97 0)
+					(length 3.81)
+					(name "GPIOR_123_CLK12_CDI20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "D8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 11.43 0)
+					(length 3.81)
+					(name "GPIOR_116_CTRL15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "E6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 8.89 0)
+					(length 3.81)
+					(name "GPIOR_122_CLK13_CDI21"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "F6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 6.35 0)
+					(length 3.81)
+					(name "GPIOR_81_MREFCLK"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "F5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 3.81 0)
+					(length 3.81)
+					(name "GPIOR_79_EXTFB1_CDI30"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "F4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 1.27 0)
+					(length 3.81)
+					(name "GPIOR_78_EXTFB0_CDI31"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "G5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_5_1"
+				(rectangle
+					(start 0 12.7)
+					(end 22.86 0)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(text "Bank 3D_3E"
+					(at 21.59 6.35 900)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 11.43 0)
+					(length 3.81)
+					(name "GPIOR_154"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "E8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 8.89 0)
+					(length 3.81)
+					(name "GPIOR_155"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "E9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 6.35 0)
+					(length 3.81)
+					(name "GPIOR_133_CDI18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "F7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 3.81 0)
+					(length 3.81)
+					(name "GPIOR_132_CDI19"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "G7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "MODULE_INTERNAL_T20_L431_HOST_6_1"
 				(rectangle
 					(start 0 49.53)
 					(end 22.86 0)
@@ -2906,25 +3287,393 @@
 						(type background)
 					)
 				)
-				(text "Bank 3D_3E"
-					(at 21.59 38.1 900)
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
 				(pin bidirectional line
 					(at -3.81 48.26 0)
 					(length 3.81)
-					(name "GPIOR_154"
+					(name "PA0"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "E8"
+					(number "J1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 45.72 0)
+					(length 3.81)
+					(name "PA1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "K3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 43.18 0)
+					(length 3.81)
+					(name "PA2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "K1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 40.64 0)
+					(length 3.81)
+					(name "PA3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "H1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 38.1 0)
+					(length 3.81)
+					(name "PA4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "H4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 35.56 0)
+					(length 3.81)
+					(name "PA5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "H3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 33.02 0)
+					(length 3.81)
+					(name "PA6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "H5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 30.48 0)
+					(length 3.81)
+					(name "PA7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "MODULE_INTERNAL_T20_L431_HOST_7_1"
+				(rectangle
+					(start 0 49.53)
+					(end 22.86 0)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 48.26 0)
+					(length 3.81)
+					(name "PB0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "H6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 45.72 0)
+					(length 3.81)
+					(name "PB1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "H2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 43.18 0)
+					(length 3.81)
+					(name "PB2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 27.94 0)
+					(length 3.81)
+					(name "PB9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "N4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 25.4 0)
+					(length 3.81)
+					(name "PB10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "G3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 22.86 0)
+					(length 3.81)
+					(name "PB11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "G6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "MODULE_INTERNAL_T20_L431_HOST_8_1"
+				(rectangle
+					(start 0 49.53)
+					(end 22.86 0)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 44.45 0)
+					(length 3.81)
+					(name "PC1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "G2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 41.91 0)
+					(length 3.81)
+					(name "PC2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "L1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 39.37 0)
+					(length 3.81)
+					(name "PC8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "H7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "MODULE_INTERNAL_T20_L431_HOST_9_1"
+				(rectangle
+					(start 0 49.53)
+					(end 22.86 0)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin output line
+					(at -3.81 48.26 0)
+					(length 3.81)
+					(name "MCU_TCK"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "N6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "MODULE_INTERNAL_T20_L431_HOST_10_1"
+				(rectangle
+					(start 0 49.53)
+					(end 22.86 0)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 48.26 0)
+					(length 3.81)
+					(name "PH0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "G1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3369,7 +4118,7 @@
 	)
 	(symbol
 		(lib_id "special-azonenberg:MODULE_INTERNAL_T20_L431_HOST")
-		(at 49.53 157.48 0)
+		(at 49.53 119.38 0)
 		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3377,7 +4126,7 @@
 		(dnp no)
 		(uuid "8d4e01b6-fbf5-444d-82f9-16c6bc5d317b")
 		(property "Reference" "U4"
-			(at 49.53 158.8657 0)
+			(at 49.53 120.7657 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3386,7 +4135,7 @@
 			)
 		)
 		(property "Value" "MODULE_INTERNAL_T20_L431_HOST"
-			(at 49.53 161.29 0)
+			(at 49.53 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3395,7 +4144,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:MODULE_INTERNAL_T20_L431_HOST"
-			(at 49.53 157.48 0)
+			(at 49.53 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3404,7 +4153,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 49.53 157.48 0)
+			(at 49.53 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3413,7 +4162,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 49.53 157.48 0)
+			(at 49.53 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3516,6 +4265,120 @@
 		)
 		(pin "F2"
 			(uuid "ec5642ed-be14-4048-a359-75d2f6c156a3")
+		)
+		(pin "F7"
+			(uuid "62941cb5-d53c-4996-b967-67038914eb0e")
+		)
+		(pin "G6"
+			(uuid "5fd3c776-41e4-4b68-b032-b3cac8b85086")
+		)
+		(pin "D8"
+			(uuid "da2ff397-4c57-4b36-992b-1888c9e23859")
+		)
+		(pin "E6"
+			(uuid "83f8c0c6-e545-43a2-9f7d-cb85b120fef9")
+		)
+		(pin "G12"
+			(uuid "99bf4fb9-372e-4a41-9970-32e5918c6882")
+		)
+		(pin "E9"
+			(uuid "b69ea0a2-9238-4b79-ab5f-a37f4731c843")
+		)
+		(pin "F8"
+			(uuid "47e56b69-1b97-4a08-a7fd-7b0487d7d563")
+		)
+		(pin "G11"
+			(uuid "cf4ac8d9-e074-4e2f-a0e1-a05c3cb9d845")
+		)
+		(pin "J2"
+			(uuid "1404a6c5-3f8d-4c0d-8f0e-d475dae34648")
+		)
+		(pin "G8"
+			(uuid "005280e8-e590-4e5c-91fd-f63d415a1304")
+		)
+		(pin "F6"
+			(uuid "98449702-f02b-4b97-823c-535f70009082")
+		)
+		(pin "G10"
+			(uuid "953f285e-8520-465b-8eaf-0f32950ca40e")
+		)
+		(pin "F5"
+			(uuid "08d4fec1-98ed-4aa0-b774-5a4b7b2f5691")
+		)
+		(pin "C4"
+			(uuid "34d722d5-52e2-45c3-90f7-ad6ebc2ab25c")
+		)
+		(pin "K3"
+			(uuid "6ad44643-8cde-4894-bf8e-25b646c7ec5a")
+		)
+		(pin "H4"
+			(uuid "e295a6ee-0b18-4889-91ec-c43a2e1901dd")
+		)
+		(pin "H3"
+			(uuid "2ec144fd-511a-48d2-b664-a6b05c92984c")
+		)
+		(pin "H5"
+			(uuid "12836762-bb08-4e46-987a-d7356a78d915")
+		)
+		(pin "J5"
+			(uuid "38d9d235-d802-4fd6-b5b4-582c68df2eea")
+		)
+		(pin "J3"
+			(uuid "fa370967-b734-4ba4-aab9-3f39f79c446e")
+		)
+		(pin "J4"
+			(uuid "bc7e67ce-07af-48f7-bc53-77556852b5ac")
+		)
+		(pin "J6"
+			(uuid "ad29c56d-a4e6-45c6-9866-45ae354c3de5")
+		)
+		(pin "H6"
+			(uuid "02d8ec8e-fd72-4a68-adb0-09eea3eb4245")
+		)
+		(pin "H2"
+			(uuid "c1126bcb-8bab-4f73-9952-ac9e621bf6ce")
+		)
+		(pin "F4"
+			(uuid "c7f98873-9f35-4a24-9669-075ac53321da")
+		)
+		(pin "G5"
+			(uuid "770e6b7a-838c-4b6c-850b-e02b213bd66c")
+		)
+		(pin "H7"
+			(uuid "cc899baf-cc90-48ed-82ed-bfb47a9d3cdb")
+		)
+		(pin "N4"
+			(uuid "02617e15-7f50-4ec6-9444-b496db597972")
+		)
+		(pin "G7"
+			(uuid "635554bc-e509-4388-b37a-160ce8cfd2bf")
+		)
+		(pin "G3"
+			(uuid "bcf59142-2a80-407f-ac80-737e32874058")
+		)
+		(pin "K1"
+			(uuid "64f1ad0f-3df8-4ca0-885b-f60232f0aa07")
+		)
+		(pin "N6"
+			(uuid "bbbe5444-15eb-4c15-a8c5-fce135e09a6a")
+		)
+		(pin "L1"
+			(uuid "f4e58b3f-81dc-44ac-8e7e-07112d4ab7d0")
+		)
+		(pin "J1"
+			(uuid "17a3f440-574a-4ff7-ad9f-0a54ffbc5042")
+		)
+		(pin "N3"
+			(uuid "8f52e095-9106-4d7e-8100-ff2ad2d21279")
+		)
+		(pin "H1"
+			(uuid "32b1b4e2-41fa-464d-8ced-099b10b2424b")
+		)
+		(pin "G1"
+			(uuid "b3b42280-ea10-4e19-9682-b88963fe754f")
+		)
+		(pin "G2"
+			(uuid "f8baf2f7-2af3-4555-a70b-3905903d9ca1")
 		)
 		(instances
 			(project "t20-l431-som"

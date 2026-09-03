@@ -125,7 +125,7 @@
         "max_error": 0.005,
         "min_clearance": 0.075,
         "min_connection": 0.0,
-        "min_copper_edge_clearance": 0.5,
+        "min_copper_edge_clearance": 0.3,
         "min_groove_width": 0.0,
         "min_hole_clearance": 0.1,
         "min_hole_to_hole": 0.2,
@@ -644,6 +644,10 @@
     [
       "bd86606c-2acb-477c-972b-5bc80fa54b47",
       "FPGA config"
+    ],
+    [
+      "9883231c-76a7-4d24-afde-016bf481ab83",
+      "FPGA IO"
     ]
   ],
   "text_variables": {}
