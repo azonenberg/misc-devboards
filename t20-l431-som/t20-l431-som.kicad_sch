@@ -62,7 +62,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_1_1_1"
 				(rectangle
-					(start 0 55.88)
+					(start 0 60.96)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -73,7 +73,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 52.07 0)
+					(at -3.81 59.69 0)
 					(length 3.81)
 					(name "3V3_FPGA"
 						(effects
@@ -91,7 +91,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 49.53 0)
+					(at -3.81 57.15 0)
 					(length 3.81)
 					(name "3V3_FPGA"
 						(effects
@@ -101,6 +101,24 @@
 						)
 					)
 					(number "D6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 46.99 0)
+					(length 3.81)
+					(name "3V3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "L8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -371,6 +389,42 @@
 						)
 					)
 					(number "N3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 59.69 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "C9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 57.15 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1377,7 +1431,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_1_6_1"
 				(rectangle
-					(start 0 49.53)
+					(start 0 22.86)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -1388,7 +1442,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 48.26 0)
+					(at -3.81 21.59 0)
 					(length 3.81)
 					(name "PA0"
 						(effects
@@ -1406,7 +1460,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 45.72 0)
+					(at -3.81 19.05 0)
 					(length 3.81)
 					(name "PA1"
 						(effects
@@ -1424,7 +1478,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 43.18 0)
+					(at -3.81 16.51 0)
 					(length 3.81)
 					(name "PA2"
 						(effects
@@ -1442,7 +1496,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 40.64 0)
+					(at -3.81 13.97 0)
 					(length 3.81)
 					(name "PA3"
 						(effects
@@ -1460,7 +1514,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 38.1 0)
+					(at -3.81 11.43 0)
 					(length 3.81)
 					(name "PA4"
 						(effects
@@ -1478,7 +1532,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 35.56 0)
+					(at -3.81 8.89 0)
 					(length 3.81)
 					(name "PA5"
 						(effects
@@ -1496,7 +1550,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 33.02 0)
+					(at -3.81 6.35 0)
 					(length 3.81)
 					(name "PA6"
 						(effects
@@ -1514,7 +1568,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 30.48 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "PA7"
 						(effects
@@ -1532,7 +1586,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 27.94 0)
+					(at -3.81 1.27 0)
 					(length 3.81)
 					(name "PA8"
 						(effects
@@ -1542,24 +1596,6 @@
 						)
 					)
 					(number "K8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at -3.81 20.32 0)
-					(length 3.81)
-					(name "PA11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "P7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1801,7 +1837,7 @@
 							)
 						)
 					)
-					(number "N2"
+					(number "~"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2046,7 +2082,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_1_9_1"
 				(rectangle
-					(start 0 49.53)
+					(start 0 19.05)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -2057,7 +2093,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 48.26 0)
+					(at -3.81 17.78 0)
 					(length 3.81)
 					(name "MCU_TCK"
 						(effects
@@ -2075,7 +2111,7 @@
 					)
 				)
 				(pin input line
-					(at -3.81 45.72 0)
+					(at -3.81 15.24 0)
 					(length 3.81)
 					(name "MCU_TDO"
 						(effects
@@ -2093,7 +2129,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 43.18 0)
+					(at -3.81 12.7 0)
 					(length 3.81)
 					(name "MCU_TMS"
 						(effects
@@ -2111,7 +2147,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 40.64 0)
+					(at -3.81 10.16 0)
 					(length 3.81)
 					(name "MCU_TDI"
 						(effects
@@ -2129,7 +2165,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 34.29 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "MCU_BOOT0"
 						(effects
@@ -2147,7 +2183,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 31.75 0)
+					(at -3.81 1.27 0)
 					(length 3.81)
 					(name "MCU_RST_N"
 						(effects
@@ -2198,7 +2234,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_1_11_1"
 				(rectangle
-					(start 0 10.16)
+					(start 0 5.08)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -2209,7 +2245,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 8.89 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "PH0"
 						(effects
@@ -2219,6 +2255,24 @@
 						)
 					)
 					(number "G1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 1.27 0)
+					(length 3.81)
+					(name "PH1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "N2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2286,7 +2340,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_2_1_1"
 				(rectangle
-					(start 0 55.88)
+					(start 0 60.96)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -2297,7 +2351,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 52.07 0)
+					(at -3.81 59.69 0)
 					(length 3.81)
 					(name "3V3_FPGA"
 						(effects
@@ -2315,7 +2369,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 49.53 0)
+					(at -3.81 57.15 0)
 					(length 3.81)
 					(name "3V3_FPGA"
 						(effects
@@ -2325,6 +2379,24 @@
 						)
 					)
 					(number "D6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 46.99 0)
+					(length 3.81)
+					(name "3V3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "L8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2595,6 +2667,42 @@
 						)
 					)
 					(number "N3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 59.69 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "C9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 57.15 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3601,7 +3709,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_2_6_1"
 				(rectangle
-					(start 0 49.53)
+					(start 0 22.86)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -3612,7 +3720,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 48.26 0)
+					(at -3.81 21.59 0)
 					(length 3.81)
 					(name "PA0"
 						(effects
@@ -3630,7 +3738,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 45.72 0)
+					(at -3.81 19.05 0)
 					(length 3.81)
 					(name "PA1"
 						(effects
@@ -3648,7 +3756,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 43.18 0)
+					(at -3.81 16.51 0)
 					(length 3.81)
 					(name "PA2"
 						(effects
@@ -3666,7 +3774,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 40.64 0)
+					(at -3.81 13.97 0)
 					(length 3.81)
 					(name "PA3"
 						(effects
@@ -3684,7 +3792,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 38.1 0)
+					(at -3.81 11.43 0)
 					(length 3.81)
 					(name "PA4"
 						(effects
@@ -3702,7 +3810,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 35.56 0)
+					(at -3.81 8.89 0)
 					(length 3.81)
 					(name "PA5"
 						(effects
@@ -3720,7 +3828,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 33.02 0)
+					(at -3.81 6.35 0)
 					(length 3.81)
 					(name "PA6"
 						(effects
@@ -3738,7 +3846,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 30.48 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "PA7"
 						(effects
@@ -3756,7 +3864,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 27.94 0)
+					(at -3.81 1.27 0)
 					(length 3.81)
 					(name "PA8"
 						(effects
@@ -3766,24 +3874,6 @@
 						)
 					)
 					(number "K8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at -3.81 20.32 0)
-					(length 3.81)
-					(name "PA11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "P7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4025,7 +4115,7 @@
 							)
 						)
 					)
-					(number "N2"
+					(number "~"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4270,7 +4360,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_2_9_1"
 				(rectangle
-					(start 0 49.53)
+					(start 0 19.05)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -4281,7 +4371,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 48.26 0)
+					(at -3.81 17.78 0)
 					(length 3.81)
 					(name "MCU_TCK"
 						(effects
@@ -4299,7 +4389,7 @@
 					)
 				)
 				(pin input line
-					(at -3.81 45.72 0)
+					(at -3.81 15.24 0)
 					(length 3.81)
 					(name "MCU_TDO"
 						(effects
@@ -4317,7 +4407,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 43.18 0)
+					(at -3.81 12.7 0)
 					(length 3.81)
 					(name "MCU_TMS"
 						(effects
@@ -4335,7 +4425,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 40.64 0)
+					(at -3.81 10.16 0)
 					(length 3.81)
 					(name "MCU_TDI"
 						(effects
@@ -4353,7 +4443,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 34.29 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "MCU_BOOT0"
 						(effects
@@ -4371,7 +4461,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 31.75 0)
+					(at -3.81 1.27 0)
 					(length 3.81)
 					(name "MCU_RST_N"
 						(effects
@@ -4422,7 +4512,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_2_11_1"
 				(rectangle
-					(start 0 10.16)
+					(start 0 5.08)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -4433,7 +4523,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 8.89 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "PH0"
 						(effects
@@ -4443,6 +4533,24 @@
 						)
 					)
 					(number "G1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 1.27 0)
+					(length 3.81)
+					(name "PH1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "N2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4510,7 +4618,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_3_1_1"
 				(rectangle
-					(start 0 55.88)
+					(start 0 60.96)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -4521,7 +4629,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 52.07 0)
+					(at -3.81 59.69 0)
 					(length 3.81)
 					(name "3V3_FPGA"
 						(effects
@@ -4539,7 +4647,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 49.53 0)
+					(at -3.81 57.15 0)
 					(length 3.81)
 					(name "3V3_FPGA"
 						(effects
@@ -4549,6 +4657,24 @@
 						)
 					)
 					(number "D6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 46.99 0)
+					(length 3.81)
+					(name "3V3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "L8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4819,6 +4945,42 @@
 						)
 					)
 					(number "N3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 59.69 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "C9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 57.15 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5825,7 +5987,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_3_6_1"
 				(rectangle
-					(start 0 49.53)
+					(start 0 22.86)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -5836,7 +5998,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 48.26 0)
+					(at -3.81 21.59 0)
 					(length 3.81)
 					(name "PA0"
 						(effects
@@ -5854,7 +6016,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 45.72 0)
+					(at -3.81 19.05 0)
 					(length 3.81)
 					(name "PA1"
 						(effects
@@ -5872,7 +6034,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 43.18 0)
+					(at -3.81 16.51 0)
 					(length 3.81)
 					(name "PA2"
 						(effects
@@ -5890,7 +6052,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 40.64 0)
+					(at -3.81 13.97 0)
 					(length 3.81)
 					(name "PA3"
 						(effects
@@ -5908,7 +6070,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 38.1 0)
+					(at -3.81 11.43 0)
 					(length 3.81)
 					(name "PA4"
 						(effects
@@ -5926,7 +6088,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 35.56 0)
+					(at -3.81 8.89 0)
 					(length 3.81)
 					(name "PA5"
 						(effects
@@ -5944,7 +6106,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 33.02 0)
+					(at -3.81 6.35 0)
 					(length 3.81)
 					(name "PA6"
 						(effects
@@ -5962,7 +6124,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 30.48 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "PA7"
 						(effects
@@ -5980,7 +6142,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 27.94 0)
+					(at -3.81 1.27 0)
 					(length 3.81)
 					(name "PA8"
 						(effects
@@ -5990,24 +6152,6 @@
 						)
 					)
 					(number "K8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at -3.81 20.32 0)
-					(length 3.81)
-					(name "PA11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "P7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -6249,7 +6393,7 @@
 							)
 						)
 					)
-					(number "N2"
+					(number "~"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -6494,7 +6638,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_3_9_1"
 				(rectangle
-					(start 0 49.53)
+					(start 0 19.05)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -6505,7 +6649,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 48.26 0)
+					(at -3.81 17.78 0)
 					(length 3.81)
 					(name "MCU_TCK"
 						(effects
@@ -6523,7 +6667,7 @@
 					)
 				)
 				(pin input line
-					(at -3.81 45.72 0)
+					(at -3.81 15.24 0)
 					(length 3.81)
 					(name "MCU_TDO"
 						(effects
@@ -6541,7 +6685,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 43.18 0)
+					(at -3.81 12.7 0)
 					(length 3.81)
 					(name "MCU_TMS"
 						(effects
@@ -6559,7 +6703,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 40.64 0)
+					(at -3.81 10.16 0)
 					(length 3.81)
 					(name "MCU_TDI"
 						(effects
@@ -6577,7 +6721,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 34.29 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "MCU_BOOT0"
 						(effects
@@ -6595,7 +6739,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 31.75 0)
+					(at -3.81 1.27 0)
 					(length 3.81)
 					(name "MCU_RST_N"
 						(effects
@@ -6646,7 +6790,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_3_11_1"
 				(rectangle
-					(start 0 10.16)
+					(start 0 5.08)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -6657,7 +6801,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 8.89 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "PH0"
 						(effects
@@ -6667,6 +6811,24 @@
 						)
 					)
 					(number "G1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 1.27 0)
+					(length 3.81)
+					(name "PH1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "N2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -6734,7 +6896,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_4_1_1"
 				(rectangle
-					(start 0 55.88)
+					(start 0 60.96)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -6745,7 +6907,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 52.07 0)
+					(at -3.81 59.69 0)
 					(length 3.81)
 					(name "3V3_FPGA"
 						(effects
@@ -6763,7 +6925,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 49.53 0)
+					(at -3.81 57.15 0)
 					(length 3.81)
 					(name "3V3_FPGA"
 						(effects
@@ -6773,6 +6935,24 @@
 						)
 					)
 					(number "D6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 46.99 0)
+					(length 3.81)
+					(name "3V3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "L8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -7043,6 +7223,42 @@
 						)
 					)
 					(number "N3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 59.69 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "C9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 57.15 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8049,7 +8265,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_4_6_1"
 				(rectangle
-					(start 0 49.53)
+					(start 0 22.86)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -8060,7 +8276,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 48.26 0)
+					(at -3.81 21.59 0)
 					(length 3.81)
 					(name "PA0"
 						(effects
@@ -8078,7 +8294,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 45.72 0)
+					(at -3.81 19.05 0)
 					(length 3.81)
 					(name "PA1"
 						(effects
@@ -8096,7 +8312,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 43.18 0)
+					(at -3.81 16.51 0)
 					(length 3.81)
 					(name "PA2"
 						(effects
@@ -8114,7 +8330,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 40.64 0)
+					(at -3.81 13.97 0)
 					(length 3.81)
 					(name "PA3"
 						(effects
@@ -8132,7 +8348,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 38.1 0)
+					(at -3.81 11.43 0)
 					(length 3.81)
 					(name "PA4"
 						(effects
@@ -8150,7 +8366,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 35.56 0)
+					(at -3.81 8.89 0)
 					(length 3.81)
 					(name "PA5"
 						(effects
@@ -8168,7 +8384,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 33.02 0)
+					(at -3.81 6.35 0)
 					(length 3.81)
 					(name "PA6"
 						(effects
@@ -8186,7 +8402,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 30.48 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "PA7"
 						(effects
@@ -8204,7 +8420,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 27.94 0)
+					(at -3.81 1.27 0)
 					(length 3.81)
 					(name "PA8"
 						(effects
@@ -8214,24 +8430,6 @@
 						)
 					)
 					(number "K8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at -3.81 20.32 0)
-					(length 3.81)
-					(name "PA11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "P7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8473,7 +8671,7 @@
 							)
 						)
 					)
-					(number "N2"
+					(number "~"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8718,7 +8916,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_4_9_1"
 				(rectangle
-					(start 0 49.53)
+					(start 0 19.05)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -8729,7 +8927,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 48.26 0)
+					(at -3.81 17.78 0)
 					(length 3.81)
 					(name "MCU_TCK"
 						(effects
@@ -8747,7 +8945,7 @@
 					)
 				)
 				(pin input line
-					(at -3.81 45.72 0)
+					(at -3.81 15.24 0)
 					(length 3.81)
 					(name "MCU_TDO"
 						(effects
@@ -8765,7 +8963,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 43.18 0)
+					(at -3.81 12.7 0)
 					(length 3.81)
 					(name "MCU_TMS"
 						(effects
@@ -8783,7 +8981,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 40.64 0)
+					(at -3.81 10.16 0)
 					(length 3.81)
 					(name "MCU_TDI"
 						(effects
@@ -8801,7 +8999,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 34.29 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "MCU_BOOT0"
 						(effects
@@ -8819,7 +9017,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 31.75 0)
+					(at -3.81 1.27 0)
 					(length 3.81)
 					(name "MCU_RST_N"
 						(effects
@@ -8870,7 +9068,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_4_11_1"
 				(rectangle
-					(start 0 10.16)
+					(start 0 5.08)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -8881,7 +9079,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 8.89 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "PH0"
 						(effects
@@ -8891,6 +9089,24 @@
 						)
 					)
 					(number "G1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 1.27 0)
+					(length 3.81)
+					(name "PH1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "N2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8958,7 +9174,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_5_1_1"
 				(rectangle
-					(start 0 55.88)
+					(start 0 60.96)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -8969,7 +9185,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 52.07 0)
+					(at -3.81 59.69 0)
 					(length 3.81)
 					(name "3V3_FPGA"
 						(effects
@@ -8987,7 +9203,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 49.53 0)
+					(at -3.81 57.15 0)
 					(length 3.81)
 					(name "3V3_FPGA"
 						(effects
@@ -8997,6 +9213,24 @@
 						)
 					)
 					(number "D6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 46.99 0)
+					(length 3.81)
+					(name "3V3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "L8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -9267,6 +9501,42 @@
 						)
 					)
 					(number "N3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 59.69 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "C9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 57.15 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -10273,7 +10543,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_5_6_1"
 				(rectangle
-					(start 0 49.53)
+					(start 0 22.86)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -10284,7 +10554,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 48.26 0)
+					(at -3.81 21.59 0)
 					(length 3.81)
 					(name "PA0"
 						(effects
@@ -10302,7 +10572,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 45.72 0)
+					(at -3.81 19.05 0)
 					(length 3.81)
 					(name "PA1"
 						(effects
@@ -10320,7 +10590,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 43.18 0)
+					(at -3.81 16.51 0)
 					(length 3.81)
 					(name "PA2"
 						(effects
@@ -10338,7 +10608,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 40.64 0)
+					(at -3.81 13.97 0)
 					(length 3.81)
 					(name "PA3"
 						(effects
@@ -10356,7 +10626,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 38.1 0)
+					(at -3.81 11.43 0)
 					(length 3.81)
 					(name "PA4"
 						(effects
@@ -10374,7 +10644,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 35.56 0)
+					(at -3.81 8.89 0)
 					(length 3.81)
 					(name "PA5"
 						(effects
@@ -10392,7 +10662,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 33.02 0)
+					(at -3.81 6.35 0)
 					(length 3.81)
 					(name "PA6"
 						(effects
@@ -10410,7 +10680,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 30.48 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "PA7"
 						(effects
@@ -10428,7 +10698,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 27.94 0)
+					(at -3.81 1.27 0)
 					(length 3.81)
 					(name "PA8"
 						(effects
@@ -10438,24 +10708,6 @@
 						)
 					)
 					(number "K8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at -3.81 20.32 0)
-					(length 3.81)
-					(name "PA11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "P7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -10697,7 +10949,7 @@
 							)
 						)
 					)
-					(number "N2"
+					(number "~"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -10942,7 +11194,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_5_9_1"
 				(rectangle
-					(start 0 49.53)
+					(start 0 19.05)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -10953,7 +11205,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 48.26 0)
+					(at -3.81 17.78 0)
 					(length 3.81)
 					(name "MCU_TCK"
 						(effects
@@ -10971,7 +11223,7 @@
 					)
 				)
 				(pin input line
-					(at -3.81 45.72 0)
+					(at -3.81 15.24 0)
 					(length 3.81)
 					(name "MCU_TDO"
 						(effects
@@ -10989,7 +11241,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 43.18 0)
+					(at -3.81 12.7 0)
 					(length 3.81)
 					(name "MCU_TMS"
 						(effects
@@ -11007,7 +11259,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 40.64 0)
+					(at -3.81 10.16 0)
 					(length 3.81)
 					(name "MCU_TDI"
 						(effects
@@ -11025,7 +11277,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 34.29 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "MCU_BOOT0"
 						(effects
@@ -11043,7 +11295,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 31.75 0)
+					(at -3.81 1.27 0)
 					(length 3.81)
 					(name "MCU_RST_N"
 						(effects
@@ -11094,7 +11346,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_5_11_1"
 				(rectangle
-					(start 0 10.16)
+					(start 0 5.08)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -11105,7 +11357,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 8.89 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "PH0"
 						(effects
@@ -11115,6 +11367,24 @@
 						)
 					)
 					(number "G1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 1.27 0)
+					(length 3.81)
+					(name "PH1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "N2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -11182,7 +11452,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_6_1_1"
 				(rectangle
-					(start 0 55.88)
+					(start 0 60.96)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -11193,7 +11463,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 52.07 0)
+					(at -3.81 59.69 0)
 					(length 3.81)
 					(name "3V3_FPGA"
 						(effects
@@ -11211,7 +11481,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 49.53 0)
+					(at -3.81 57.15 0)
 					(length 3.81)
 					(name "3V3_FPGA"
 						(effects
@@ -11221,6 +11491,24 @@
 						)
 					)
 					(number "D6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 46.99 0)
+					(length 3.81)
+					(name "3V3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "L8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -11491,6 +11779,42 @@
 						)
 					)
 					(number "N3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 59.69 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "C9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 57.15 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -12497,7 +12821,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_6_6_1"
 				(rectangle
-					(start 0 49.53)
+					(start 0 22.86)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -12508,7 +12832,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 48.26 0)
+					(at -3.81 21.59 0)
 					(length 3.81)
 					(name "PA0"
 						(effects
@@ -12526,7 +12850,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 45.72 0)
+					(at -3.81 19.05 0)
 					(length 3.81)
 					(name "PA1"
 						(effects
@@ -12544,7 +12868,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 43.18 0)
+					(at -3.81 16.51 0)
 					(length 3.81)
 					(name "PA2"
 						(effects
@@ -12562,7 +12886,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 40.64 0)
+					(at -3.81 13.97 0)
 					(length 3.81)
 					(name "PA3"
 						(effects
@@ -12580,7 +12904,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 38.1 0)
+					(at -3.81 11.43 0)
 					(length 3.81)
 					(name "PA4"
 						(effects
@@ -12598,7 +12922,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 35.56 0)
+					(at -3.81 8.89 0)
 					(length 3.81)
 					(name "PA5"
 						(effects
@@ -12616,7 +12940,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 33.02 0)
+					(at -3.81 6.35 0)
 					(length 3.81)
 					(name "PA6"
 						(effects
@@ -12634,7 +12958,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 30.48 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "PA7"
 						(effects
@@ -12652,7 +12976,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 27.94 0)
+					(at -3.81 1.27 0)
 					(length 3.81)
 					(name "PA8"
 						(effects
@@ -12662,24 +12986,6 @@
 						)
 					)
 					(number "K8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at -3.81 20.32 0)
-					(length 3.81)
-					(name "PA11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "P7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -12921,7 +13227,7 @@
 							)
 						)
 					)
-					(number "N2"
+					(number "~"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13166,7 +13472,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_6_9_1"
 				(rectangle
-					(start 0 49.53)
+					(start 0 19.05)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -13177,7 +13483,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 48.26 0)
+					(at -3.81 17.78 0)
 					(length 3.81)
 					(name "MCU_TCK"
 						(effects
@@ -13195,7 +13501,7 @@
 					)
 				)
 				(pin input line
-					(at -3.81 45.72 0)
+					(at -3.81 15.24 0)
 					(length 3.81)
 					(name "MCU_TDO"
 						(effects
@@ -13213,7 +13519,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 43.18 0)
+					(at -3.81 12.7 0)
 					(length 3.81)
 					(name "MCU_TMS"
 						(effects
@@ -13231,7 +13537,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 40.64 0)
+					(at -3.81 10.16 0)
 					(length 3.81)
 					(name "MCU_TDI"
 						(effects
@@ -13249,7 +13555,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 34.29 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "MCU_BOOT0"
 						(effects
@@ -13267,7 +13573,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 31.75 0)
+					(at -3.81 1.27 0)
 					(length 3.81)
 					(name "MCU_RST_N"
 						(effects
@@ -13318,7 +13624,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_6_11_1"
 				(rectangle
-					(start 0 10.16)
+					(start 0 5.08)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -13329,7 +13635,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 8.89 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "PH0"
 						(effects
@@ -13339,6 +13645,24 @@
 						)
 					)
 					(number "G1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 1.27 0)
+					(length 3.81)
+					(name "PH1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "N2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -15482,7 +15806,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_1_1"
 				(rectangle
-					(start 0 55.88)
+					(start 0 60.96)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -15493,7 +15817,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 52.07 0)
+					(at -3.81 59.69 0)
 					(length 3.81)
 					(name "3V3_FPGA"
 						(effects
@@ -15511,7 +15835,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 49.53 0)
+					(at -3.81 57.15 0)
 					(length 3.81)
 					(name "3V3_FPGA"
 						(effects
@@ -15521,6 +15845,24 @@
 						)
 					)
 					(number "D6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 46.99 0)
+					(length 3.81)
+					(name "3V3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "L8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -15791,6 +16133,42 @@
 						)
 					)
 					(number "N3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 59.69 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "C9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 57.15 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -16797,7 +17175,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_6_1"
 				(rectangle
-					(start 0 49.53)
+					(start 0 22.86)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -16808,7 +17186,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 48.26 0)
+					(at -3.81 21.59 0)
 					(length 3.81)
 					(name "PA0"
 						(effects
@@ -16826,7 +17204,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 45.72 0)
+					(at -3.81 19.05 0)
 					(length 3.81)
 					(name "PA1"
 						(effects
@@ -16844,7 +17222,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 43.18 0)
+					(at -3.81 16.51 0)
 					(length 3.81)
 					(name "PA2"
 						(effects
@@ -16862,7 +17240,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 40.64 0)
+					(at -3.81 13.97 0)
 					(length 3.81)
 					(name "PA3"
 						(effects
@@ -16880,7 +17258,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 38.1 0)
+					(at -3.81 11.43 0)
 					(length 3.81)
 					(name "PA4"
 						(effects
@@ -16898,7 +17276,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 35.56 0)
+					(at -3.81 8.89 0)
 					(length 3.81)
 					(name "PA5"
 						(effects
@@ -16916,7 +17294,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 33.02 0)
+					(at -3.81 6.35 0)
 					(length 3.81)
 					(name "PA6"
 						(effects
@@ -16934,7 +17312,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 30.48 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "PA7"
 						(effects
@@ -16952,7 +17330,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 27.94 0)
+					(at -3.81 1.27 0)
 					(length 3.81)
 					(name "PA8"
 						(effects
@@ -16962,24 +17340,6 @@
 						)
 					)
 					(number "K8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at -3.81 20.32 0)
-					(length 3.81)
-					(name "PA11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "P7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -17221,7 +17581,7 @@
 							)
 						)
 					)
-					(number "N2"
+					(number "~"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -17466,7 +17826,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_9_1"
 				(rectangle
-					(start 0 49.53)
+					(start 0 19.05)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -17477,7 +17837,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 48.26 0)
+					(at -3.81 17.78 0)
 					(length 3.81)
 					(name "MCU_TCK"
 						(effects
@@ -17495,7 +17855,7 @@
 					)
 				)
 				(pin input line
-					(at -3.81 45.72 0)
+					(at -3.81 15.24 0)
 					(length 3.81)
 					(name "MCU_TDO"
 						(effects
@@ -17513,7 +17873,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 43.18 0)
+					(at -3.81 12.7 0)
 					(length 3.81)
 					(name "MCU_TMS"
 						(effects
@@ -17531,7 +17891,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 40.64 0)
+					(at -3.81 10.16 0)
 					(length 3.81)
 					(name "MCU_TDI"
 						(effects
@@ -17549,7 +17909,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 34.29 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "MCU_BOOT0"
 						(effects
@@ -17567,7 +17927,7 @@
 					)
 				)
 				(pin output line
-					(at -3.81 31.75 0)
+					(at -3.81 1.27 0)
 					(length 3.81)
 					(name "MCU_RST_N"
 						(effects
@@ -17618,7 +17978,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_11_1"
 				(rectangle
-					(start 0 10.16)
+					(start 0 5.08)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -17629,7 +17989,7 @@
 					)
 				)
 				(pin bidirectional line
-					(at -3.81 8.89 0)
+					(at -3.81 3.81 0)
 					(length 3.81)
 					(name "PH0"
 						(effects
@@ -17639,6 +17999,24 @@
 						)
 					)
 					(number "G1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -3.81 1.27 0)
+					(length 3.81)
+					(name "PH1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "N2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -19277,7 +19655,7 @@
 	)
 	(text "Table 1, DIR high is A to B\n7.3, DIR is referenced to VCCA"
 		(exclude_from_sim no)
-		(at 172.72 96.52 0)
+		(at 166.37 92.71 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19310,7 +19688,7 @@
 	)
 	(wire
 		(pts
-			(xy 167.64 85.09) (xy 167.64 87.63)
+			(xy 161.29 81.28) (xy 161.29 83.82)
 		)
 		(stroke
 			(width 0)
@@ -19349,7 +19727,7 @@
 		(uuid "02549de4-746f-401b-889f-8712084dc944")
 	)
 	(label "MCU_TMS"
-		(at 120.65 90.17 180)
+		(at 133.35 147.32 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19409,7 +19787,7 @@
 		(uuid "10897788-c83a-4157-b0f2-3e2d73209c66")
 	)
 	(label "3V3_FPGA_EN"
-		(at 35.56 33.02 0)
+		(at 35.56 29.21 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19419,7 +19797,7 @@
 		(uuid "1134d828-203a-4186-8c00-ed9bb11d361d")
 	)
 	(label "PA8"
-		(at 81.28 105.41 180)
+		(at 81.28 132.08 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19499,7 +19877,7 @@
 		(uuid "1fe541b9-d7ac-46d6-974c-154df1b26615")
 	)
 	(label "1V8"
-		(at 35.56 25.4 0)
+		(at 35.56 21.59 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19507,6 +19885,16 @@
 			(justify left bottom)
 		)
 		(uuid "206e495b-0d92-4e88-9748-b44b3e682aaa")
+	)
+	(label "PH1"
+		(at 240.03 50.8 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "249d4f22-2008-4b0c-b8f6-ffb5f372fa82")
 	)
 	(label "MCU_RST_N"
 		(at 240.03 55.88 180)
@@ -19549,7 +19937,7 @@
 		(uuid "2a838c7d-0587-4d05-94ba-fab3b4055a39")
 	)
 	(label "PA1"
-		(at 81.28 87.63 180)
+		(at 81.28 114.3 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19599,7 +19987,7 @@
 		(uuid "3fbb34b2-8058-46da-a25a-ffaad2df800d")
 	)
 	(label "MCU_TDO"
-		(at 120.65 87.63 180)
+		(at 133.35 144.78 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19609,7 +19997,7 @@
 		(uuid "42eb535e-b7a5-45e4-b3c4-2529334b0197")
 	)
 	(label "FPGA_DONE_3V3"
-		(at 194.31 92.71 0)
+		(at 187.96 88.9 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19629,7 +20017,7 @@
 		(uuid "49f26f98-4144-4371-acde-ee56cb2f6fd5")
 	)
 	(label "MCU_TDI"
-		(at 120.65 92.71 180)
+		(at 133.35 149.86 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19649,7 +20037,7 @@
 		(uuid "4b9f521b-145b-4460-9946-86aa61141c54")
 	)
 	(label "1V8_EN"
-		(at 35.56 38.1 0)
+		(at 35.56 34.29 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19678,18 +20066,8 @@
 		)
 		(uuid "51f90d23-5e15-4010-bc28-9bc31cf363f5")
 	)
-	(label "PA11"
-		(at 81.28 113.03 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "566153a9-6efb-450d-a0e2-bb98c998c5f3")
-	)
 	(label "MCU_RST_N"
-		(at 120.65 101.6 180)
+		(at 133.35 158.75 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19719,7 +20097,7 @@
 		(uuid "5d53aadb-1cf4-4aa9-b2ac-5ea75f1b5c5f")
 	)
 	(label "2V5_EN"
-		(at 35.56 35.56 0)
+		(at 35.56 31.75 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19739,7 +20117,7 @@
 		(uuid "627de931-cfe2-463f-a7f3-ab7490e3bcb4")
 	)
 	(label "PH0"
-		(at 120.65 156.21 180)
+		(at 133.35 182.88 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19759,7 +20137,7 @@
 		(uuid "63a6ffb7-f650-4ffd-afcb-e1a3e0db58ea")
 	)
 	(label "MCU_BOOT0"
-		(at 120.65 99.06 180)
+		(at 133.35 156.21 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19789,7 +20167,7 @@
 		(uuid "748c3f95-8962-4bd3-b1db-613f44d82bd7")
 	)
 	(label "3V3_FPGA"
-		(at 35.56 22.86 0)
+		(at 35.56 19.05 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19809,7 +20187,7 @@
 		(uuid "75452244-6882-4e20-b438-dc813927ef71")
 	)
 	(label "PA2"
-		(at 81.28 90.17 180)
+		(at 81.28 116.84 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19888,6 +20266,16 @@
 		)
 		(uuid "80f8cdfb-dde8-4f92-8a1c-65fb1545a303")
 	)
+	(label "1V2_EN"
+		(at 71.12 46.99 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "88bb9951-4d84-4450-a8ae-77ade337366d")
+	)
 	(label "GPIOR_132_CDI19"
 		(at 31.75 119.38 180)
 		(effects
@@ -19899,7 +20287,7 @@
 		(uuid "894164db-71d7-4be2-ae9d-43e05c9b8f5e")
 	)
 	(label "1V8"
-		(at 167.64 85.09 180)
+		(at 161.29 81.28 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19929,7 +20317,7 @@
 		(uuid "8ad9c7a3-6918-423c-83bb-eb4b2ac37881")
 	)
 	(label "PA3"
-		(at 81.28 92.71 180)
+		(at 81.28 119.38 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19939,7 +20327,7 @@
 		(uuid "8b1e6cf1-a33e-4819-a8f4-fcf9795bed96")
 	)
 	(label "PA7"
-		(at 81.28 102.87 180)
+		(at 81.28 129.54 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19957,16 +20345,6 @@
 			(justify right bottom)
 		)
 		(uuid "8d39e8f7-98b3-4e00-9ee8-d417ef35aaf0")
-	)
-	(label "PA11"
-		(at 71.12 46.99 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "8d8d63c6-022f-44bb-9faa-28125403c6e0")
 	)
 	(label "PC15"
 		(at 81.28 185.42 180)
@@ -19999,7 +20377,7 @@
 		(uuid "8f320511-66ef-4a1c-a157-76d29baf94fe")
 	)
 	(label "GND"
-		(at 194.31 87.63 0)
+		(at 187.96 83.82 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20049,7 +20427,7 @@
 		(uuid "97d7bf23-acfa-48fe-b9c6-aa8a3e5f36dc")
 	)
 	(label "FPGA_DONE_1V8"
-		(at 167.64 92.71 180)
+		(at 161.29 88.9 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20119,7 +20497,7 @@
 		(uuid "a7140cb3-2cb3-4a74-81f2-e31baddb474b")
 	)
 	(label "PA0"
-		(at 81.28 85.09 180)
+		(at 81.28 111.76 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20139,7 +20517,7 @@
 		(uuid "ab511765-32b4-4693-86e9-6db5d379e3c2")
 	)
 	(label "PD2"
-		(at 201.93 58.42 180)
+		(at 162.56 66.04 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20159,7 +20537,7 @@
 		(uuid "ab6081a7-38e4-4d76-9da2-93b13a3f2de7")
 	)
 	(label "3V3"
-		(at 194.31 85.09 0)
+		(at 187.96 81.28 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20199,7 +20577,7 @@
 		(uuid "b2ba3a8c-a46f-4ffb-b6fc-0df13544f75a")
 	)
 	(label "GND"
-		(at 35.56 27.94 0)
+		(at 35.56 24.13 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20229,7 +20607,7 @@
 		(uuid "b7db912c-4e52-4e2f-a186-14fe4842f8f2")
 	)
 	(label "3V3"
-		(at 35.56 20.32 0)
+		(at 35.56 16.51 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20259,7 +20637,7 @@
 		(uuid "bf4a0efb-88e1-4271-be13-0b184d23adc6")
 	)
 	(label "MCU_TCK"
-		(at 120.65 85.09 180)
+		(at 133.35 142.24 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20459,7 +20837,7 @@
 		(uuid "e26eee27-5592-4e65-ab67-494f20bc221d")
 	)
 	(label "PA4"
-		(at 81.28 95.25 180)
+		(at 81.28 121.92 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20508,6 +20886,16 @@
 		)
 		(uuid "ed779028-5971-496f-b4fe-9969bf8256c4")
 	)
+	(label "PH1"
+		(at 133.35 185.42 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "edbd6294-9a05-4453-bf31-be0dd0edaace")
+	)
 	(label "CROSS_SPI_CS_N"
 		(at 114.3 49.53 180)
 		(effects
@@ -20527,6 +20915,16 @@
 			(justify right bottom)
 		)
 		(uuid "ef1b837b-bfdc-4744-af66-55922e81f7d4")
+	)
+	(label "1V2_EN"
+		(at 35.56 36.83 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ef461e80-0f9b-4c5a-98bc-52695ec5445f")
 	)
 	(label "MCU_BOOT0"
 		(at 240.03 58.42 180)
@@ -20549,7 +20947,7 @@
 		(uuid "f0cdbe5b-9028-44f8-b0fc-2cfd86a015ec")
 	)
 	(label "PD2"
-		(at 120.65 147.32 180)
+		(at 133.35 168.91 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20559,7 +20957,7 @@
 		(uuid "f47248a8-6646-4d49-853a-de19b38dcd6a")
 	)
 	(label "PA5"
-		(at 81.28 97.79 180)
+		(at 81.28 124.46 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20609,7 +21007,7 @@
 		(uuid "fd7a7ef4-74a1-46d2-a6d4-ec583e7fc79b")
 	)
 	(label "PA6"
-		(at 81.28 100.33 180)
+		(at 81.28 127 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20962,9 +21360,6 @@
 		(pin "M7"
 			(uuid "8355ec47-6204-460d-ae97-ee1bc6f65998")
 		)
-		(pin "P7"
-			(uuid "d7f0994d-c5dd-4f92-bbeb-c4cbdd8c48a4")
-		)
 		(pin "M7"
 			(uuid "5f1df218-cd54-4449-aaef-b60b44f304f4")
 		)
@@ -21012,6 +21407,18 @@
 		)
 		(pin "L12"
 			(uuid "7996e7b3-7366-4d0f-8a83-822f3d5165c0")
+		)
+		(pin "~"
+			(uuid "27fc8a2d-ccf6-4807-8d77-f82827d7ce44")
+		)
+		(pin "B9"
+			(uuid "27dc18b9-0d69-4061-8944-5e2a3ea6f37e")
+		)
+		(pin "C9"
+			(uuid "6ed85f1e-9a58-434b-9408-3556df73dddc")
+		)
+		(pin "L8"
+			(uuid "5b215a8c-4469-4bf3-85a0-2771a64a9ab9")
 		)
 		(instances
 			(project "t20-l431-som"
@@ -21738,7 +22145,7 @@
 	(symbol
 		(lib_name "MODULE_INTERNAL_T20_L431_HOST_5")
 		(lib_id "special-azonenberg:MODULE_INTERNAL_T20_L431_HOST")
-		(at 124.46 133.35 0)
+		(at 137.16 160.02 0)
 		(unit 9)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -21746,7 +22153,7 @@
 		(dnp no)
 		(uuid "4e32b8a9-5247-4be6-aecb-02dae7c9e1fa")
 		(property "Reference" "U4"
-			(at 124.46 134.62 0)
+			(at 137.16 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21755,7 +22162,7 @@
 			)
 		)
 		(property "Value" "MODULE_INTERNAL_T20_L431_HOST"
-			(at 124.46 137.0443 0)
+			(at 137.16 163.7143 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21764,7 +22171,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:MODULE_INTERNAL_T20_L431_HOST"
-			(at 124.46 133.35 0)
+			(at 137.16 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21773,7 +22180,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 124.46 133.35 0)
+			(at 137.16 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21782,7 +22189,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 124.46 133.35 0)
+			(at 137.16 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22069,9 +22476,6 @@
 		(pin "M7"
 			(uuid "83c3257f-e4cf-47c2-bc87-4a7586139f3d")
 		)
-		(pin "P7"
-			(uuid "6c5c7957-d04a-4a17-87fb-33988f508fbe")
-		)
 		(pin "M7"
 			(uuid "be13aef7-e4fd-4094-94be-e6921abd3dd7")
 		)
@@ -22119,6 +22523,18 @@
 		)
 		(pin "L12"
 			(uuid "97bd92fd-92c7-46a3-a1a3-6eeb3eee6386")
+		)
+		(pin "~"
+			(uuid "bd6ae76f-42a3-445b-b4f2-e86674fc4c0c")
+		)
+		(pin "C9"
+			(uuid "fc6ca334-1f22-4722-a624-0957f8688282")
+		)
+		(pin "B9"
+			(uuid "f0caee63-8d9e-4d10-acae-f32d7fb750ef")
+		)
+		(pin "L8"
+			(uuid "ca1117a3-91e6-44cb-8c70-06025505390c")
 		)
 		(instances
 			(project "t20-l431-som"
@@ -22395,7 +22811,7 @@
 	)
 	(symbol
 		(lib_id "special-azonenberg:MODULE_INTERNAL_T20_L431_HOST")
-		(at 124.46 148.59 0)
+		(at 137.16 170.18 0)
 		(unit 10)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -22403,7 +22819,7 @@
 		(dnp no)
 		(uuid "68c76511-ae39-451a-92d8-08e4eb87ff91")
 		(property "Reference" "U4"
-			(at 124.46 149.86 0)
+			(at 137.16 171.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22412,7 +22828,7 @@
 			)
 		)
 		(property "Value" "MODULE_INTERNAL_T20_L431_HOST"
-			(at 124.46 152.2843 0)
+			(at 137.16 173.8743 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22421,7 +22837,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:MODULE_INTERNAL_T20_L431_HOST"
-			(at 124.46 148.59 0)
+			(at 137.16 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22430,7 +22846,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 124.46 148.59 0)
+			(at 137.16 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22439,7 +22855,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 124.46 148.59 0)
+			(at 137.16 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22729,9 +23145,6 @@
 		(pin "M7"
 			(uuid "88b97966-880c-4bef-9914-696c7698e95f")
 		)
-		(pin "P7"
-			(uuid "ee6f1d28-4726-42c1-9e63-4b6539252788")
-		)
 		(pin "N7"
 			(uuid "acb8700d-57ef-4a07-b3c7-d6c8338395f0")
 		)
@@ -22776,6 +23189,18 @@
 		)
 		(pin "L12"
 			(uuid "b07f61e8-17c9-421f-b03e-be73f2856580")
+		)
+		(pin "C9"
+			(uuid "f4741f80-8b2d-4602-a420-33e2bb422ef4")
+		)
+		(pin "B9"
+			(uuid "d78a3717-100c-4093-beba-f1c64855842c")
+		)
+		(pin "~"
+			(uuid "685dd7cd-55f4-403e-90ba-fa54c36d7abf")
+		)
+		(pin "L8"
+			(uuid "ccf0b82a-27c7-45c4-b331-15e6538ddcf0")
 		)
 		(instances
 			(project "t20-l431-som"
@@ -23052,7 +23477,7 @@
 	)
 	(symbol
 		(lib_id "special-azonenberg:74LVC1T45_DSBGA_YZP")
-		(at 172.72 93.98 0)
+		(at 166.37 90.17 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -23061,7 +23486,7 @@
 		(fields_autoplaced yes)
 		(uuid "6c100cfa-f679-4a3d-8fac-ab7944689113")
 		(property "Reference" "U6"
-			(at 180.975 79.1896 0)
+			(at 174.625 75.3796 0)
 			(effects
 				(font
 					(size 1.524 1.524)
@@ -23069,7 +23494,7 @@
 			)
 		)
 		(property "Value" "74LVC1T45_DSBGA_YZP"
-			(at 180.975 82.0225 0)
+			(at 174.625 78.2125 0)
 			(effects
 				(font
 					(size 1.524 1.524)
@@ -23077,7 +23502,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:BGA_6_1.5x0.9_0.5MM_TI_YZP"
-			(at 172.72 93.98 0)
+			(at 166.37 90.17 0)
 			(effects
 				(font
 					(size 1.524 1.524)
@@ -23086,7 +23511,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 172.72 93.98 0)
+			(at 166.37 90.17 0)
 			(effects
 				(font
 					(size 1.524 1.524)
@@ -23095,7 +23520,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 172.72 93.98 0)
+			(at 166.37 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23132,7 +23557,7 @@
 	)
 	(symbol
 		(lib_id "st-azonenberg:STM32L431-WLCSP64")
-		(at 205.74 59.69 0)
+		(at 166.37 67.31 0)
 		(unit 4)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -23140,7 +23565,7 @@
 		(dnp no)
 		(uuid "87d39d52-892a-40ba-af8d-ee2e71a5d741")
 		(property "Reference" "U1"
-			(at 213.36 60.96 0)
+			(at 173.99 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23148,7 +23573,7 @@
 			)
 		)
 		(property "Value" "STM32L431-WLCSP64"
-			(at 213.36 63.3843 0)
+			(at 173.99 71.0043 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23156,7 +23581,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:BGA_64_0.35MM_3p1MM_STM32L431"
-			(at 205.74 59.69 0)
+			(at 166.37 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23165,7 +23590,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 205.74 59.69 0)
+			(at 166.37 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23174,7 +23599,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 205.74 59.69 0)
+			(at 166.37 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23793,9 +24218,6 @@
 		(pin "N7"
 			(uuid "d591afcb-c00b-4ad8-a587-adf5d5295b0f")
 		)
-		(pin "P7"
-			(uuid "0a006b38-f893-40cd-ae6a-0c0bc7ee54a8")
-		)
 		(pin "M7"
 			(uuid "239458d9-2597-41cb-8df2-42f2d9d432da")
 		)
@@ -23843,6 +24265,18 @@
 		)
 		(pin "L12"
 			(uuid "f47bc046-4377-4191-bbd5-75c74cf3d5a1")
+		)
+		(pin "L8"
+			(uuid "f87df4e5-1b74-4f08-b3df-4c2e95fbc55c")
+		)
+		(pin "~"
+			(uuid "ba0586aa-6d61-4144-9662-a5d0aa1a7317")
+		)
+		(pin "C9"
+			(uuid "9860d109-8ebd-4fb8-ba09-952c830003a5")
+		)
+		(pin "B9"
+			(uuid "3a8fa74d-9486-4e02-bba5-cb78591da882")
 		)
 		(instances
 			(project "t20-l431-som"
@@ -24120,7 +24554,7 @@
 	(symbol
 		(lib_name "MODULE_INTERNAL_T20_L431_HOST_6")
 		(lib_id "special-azonenberg:MODULE_INTERNAL_T20_L431_HOST")
-		(at 124.46 165.1 0)
+		(at 137.16 186.69 0)
 		(unit 11)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -24128,7 +24562,7 @@
 		(dnp no)
 		(uuid "bba29b44-e8ec-4152-8977-b82275d9aa76")
 		(property "Reference" "U4"
-			(at 124.46 166.37 0)
+			(at 137.16 187.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24137,7 +24571,7 @@
 			)
 		)
 		(property "Value" "MODULE_INTERNAL_T20_L431_HOST"
-			(at 124.46 168.7943 0)
+			(at 137.16 190.3843 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24146,7 +24580,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:MODULE_INTERNAL_T20_L431_HOST"
-			(at 124.46 165.1 0)
+			(at 137.16 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24155,7 +24589,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 124.46 165.1 0)
+			(at 137.16 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24164,7 +24598,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 124.46 165.1 0)
+			(at 137.16 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24454,9 +24888,6 @@
 		(pin "M7"
 			(uuid "88b97966-880c-4bef-9914-696c7698e95f")
 		)
-		(pin "P7"
-			(uuid "ee6f1d28-4726-42c1-9e63-4b6539252788")
-		)
 		(pin "N7"
 			(uuid "acb8700d-57ef-4a07-b3c7-d6c8338395f0")
 		)
@@ -24501,6 +24932,18 @@
 		)
 		(pin "L12"
 			(uuid "77d1a318-73da-4b0a-8ef1-f237424cf733")
+		)
+		(pin "~"
+			(uuid "64d00d92-7d70-4d7c-8ad7-59b6351caeca")
+		)
+		(pin "L8"
+			(uuid "ce2daa0b-1a7f-4066-903c-89b4d640275c")
+		)
+		(pin "C9"
+			(uuid "f4d50471-eb11-446f-9c1a-1d23612d506a")
+		)
+		(pin "B9"
+			(uuid "7f39f3da-345c-4304-bf6d-f0e6fb0a1a4f")
 		)
 		(instances
 			(project "t20-l431-som"
@@ -24848,9 +25291,6 @@
 		(pin "M7"
 			(uuid "1ccc098a-df96-4b9d-942a-b01b4020fad9")
 		)
-		(pin "P7"
-			(uuid "2b590615-21ce-41ec-ad97-56de1ff2b152")
-		)
 		(pin "M7"
 			(uuid "95d51092-fefd-4235-985e-2d24b00c01c6")
 		)
@@ -24895,6 +25335,18 @@
 		)
 		(pin "L12"
 			(uuid "ad01205a-3ee3-4657-9348-20d21317e049")
+		)
+		(pin "B9"
+			(uuid "578b96a0-c8db-42cb-9919-38dd1b208ab9")
+		)
+		(pin "~"
+			(uuid "ecd494e5-4eff-401c-a9ea-dda2b0d15f5a")
+		)
+		(pin "L8"
+			(uuid "e717d867-a423-44b5-a803-180e721baefd")
+		)
+		(pin "C9"
+			(uuid "647fd252-c48d-47b9-9cce-1a71def484cc")
 		)
 		(instances
 			(project "t20-l431-som"
@@ -25236,9 +25688,6 @@
 		(pin "K8"
 			(uuid "0e810d16-c8c3-4931-9ec8-a967bedadd8a")
 		)
-		(pin "P7"
-			(uuid "b2f6ecaf-aa84-4b8f-88a5-2a480557a858")
-		)
 		(pin "M7"
 			(uuid "2bcdc0f2-d1ae-4283-8589-b8d64e443229")
 		)
@@ -25289,6 +25738,18 @@
 		)
 		(pin "L12"
 			(uuid "d08db55d-579a-42c3-9f97-ffdfe2827179")
+		)
+		(pin "L8"
+			(uuid "fc0f1bb6-9546-45ac-8516-ba8a96889311")
+		)
+		(pin "C9"
+			(uuid "504f8e4b-f312-4ea2-b1da-fdbe9d6820ee")
+		)
+		(pin "B9"
+			(uuid "794af40f-56ad-438e-a3eb-1ec60b079507")
+		)
+		(pin "~"
+			(uuid "52d360e1-22ce-43fb-bd26-044c8a6170a3")
 		)
 		(instances
 			(project "t20-l431-som"
@@ -25486,8 +25947,8 @@
 		)
 	)
 	(sheet
-		(at 15.24 18.415)
-		(size 20.32 20.955)
+		(at 15.24 14.605)
+		(size 20.32 24.765)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -25502,7 +25963,7 @@
 		)
 		(uuid "cee616b2-310c-4168-8c64-88604d0390f4")
 		(property "Sheetname" "Power"
-			(at 15.24 17.7034 0)
+			(at 15.24 13.8934 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25520,7 +25981,7 @@
 			)
 		)
 		(pin "3V3" input
-			(at 35.56 20.32 0)
+			(at 35.56 16.51 0)
 			(uuid "3a7eb6ea-9716-49d4-82a0-42c5447b64f5")
 			(effects
 				(font
@@ -25530,7 +25991,7 @@
 			)
 		)
 		(pin "GND" input
-			(at 35.56 27.94 0)
+			(at 35.56 24.13 0)
 			(uuid "183d60b9-7ae2-49fd-a78d-0abb0b66e351")
 			(effects
 				(font
@@ -25540,7 +26001,7 @@
 			)
 		)
 		(pin "1V8" output
-			(at 35.56 25.4 0)
+			(at 35.56 21.59 0)
 			(uuid "b5898a2e-e855-4d8c-92f5-b4aff74287f5")
 			(effects
 				(font
@@ -25550,7 +26011,7 @@
 			)
 		)
 		(pin "1V8_EN" input
-			(at 35.56 38.1 0)
+			(at 35.56 34.29 0)
 			(uuid "a907053b-246b-4d3d-bc95-c654ff6565dd")
 			(effects
 				(font
@@ -25560,7 +26021,7 @@
 			)
 		)
 		(pin "2V5_EN" input
-			(at 35.56 35.56 0)
+			(at 35.56 31.75 0)
 			(uuid "efb5f575-9836-48be-83d0-e5a4f9130a87")
 			(effects
 				(font
@@ -25570,7 +26031,7 @@
 			)
 		)
 		(pin "3V3_FPGA_EN" input
-			(at 35.56 33.02 0)
+			(at 35.56 29.21 0)
 			(uuid "801ffb95-ea45-4204-a573-b95d9ab7edf8")
 			(effects
 				(font
@@ -25580,8 +26041,18 @@
 			)
 		)
 		(pin "3V3_FPGA" output
-			(at 35.56 22.86 0)
+			(at 35.56 19.05 0)
 			(uuid "12e3fb72-f6eb-4b3f-a103-758501d4590d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "1V2_EN" input
+			(at 35.56 36.83 0)
+			(uuid "16bec7e0-c27b-4aa7-9ed4-4c4729d7e274")
 			(effects
 				(font
 					(size 1.27 1.27)
