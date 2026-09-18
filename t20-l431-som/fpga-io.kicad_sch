@@ -1974,7 +1974,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_1_1"
 				(rectangle
-					(start 0 63.5)
+					(start 0 71.12)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -1985,7 +1985,25 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 59.69 0)
+					(at -3.81 64.77 0)
+					(length 3.81)
+					(name "3V3_FPGA"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "L11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 62.23 0)
 					(length 3.81)
 					(name "3V3_FPGA"
 						(effects
@@ -2003,7 +2021,7 @@
 					)
 				)
 				(pin power_in line
-					(at -3.81 57.15 0)
+					(at -3.81 59.69 0)
 					(length 3.81)
 					(name "3V3_FPGA"
 						(effects
@@ -2013,6 +2031,42 @@
 						)
 					)
 					(number "D6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 54.61 0)
+					(length 3.81)
+					(name "3V3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "K10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -3.81 52.07 0)
+					(length 3.81)
+					(name "3V3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "R11"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2301,6 +2355,60 @@
 						)
 					)
 					(number "N3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 69.85 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "N11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 67.31 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "L10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 26.67 64.77 180)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "R10"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5401,6 +5509,24 @@
 		(pin "P7"
 			(uuid "52408ff1-4ae2-497b-905e-4389f900a5a0")
 		)
+		(pin "L11"
+			(uuid "f995b655-cca0-4141-a998-80fd547076d8")
+		)
+		(pin "K10"
+			(uuid "dd6ca5a8-ca4f-4dbe-b8ab-908e59e22d10")
+		)
+		(pin "R11"
+			(uuid "09b7e9f2-ed97-40ba-b348-e8e3f7f77c51")
+		)
+		(pin "N11"
+			(uuid "39c0cb6c-28ef-4502-aab7-181450bfd612")
+		)
+		(pin "L10"
+			(uuid "38c7ba68-2470-4d86-a3cb-c5bf2ae70841")
+		)
+		(pin "R10"
+			(uuid "306e2171-c06c-4eea-8488-0b695cda6c97")
+		)
 		(instances
 			(project "t20-l431-som"
 				(path "/c9028163-a5a7-4e78-bba9-fb79df7846cd/9883231c-76a7-4d24-afde-016bf481ab83"
@@ -6260,6 +6386,24 @@
 		)
 		(pin "M10"
 			(uuid "1ef6249f-8006-4aaf-911c-10b85bc6e094")
+		)
+		(pin "L11"
+			(uuid "f992971a-8c3b-45a5-a4f8-8eae8b5289f2")
+		)
+		(pin "N11"
+			(uuid "aedddaa5-d351-48e7-89dc-52559cff5bb3")
+		)
+		(pin "L10"
+			(uuid "52b87d79-1a30-403c-bfb5-ae6c640000e4")
+		)
+		(pin "K10"
+			(uuid "ccd3649e-9d2b-48d9-b0eb-183aa8d49829")
+		)
+		(pin "R11"
+			(uuid "43de075a-77cb-4a06-9d4b-f12fd3081a38")
+		)
+		(pin "R10"
+			(uuid "8c216d38-19af-4811-8682-7b748bef1fbc")
 		)
 		(instances
 			(project "t20-l431-som"
