@@ -2613,7 +2613,7 @@
 			)
 			(symbol "MODULE_INTERNAL_T20_L431_HOST_1_1"
 				(rectangle
-					(start 0 66.04)
+					(start 0 63.5)
 					(end 22.86 0)
 					(stroke
 						(width 0)
@@ -2929,24 +2929,6 @@
 						)
 					)
 				)
-				(pin power_in line
-					(at -3.81 6.35 0)
-					(length 3.81)
-					(name "1V2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "C2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin power_out line
 					(at -3.81 1.27 0)
 					(length 3.81)
@@ -2966,7 +2948,7 @@
 					)
 				)
 				(pin power_in line
-					(at 26.67 64.77 180)
+					(at 26.67 62.23 180)
 					(length 3.81)
 					(name "GND"
 						(effects
@@ -2984,7 +2966,7 @@
 					)
 				)
 				(pin power_in line
-					(at 26.67 62.23 180)
+					(at 26.67 59.69 180)
 					(length 3.81)
 					(name "GND"
 						(effects
@@ -3002,7 +2984,7 @@
 					)
 				)
 				(pin power_in line
-					(at 26.67 59.69 180)
+					(at 26.67 57.15 180)
 					(length 3.81)
 					(name "GND"
 						(effects
@@ -3020,7 +3002,7 @@
 					)
 				)
 				(pin power_in line
-					(at 26.67 57.15 180)
+					(at 26.67 54.61 180)
 					(length 3.81)
 					(name "GND"
 						(effects
@@ -3038,7 +3020,7 @@
 					)
 				)
 				(pin power_in line
-					(at 26.67 54.61 180)
+					(at 26.67 52.07 180)
 					(length 3.81)
 					(name "GND"
 						(effects
@@ -3056,7 +3038,7 @@
 					)
 				)
 				(pin power_in line
-					(at 26.67 52.07 180)
+					(at 26.67 49.53 180)
 					(length 3.81)
 					(name "GND"
 						(effects
@@ -3074,7 +3056,7 @@
 					)
 				)
 				(pin power_in line
-					(at 26.67 49.53 180)
+					(at 26.67 46.99 180)
 					(length 3.81)
 					(name "GND"
 						(effects
@@ -3092,24 +3074,6 @@
 					)
 				)
 				(pin power_out line
-					(at 26.67 46.99 180)
-					(length 3.81)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "D5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
 					(at 26.67 44.45 180)
 					(length 3.81)
 					(name "GND"
@@ -3119,7 +3083,7 @@
 							)
 						)
 					)
-					(number "A3"
+					(number "D5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4303,7 +4267,7 @@
 							)
 						)
 					)
-					(number "R6"
+					(number "R7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4339,7 +4303,7 @@
 							)
 						)
 					)
-					(number "R1"
+					(number "R2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4442,7 +4406,7 @@
 							)
 						)
 					)
-					(number "~"
+					(number "P2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4586,7 +4550,7 @@
 							)
 						)
 					)
-					(number "R7"
+					(number "P6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4604,7 +4568,7 @@
 							)
 						)
 					)
-					(number "P6"
+					(number "N6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4676,7 +4640,7 @@
 							)
 						)
 					)
-					(number "P2"
+					(number "R1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4707,7 +4671,7 @@
 							)
 						)
 					)
-					(number "N6"
+					(number "P7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4725,7 +4689,7 @@
 							)
 						)
 					)
-					(number "R2"
+					(number "R3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4743,7 +4707,7 @@
 							)
 						)
 					)
-					(number "M7"
+					(number "L9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4779,7 +4743,7 @@
 							)
 						)
 					)
-					(number "R3"
+					(number "R6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -6831,12 +6795,6 @@
 		(uuid "b01b7c3b-66ce-47ce-89ee-630c49d645c4")
 	)
 	(junction
-		(at 139.7 73.66)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ba10219a-1851-4b7d-b65c-bcb8296cbf2b")
-	)
-	(junction
 		(at 105.41 81.28)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -6913,12 +6871,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d99b2441-292d-406a-9bf5-9463a5261f1b")
-	)
-	(junction
-		(at 170.18 20.32)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "e4b3b70f-8149-4365-aa5c-bc8544b30fda")
 	)
 	(junction
 		(at 71.12 46.99)
@@ -7148,16 +7100,6 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 17.78) (xy 170.18 20.32)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2da5d045-52e8-49ee-8ef3-7f799b15c852")
-	)
-	(wire
-		(pts
 			(xy 170.18 22.86) (xy 170.18 25.4)
 		)
 		(stroke
@@ -7335,16 +7277,6 @@
 			(type default)
 		)
 		(uuid "4ac961e2-0248-488f-8403-9376ce766eeb")
-	)
-	(wire
-		(pts
-			(xy 139.7 73.66) (xy 139.7 76.2)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4c847305-af84-4e80-96e1-43b13d9e7d80")
 	)
 	(wire
 		(pts
@@ -8077,7 +8009,7 @@
 		(uuid "03037a5b-4bd5-49fa-b4b6-20399af99bcb")
 	)
 	(label "GND"
-		(at 170.18 17.78 0)
+		(at 170.18 20.32 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -10344,11 +10276,8 @@
 		(pin "D2"
 			(uuid "ecf183c9-34b5-4830-aa8b-21ed1ac218ae")
 		)
-		(pin "C2"
+		(pin "P2"
 			(uuid "0c8f4659-1648-4970-af7a-36d6e994ce99")
-		)
-		(pin "A3"
-			(uuid "eb5ee9a7-3e8e-4fee-b295-9a4e997092c7")
 		)
 		(pin "E8"
 			(uuid "dd5be02a-f653-4320-b992-5f7372d4ba25")
@@ -10503,7 +10432,7 @@
 		(pin "P3"
 			(uuid "5c4a4ff6-b31d-421f-b07a-a68f3f7c4a91")
 		)
-		(pin "P2"
+		(pin "R1"
 			(uuid "2c28cf52-0eec-419e-9210-687ae691f16f")
 		)
 		(pin "N2"
@@ -10515,13 +10444,13 @@
 		(pin "K2"
 			(uuid "707bd032-fca2-462c-bf6d-9b7649db94a4")
 		)
-		(pin "R1"
+		(pin "R3"
 			(uuid "b4aeaad5-142b-498c-aaae-0a5974770a83")
 		)
 		(pin "R2"
 			(uuid "05fadb19-2dce-49e7-9138-a72e64e4a3b2")
 		)
-		(pin "R3"
+		(pin "R6"
 			(uuid "6f58f202-112d-43b5-8abf-cd63d74ed307")
 		)
 		(pin "J7"
@@ -10539,7 +10468,7 @@
 		(pin "M7"
 			(uuid "fbf6be8a-22f4-4ed0-9ac1-f8ad797e1b6e")
 		)
-		(pin "M7"
+		(pin "L9"
 			(uuid "8a5fd82c-fecb-404b-8464-8357b613c77f")
 		)
 		(pin "P5"
@@ -10551,13 +10480,13 @@
 		(pin "R4"
 			(uuid "ff332ff7-1e2e-4817-859b-a6dc4388dc73")
 		)
-		(pin "R7"
+		(pin "P7"
 			(uuid "d654b95e-1e07-451d-ac1f-6643137661ee")
 		)
 		(pin "P6"
 			(uuid "f0d464a2-b8a1-4b56-a0ac-5af10a98f834")
 		)
-		(pin "R6"
+		(pin "R7"
 			(uuid "fc682db8-856c-450e-a3d7-cc2f84764bf5")
 		)
 		(pin "N8"
@@ -10592,9 +10521,6 @@
 		)
 		(pin "L8"
 			(uuid "2aa1b8c8-86d4-489f-8527-1452b08dbbcd")
-		)
-		(pin "~"
-			(uuid "921c0a66-a153-49aa-a6d7-8df9a20ccaba")
 		)
 		(pin "P10"
 			(uuid "4c6ec3b2-54c5-4bb5-a0c2-ff0ae0ef4ee8")
