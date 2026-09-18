@@ -145,6 +145,19 @@ module SMPM_Quad(
 		end
 	end
 
+	/*
+	wire[4:0] txdiffctrl;
+	wire[4:0] txprecursor;
+	wire[4:0] txpostcursor;
+
+	vio_0 vio(
+		.clk(clk_156m25),
+		.probe_out0(txdiffctrl),
+		.probe_out1(txprecursor),
+		.probe_out2(txpostcursor)
+	);
+	*/
+
 	for(genvar g=0; g <= 2; g++) begin : lanes
 
 		wire[39:0]	rx_data;
@@ -214,9 +227,9 @@ module SMPM_Quad(
 
 			.rx_ctle_en(1'b1),
 
-			.txdiffctrl(5'h10),
-			.txpostcursor(5'h0),
-			.txprecursor(5'h6),
+			.txdiffctrl(5'h13),
+			.txpostcursor(5'h07),
+			.txprecursor(5'h04),
 			.tx_invert(tx_invert[g]),
 			.rx_invert(rx_invert[g]),
 

@@ -63,7 +63,7 @@ module Peripherals_APB1(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// APB1 (0xc010_0000)
 
-	localparam NUM_APB1_PERIPHERALS	= 13;
+	localparam NUM_APB1_PERIPHERALS	= 14;
 	localparam APB1_BLOCK_SIZE		= 32'h400;
 	localparam APB1_ADDR_WIDTH		= $clog2(APB1_BLOCK_SIZE);
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb1[NUM_APB1_PERIPHERALS-1:0]();
@@ -172,5 +172,52 @@ module Peripherals_APB1(
 		apb_regslice_qsfp0_serdes_2( .upstream(apb1[11]), .downstream(apb_qsfp0_serdes_lane[2]) );
 	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
 		apb_regslice_qsfp0_serdes_3( .upstream(apb1[12]), .downstream(apb_qsfp0_serdes_lane[3]) );
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB1: QSPI flash controller (0xc010_3400)
+
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb_flash();
+	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(1))
+		apb_regslice_boot_flash( .upstream(apb1[13]), .downstream(apb_flash) );
+
+	wire		cclk;
+	wire[3:0]	flash_dq_out;
+	wire[3:0]	flash_dq_in;
+	wire[3:0]	flash_dq_tris;
+	wire		flash_cs_n;
+
+	APB_QSPIHostInterface flash(
+		.apb(apb_flash),
+
+		.qspi_sck(cclk),
+		.qspi_dq_out(flash_dq_out),
+		.qspi_dq_in(flash_dq_in),
+		.qspi_dq_tris(flash_dq_tris),
+		.qspi_cs_n(flash_cs_n)
+	);
+
+	wire	preq;
+	STARTUPE3 #(
+		.PROG_USR("FALSE"),
+		.SIM_CCLK_FREQ(10.0)
+	) startup (
+		.CFGCLK(),
+		.CFGMCLK(),
+		.DI(flash_dq_in),
+		.DO(flash_dq_out),
+		.DTS(flash_dq_tris),
+		.EOS(),
+		.FCSBO(flash_cs_n),
+		.FCSBTS(1'b0),
+		.GSR(1'b0),
+		.GTS(1'b0),
+		.KEYCLEARB(1'b1),
+		.PACK(preq),
+		.PREQ(preq),
+		.USRCCLKO(cclk),
+		.USRCCLKTS(1'b0),
+		.USRDONEO(1'b1),
+		.USRDONETS(1'b0)
+	);
 
 endmodule

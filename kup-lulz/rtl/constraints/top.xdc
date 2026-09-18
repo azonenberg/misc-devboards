@@ -76,36 +76,46 @@ create_generated_clock -name phy0_lane2_txclk -source [get_pins {smpm_quad_224/l
 ########################################################################################################################
 # CDC constraints
 
-set _xlnx_shared_i0 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*reg_a_ff*" }]
-set _xlnx_shared_i1 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*reg_b*" }]
-set _xlnx_shared_i2 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*tx_a_reg*" }]
-set _xlnx_shared_i3 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*dout1_reg*" }]
-set _xlnx_shared_i4 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*a_ff*" }]
-set _xlnx_shared_i5 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*dout0_reg*" }]
+set tmp_i_i0 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*reg_a_ff*" }]
+set tmp_i_i1 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*reg_b*" }]
+set tmp_i_i2 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*tx_a_reg*" }]
+set tmp_i_i3 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*dout1_reg*" }]
+set tmp_i_i4 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*a_ff*" }]
+set tmp_i_i5 [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*dout0_reg*" }]
 
-set_max_delay -datapath_only -from $_xlnx_shared_i0 -to $_xlnx_shared_i1 2.500
-set_bus_skew -from $_xlnx_shared_i0 -to $_xlnx_shared_i1 2.500
+set_max_delay -datapath_only -from $tmp_i_i0 -to $tmp_i_i1 2.500
+set_bus_skew -from $tmp_i_i0 -to $tmp_i_i1 2.500
 
-set_max_delay -datapath_only -from $_xlnx_shared_i2 -to $_xlnx_shared_i3 2.500
-set_bus_skew -from $_xlnx_shared_i2 -to $_xlnx_shared_i3 2.500
+set_max_delay -datapath_only -from $tmp_i_i2 -to $tmp_i_i3 2.500
+set_bus_skew -from $tmp_i_i2 -to $tmp_i_i3 2.500
 
-set_max_delay -datapath_only -from $_xlnx_shared_i5 -to $_xlnx_shared_i3 2.500
-set_bus_skew -from $_xlnx_shared_i5 -to $_xlnx_shared_i3 2.500
+set_max_delay -datapath_only -from $tmp_i_i5 -to $tmp_i_i3 2.500
+set_bus_skew -from $tmp_i_i5 -to $tmp_i_i3 2.500
 
-set_max_delay -datapath_only -from $_xlnx_shared_i4 -to $_xlnx_shared_i1 2.500
-set_bus_skew -from $_xlnx_shared_i4 -to $_xlnx_shared_i1 2.500
+set_max_delay -datapath_only -from $tmp_i_i4 -to $tmp_i_i1 2.500
+set_bus_skew -from $tmp_i_i4 -to $tmp_i_i1 2.500
 
-set_max_delay -datapath_only -from $_xlnx_shared_i5 -to $_xlnx_shared_i3 2.500
-set_bus_skew -from $_xlnx_shared_i5 -to $_xlnx_shared_i3 2.500
+set_max_delay -datapath_only -from $tmp_i_i5 -to $tmp_i_i3 2.500
+set_bus_skew -from $tmp_i_i5 -to $tmp_i_i3 2.500
 
 # this is a LUTRAM driving a fabric flop, false path from write to read
-set _xlnx_shared_i6 [get_cells -hierarchical -filter { NAME =~  "*fifomem*" }]
-set_false_path -from [get_clocks sccb_apb_rxclk] -through $_xlnx_shared_i6 -to [get_clocks mgmt_xg_txclk]
+set tmp_i_i6 [get_cells -hierarchical -filter { NAME =~  "*fifomem*" }]
+set_false_path -from [get_clocks sccb_apb_rxclk] -through $tmp_i_i6 -to [get_clocks mgmt_xg_txclk]
 
 ########################################################################################################################
-# Put the timestamp in the bitstream USERCODE
+# Bitstream configuration
 
+# Bitstream configuration
 set_property BITSTREAM.CONFIG.USR_ACCESS TIMESTAMP [current_design]
+#set_property BITSTREAM.CONFIG.CONFIGRATE 51.0 [current_design]
+set_property BITSTREAM.CONFIG.CONFIGRATE 8.0 [current_design]
+set_property BITSTREAM.CONFIG.SPI_32BIT_ADDR YES [current_design]
+#set_property BITSTREAM.CONFIG.CONFIGRATE 31.9 [get_designs impl_1]
+#set_property BITSTREAM.CONFIG.SPI_32BIT_ADDR NO [get_designs impl_1]
+#set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design]
+set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 1 [current_design]
+#set_property CONFIG_MODE SPIx4 [current_design]
+set_property CONFIG_MODE SPIx1 [current_design]
 
 ########################################################################################################################
 # Debugging
