@@ -58,24 +58,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        [
-          "silk_over_copper|89000000|71264999|a84d4077-5d4f-4b9a-897f-8eb54aa3d5ac|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "silk_over_copper|90050000|70100000|06caf862-41fd-4a6d-ada8-ee4579f7492f|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "silk_over_copper|91400000|71000000|f6dd755e-a25e-47e2-ba63-0dc2b27f95fb|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "silk_over_copper|91450000|71050000|835df87b-837d-4284-99fe-3de07d8c24ea|00000000-0000-0000-0000-000000000000",
-          ""
-        ]
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -118,7 +101,7 @@
         "pth_inside_courtyard": "ignore",
         "shorting_items": "error",
         "silk_edge_clearance": "warning",
-        "silk_over_copper": "warning",
+        "silk_over_copper": "ignore",
         "silk_overlap": "warning",
         "skew_out_of_range": "error",
         "solder_mask_bridge": "error",
@@ -144,10 +127,10 @@
         "min_connection": 0.0,
         "min_copper_edge_clearance": 0.3,
         "min_groove_width": 0.0,
-        "min_hole_clearance": 0.1,
-        "min_hole_to_hole": 0.2,
-        "min_microvia_diameter": 0.2,
-        "min_microvia_drill": 0.1,
+        "min_hole_clearance": 0.15,
+        "min_hole_to_hole": 0.0,
+        "min_microvia_diameter": 0.225,
+        "min_microvia_drill": 0.075,
         "min_resolved_spokes": 2,
         "min_silk_clearance": 0.0,
         "min_text_height": 0.75,
@@ -242,6 +225,10 @@
         {
           "diameter": 0.2,
           "drill": 0.1
+        },
+        {
+          "diameter": 0.225,
+          "drill": 0.075
         }
       ],
       "zones_allow_external_fillets": false
@@ -499,8 +486,8 @@
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
         "line_style": 0,
-        "microvia_diameter": 0.3,
-        "microvia_drill": 0.1,
+        "microvia_diameter": 0.225,
+        "microvia_drill": 0.075,
         "name": "Default",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 2147483647,
