@@ -6845,7 +6845,7 @@
 		(uuid "0410dfb2-0b01-4688-bef4-efc82d42eb57")
 	)
 	(label "FPGA_PMOD0_DQ3"
-		(at 99.06 193.04 180)
+		(at 99.06 175.26 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6855,7 +6855,7 @@
 		(uuid "0421dfd7-2d6d-46bb-ab67-5e24d1dd9eeb")
 	)
 	(label "FPGA_PMOD0_DQ7"
-		(at 99.06 208.28 180)
+		(at 99.06 177.8 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6965,7 +6965,7 @@
 		(uuid "159352c5-2a12-430c-bd78-0a13b0308061")
 	)
 	(label "FPGA_PMOD1_DQ2"
-		(at 99.06 223.52 180)
+		(at 99.06 193.04 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7315,7 +7315,7 @@
 		(uuid "4c4ce6a7-7f6e-4c2d-8ced-07665bf49ad7")
 	)
 	(label "FPGA_PMOD1_DQ0"
-		(at 99.06 218.44 180)
+		(at 99.06 220.98 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7515,7 +7515,7 @@
 		(uuid "7beec3cb-be19-4abd-984d-71f62c0d7b8b")
 	)
 	(label "FPGA_PMOD1_DQ6"
-		(at 99.06 177.8 180)
+		(at 99.06 226.06 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7785,7 +7785,7 @@
 		(uuid "bb961668-5d56-46df-8a08-5352d45c41e3")
 	)
 	(label "FPGA_PMOD1_DQ3"
-		(at 99.06 226.06 180)
+		(at 99.06 208.28 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7975,7 +7975,7 @@
 		(uuid "d6983d24-55a9-4fdf-a4a1-137fa44df266")
 	)
 	(label "FPGA_PMOD1_DQ5"
-		(at 99.06 175.26 180)
+		(at 99.06 218.44 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8145,7 +8145,7 @@
 		(uuid "f0675ac7-5086-468e-b298-d2964a442961")
 	)
 	(label "FPGA_PMOD1_DQ1"
-		(at 99.06 220.98 180)
+		(at 99.06 223.52 180)
 		(effects
 			(font
 				(size 1.27 1.27)
