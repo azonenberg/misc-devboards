@@ -5471,28 +5471,12 @@
 		(uuid "0048b8af-4dae-49ab-bba0-0dd478324c57")
 	)
 	(no_connect
-		(at 38.1 248.92)
-		(uuid "0220a300-04c3-4572-bc50-23a6124099e7")
-	)
-	(no_connect
-		(at 99.06 86.36)
-		(uuid "0d4a6019-ecd7-4cdb-83a6-dbebcb336a02")
-	)
-	(no_connect
 		(at 99.06 170.18)
 		(uuid "11c24eb4-e2ec-4d31-a769-68ffd537168c")
 	)
 	(no_connect
-		(at 99.06 91.44)
-		(uuid "1baefe42-79f2-4152-9794-24b91ca11dbf")
-	)
-	(no_connect
 		(at 38.1 209.55)
 		(uuid "1e488e2d-0374-4d92-a18f-44351352597f")
-	)
-	(no_connect
-		(at 99.06 93.98)
-		(uuid "2734fc3a-9911-439f-afc7-5f2f20eb96e8")
 	)
 	(no_connect
 		(at 186.69 88.9)
@@ -5511,6 +5495,10 @@
 		(uuid "3632bd3e-4c88-4bb4-b27c-7de5fa07fc32")
 	)
 	(no_connect
+		(at 99.06 118.11)
+		(uuid "3ceb15ae-b9e8-45d5-85b7-f298451f4ae9")
+	)
+	(no_connect
 		(at 38.1 246.38)
 		(uuid "48441d16-284f-4f74-96f3-c1a2de813713")
 	)
@@ -5519,12 +5507,32 @@
 		(uuid "4a970047-8a2c-4759-aabd-ebade783bfc4")
 	)
 	(no_connect
+		(at 99.06 99.06)
+		(uuid "4dfe4a08-900d-44ea-9a5a-8943beee0592")
+	)
+	(no_connect
 		(at 38.1 241.3)
 		(uuid "54cedbc4-4d8d-46a1-b4ca-8ed475a83ef1")
 	)
 	(no_connect
+		(at 99.06 123.19)
+		(uuid "6edfbd02-137e-4989-99f4-76aec4a604f5")
+	)
+	(no_connect
 		(at 99.06 140.97)
 		(uuid "7686ce29-2ac6-43ac-99ad-e61f992fab6f")
+	)
+	(no_connect
+		(at 99.06 135.89)
+		(uuid "770bc39a-e20b-4469-9e0f-c66dd9cc57a4")
+	)
+	(no_connect
+		(at 99.06 143.51)
+		(uuid "7eba2568-7eab-4d90-ab3b-2e2039901c8d")
+	)
+	(no_connect
+		(at 166.37 102.87)
+		(uuid "87fd94cf-5bc5-476a-a594-b4e3be155696")
 	)
 	(no_connect
 		(at 186.69 91.44)
@@ -5547,12 +5555,12 @@
 		(uuid "a0560d58-7123-4b50-81c9-211140c63997")
 	)
 	(no_connect
-		(at 99.06 138.43)
-		(uuid "a7f1320c-e74e-456c-815e-473c76211402")
+		(at 99.06 125.73)
+		(uuid "a399dfa6-e1dc-44b2-97c3-5a11ca62c1d8")
 	)
 	(no_connect
-		(at 99.06 101.6)
-		(uuid "b5088a0e-7b9f-41a0-93d6-7e90bb286973")
+		(at 99.06 138.43)
+		(uuid "a7f1320c-e74e-456c-815e-473c76211402")
 	)
 	(no_connect
 		(at 38.1 243.84)
@@ -5565,10 +5573,6 @@
 	(no_connect
 		(at 99.06 162.56)
 		(uuid "d9efb6e8-b5b1-42a8-a979-66b2ad026918")
-	)
-	(no_connect
-		(at 38.1 220.98)
-		(uuid "de259b60-f81f-491c-94ba-180bfafe5d43")
 	)
 	(no_connect
 		(at 186.69 93.98)
@@ -6825,7 +6829,7 @@
 		(uuid "02dc49c1-33de-4e8b-ae8c-64b255242692")
 	)
 	(label "MCU_PMOD1_DQ6"
-		(at 99.06 135.89 180)
+		(at 38.1 220.98 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6865,7 +6869,7 @@
 		(uuid "092ca2f7-da2d-4c3d-9b3f-2bbe4306642a")
 	)
 	(label "MCU_PMOD1_DQ0"
-		(at 99.06 118.11 180)
+		(at 99.06 91.44 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6895,7 +6899,7 @@
 		(uuid "0abc23d6-b564-49e3-bfff-8ea4b712d9eb")
 	)
 	(label "MCU_PMOD1_DQ7"
-		(at 99.06 143.51 180)
+		(at 99.06 130.81 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6965,7 +6969,7 @@
 		(uuid "159352c5-2a12-430c-bd78-0a13b0308061")
 	)
 	(label "FPGA_PMOD1_DQ2"
-		(at 99.06 193.04 180)
+		(at 99.06 208.28 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7205,7 +7209,7 @@
 		(uuid "33826bda-dc13-4f36-a5fe-08870784f836")
 	)
 	(label "MCU_PMOD1_DQ4"
-		(at 99.06 128.27 180)
+		(at 38.1 248.92 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7755,7 +7759,7 @@
 		(uuid "b5867005-d88a-4578-9b9b-be3619eb231f")
 	)
 	(label "MCU_PMOD1_DQ5"
-		(at 99.06 130.81 180)
+		(at 99.06 86.36 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7785,7 +7789,7 @@
 		(uuid "bb961668-5d56-46df-8a08-5352d45c41e3")
 	)
 	(label "FPGA_PMOD1_DQ3"
-		(at 99.06 208.28 180)
+		(at 99.06 193.04 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7855,7 +7859,7 @@
 		(uuid "c529bc84-87ff-464a-a603-4c5739b6b15d")
 	)
 	(label "MCU_PMOD1_DQ3"
-		(at 99.06 125.73 180)
+		(at 99.06 128.27 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7995,7 +7999,7 @@
 		(uuid "d79eb345-0d29-4ebf-9242-8328fdca3c4d")
 	)
 	(label "MCU_PMOD1_DQ2"
-		(at 99.06 123.19 180)
+		(at 99.06 101.6 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8045,7 +8049,7 @@
 		(uuid "e2f2b6eb-ca11-42d5-93df-1b2e0a455d1a")
 	)
 	(label "MCU_PMOD1_DQ1"
-		(at 99.06 99.06 180)
+		(at 99.06 93.98 180)
 		(effects
 			(font
 				(size 1.27 1.27)
