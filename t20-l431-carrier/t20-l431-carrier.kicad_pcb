@@ -12620,10 +12620,66 @@
 		(layer "Edge.Cuts")
 		(uuid "39a8c0fe-4427-450e-8e3d-bfb50803e763")
 	)
+	(gr_text "STM32L431 / T20 SoM\nBringup Carrier\nA. Zonenberg / v0.1\n2026-10-22"
+		(at 82.25 97.5 0)
+		(layer "F.SilkS")
+		(uuid "aea22f59-1850-4f0a-aff5-37788988fb29")
+		(effects
+			(font
+				(size 0.75 0.75)
+				(thickness 0.1)
+			)
+			(justify left)
+		)
+	)
+	(gr_text "MCU\nPMOD0"
+		(at 52.5 74.25 0)
+		(layer "F.SilkS")
+		(uuid "5f654408-2ac3-4799-83df-3c80526aeda4")
+		(effects
+			(font
+				(size 0.75 0.75)
+				(thickness 0.1)
+			)
+		)
+	)
+	(gr_text "FPGA\nPMOD0"
+		(at 55.25 58.5 0)
+		(layer "F.SilkS")
+		(uuid "375da75f-974e-4fdf-b12e-74ee419cbf17")
+		(effects
+			(font
+				(size 0.75 0.75)
+				(thickness 0.1)
+			)
+		)
+	)
 	(gr_text "MCU\nBOOT0"
 		(at 94.1 104 0)
 		(layer "F.SilkS")
 		(uuid "119e252b-2ac3-44d3-86c4-d19f2714a44b")
+		(effects
+			(font
+				(size 0.75 0.75)
+				(thickness 0.1)
+			)
+		)
+	)
+	(gr_text "MCU\nPMOD1"
+		(at 94.75 74.25 0)
+		(layer "F.SilkS")
+		(uuid "76fd9a2a-25e1-4964-a371-9b3edb03a065")
+		(effects
+			(font
+				(size 0.75 0.75)
+				(thickness 0.1)
+			)
+		)
+	)
+	(gr_text "FPGA\nPMOD1"
+		(at 98.5 58.5 0)
+		(layer "F.SilkS")
+		(uuid "66ff7558-abf1-4cc0-a95c-51e27f1a511d")
 		(effects
 			(font
 				(size 0.75 0.75)
