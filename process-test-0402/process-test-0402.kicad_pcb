@@ -97,7 +97,7 @@
 			(copper_finish "ENIG")
 			(dielectric_constraints no)
 		)
-		(pad_to_mask_clearance 0)
+		(pad_to_mask_clearance 0.05)
 		(allow_soldermask_bridges_in_footprints no)
 		(tenting front back)
 		(pcbplotparams
@@ -135,9 +135,9 @@
 			(subtractmaskfromsilk no)
 			(outputformat 1)
 			(mirror no)
-			(drillshape 1)
+			(drillshape 0)
 			(scaleselection 1)
-			(outputdirectory "")
+			(outputdirectory "output/")
 		)
 	)
 	(net 0 "")
@@ -21050,7 +21050,7 @@
 		(layer "Edge.Cuts")
 		(uuid "5bc63ded-aa41-4a3b-b8ae-2462f545a720")
 	)
-	(gr_text "0402 Reflow / Thermal Imbalance / Placement Testbed\nA. Zonenberg / v0.1 / 2026-10-24"
+	(gr_text "0402 Reflow / Thermal Imbalance / Placement Testbed\nA. Zonenberg / v0.1 / 2026-10-25"
 		(at 32.5 131 0)
 		(layer "F.SilkS")
 		(uuid "3093cdda-b7ac-4547-b3dc-122cf54480ca")
@@ -23565,6 +23565,43 @@
 		(layer "In1.Cu")
 		(net 1)
 		(uuid "ee6a7cbb-7af6-4733-b654-73a5b73cf5c3")
+	)
+	(zone
+		(net 1)
+		(net_name "/GND")
+		(layers "In1.Cu" "In2.Cu")
+		(uuid "f715915a-046e-4c92-bb4a-1dac55d71f9e")
+		(hatch edge 0.5)
+		(connect_pads yes
+			(clearance 0.125)
+		)
+		(min_thickness 0.125)
+		(filled_areas_thickness no)
+		(fill yes
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+		)
+		(polygon
+			(pts
+				(xy 25.5 17.5) (xy 25.5 132) (xy 132.5 132) (xy 132.5 17.5)
+			)
+		)
+		(filled_polygon
+			(layer "In1.Cu")
+			(pts
+				(xy 132.481487 17.518513) (xy 132.4995 17.562) (xy 132.4995 131.938) (xy 132.481487 131.981487)
+				(xy 132.438 131.9995) (xy 25.562 131.9995) (xy 25.518513 131.981487) (xy 25.5005 131.938) (xy 25.5005 17.562)
+				(xy 25.518513 17.518513) (xy 25.562 17.5005) (xy 132.438 17.5005)
+			)
+		)
+		(filled_polygon
+			(layer "In2.Cu")
+			(pts
+				(xy 132.481487 17.518513) (xy 132.4995 17.562) (xy 132.4995 131.938) (xy 132.481487 131.981487)
+				(xy 132.438 131.9995) (xy 25.562 131.9995) (xy 25.518513 131.981487) (xy 25.5005 131.938) (xy 25.5005 17.562)
+				(xy 25.518513 17.518513) (xy 25.562 17.5005) (xy 132.438 17.5005)
+			)
+		)
 	)
 	(embedded_fonts no)
 )
